@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="global.sesoc.test3.dao.UrlMapper">
+	<select id="select" resultType="MyUrl" parameterType="map" >
+		select
+			urlnum
+			,url
+			,id
+			,title
+			,to_char(regdate,'YYYY-MM-DD') regdate
+		from
+			myurl
+		where
+			id = #{id}
+		and
+			${searchItem}
+			 like '%' || #{searchWord} || '%'
+		order by urlnum desc
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from myurl
+		where
+			urlnum = #{urlnum}
+	</delete>
+	
+
+	
+	  <!-- url 등록 -->
+	<insert id="insert" parameterType="MyUrl">
+		insert into myurl
+		(urlnum, url, id, title)		
+		values
+		(
+			myurl_seq.nextval, 
+			#{url} 
+			,#{id} 
+			,#{title}
+			
+		)
+	</insert> 
+	
+
+	
+	<!-- 전체 글 개수 조회 -->
+	<select id="getTotalBoard" resultType="int" parameterType="map">
+		select count(*)
+		from
+		myurl
+		where
+			id = #{id}
+		and
+			${searchItem}
+			 like '%' || #{searchWord} || '%'
+	</select> 
+	
+	
+
+	
+	<select id="selectOne" parameterType="int" resultType="MyUrl">
+		select
+			urlnum       
+  			, url      
+   			, id       
+   			, title       
+   			, to_char(regdate,'YYYY-MM-DD') regdate   	
+		from
+			myurl
+		where
+			urlnum = #{urlnum}
+	</select>
+	
+	
+	
+	
+	
+</mapper>

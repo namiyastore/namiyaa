@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="global.sesoc.namiya.vo.Board" alias="Board"/>
+		<typeAlias type="global.sesoc.namiya.vo.Categories" alias="Categories"/>
+		<typeAlias type="global.sesoc.namiya.vo.Favorite" alias="Favorite"/>
+		<typeAlias type="global.sesoc.namiya.vo.History" alias="History"/>
+		<typeAlias type="global.sesoc.namiya.vo.Interest" alias="Interest"/>
+		<typeAlias type="global.sesoc.namiya.vo.Keyword" alias="Keyword"/>
+		<typeAlias type="global.sesoc.namiya.vo.Members" alias="Members"/>
+		<typeAlias type="global.sesoc.namiya.vo.Message" alias="Message"/>
+		<typeAlias type="global.sesoc.namiya.vo.Mystore" alias="Mystore"/>
+		<typeAlias type="global.sesoc.namiya.vo.Notice" alias="Notice"/>
+		<typeAlias type="global.sesoc.namiya.vo.Product" alias="Product"/>
+		<typeAlias type="global.sesoc.namiya.vo.Review" alias="Review"/>
+		<typeAlias type="global.sesoc.namiya.vo.Saving" alias="Saving"/>
+	</typeAliases>
+	
+	
+	<mappers>
+		<mapper resource="mappers/boardMapper.xml"/>
+		<mapper resource="mappers/categoriesMapper.xml"/>
+		<mapper resource="mappers/favoriteMapper.xml"/>
+		<mapper resource="mappers/historyMapper.xml"/>
+		<mapper resource="mappers/interestMapper.xml"/>
+		<mapper resource="mappers/keywordMapper.xml"/>
+		<mapper resource="mappers/membersMapper.xml"/>
+		<mapper resource="mappers/messageMapper.xml"/>
+		<mapper resource="mappers/mystoreMapper.xml"/>
+		<mapper resource="mappers/noticeMapper.xml"/>
+		<mapper resource="mappers/productMapper.xml"/>
+		<mapper resource="mappers/reviewMapper.xml"/>
+		<mapper resource="mappers/savingMapper.xml"/>
+		
+	</mappers>
+</configuration>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="global.sesoc.test3.dao.UserMapper">
+	<select id="select" parameterType="String" resultType="UserDetailsVO">
+		select id, username, password, isadmin
+		from test_user
+		where id = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="UserDetailsVO">
+		insert into test_user values (
+			#{id}
+			, #{username}
+			, #{password}
+			, 'N'
+		)
+	</insert>
+</mapper>
