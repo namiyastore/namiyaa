@@ -3,7 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.CategoriesMapper">
-	
+	<select resultType="Categories" id="selectClist"> 
+		select categorynum, categoryname, depth, parentnum from categories where depth=1 
+	</select>
+
+	<select resultType="Categories" id="selectMlist" parameterType="Integer"> 
+		select categorynum, categoryname, depth, parentnum from categories where depth=2 and parentnum=#{categorynum} 
+	</select>
+
+	<select resultType="Categories" id="selectSlist" parameterType="Integer"> 
+		select categorynum, categoryname, depth, parentnum from categories where depth=3 and parentnum=#{categorynum} 
+	</select>
 	
 	
 </mapper>

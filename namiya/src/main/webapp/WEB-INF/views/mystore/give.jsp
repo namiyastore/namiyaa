@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<a href="giveForm">글작성</a>
 </body>
 </html>
