@@ -18,7 +18,7 @@
 <body>
 <div id="wrapper">
 	<div id="store">
-	<p> dododododo</p>
+	<p> dododo</p>
 	</div>
 	
 	<div id="menu">
