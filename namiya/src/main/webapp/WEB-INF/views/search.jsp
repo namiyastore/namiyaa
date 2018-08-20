@@ -38,7 +38,7 @@
 		$("li > div").mouseout(function(){
 			var dept = $(this).attr("data-dp");
 			
-			if(dept == 1 || dept == 2) {
+			if( dept == 1 || dept == 2 ) {
 				$(this).css("color","black");
 				$(this).css("backgroundColor","white");
 			}
