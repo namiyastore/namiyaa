@@ -164,7 +164,7 @@ body {
 <div id="container">
 	<!-- 카테고리 -->
 	<ul id="menu">
-		<li class="ui-state-disabled"><div>전체 카테고리</div></li>
+		<li class="ui-state-disabled"><div>전체  카테고리</div></li>
 		<li><div>브랜드패션</div></li>
 		<li><div>의류/잡화</div></li>
 		<li><div>뷰티</div></li>
