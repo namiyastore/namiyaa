@@ -3,7 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.BoardMapper">
+	<insert id="insertBrd" parameterType="Board">
+		insert into board values(boardnum_seq.nextval, #{productnum}, #{userid}, sysdate, #{title}, #{content}, #{service}, 'aaaa', 'aaaa')
+	</insert>
 	
-	
-	
+	<select id="selectGiveList" resultType="Board" parameterType="String">
+		select boardnum, productnum, userid, to_char(regdate,'YYYY-MM-DD') regdate, title, content, service, originalfile, savedfile from board where service=#{service} order by boardnum desc
+	</select>
 </mapper>

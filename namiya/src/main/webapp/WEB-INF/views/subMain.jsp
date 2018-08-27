@@ -5,6 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	body {
+		background: url('resources/images/submain.png') no-repeat center center fixed; 
+ 		-webkit-background-size: cover;
+  		-moz-background-size: cover;
+  		-o-background-size: cover;
+  		background-size: cover;
+  		background-position : left bottom;
+	}
+</style>
 </head>
 <body>
 
