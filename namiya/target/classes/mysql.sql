@@ -2,7 +2,7 @@
 
 DROP TABLE board CASCADE CONSTRAINTS;
 DROP TABLE product CASCADE CONSTRAINTS;
-DROP TABLE category CASCADE CONSTRAINTS;
+DROP TABLE categories CASCADE CONSTRAINTS;
 DROP TABLE favorite CASCADE CONSTRAINTS;
 DROP TABLE history CASCADE CONSTRAINTS;
 DROP TABLE interest CASCADE CONSTRAINTS;
@@ -163,13 +163,13 @@ CREATE TABLE saving
 
 /* Create Tables */
 create sequence boardnum_seq;
-create sequence reviewnum_seq
-create sequence productnum_seq
-create sequence categorynum_seq
-create sequence favoritenum_seq
+create sequence reviewnum_seq;
+create sequence productnum_seq;
+create sequence categorynum_seq;
+create sequence favoritenum_seq;
 create sequence interestnum_seq;
 create sequence messagenum_seq;
 create sequence keywordnum_seq;
 create sequence historynum_seq;
 create sequence noticenum_seq;
-create sequence imagenum_seq
+create sequence imagenum_seq;

@@ -15,11 +15,18 @@ public class BoardRepository {
 	@Autowired
 	SqlSession session;
 
-	public int insert(Board board) {
+	public int insertBrd(Board board) {
 		BoardMapper mapper = session.getMapper(BoardMapper.class);
-		int result = mapper.insert(board);
+		int result = mapper.insertBrd(board);
 		
 		return result;
+	}
+
+	public List<Board> selectGiveList(String service) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		List<Board> list = mapper.selectGiveList(service);
+		
+		return list;
 	}
 	
 	

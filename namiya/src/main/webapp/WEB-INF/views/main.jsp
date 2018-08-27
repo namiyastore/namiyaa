@@ -7,10 +7,20 @@
 <title>Insert title here</title>
 <script>
 	function mystoreOpen() {
-		window.open("myStore", "newidwindow", "width=1000,height=550");
+		window.open("myStore", "newidwindow", "width=1200,height=650");
         //(request(get방식/서버로의 요청), 새로운 창의 이름(창 이름이 같으면 그 위에 오버라이딩 가능), 창에 대한 모양)  
 	}
 </script>
+<style>
+	body {
+		background: url('resources/images/submain2.png') no-repeat center center fixed; 
+ 		 -webkit-background-size: cover;
+  		-moz-background-size: cover;
+  		-o-background-size: cover;
+  		background-size: cover; 
+  		background-position: left bottom;
+	}
+</style>
 </head>
 <body>
 <<<<<<< HEAD

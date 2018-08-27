@@ -3,7 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.ProductMapper">
+	<insert id="insertPdt" parameterType="Product">
+		insert into product (productnum, categorynum, productname) values(productnum_seq.nextval, #{categorynum}, #{productname})
+	</insert>
 	
-	
-	
+	<select id="selectOne" resultType="Product">
+		select productnum, categorynum, productname, sstatus from product where productnum in (select max(productnum) from product)
+	</select>
 </mapper>
