@@ -15,5 +15,4 @@
 		select categorynum, categoryname, depth, parentnum from categories where depth=3 and parentnum=#{categorynum} 
 	</select>
 	
-	
 </mapper>
