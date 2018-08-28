@@ -1,217 +1,513 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>jQuery UI Menu - Default functionality</title>
+<title></title>
 
 <!-- 카테고리 -->
-<link rel="stylesheet" href="resources/search/css/common/jquery-ui.css">
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
-<script src="resources/search/js/common/jquery-ui.js"></script>
 
 <!-- 검색 -->
 <link href="resources/search/css/search/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<!-- <script src="resources/main/js/search/jquery-1.11.1.min.js"></script> -->
-<!-- <script src="resources/main/js/search/bootstrap.min.js"></script> -->
+<link href="resources/search/css/result/result.css" rel="stylesheet">
 
 <script>
-	$(function() {
-		// 카테고리 디자인 적용
-		$("#menu").menu();
+
+var idx1 = "";	// 대분류 index
+var idx2 = "";	// 중분류 index
+
+// 카테고리 div 높이( 단위 : px )
+// CSS : '#sideMenu > div > div' 부분에 height 값과 일치시켜야됨
+var divHeight = 30;
+
+var colorMajor = 'rgb(70,102,128)';	// 대분류 카테고리 색상
+var colorMedium = 'rgb(70,102,128)';	// 중분류 카테고리 색상
+var colorMiner = 'rgb(255,90,90)';		// 소분류 카테고리 색상
+
+var category = "product";	// 검색 옵션 선택
+							// product : 양도
+							// talent : 재능
+							// trade : 교환
+
+$(function(){
+	
+	// 카테고리 대분류 가져오기
+	majorCategory();
+
+	$("#sideMenu").mouseleave(function(){		
+		$("#depth2").css("visibility","hidden");
+		$("#depth3").css("visibility","hidden");
 		
-		$("li > div").mouseover(function(){
-			var dept = $(this).attr("data-dp");
-			
-			if(dept == 1) {
-				$(this).css("color","white");
-				$(this).css("backgroundColor","#466680");
-			}
-			else if(dept == 2) {
-				$(this).css("color","white");
-				$(this).css("backgroundColor","red");
-			}
-		});
-		
-		$("li > div").mouseout(function(){
-			var dept = $(this).attr("data-dp");
-			
-			if(dept == 1 || dept == 2) {
-				$(this).css("color","black");
-				$(this).css("backgroundColor","white");
-			}
-		});
-		
+		$("#depth1 div").css("backgroundColor","#FFFFFF");
+		$("#depth1 div").css("color","#000000");
 	});
+	
+	$(".btn-danger").on("click",function(){
+		location.href="result";
+	});
+	
+	// 위치 초기화( 검색결과창창, 프로필 )
+	setPositionInit();
+	
+	// 미니홈피 창 열기
+	$("#myStoreClick").on("click",function(){
+		window.open("myStore","mystoreWindow","width:1200","height:650");
+	});
+	
+	// 창 크기에 따라 좌표 지정 ( 창크기 변경 감지 )
+	$( window ).resize( function() {
+		
+		// < 검색결과창창 위치 >
+		
+		// 카테고리 위치값
+		var left_category = $("#sideMenu").offset().left;
+		var top_category = $("#sideMenu").offset().top;
+		
+		$("#productContainer").css("position", "absolute")
+// 		.css("top", (parseInt(top_category)+40) + "px")
+		.css("top", 60 + "px")
+		.css("left", (parseInt(left_category)+250) + "px")
+		.css("margin-top","40px");
+		
+		document.getElementById("sideMenu").style.zIndex = 1;
+		
+		// < 프로필 위치 >
+		
+		// 검색결과창 위치값
+		var left_product = $("#productContainer").offset().left;
+		var top_product = $("#productContainer").offset().top;
+		
+		// 프로필 위치 지정
+		$('#profile').css("position", "absolute")
+			.css("top", 101 + "px")
+			.css("left", (parseInt(left_product)+600) + "px")
+			.css("margin-left","50px");
+	} );
+	
+	
+});
+
+function setPositionInit() {
+	
+	// 카테고리 위치값
+	var left_category = $("#sideMenu").offset().left;
+	var top_category = $("#sideMenu").offset().top;
+	
+	// 검색결과창 위치 지정
+	$("#productContainer").css("position", "absolute")
+// 		.css("top", (parseInt(top_category)+40) + "px")
+		.css("top", 60 + "px")
+		.css("left", (parseInt(left_category)+250) + "px")
+		.css("margin-top","40px");
+	
+	document.getElementById("sideMenu").style.zIndex = 1;
+	
+	// 검색결과창 위치값
+	var left_productContainer = $("#productContainer").offset().left;
+	var top_productContainer = $("#productContainer").offset().top;
+	
+	// 프로필 위치 지정
+	$("#profile").css("position", "absolute")
+// 		.css("top", parseInt(top_category)+40 + "px")
+		.css("top", 101 + "px")
+		.css("left", (parseInt(left_productContainer)+600) + "px")
+		.css("margin-left","50px");
+	
+}
+
+function majorCategory() {
+	
+	$.ajax({
+		method : "get",
+		url : "majorCategory",
+		success : function(resp) {			
+			for(var i in resp) {
+				if(i == 0) {
+					$("#depth1").append(
+						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+					);
+				}
+				else if(i == (resp.length-1)) {
+					$("#depth1").append(
+						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+					);
+				}
+				else {
+					$("#depth1").append(
+						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+					);
+				}
+			}
+			
+			$("#depth1 div").mouseenter(function(){
+				// 선택된 카테고리 색상 셋팅
+				$("#depth1 div").css("backgroundColor","#FFFFFF");
+				$("#depth1 div").css("color","#000000");
+				
+				$(this).css("backgroundColor",colorMajor);
+				$(this).css("color","#FFFFFF");
+				
+				// 카테고리 중분류 가져오기
+				idx1 = $(this).attr("data-idx");
+				
+				mediumCategory($(this));
+				
+				$("#depth3").html('');
+			});
+		}
+	});
+}
+
+function mediumCategory(categoryM) {
+	
+	var dataNum = categoryM.attr("data-num");	// 카테고리번호
+	var dataDept = categoryM.attr("data-dept");	// 카테고리 대/중/소
+	var dataIdx = categoryM.attr("data-idx");	// 카테고리 위치
+	var dataName = categoryM.html();			// 카테고리 이름
+	
+	$.ajax({
+		method : "get",
+		url : "mediumCategory",
+		async: false,
+		data : "categorynum=" + dataNum,
+		success : function(resp) {
+			
+ 			$("#depth2").html('');
+			
+			var ht = parseInt(dataIdx) * divHeight + "px";
+			
+			$("#depth2").css("top",ht);
+			
+			// 중분류 카테고리 출력
+			for(var i in resp) {
+				if(i == 0) {
+					$("#depth2").append(
+						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+					);
+				}
+				else if(i == (resp.length-1)) {
+					$("#depth2").append(
+						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+					);
+				}
+				else {
+					$("#depth2").append(
+						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+					);	
+				}
+				
+				$("#depth2").css("border-left","1px solid gray");
+				$("#depth2").css("border-right","1px solid gray");
+			}
+			
+			$("#depth2 div").mouseenter(function(){
+				// 선택된 카테고리 색상 셋팅
+				$("#depth2 div").css("backgroundColor","#FFFFFF");
+				$("#depth2 div").css("color","#000000");
+				
+				$(this).css("backgroundColor",colorMedium);
+				$(this).css("color","#FFFFFF");
+				
+				// 카테고리 중분류 가져오기
+				idx2 = $(this).attr("data-idx");
+				minerCategory($(this));
+			});
+			
+			document.getElementById("depth2").style.zIndex = 1;
+			document.getElementById("productContainer").style.zIndex = 0;
+			
+			$("#depth2").css("visibility","visible");
+		}
+	});
+}
+
+function minerCategory(category_m) {
+	
+	// 카테고리 선택시 선택 색상 지정
+	$("#depth1 div").css("backgroundColor","#FFFFFF");
+	$("#depth1 div").css("color","#000000");
+	
+	$("#depth1 div").eq(parseInt(idx1)-1).css("backgroundColor",colorMajor);
+	$("#depth1 div").eq(parseInt(idx1)-1).css("color","#FFFFFF");
+	
+	var dataNum = category_m.attr("data-num");	// 카테고리번호
+	var dataDept = category_m.attr("data-dept");	// 카테고리 대/중/소
+	var dataIdx = category_m.attr("data-idx");	// 카테고리 위치
+	var dataName = category_m.html();			// 카테고리 이름
+	
+	$.ajax({
+		method : "get",
+		url : "minerCategory",
+		async: false,
+		data : "categorynum=" + dataNum,
+		success : function(resp) {
+			
+			$("#depth3").html('');
+			
+			var ht = ( (parseInt(idx1) * divHeight) + ((parseInt(idx2)-1) * divHeight) ) + "px";
+			
+			$("#depth3").css("top",ht);
+			
+			// 중분류 카테고리 출력
+			for(var i in resp) {
+				if(i == 0) {
+					$("#depth3").append(
+						"<div style='border-top: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+					);
+				}
+				else if(i == (resp.length-1)) {
+					$("#depth3").append(
+						"<div style='border-bottom: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+					);
+				}
+				else {
+					$("#depth3").append(
+						"<div style='border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+					);
+				}
+			}
+			
+			document.getElementById("depth3").style.zIndex = 1;
+			document.getElementById("productContainer").style.zIndex = 0;
+			
+			$("#depth3").css("visibility","visible");
+		}
+	});
+	
+	
+}
+
 </script>
-<style>
 
-body {
-	background-color: #2A3D4C;
-}
-
-/* 메인프레임 */
-#container{
-	margin: 0 auto;
-	width: 1000px;
-}
-
-/* 카테고리 */
-.ui-menu {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 200px;
-}
-
-/* 로고 */
-#logo {
-	margin-top: 50px;
-	position: relative;	
-	width: 150px;
-	left: 425px;
-}
-
-/* 검색 */
-#custom-search-input {
-	position: relative;
-	top: 25px;
-	left: 350px;
-	width: 300px;
-}
-
-/* 거래 외침 내용 */
-#notice {
-	margin-top: 50px;
-	margin-left: 350px;
-	height: 250px;
-	width: 300px;
-	background-color: #FFFFFF;
-	
-	overflow: auto;
-	overflow: scroll;
-}
-
-/* 프로필 */
-#profile {
-	position: absolute;
-	width: 300px;
-	top: 0px;
-	left: 77%;
-	right: 0%;
-	background-color: #FFFFFF;
-}
-
-/* 거래 외침 폰트 */
-#notice a {
-	color: #000000;
-	text-decoration: none;
-}
-
-/* 프로필 */
-#profile {
-	margin: 0 auto;
-	border-radius: 5px;
-}
-
-/* 프로필 사진 프레임 */
-#profilePicture {
-	margin: 0 auto;
-	margin-top: 20px;
-	width: 300px;
-}
-
-/* 이미지 테두리 */
-#profilePicture > img {
-	border-radius: 5px;
-}
-
-/* 프로필 버튼 */
-.profileBtn {
-	margin: 20px;
-	margin-left: 50px;
-	
-	text-align: center;
-	font-size: 1.5em;
-	
-	border: 1px solid;
-	border-radius: 5px;
-	
-	width: 200px;
-	height: 40px;
-	
-	line-height: 1.6em;
-	
-	cursor: pointer;
-	
-	background-color: #2A3D4C;
-	color: #FFFFFF;
-	
-}
-
-/* 프로필 버튼 ( on mouse ) */
-.profileBtn:hover {
-	background-color: #FFFFFF;
-	color: #2A3D4C;
-}
-
-</style>
 </head>
 <body>
 
 <div id="container">
-	<!-- 카테고리 -->
-	<ul id="menu">
-		<li class="ui-state-disabled"><div>전체  카테고리</div></li>
-		<li><div>브랜드패션</div></li>
-		<li><div>의류/잡화</div></li>
-		<li><div>뷰티</div></li>
-		<li><div>레저/자동차</div></li>
-		<li><div>식품</div></li>
-		<li><div>출산/육아</div></li>
-		<li><div>생활/건강</div></li>
-		<li><div>가구/인테리어</div></li>
-		<li><div>디지털/가전/컴퓨터</div></li>
-		<li><div>도서/취미/반려동물</div></li>
-		<li><div>여행/공연/e쿠폰</div></li>
-		<li><div>test</div>
-			<ul>
-				<li><div data-dp="1">Car Hifi</div></li>
-				<li><div data-dp="1">Utilities</div></li>
-			</ul></li>
-		<li><div>Movies</div></li>
-		<li><div>Music</div>
-			<ul>
-				<li><div data-dp="1">Rock</div>
-					<ul>
-						<li><div data-dp="2">Alternative</div></li>
-						<li><div data-dp="2">Classic</div></li>
-					</ul></li>
-				<li><div data-dp="1">Jazz</div>
-					<ul>
-						<li><div data-dp="2">Freejazz</div></li>
-						<li><div data-dp="2">Big Band</div></li>
-						<li><div data-dp="2">전동레저/인라인/킥보드</div></li>
-					</ul></li>
-				<li><div data-dp="1">Pop</div></li>
-			</ul></li>
-	</ul>
 
-	
-	
-	
-
-	<div id="profile">
-		<div id="profilePicture" align="center">
-			<img src="resources/search/image/jennifer.jpg" width="200px">
+	<!-- 레이아웃(로고, 검색) -->
+	<div id="layoutTop">
+		<!-- 로고 -->
+		<a href="${pageContext.request.contextPath}/search"><img id="logo" src="resources/search/image/logo.jpg"/></a>
+		<!-- 검색 -->
+		<div id="custom-search-input">
+			<div class="input-group col-md-12">				
+				<input type="text" class="  search-query form-control" placeholder="Search" /> <span class="input-group-btn">
+					<button class="btn btn-danger" type="button">
+						<span class=" glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
 		</div>
-		<div class="profileBtn">My Page</div>
-		<div class="profileBtn">My Store</div>
-		<div class="profileBtn">Logout</div>
+	</div>	
+	
+	<!-- 레이아웃(카테고리, 실시간알림, 프로필) -->
+	<div id="layoutBottom" align="center">
+		<!-- 카테고리 -->
+		<div id="sideMenu">
+			<div id="depth1"></div>
+			<div id="depth2"></div>
+			<div id="depth3"></div>
+		</div>
+		
+		<!-- 상품 리스트 -->
+		<div id="productContainer">
+			<!-- 페이징 -->
+			<div id="paging">
+				<div class="pagingBtn" id="pagingFirst">
+					<div>&lt;&lt;</div>
+				</div>
+						
+				<div class="pagingBtn" id="pagingLeft">
+					<div>&lt;</div>
+				</div>
+				
+				<span id="pagingNum">1 - 10</span>
+				
+				<div class="pagingBtn" id="pagingRight">
+					<div>&gt;</div>
+				</div>
+				
+				<div class="pagingBtn" id="pagingLast">
+					<div>&gt;&gt;</div>
+				</div>
+			</div>
+			<div>
+				<div class="productList">
+				
+					<div class="leftFrame">
+						<div class="productImg">
+							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
+						</div>
+					</div>
+					
+					<div class="rightFrame">
+						<div class="productTitle">제목</div>
+						<div class="rightFrameSub">
+							<div class="regdate">등록날짜</div>
+							<div class="userid">작성자(id)</div>
+						</div>
+					</div>			
+				
+				</div>
+			</div>
+			<div><hr/></div>
+			<div>
+				<div class="productList">
+				
+					<div class="leftFrame">
+						<div class="productImg">
+							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
+						</div>
+					</div>
+					
+					<div class="rightFrame">
+						<div class="productTitle">제목</div>
+						<div class="rightFrameSub">
+							<div class="regdate">등록날짜</div>
+							<div class="userid">작성자(id)</div>
+						</div>
+					</div>			
+				</div>
+			</div>
+			<div><hr/></div>
+			<div>
+				<div class="productList">
+				
+					<div class="leftFrame">
+						<div class="productImg">
+							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
+						</div>
+					</div>
+					
+					<div class="rightFrame">
+						<div class="productTitle">제목</div>
+						<div class="rightFrameSub">
+							<div class="regdate">등록날짜</div>
+							<div class="userid">작성자(id)</div>
+						</div>
+					</div>			
+				
+				</div>
+			</div>
+			<div><hr/></div>
+			<div>
+				<div class="productList">
+				
+					<div class="leftFrame">
+						<div class="productImg">
+							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
+						</div>
+					</div>
+					
+					<div class="rightFrame">
+						<div class="productTitle">제목</div>
+						<div class="rightFrameSub">
+							<div class="regdate">등록날짜</div>
+							<div class="userid">작성자(id)</div>
+						</div>
+					</div>			
+				
+				</div>
+			</div>
+			<div><hr/></div>
+			<div>
+				<div class="productList">
+				
+					<div class="leftFrame">
+						<div class="productImg">
+							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
+						</div>
+					</div>
+					
+					<div class="rightFrame">
+						<div class="productTitle">제목</div>
+						<div class="rightFrameSub">
+							<div class="regdate">등록날짜</div>
+							<div class="userid">작성자(id)</div>
+						</div>
+					</div>			
+				
+				</div>
+			</div>
+			<div><hr/></div>
+			<div>
+				<div class="productList">
+				
+					<div class="leftFrame">
+						<div class="productImg">
+							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
+						</div>
+					</div>
+					
+					<div class="rightFrame">
+						<div class="productTitle">제목</div>
+						<div class="rightFrameSub">
+							<div class="regdate">등록날짜</div>
+							<div class="userid">작성자(id)</div>
+						</div>
+					</div>			
+				
+				</div>
+			</div>
+			<div><hr/></div>
+			<div>
+				<div class="productList">
+				
+					<div class="leftFrame">
+						<div class="productImg">
+							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
+						</div>
+					</div>
+					
+					<div class="rightFrame">
+						<div class="productTitle">제목</div>
+						<div class="rightFrameSub">
+							<div class="regdate">등록날짜</div>
+							<div class="userid">작성자(id)</div>
+						</div>
+					</div>			
+				
+				</div>
+			</div>
+			<div><hr/></div>
+			<div>
+				<div class="productList">
+				
+					<div class="leftFrame">
+						<div class="productImg">
+							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
+						</div>
+					</div>
+					
+					<div class="rightFrame">
+						<div class="productTitle">제목</div>
+						<div class="rightFrameSub">
+							<div class="regdate">등록날짜</div>
+							<div class="userid">작성자(id)</div>
+						</div>
+					</div>			
+				
+				</div>
+			</div>
+			
+		</div>
+	
+		<!-- 프로필 -->
+		<div id="profile">
+		
+			<div id="profilePicture">
+				<img src="resources/search/image/jennifer.jpg" width="200px">
+			</div>
+			<div class="profileBtn">My Page</div>
+			<div id="myStoreClick" class="profileBtn">My Store</div>
+			<div class="profileBtn">Logout</div>
+		</div>
 	</div>
-
+	
 </div>
 
 </body>

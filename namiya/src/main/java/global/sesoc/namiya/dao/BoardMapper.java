@@ -8,6 +8,8 @@ import global.sesoc.namiya.vo.Board;
 
 public interface BoardMapper {
 
-	int insert(Board board); // 글작성
+	public int insertBrd(Board board); // 글작성
+
+	public List<Board> selectGiveList(String service); // 양도글 불러오기
 	
 }
