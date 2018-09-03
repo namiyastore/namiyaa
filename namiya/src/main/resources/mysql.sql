@@ -111,14 +111,31 @@ CREATE TABLE mystore
 (
 	imagenum number NOT NULL,
 	userid varchar2(100) NOT NULL,
-	totalframes number NOT NULL,
+	itemnum number NOT NULL constraint itemnum_fk REFERENCES imageitem(itemnum), 
 	currentframe number NOT NULL,
+	px number NOT NULL,
+	py number NOT NULL,
+    imageorder number NOT NULL,
+	PRIMARY KEY (imagenum)
+);
+
+create table imageitem 
+(
+    itemnum number NOT NULL,
+	totalframes number NOT NULL,
 	width number NOT NULL,
 	height number NOT NULL,
 	filename varchar2(200) NOT NULL,
-	px number NOT NULL,
-	py number NOT NULL,
-	PRIMARY KEY (imagenum)
+    type varchar2(100) not null,
+    PRIMARY KEY (itemnum)
+);
+
+create table useritem 
+(
+    useritemnum number NOT NULL,
+    userid varchar2(100) NOT NULL,
+	itemnum number NOT NULL constraint useritem_fk REFERENCES imageitem(itemnum),
+    PRIMARY KEY (useritemnum)
 );
 
 
@@ -173,3 +190,5 @@ create sequence keywordnum_seq;
 create sequence historynum_seq;
 create sequence noticenum_seq;
 create sequence imagenum_seq;
+create sequence imageitem_seq;
+create sequence useritem_seq;

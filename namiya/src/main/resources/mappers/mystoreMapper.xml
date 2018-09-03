@@ -4,6 +4,63 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.MystoreMapper">
 	
+	<select id="selectAll" parameterType="String" resultType="Map">
+		select 
+		 	*
+		from mystore, imageitem 
+		where 
+			userid = #{userid}
+		and
+			imageitem.itemnum = mystore.itemnum
+		order by IMAGEORDER
+	</select>
 	
+	<insert id="insert" parameterType="Mystore">
+		insert into mystore values (
+			mystore_seq.nextval,
+			#{userid} ,
+			#{itemnum} ,
+			#{currentframe} ,
+			#{px},
+			#{py},
+		    #{imageorder}
+		)
+	</insert>
+	
+	<delete id="deleteAll" parameterType="String">
+		delete from mystore where userid = #{userid}
+	</delete>
+	
+	<!-- 전체 글 개수 조회 -->
+	<select id="getTotalItem" resultType="int" parameterType="map">
+		select count(*)
+		from
+		useritem,imageitem
+		where
+			userid = #{userid}
+		and
+			imageitem.itemnum = useritem.itemnum
+		and
+			${searchItem}
+			 like '%' || #{searchWord} || '%'
+	</select> 
+	
+	<select id="selectUserItem" resultType="Map" parameterType="map" >
+	
+	
+		select 
+        *
+		from useritem, imageitem 
+		where 
+			userid = #{userid}
+		and
+			imageitem.itemnum = useritem.itemnum
+		and
+			${searchItem}
+			 like '%' || #{searchWord} || '%'
+		order by useritemnum
+	
+	
+	</select>
 	
 </mapper>
