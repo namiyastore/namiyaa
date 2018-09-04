@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>양도게시판</title>
+<title>양도 글 자세히 보기</title>
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script>
 	function interest() {
@@ -16,6 +17,38 @@
 	function want() {
 		alert("이 상품을 원합니다");
 	}
+	
+	function give() {
+		location.href="give";
+	}
+	
+	function giveUpdate(boardnum) {
+		location.href="giveUpdate?boardnum="+boardnum;
+	}
+	
+	function deleted(boardnum) {
+		var boardnum = boardnum;
+		
+		var answer = confirm("게시글을 삭제하시겠습니까?");
+		
+		if(answer) {
+			$.ajax({
+				method: 'get',
+				url : 'deleted',
+				data : {"boardnum" : boardnum},
+				success : function(resp) {
+					alert("삭제가 완료되었습니다!");
+					location.href="give";
+				},
+				error : function(resp) {
+					alert("error: "+ error);
+				}
+			});
+		}
+		
+	}
+
+	 
 </script>
 <style>
 ::-webkit-scrollbar{width: 16px;}
@@ -118,6 +151,7 @@
    		text-align:left;
    		color: #646568;
    		font-size: 14px;
+   		width:100px;
 	}
 	
 	h1 {
@@ -125,7 +159,7 @@
 	}
 	
 	body, p {
-		font-family: 'Jeju Gothic', Eco Sans Mono;
+		font-family: 'Jeju Gothic', sans-serif;
 	}
 	
 	table, tr, td {
@@ -134,31 +168,30 @@
 	}
 	
 	table {
-		width:900px;
+		width:950px;
 		height: 160px;
 		padding: 0px;
 		margin:0px;
-		font-family: 'Jeju Gothic', Eco Sans Mono;
 	}
-	
-	hr {
-		width:950px;
-	}
-	
+
 	#image {
-		width:180px;
+		width:200px;
 		text-align: center;
 	}
 	
 	#title {
-		width:350px;
+		width:450px;
+		font-size:20px;
+	}
+	
+	#sstatus {
+		width:450px;
 		font-size:20px;
 	}
 	
 	#date {
 		width:150px;
 		text-align: center;
-		font-family: 'Jeju Gothic';
 	}
 	
 	#btn {
@@ -166,95 +199,87 @@
 		text-align: center;
 	}
 	
-	#page {
-		width: 150px;
-		display:flex;
-		align-items: center;
-		justify-content: space-between;
-	}
 </style>
 </head>
 <body>
 <div id="wrapper" align="center">
 	<div id="scroll" style="float:left; width: 1073px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
-		<div id="givedetail">
-			<h1><b>Free Give</b></h1>
-			<hr/>
-			
-			<a href="giveForm"><img src="resources/images/write.png" style="width:70px; height:40px;"></a>
-			
-			<hr/>
-			<c:if test="${empty map}">
-					<br/>
-					<tr>
-						<td colspan="3">등록된 무료양도 상품이 없습니다.</td>
-					</tr>
-			</c:if>
-	
-			<%-- 이하 글 목록 반복 --%>
-			<c:if test="${not empty map}">
-			<c:forEach var="map" items="${map}" varStatus="status">
+			<div id="giveform">
 				<table>
 					<tr>
-						<td style="width:50px; font-family: 'Jeju Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
-						<c:if test="${map.ORIGINALFILE != null}">
-						<td id="image"><img src="boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
-						</c:if>
-						<c:if test="${map.ORIGINALFILE == null}">
-						<td id="image"><img src="resources/images/rabit.png" style="width:150px; height:100px;"></td>
-						</c:if>
-						<td id="title"><a href="giveView?boardnum=${map.BOARDNUM}" style="text-decoration:none; color:black;"><span id="title"><b>${map.TITLE}</b></span></a></td>
-						<td id="date">${map.REGDATE}</td>
-						<td id="btn">
-							<img src="resources/images/interest.png" onclick="interest()" style="width:55px; height:40px;">
-							&nbsp;
-							<img src="resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
+						<td colspan="2" id="boardname">
+							<h1 align="center"><b>Free Give</b></h1>
+							<hr/>
 						</td>
 					</tr>
+					<tr>
+						<td colspan="2" align="right">
+							<img src="resources/images/interest.png" onclick="interest()" style="width:55px; height:40px;">
+							<img src="resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
+							<hr/>
+						</td>
+					</tr>
+					<tr>
+						<td class="menu" colspan="2"><b>거래상태</b></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="scontent"> 
+							<input class="ins" type="text" name="sstatus" id="sstatus" value="${map.SSTATUS}" readonly="readonly">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="menu"><b>제목</b></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="scontent"><input type="text" class="ins" id="title" name="title" value="${board.title}" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="menu"><b>내용</b></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div id="content" style="width:950px;" >
+								<c:if test="${not empty board.originalfile}">
+								<div align="center">
+										<img alt="" src="boardfile/${board.savedfile}" style="width:200px; height:150px;">
+										<br/>
+								</div>
+								<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Jeju Gothic', Eco Sans Mono;" readonly="readonly">${board.content}</textarea>
+								</c:if>	
+								
+								
+								<c:if test="${empty board.originalfile}" >
+										<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Jeju Gothic', Eco Sans Mono;" readonly="readonly">${board.content}</textarea>
+								</c:if>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="menu"><b>양도상품 정보</b></td>
+					</tr>
+					<tr>
+						<td class="sort"><b>분류</b></td>
+						<td class="scontent">
+							<input class="ins" type="text" id="categoryname" name="categoryname" value="${map.CATEGORYNAME}" readonly="readonly">
+						</td>
+						
+					</tr>
+					<tr>
+						<td class="sort"><b>상품이름</b></td>
+						<td class="scontent"><input class="ins" type="text" id="productname" name="productname" value="${map.PRODUCTNAME}" readonly="readonly"></td>
+					</tr>
 				</table>
-				<hr/>
-			</c:forEach>
-			
-			<%-- 페이징 처리하기  --%>
-			<br/>
-			<div id="page">
-				<div>
-					<a href="give?currentPage=${navi.currentPage-navi.pagePerGroup}"><img src="resources/images/arrow2.png" style="width:20px; height:30px;"></a>
-				</div>
-				
-				<div>
-					<a href="give?currentPage=${navi.currentPage-1}"><img src="resources/images/arrow4.png" style="width:20px; height:30px;"></a>
-				</div>
-				
-				<c:forEach var="page" begin="${navi.startPageGroup}" end="${navi.endPageGroup}">
-					<c:if test="${page == navi.currentPage}">
-						<div>
-							<span style="color:#0081C6; font-weight:bold; text-decoration:none; color:black;"><dr>${page}</dr></span>&nbsp;
-						</div>
-					</c:if>	
-					
-					<c:if test="${page != navi.currentPage}">
-						<div>
-							<a style="text-decoration:none; color:black;" href="give?currentPage=${page}">${page}</a>&nbsp;
-						</div>
-					</c:if>
-				</c:forEach>
-				
-				<div>
-					<a href="give?currentPage=${navi.currentPage+1}"><img src="resources/images/arrow3.png" style="width:20px; height:30px;"></a>
-				</div>
-				
-				<div>
-					<a href="give?currentPage=${navi.currentPage+navi.pagePerGroup}"><img src="resources/images/arrow1.png" style="width:20px; height:30px;"></a>
-				</div>
-			</div>
-			</c:if>
 				<br/>
+				<img src="resources/images/board.png" style="width:60px; height:40px;" onclick="give()">
+				<img src="resources/images/update.png" style="width:60px; height:40px;" onclick="giveUpdate(${board.boardnum})">
+				<img src="resources/images/delete.png" style="width:60px; height:40px;" onclick="deleted(${board.boardnum})">
+				<br/><br/>
 			</div>
 	</div>
-		
+			
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
 		<ul>
+		<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>
@@ -263,6 +288,7 @@
 			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; "></a></li>
 		</ul>
 	</div>
+	
 </div>
 </body>
 </html>

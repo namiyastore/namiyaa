@@ -10,8 +10,16 @@
 <script>
 $(function(){
     $("#big").on("change", function(){
+    	var big = document.getElementById("big");
+    	
+    	if (big.value == '대분류') {
+    		$("#middle").html("");
+    		$("#small").html("");
+    	}
+    
        var categorynum = $(this).val();
        var result = '';
+       if (categorynum > 0) {
        $.ajax({
        	url : 'selectMlist',
        	method : 'get',
@@ -43,13 +51,16 @@ $(function(){
        	error : function(error) {
        		alert("error : "+error);
        	}
-       });  
+       });
+       }
     });
     
    	function middle() {
    		$("#middle").on("change", function(){
    	   		var categorynum2 = $("#middle").val();
    	        var last = '';
+   	        
+   	        if(categorynum2 > 0) {
    	        $.ajax({
    	        	url : 'selectSlist',
    	        	method : 'get',
@@ -64,84 +75,10 @@ $(function(){
    	        		alert("error : "+error);
    	        	}
    	        });
+   	        
+   	        }
    	     });
    	}
-
-
-   	
-   	
-   	
-   /* 	$("#insert").on('click', function () {
-		var title = document.getElementById("title");
-		var content = document.getElementById("content");
-		var big = document.getElementById("big");
-		var middle = document.getElementById("middle");
-		var small = document.getElementById("small");
-		var productname = document.getElementById("productname");
-		var categorynum = small.value;
-		var userid = $("#userid").val();
-		var service = $("#service").val();
-		
-		
-		if (title.value == '' || content.value == '') {
-			alert('제목과 내용을 입력하세요.');
-			return false;
-		}
-		
-		if (big.value == '' || middle.value == '' || small.value == '') {
-			alert('상품의 분류를 정확히 입력하세요.');
-			return false;
-		}
-		
-		if (productname.value == '') {
-			alert('상품명을 정확히 입력하세요.');
-			return false;
-		}
-		
-		
-		var sendData1 = 
-			{
-				"categorynum" : categorynum,
-				"productname" : $("#productname").val()
-			}
-		
-		$.ajax ({
-			method: 'post',
-			url: 'insertPdt',
-			data : JSON.stringify(sendData1),
-			contentType : 'application/json; charset=UTF-8',
-			success : function(resp) {
-				alert(resp);
-			},
-			error : function(request,status,error) {
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"p_error:"+error);
-			}
-			
-		});
-		
-		var sendData2 = 
-			{
-				"userid" : userid,
-				"title" : $("#title").val(),
-				"content" : $("#content").val(),
-				"service" : service
-			}
-		
-		$.ajax ({
-			method : 'post',
-			url : 'insertBrd',
-			data : JSON.stringify(sendData2),
-			contentType : 'application/json; charset=UTF-8',
-			success : function(resp) {
-				alert(resp);
-				location.href="give"
-			},
-			error : function(request,status,error) {
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"g_error:"+error);
-			}
-		});
-	});
-   	 */
 });
 
 function  formCheck() {
@@ -157,7 +94,7 @@ function  formCheck() {
 		return false;
 	}
 	
-	if (big.value == '' || middle.value == '' || small.value == '') {
+	if (big.value == '' || middle.value == '' || small.value == '' || big.value == '대분류') {
 		alert('상품의 분류를 정확히 입력하세요.');
 		return false;
 	}
@@ -169,6 +106,8 @@ function  formCheck() {
 	
 	return true;
 }
+
+
 </script>
 <style>
 ::-webkit-scrollbar{width: 16px;}
@@ -204,7 +143,7 @@ function  formCheck() {
 	
 	
 	#giveform {
-		width: 1081px;
+		width: 1073px;
 		height: 545px;
 		border-radius: 25px;
 		background-color: white;
@@ -242,6 +181,7 @@ function  formCheck() {
    		border-radius: 10px;
    		background-color: #fcfbf9;
    		width: 800px;
+   		outline: none;
 	}
 	
 	#content {
@@ -250,6 +190,7 @@ function  formCheck() {
 		border: 1px solid #fcfbf9;
    		border-radius: 10px;
    		background-color: #fcfbf9;
+   		outline: none;
 	}
 	
 	.ins {
@@ -260,6 +201,7 @@ function  formCheck() {
     	padding: 10px;
    		border-radius: 10px;
    		background-color: #fcfbf9;
+   		outline: none;
 	}
 
 	.sort {
@@ -283,13 +225,14 @@ function  formCheck() {
 	
 	.scl {
 		float:left; 
-		width: 1081px; 
+		width: 1073px; 
 		height:545px; 
-		overflow-y:scroll; 
+		overflow-y:auto; 
 		overflow-x:hidden; 
 		border-radius: 25px; 
 		background-color: white;
 	}
+
 </style>
 </head>
 <body>
@@ -331,16 +274,19 @@ function  formCheck() {
 					<tr>
 						<td class="sort"><b>분류</b></td>
 						<td class="scontent">
-						<label>대분류</label>
+						<label style="font-size: 14px;">대분류</label>
 							<select id="big">
+								<option class="category" value="대분류">--대분류--</option>
 								<c:forEach var="list" items="${c_list}">
-									<option class="category" value="${list.categorynum}">${list.categoryname}</option>
+									<c:if test="${list.categorynum != 1984 && list.categorynum != 1985}">
+										<option class="category" value="${list.categorynum}">${list.categoryname}</option>
+									</c:if>
 								</c:forEach>
 							</select>
-						<label>중분류</label>
+						<label style="font-size: 14px;">중분류</label>
 							<select id="middle">
 							</select>
-						<label>소분류</label>
+						<label style="font-size: 14px;">소분류</label>
 							<select id="small" name="categorynum">
 							</select>
 						</td>
@@ -351,7 +297,10 @@ function  formCheck() {
 					</tr>
 					<tr>
 						<td class="sort"><b>첨부파일</b></td>
-						<td class="scontent"><input type="file" name="upload"></td>
+						<td class="scontent">
+							<input type="file" name="upload" id="file" accept="image/jpeg, image/png, image/gif">
+							<p style="font-family: 'Jeju Gothic'; font-size: 12px; color:red;">이미지 파일만 등록가능합니다.</p>
+						</td>
 					</tr>
 				</table>
 				<br/>
@@ -368,7 +317,7 @@ function  formCheck() {
 			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; "></a></li>
 		</ul>
 	</div>
 	

@@ -26,6 +26,29 @@ public class ProductRepository {
 		Product product = mapper.selectOne();
 		return product;
 	}
+
+	public HashMap<String, Object> seletPC(int productnum) {
+		ProductMapper mapper = session.getMapper(ProductMapper.class);
+		HashMap<String, Object> map = mapper.seletPC(productnum);
+		
+		return map;
+	}
+
+	public int updatePdt(Product product) {
+		ProductMapper mapper = session.getMapper(ProductMapper.class);
+		int result = mapper.updatePdt(product);
+		
+		return result;
+	}
+
+	public Product selectPdt(int productnum) {
+		ProductMapper mapper = session.getMapper(ProductMapper.class);
+		Product product = mapper.selectPdt(productnum);
+		
+		return product;
+	}
+
+	
 	
 	
 		

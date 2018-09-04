@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,11 +23,39 @@ public class BoardRepository {
 		return result;
 	}
 
-	public List<Board> selectGiveList(String service) {
+	public  List<HashMap<String, Object>> selectList(Map<String,String> parm) {
 		BoardMapper mapper = session.getMapper(BoardMapper.class);
-		List<Board> list = mapper.selectGiveList(service);
+		 List<HashMap<String, Object>> map = mapper.selectList(parm);
 		
-		return list;
+		return map;
+	}
+
+	public Board selectOne(int boardnum) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		Board board = mapper.selectOne(boardnum);
+		
+		return board;
+	}
+
+
+	public int getTotalPage(String service, String userid) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int recordCount = mapper.getTotalPage(service, userid);
+		return recordCount;
+	}
+
+	public int deleteOne(int boardnum) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int result = mapper.deleteOne(boardnum);
+		
+		return result;
+	}
+
+	public int boardUpdate(Board board) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int result = mapper.boardUpdate(board);
+		
+		return result;
 	}
 	
 	
