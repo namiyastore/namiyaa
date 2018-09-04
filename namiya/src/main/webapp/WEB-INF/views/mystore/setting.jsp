@@ -13,8 +13,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 var background = {
-	'width' : 800,
-	'height': 400
+	'width' : 700,
+	'height': 350
 };
 var currentBackgroundPage = 1;
 var currentFurniturePage = 1;
@@ -727,7 +727,7 @@ function pagingItem(searchItem,searchWord,gap) {
 		<div id="edit">
 			<p><b>Edit My Store</b></p>
 			<hr/>
-			<canvas id="myCanvas"  width="800" height="400"></canvas> 
+			<canvas id="myCanvas"  width="700px" height="350px"></canvas> 
 			<hr/>
     	<input type="button" value="저장" onclick="saveTexture()"/>
 		</div>
