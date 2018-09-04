@@ -1,6 +1,7 @@
 package global.sesoc.namiya.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,6 @@ public class CategoriesRepository {
 		List<Categories> list = mapper.selectSlist(categorynum);
 		
 		return list;
-	}
-
-	
+	}	
 		
 }

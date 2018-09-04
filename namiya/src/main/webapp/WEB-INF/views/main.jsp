@@ -23,10 +23,10 @@
 </style>
 </head>
 <body>
-<<<<<<< HEAD
-<h1>첫 화면</h1>
-=======
 <input type="button" value="mystore" onclick="mystoreOpen()">
+<<<<<<< HEAD
+=======
 >>>>>>> branch '180817' of https://github.com/namiyastore/namiyaa
+>>>>>>> branch '180817' of https://github.com/namiyastore/namiyaa.git
 </body>
 </html>

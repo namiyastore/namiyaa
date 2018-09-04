@@ -1,31 +1,28 @@
 package global.sesoc.namiya.vo;
 
 public class Mystore {
-	
 	private int imagenum;
 	private String userid;
-	private int totalframes;
+	private int itemnum;
 	private int currentframe;
-	private int width;
-	private int height;
-	private String filename;
 	private String px;
 	private String py;
+	private int imageorder;
+	private String type;
 	
 	public Mystore() {}
 
-	public Mystore(int imagenum, String userid, int totalframes, int currentframe, int width, int height,
-			String filename, String px, String py) {
+	public Mystore(int imagenum, String userid, int itemnum, int currentframe, String px, String py, int imageorder,
+			String type) {
 		super();
 		this.imagenum = imagenum;
 		this.userid = userid;
-		this.totalframes = totalframes;
+		this.itemnum = itemnum;
 		this.currentframe = currentframe;
-		this.width = width;
-		this.height = height;
-		this.filename = filename;
 		this.px = px;
 		this.py = py;
+		this.imageorder = imageorder;
+		this.type = type;
 	}
 
 	public int getImagenum() {
@@ -44,12 +41,12 @@ public class Mystore {
 		this.userid = userid;
 	}
 
-	public int getTotalframes() {
-		return totalframes;
+	public int getItemnum() {
+		return itemnum;
 	}
 
-	public void setTotalframes(int totalframes) {
-		this.totalframes = totalframes;
+	public void setItemnum(int itemnum) {
+		this.itemnum = itemnum;
 	}
 
 	public int getCurrentframe() {
@@ -58,30 +55,6 @@ public class Mystore {
 
 	public void setCurrentframe(int currentframe) {
 		this.currentframe = currentframe;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
 	}
 
 	public String getPx() {
@@ -100,12 +73,29 @@ public class Mystore {
 		this.py = py;
 	}
 
+	public int getImageorder() {
+		return imageorder;
+	}
+
+	public void setImageorder(int imageorder) {
+		this.imageorder = imageorder;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
-		return "Mystore [imagenum=" + imagenum + ", userid=" + userid + ", totalframes=" + totalframes
-				+ ", currentframe=" + currentframe + ", width=" + width + ", height=" + height + ", filename="
-				+ filename + ", px=" + px + ", py=" + py + "]";
+		return "Mystore [imagenum=" + imagenum + ", userid=" + userid + ", itemnum=" + itemnum + ", currentframe="
+				+ currentframe + ", px=" + px + ", py=" + py + ", imageorder=" + imageorder + ", type=" + type + "]";
 	}
+
+	
 	
 	
 }
