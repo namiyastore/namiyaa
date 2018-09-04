@@ -37,7 +37,6 @@ import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.CategoriesRepository;
 import global.sesoc.namiya.dao.ProductRepository;
 import global.sesoc.namiya.util.FileService;
-import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
 import global.sesoc.namiya.vo.Product;
