@@ -1,5 +1,6 @@
 package global.sesoc.namiya.controller;
 
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,6 +9,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,10 +38,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.CategoriesRepository;
+import global.sesoc.namiya.dao.MystoreRepository;
 import global.sesoc.namiya.dao.ProductRepository;
 import global.sesoc.namiya.util.FileService;
+import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
+import global.sesoc.namiya.vo.Mystore;
 import global.sesoc.namiya.vo.Product;
 
 @Controller
@@ -52,12 +58,19 @@ public class MyStoreController {
 	@Autowired
 	ProductRepository p_repository;
 	
+
+	@Autowired
+	MystoreRepository m_repository;
 	
 	final String uploadPath = "/boardfile";
 	
 	// myStore 띄우기 
 	@RequestMapping(value="/myStore")
-	public String myStore() {
+	public String myStore(Model model) {
+		
+		List<Map<String,String>> list = m_repository.selectAll("aaa");
+		model.addAttribute("list", list);
+		System.out.println(list);
 		return "mystore/myStore";
 	}
 	
@@ -592,8 +605,11 @@ public class MyStoreController {
 	
 	// 임시 : setting
 	@RequestMapping(value="/setting")
-	public String setting() {
+	public String setting(Model model) {
 		
+		List<Map<String,String>> list = m_repository.selectAll("aaa");
+		model.addAttribute("list", list);
+		System.out.println(list);
 		return "mystore/setting";
 	}
 	
@@ -603,4 +619,48 @@ public class MyStoreController {
 		
 		return "mystore/profileEdit";
 	}
+	
+	// 미니룸 정보 저장
+	@ResponseBody
+	@RequestMapping(value="/saveMiniRoom", method=RequestMethod.POST)
+	public List<Mystore> saveMiniRoom(@RequestBody List<Mystore> list , Model model) {
+		
+		//System.out.println(list.get(0));
+		
+		m_repository.deleteAll("aaa");
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).setUserid("aaa");
+			list.get(i).setImageorder(i);
+			System.out.println(list.get(i));
+			m_repository.insert(list.get(i));
+		}
+		
+		return list;
+	}
+	
+	// 가구 반환
+	@ResponseBody
+	@RequestMapping(value="/reqFurniture", method=RequestMethod.GET)
+	public Map<String, Object> reqFurniture(
+			@RequestParam(value="currentPage",defaultValue="1") int currentPage,
+			@RequestParam(value="searchItem", defaultValue="type") String searchItem,
+			@RequestParam(value="searchWord", defaultValue="background") String searchWord,
+			Model model) {
+		
+		int totalItemCount = m_repository.getItemCount(searchItem,searchWord);
+		PageNavigator navi = new PageNavigator(currentPage, totalItemCount);
+		List<Map<String,Object>> list = m_repository.selectUserItem(searchItem,searchWord, navi.getStartRecord(), navi.getCountPerPage());
+		System.out.println("list: "+ list);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("list", list);
+		map.put("totalPage", navi.getTotalRecordCount());
+		map.put("navi", navi);
+		
+		
+		//int srow = COUNT_PER_PAGE * (currentPage -1) + 1;
+		//int erow = (totalPageCount == currentPage) ?  : COUNT_PER_PAGE * currentPage;
+		
+		return map;
+	}
+	
 }

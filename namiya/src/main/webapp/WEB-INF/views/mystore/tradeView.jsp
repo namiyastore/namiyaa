@@ -84,7 +84,7 @@
 	}
 	
 	#givedetail {
-		width: 1081px;
+		width: 1073px;
 		height: 545px;
 		border-radius: 25px;
 		background-color: white;
@@ -202,7 +202,7 @@
 </head>
 <body>
 <div id="wrapper" align="center">
-	<div id="scroll" style="float:left; width: 1081px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
+	<div id="scroll" style="float:left; width: 1073px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
 			<div id="tradeform">
 				<table>
 					<tr>
@@ -283,7 +283,7 @@
 			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; "></a></li>
 		</ul>
 	</div>
 	
