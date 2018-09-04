@@ -58,6 +58,7 @@
 		background-color: white;
 		padding: 1px;
 		float : left;
+		padding-top: 20px;
 	}
 	
 	#profile {
@@ -158,12 +159,12 @@
 	</div>
 	<div id="mystore">
 		<h1><b>Welcome My Store</b></h1>
-		<div id="url" style="border-top: 1px solid #e3e9ed; border-bottom: 1px solid #e3e9ed; background-color:#e3e9ed; width:800px; padding-top:10px; padding-bottom:10px;" align="right">
-			www.namiya.com/sosori93
+		<div id="url" style="border-top: 1px solid #e3e9ed; border-bottom: 1px solid #e3e9ed; background-color:#e3e9ed; width:700px; padding-top:10px; padding-bottom:10px;" align="right">
+			www.namiya.com/sosori93 &nbsp;
 		</div>
 		
-		<div id="store" style="width:800px; height:400px; background-color: #97c2e5;">
-			<img src="resources/images/example2.PNG" style="width:800px; height:400px;">
+		<div id="store" style="width:700px; height:350px; background-color: #97c2e5;">
+			<img src="resources/images/example2.PNG" style="width:700px; height:350px;">
 		</div>
 	</div>
 	

@@ -125,7 +125,7 @@
 	}
 	
 	body, p {
-		font-family: 'Jeju Gothic', sans-serif;
+		font-family: 'Jeju Gothic', Eco Sans Mono;
 	}
 	
 	table, tr, td {
@@ -134,10 +134,11 @@
 	}
 	
 	table {
-		width:950px;
+		width:900px;
 		height: 160px;
 		padding: 0px;
 		margin:0px;
+		font-family: 'Jeju Gothic', Eco Sans Mono;
 	}
 	
 	hr {
@@ -145,18 +146,19 @@
 	}
 	
 	#image {
-		width:200px;
+		width:180px;
 		text-align: center;
 	}
 	
 	#title {
-		width:450px;
+		width:350px;
 		font-size:20px;
 	}
 	
 	#date {
 		width:150px;
 		text-align: center;
+		font-family: 'Jeju Gothic';
 	}
 	
 	#btn {
@@ -164,6 +166,12 @@
 		text-align: center;
 	}
 	
+	#page {
+		width: 150px;
+		display:flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 </style>
 </head>
 <body>
@@ -176,7 +184,7 @@
 			<a href="giveForm"><img src="resources/images/write.png" style="width:70px; height:40px;"></a>
 			
 			<hr/>
-			<c:if test="${empty list}">
+			<c:if test="${empty map}">
 					<br/>
 					<tr>
 						<td colspan="3">등록된 무료양도 상품이 없습니다.</td>
@@ -184,44 +192,64 @@
 			</c:if>
 	
 			<%-- 이하 글 목록 반복 --%>
-			<c:if test="${not empty list}">
-			<c:forEach var="list" items="${list}" varStatus="status">
+			<c:if test="${not empty map}">
+			<c:forEach var="map" items="${map}" varStatus="status">
 				<table>
 					<tr>
-						<td id="image"><img src="resources/images/rabit.png" style="width:150px; height:150px;"></td>
-						<td id="title"><a href="giveView?boardnum=${list.boardnum}" style="text-decoration:none; color:black;"><span id="title"><b>${list.title}</b></span></a></td>
-						<td id="date">${list.regdate}</td>
+						<td style="width:50px; font-family: 'Jeju Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
+						<c:if test="${map.ORIGINALFILE != null}">
+						<td id="image"><img src="boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
+						</c:if>
+						<c:if test="${map.ORIGINALFILE == null}">
+						<td id="image"><img src="resources/images/rabit.png" style="width:150px; height:100px;"></td>
+						</c:if>
+						<td id="title"><a href="giveView?boardnum=${map.BOARDNUM}" style="text-decoration:none; color:black;"><span id="title"><b>${map.TITLE}</b></span></a></td>
+						<td id="date">${map.REGDATE}</td>
 						<td id="btn">
 							<img src="resources/images/interest.png" onclick="interest()" style="width:55px; height:40px;">
 							&nbsp;
-							<img src="resources/images/want.png" onclick="want()" style="width:60px; height:39px;">
+							<img src="resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
 						</td>
 					</tr>
 				</table>
 				<hr/>
 			</c:forEach>
-			</c:if>
+			
+			<%-- 페이징 처리하기  --%>
+			<br/>
+			<div id="page">
+				<div>
+					<a href="give?currentPage=${navi.currentPage-navi.pagePerGroup}"><img src="resources/images/arrow2.png" style="width:20px; height:30px;"></a>
+				</div>
 				
-				<%-- <c:if test="${empty list}"> 
-					<p>등록된 무료양도 상품 목록이 없습니다.</p>
-				</c:if>
-		
-				<c:if test="${not empty list}">
-					<c:forEach var="list" items="${list}" varStatus="status">
-				<table>
-					<tr>
-						<td rowspan="2" id="image"><img src="resources/images/rabit.png"></td>
-						<td colspan="2" id="title"><a href="boardView?boardnum=${list.boardnum}" style="text-decoration:none; color:black;"><b>${list.title}</b></a></td>
-					</tr>
+				<div>
+					<a href="give?currentPage=${navi.currentPage-1}"><img src="resources/images/arrow4.png" style="width:20px; height:30px;"></a>
+				</div>
+				
+				<c:forEach var="page" begin="${navi.startPageGroup}" end="${navi.endPageGroup}">
+					<c:if test="${page == navi.currentPage}">
+						<div>
+							<span style="color:#0081C6; font-weight:bold; text-decoration:none; color:black;"><dr>${page}</dr></span>&nbsp;
+						</div>
+					</c:if>	
 					
-					<tr>
-						<td id="writer">Write by&nbsp;<span><b>${list.userid}</b></span></td>
-						<td id="date">Date &nbsp;<span><b>${list.regdate}</b></span></td>
-					</tr>
-				</table>
-					<tr></tr>
-					</c:forEach>
-				</c:if> --%>
+					<c:if test="${page != navi.currentPage}">
+						<div>
+							<a style="text-decoration:none; color:black;" href="give?currentPage=${page}">${page}</a>&nbsp;
+						</div>
+					</c:if>
+				</c:forEach>
+				
+				<div>
+					<a href="give?currentPage=${navi.currentPage+1}"><img src="resources/images/arrow3.png" style="width:20px; height:30px;"></a>
+				</div>
+				
+				<div>
+					<a href="give?currentPage=${navi.currentPage+navi.pagePerGroup}"><img src="resources/images/arrow1.png" style="width:20px; height:30px;"></a>
+				</div>
+			</div>
+			</c:if>
+				<br/>
 			</div>
 	</div>
 		
@@ -235,7 +263,6 @@
 			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px;"></a></li>
 		</ul>
 	</div>
-	
 </div>
 </body>
 </html>

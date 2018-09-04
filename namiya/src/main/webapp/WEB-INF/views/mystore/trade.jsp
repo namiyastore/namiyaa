@@ -8,7 +8,13 @@
 <title>교환게시판</title>
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script>
-	
+	function interest() {
+		alert("관심상품에 추가되었습니다!");
+	}
+
+	function want() {
+		alert("이 상품을 원합니다");
+	}
 </script>
 <style>
 ::-webkit-scrollbar{width: 16px;}
@@ -118,45 +124,132 @@
 		font-family: Eco Sans Mono;
 	}
 	
-	body {
-		font-family: 'Jeju Gothic', sans-serif;
+	body, p {
+		font-family: 'Jeju Gothic', Eco Sans Mono;
 	}
 	
+	table, tr, td {
+		margin : 0 auto;
+		padding: 0px;	
+	}
 	
+	table {
+		width:900px;
+		height: 160px;
+		padding: 0px;
+		margin:0px;
+		font-family: 'Jeju Gothic', Eco Sans Mono;
+	}
+	
+	hr {
+		width:950px;
+	}
+	
+	#image {
+		width:180px;
+		text-align: center;
+	}
+	
+	#title {
+		width:350px;
+		font-size:20px;
+	}
+	
+	#date {
+		width:150px;
+		text-align: center;
+		font-family: 'Jeju Gothic';
+	}
+	
+	#btn {
+		width:150px;
+		text-align: center;
+	}
+	
+	#page {
+		width: 150px;
+		display:flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 </style>
 </head>
 <body>
 <div id="wrapper" align="center">
-	<div id="scroll" style="float:left; width: 1081px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: #eaeff2;">
+	<div id="scroll" style="float:left; width: 1081px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
 		<div id="tradedetail">
 			<h1><b>Exchange Things</b></h1>
 			<hr/>
 			
-			
 				<a href="tradeForm"><img src="resources/images/write.png" style="width:70px; height:40px;"></a>
-				<hr/>
 				
-				<c:if test="${empty list}"> 
-					<p>등록된 교환상품 목록이 없습니다.</p>
+				<hr/>
+				<c:if test="${empty map}"> 
+				<br/>
+					<tr>
+						<td colspan="3">등록된 교환 상품이 없습니다.</td>
+					</tr>
 				</c:if>
 		
-				<br/>
-			<%-- 	<c:if test="${not empty list}">
-					<c:forEach var="list" items="${list}" varStatus="status">
+				<%-- 이하 글 목록 반복 --%>
+				<c:if test="${not empty map}">
+				<c:forEach var="map" items="${map}" varStatus="status">
 				<table>
 					<tr>
-						<td rowspan="2" id="image"><img src="resources/images/rabit.png"></td>
-						<td colspan="2" id="title"><a href="diaryView?diarynum=${list.diarynum}" style="text-decoration:none; color:black;"><span id="diary_title"><b>${list.diary_title}</b></span></a></td>
-					</tr>
-					
-					<tr>
-						<td id="writer">Write by&nbsp;<span><b>${list.userid}</b></span></td>
-						<td id="date">Date &nbsp;<span><b>${list.regdate}</b></span></td>
+						<td style="width:50px; font-family: 'Jeju Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
+						<c:if test="${map.ORIGINALFILE != null}">
+						<td id="image"><img src="boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
+						</c:if>
+						<c:if test="${map.ORIGINALFILE == null}">
+						<td id="image"><img src="resources/images/rabit.png" style="width:150px; height:100px;"></td>
+						</c:if>
+						<td id="title"><a href="tradeView?boardnum=${map.BOARDNUM}" style="text-decoration:none; color:black;"><span id="title"><b>${map.TITLE}</b></span></a></td>
+						<td id="date">${map.REGDATE}</td>
+						<td id="btn">
+							<img src="resources/images/interest.png" onclick="interest()" style="width:55px; height:40px;">
+							&nbsp;
+							<img src="resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
+						</td>
 					</tr>
 				</table>
-					<tr></tr>
-					</c:forEach>
-				</c:if> --%>
+				<hr/>
+				</c:forEach>
+			
+			<%-- 페이징 처리하기  --%>
+			<br/>
+			<div id="page">
+				<div>
+					<a href="trade?currentPage=${navi.currentPage-navi.pagePerGroup}"><img src="resources/images/arrow2.png" style="width:20px; height:30px;"></a>
+				</div>
+				
+				<div>
+					<a href="trade?currentPage=${navi.currentPage-1}"><img src="resources/images/arrow4.png" style="width:20px; height:30px;"></a>
+				</div>
+				
+				<c:forEach var="page" begin="${navi.startPageGroup}" end="${navi.endPageGroup}">
+					<c:if test="${page == navi.currentPage}">
+						<div>
+							<span style="color:#0081C6; font-weight:bold; text-decoration:none; color:black;"><dr>${page}</dr></span>&nbsp;
+						</div>
+					</c:if>	
+					
+					<c:if test="${page != navi.currentPage}">
+						<div>
+							<a style="text-decoration:none; color:black;" href="trade?currentPage=${page}">${page}</a>&nbsp;
+						</div>
+					</c:if>
+				</c:forEach>
+				
+				<div>
+					<a href="trade?currentPage=${navi.currentPage+1}"><img src="resources/images/arrow3.png" style="width:20px; height:30px;"></a>
+				</div>
+				
+				<div>
+					<a href="trade?currentPage=${navi.currentPage+navi.pagePerGroup}"><img src="resources/images/arrow1.png" style="width:20px; height:30px;"></a>
+				</div>
+			</div>
+			</c:if>
+				<br/>
 		</div>
 	</div>
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">

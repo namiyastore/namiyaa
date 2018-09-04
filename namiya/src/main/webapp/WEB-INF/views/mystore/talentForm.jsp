@@ -19,8 +19,8 @@ function formCheck() {
 		return false;
 	}
 	
-	if (big.value == '' || big.value != '재능기부') {
-		alert('분류를 재능기부로 정확히 입력하세요.');
+	if (big.value == '대분류') {
+		alert('분류를 정확히 입력하세요.');
 		return false;
 	}
 	
@@ -133,7 +133,6 @@ function formCheck() {
    		margin : 0 auto;
    		text-align:left;
    		color: #646568;
-   		font-size: 14px;
 	}
 	
 	h1 {
@@ -149,8 +148,9 @@ function formCheck() {
 </head>
 <body>
 <div id="wrapper" align="center">
-	<form name="form1" action="write" method="post" enctype="multipart/form-data">
+	<form name="form1" action="talentwrite" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="userid" value="${sessionScope.loginId}">
+	<input type="hidden" name="categorynum" value="1985">
 		<div id="scroll" style="float:left; width: 1081px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
 			<div id="talentform">
 				<table>
@@ -186,18 +186,15 @@ function formCheck() {
 					<tr>
 						<td class="sort"><b>분류</b></td>
 						<td class="scontent">
-						<label>대분류</label>
+						<label style="font-size: 14px;">대분류</label>
 							<select id="big">
+							<option class="category" value="대분류">--대분류--</option>
 								<c:forEach var="list" items="${c_list}">
-									<option class="category" value="${list.categorynum}">${list.categoryname}</option>
+									<c:if test="${list.categorynum == 1985}">
+										<option class="category" value="${list.categorynum}" selected="selected">${list.categoryname}</option>
+									</c:if>
 								</c:forEach>
 							</select>
-						<!-- <label>중분류</label>
-							<select id="middle">
-							</select>
-						<label>소분류</label>
-							<select id="small">
-							</select> -->
 						</td>
 					</tr>
 					<tr>
@@ -206,11 +203,14 @@ function formCheck() {
 					</tr>
 					<tr>
 						<td class="sort"><b>첨부파일</b></td>
-						<td class="scontent"><input type="file" name="upload"></td>
+						<td class="scontent">
+							<input type="file" name="upload" id="file" accept="image/jpeg, image/png, image/gif">
+							<p style="font-family: 'Jeju Gothic'; font-size: 12px; color:red;">이미지 파일만 등록가능합니다.</p>
+						</td>
 					</tr>
 				</table>
 				<br/>
-				<input type="image" src="resources/images/insert.png" style="width:60px; height:40px; outline: none;" onclick="return formCheck()">
+				<input id="insert" type="image" src="resources/images/insert.png" style="width:60px; height:40px; outline: none;" onclick="return formCheck()">
 				<a href="talent"><img src="resources/images/board.png" style="width:60px; height:40px;"></a>
 				<br/><br/>
 			</div>
