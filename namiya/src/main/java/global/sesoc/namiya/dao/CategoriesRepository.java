@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
 
 @Repository
@@ -33,6 +34,6 @@ public class CategoriesRepository {
 		List<Categories> list = mapper.selectSlist(categorynum);
 		
 		return list;
-	}	
+	}
 		
 }
