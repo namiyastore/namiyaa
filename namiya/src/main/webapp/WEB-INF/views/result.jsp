@@ -46,8 +46,16 @@ $(function(){
 		$("#depth1 div").css("color","#000000");
 	});
 	
+	// 검색
 	$(".btn-danger").on("click",function(){
-		location.href="result";
+		var searchWord = $(".form-control").val();
+		var currentPage1 = $("#currentPage1").val();
+		
+		if(!currentPage1) {
+			currentPage1 = 1;
+		}
+		
+		location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&searchFlag=on";
 	});
 	
 	// 위치 초기화( 검색결과창창, 프로필 )
@@ -88,6 +96,246 @@ $(function(){
 			.css("margin-left","50px");
 	} );
 	
+	$("#pagingFirst").on("click",function(){
+		
+		var searchWord = $("#searchWord").val();
+		var currentPage = "";
+		var pagePerGroup = $("#pagePerGroup").val();
+		var startPageGroup = $("#startPageGroup").val();
+		var endPageGroup = $("#endPageGroup").val();
+		var searchFlag = $("#searchFlag").val();
+		var parentnum = $("#parentnum").val();
+		var categoryGroup = $("#categoryGroup").val();
+		
+		if(searchFlag == "on") {
+			currentPage = $("#currentPage1").val();
+			
+			if((parseInt(currentPage) - parseInt(pagePerGroup)) > 1) {
+				location.href="result?currentPage1=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&searchFlag=on";
+			}
+			else {
+				location.href="result?currentPage1=1" + "&searchWord=" + searchWord + "&searchFlag=on";
+			}
+		}
+		else {
+			if(categoryGroup == 'major') {
+				currentPage = $("#currentPage2").val();
+			}
+			else if(categoryGroup == 'medium') {
+				currentPage = $("#currentPage3").val();
+			}
+			else if(categoryGroup == 'minor') {
+				currentPage = $("#currentPage4").val();
+			}			
+			
+			if((parseInt(currentPage) - parseInt(pagePerGroup)) > 1) {
+				if(categoryGroup == 'major') {
+					location.href="result?currentPage2=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+				}
+				else if(categoryGroup == 'medium') {
+					location.href="result?currentPage3=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+				}
+				else if(categoryGroup == 'minor') {
+					location.href="result?currentPage4=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+				}
+			}
+			else {
+				if(categoryGroup == 'major') {					
+					location.href="result?currentPage2=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+				}
+				else if(categoryGroup == 'medium') {
+					location.href="result?currentPage3=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+				}
+				else if(categoryGroup == 'minor') {
+					location.href="result?currentPage4=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+				}
+				
+			}
+		}		
+		
+	});
+	
+	$("#pagingLeft").on("click",function(){
+		
+		var searchWord = $("#searchWord").val();
+		var currentPage = "";
+		var pagePerGroup = $("#pagePerGroup").val();
+		var startPageGroup = $("#startPageGroup").val();
+		var endPageGroup = $("#endPageGroup").val();
+		var searchFlag = $("#searchFlag").val();
+		var parentnum = $("#parentnum").val();
+		var categoryGroup = $("#categoryGroup").val();
+		
+		if(searchFlag == "on") {
+			currentPage = $("#currentPage1").val();
+			
+			if((parseInt(currentPage) - 1) > 1) {
+				location.href="result?currentPage1=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&searchFlag=on";
+			}
+			else {
+				location.href="result?currentPage1=1" + "&searchWord=" + searchWord + "&searchFlag=on";
+			}
+		}
+		else {
+			if(categoryGroup == 'major') {
+				currentPage = $("#currentPage2").val();
+			}
+			else if(categoryGroup == 'medium') {
+				currentPage = $("#currentPage3").val();
+			}
+			else if(categoryGroup == 'minor') {
+				currentPage = $("#currentPage4").val();
+			}
+			
+			if((parseInt(currentPage) - 1) > 1) {
+				if(categoryGroup == 'major') {
+					location.href="result?currentPage2=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+				}
+				else if(categoryGroup == 'medium') {
+					location.href="result?currentPage3=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+				}
+				else if(categoryGroup == 'minor') {
+					location.href="result?currentPage4=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+				}					
+			}
+			else {
+				if(categoryGroup == 'major') {
+					location.href="result?currentPage2=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+				}
+				else if(categoryGroup == 'medium') {
+					location.href="result?currentPage3=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+				}
+				else if(categoryGroup == 'minor') {
+					location.href="result?currentPage4=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+				}				
+			}
+			
+		}
+	});
+	
+	$("#pagingRight").on("click",function(){
+		
+		var searchWord = $("#searchWord").val();
+		var currentPage = "";
+		var pagePerGroup = $("#pagePerGroup").val();
+		var startPageGroup = $("#startPageGroup").val();
+		var endPageGroup = $("#endPageGroup").val();
+		var searchFlag = $("#searchFlag").val();
+		var parentnum = $("#parentnum").val();
+		var categoryGroup = $("#categoryGroup").val();
+		
+		if(searchFlag == "on") {
+			currentPage = $("#currentPage1").val();
+			
+			if(endPageGroup >= (parseInt(currentPage) + 1)) {
+				location.href="result?currentPage1=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&searchFlag=on";
+			}
+			else {
+				location.href="result?currentPage1=" + endPageGroup + "&searchWord=" + searchWord + "&searchFlag=on";
+			}
+		}
+		else {
+			if(categoryGroup == 'major') {
+				currentPage = $("#currentPage2").val();
+			}
+			else if(categoryGroup == 'medium') {
+				currentPage = $("#currentPage3").val();
+			}
+			else if(categoryGroup == 'minor') {
+				currentPage = $("#currentPage4").val();
+			}
+			
+			if(endPageGroup >= (parseInt(currentPage) + 1)) {
+				if(categoryGroup == 'major') {
+					location.href="result?currentPage2=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+				}
+				if(categoryGroup == 'medium') {
+					location.href="result?currentPage3=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+				}
+				if(categoryGroup == 'minor') {
+					location.href="result?currentPage4=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+				}
+			}
+			else {
+				if(categoryGroup == 'major') {
+					location.href="result?currentPage2=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";	
+				}
+				if(categoryGroup == 'medium') {
+					location.href="result?currentPage3=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+				}
+				if(categoryGroup == 'minor') {
+					location.href="result?currentPage4=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+				}
+			}
+		}
+	});
+	
+	$("#pagingLast").on("click",function(){
+		
+		var searchWord = $("#searchWord").val();
+		var currentPage = "";
+		var pagePerGroup = $("#pagePerGroup").val();
+		var startPageGroup = $("#startPageGroup").val();
+		var endPageGroup = $("#endPageGroup").val();
+		var searchFlag = $("#searchFlag").val();
+		var parentnum = $("#parentnum").val();
+		var categoryGroup = $("#categoryGroup").val();
+		
+		if(searchFlag == "on") {
+			currentPage = $("#currentPage1").val();
+			
+			if(endPageGroup  >= (parseInt(currentPage) + parseInt(pagePerGroup))) {
+				location.href="result?currentPage1=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&searchFlag=on";	
+			}
+			else {
+				location.href="result?currentPage1=" + endPageGroup + "&searchWord=" + searchWord + "&searchFlag=on";
+			}
+		}
+		else {
+			if(categoryGroup == 'major') {
+				currentPage = $("#currentPage2").val();
+			}
+			else if(categoryGroup == 'medium') {
+				currentPage = $("#currentPage3").val();
+			}
+			else if(categoryGroup == 'minor') {
+				currentPage = $("#currentPage4").val();
+			}
+			
+			if(endPageGroup >= (parseInt(currentPage) + parseInt(pagePerGroup))) {
+				if(categoryGroup == 'major') {
+					location.href="result?currentPage2=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+				}
+				if(categoryGroup == 'medium') {
+					location.href="result?currentPage3=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+				}
+				if(categoryGroup == 'minor') {
+					location.href="result?currentPage4=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+				}
+			}
+			else {
+				if(categoryGroup == 'major') {
+					location.href="result?currentPage2=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+				}
+				if(categoryGroup == 'medium') {
+					location.href="result?currentPage3=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+				}
+				if(categoryGroup == 'minor') {
+					location.href="result?currentPage4=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+				}
+			}
+		}
+	});
+	
+	var pagingFirstNum = $("#pnumFirst").val();
+	var pagingLastNum = $("#pnumLast").val();
+	
+	if(pagingFirstNum != pagingLastNum) {
+		$("#pagingNum").html(pagingFirstNum + " - " + pagingLastNum);
+	}
+	else {
+		$("#pagingNum").html(pagingFirstNum);
+	}
 	
 });
 
@@ -119,6 +367,24 @@ function setPositionInit() {
 	
 }
 
+// 대분류 클릭 이벤트 함수
+function majorCategoryClick(categorynum) {
+	var currentPage2 = $("#currentPage2").val();
+	location.href = "result?currentPage2=" + currentPage2 + "&parentnum=" + categorynum + "&categoryGroup=major";
+}
+
+// 중분류 클릭 이벤트 함수
+function mediumCategoryClick(categorynum) {
+	var currentPage3 = $("#currentPage3").val();
+	location.href = "result?currentPage3=" + currentPage3 + "&parentnum=" + categorynum + "&categoryGroup=medium";
+}
+
+// 소분류 클릭 이벤트 함수
+function minorCategoryClick(categorynum) {
+	var currentPage4 = $("#currentPage4").val();
+	location.href = "result?currentPage4=" + currentPage4 + "&parentnum=" + categorynum + "&categoryGroup=minor";
+}
+
 function majorCategory() {
 	
 	$.ajax({
@@ -128,17 +394,17 @@ function majorCategory() {
 			for(var i in resp) {
 				if(i == 0) {
 					$("#depth1").append(
-						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth1").append(
-						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else {
 					$("#depth1").append(
-						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 			}
@@ -186,17 +452,17 @@ function mediumCategory(categoryM) {
 			for(var i in resp) {
 				if(i == 0) {
 					$("#depth2").append(
-						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:mediumCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth2").append(
-						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:mediumCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else {
 					$("#depth2").append(
-						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:mediumCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);	
 				}
 				
@@ -252,21 +518,21 @@ function minerCategory(category_m) {
 			
 			$("#depth3").css("top",ht);
 			
-			// 중분류 카테고리 출력
+			// 소분류 카테고리 출력
 			for(var i in resp) {
 				if(i == 0) {
 					$("#depth3").append(
-						"<div style='border-top: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-top: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth3").append(
-						"<div style='border-bottom: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-bottom: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else {
 					$("#depth3").append(
-						"<div style='border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 			}
@@ -285,6 +551,19 @@ function minerCategory(category_m) {
 
 </head>
 <body>
+
+<input id="searchWord" type="hidden" value="${searchWord}">
+<input id="currentPage1" type="hidden" value="${currentPage1}">
+<input id="currentPage2" type="hidden" value="${currentPage2}">
+<input id="currentPage3" type="hidden" value="${currentPage3}">
+<input id="currentPage4" type="hidden" value="${currentPage4}">
+<input id="categoryGroup" type="hidden" value="${categoryGroup}">
+<input id="pagePerGroup" type="hidden" value="${navi.pagePerGroup}">
+<input id="startPageGroup" type="hidden" value="${navi.startPageGroup}">
+<input id="endPageGroup" type="hidden" value="${navi.endPageGroup}">
+<input id="totalRecordCount" type="hidden" value="${totalRecordCount}">
+<input id="searchFlag" type="hidden" value="${searchFlag}">
+<input id="parentnum" type="hidden" value="${parentnum}">
 
 <div id="container">
 
@@ -325,7 +604,8 @@ function minerCategory(category_m) {
 					<div>&lt;</div>
 				</div>
 				
-				<span id="pagingNum">1 - 10</span>
+				<span id="pagingNum">
+				</span>
 				
 				<div class="pagingBtn" id="pagingRight">
 					<div>&gt;</div>
@@ -335,164 +615,34 @@ function minerCategory(category_m) {
 					<div>&gt;&gt;</div>
 				</div>
 			</div>
-			<div>
-				<div class="productList">
-				
-					<div class="leftFrame">
-						<div class="productImg">
-							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
+			<c:if test="${not empty list}">
+				<c:forEach var="ptList" items="${list}" varStatus="status">
+					<c:if test="${status.first}">
+						<input id="pnumFirst" type="hidden" value="${status.count + navi.startRecord}">
+					</c:if>
+					<c:if test="${status.last}">
+						<input id="pnumLast" type="hidden" value="${status.count + navi.startRecord}">
+					</c:if>
+					<div>
+						<div class="productList" data-boardnum="${ptList.boardnum}">
+							<div class="leftFrame">
+								<div class="productImg">
+									<img onError="this.src='resources/search/image/noimage.png'" src="a" width="100px" height="100px">
+								</div>
+							</div>
+							
+							<div class="rightFrame">
+								<div class="productTitle">${ptList.title}</div>
+								<div class="rightFrameSub">
+									<div class="regdate">${ptList.regdate}</div>
+									<div class="userid">${ptList.userid}</div>
+								</div>
+							</div>			
+						
 						</div>
 					</div>
-					
-					<div class="rightFrame">
-						<div class="productTitle">제목</div>
-						<div class="rightFrameSub">
-							<div class="regdate">등록날짜</div>
-							<div class="userid">작성자(id)</div>
-						</div>
-					</div>			
-				
-				</div>
-			</div>
-			<div><hr/></div>
-			<div>
-				<div class="productList">
-				
-					<div class="leftFrame">
-						<div class="productImg">
-							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
-						</div>
-					</div>
-					
-					<div class="rightFrame">
-						<div class="productTitle">제목</div>
-						<div class="rightFrameSub">
-							<div class="regdate">등록날짜</div>
-							<div class="userid">작성자(id)</div>
-						</div>
-					</div>			
-				</div>
-			</div>
-			<div><hr/></div>
-			<div>
-				<div class="productList">
-				
-					<div class="leftFrame">
-						<div class="productImg">
-							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
-						</div>
-					</div>
-					
-					<div class="rightFrame">
-						<div class="productTitle">제목</div>
-						<div class="rightFrameSub">
-							<div class="regdate">등록날짜</div>
-							<div class="userid">작성자(id)</div>
-						</div>
-					</div>			
-				
-				</div>
-			</div>
-			<div><hr/></div>
-			<div>
-				<div class="productList">
-				
-					<div class="leftFrame">
-						<div class="productImg">
-							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
-						</div>
-					</div>
-					
-					<div class="rightFrame">
-						<div class="productTitle">제목</div>
-						<div class="rightFrameSub">
-							<div class="regdate">등록날짜</div>
-							<div class="userid">작성자(id)</div>
-						</div>
-					</div>			
-				
-				</div>
-			</div>
-			<div><hr/></div>
-			<div>
-				<div class="productList">
-				
-					<div class="leftFrame">
-						<div class="productImg">
-							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
-						</div>
-					</div>
-					
-					<div class="rightFrame">
-						<div class="productTitle">제목</div>
-						<div class="rightFrameSub">
-							<div class="regdate">등록날짜</div>
-							<div class="userid">작성자(id)</div>
-						</div>
-					</div>			
-				
-				</div>
-			</div>
-			<div><hr/></div>
-			<div>
-				<div class="productList">
-				
-					<div class="leftFrame">
-						<div class="productImg">
-							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
-						</div>
-					</div>
-					
-					<div class="rightFrame">
-						<div class="productTitle">제목</div>
-						<div class="rightFrameSub">
-							<div class="regdate">등록날짜</div>
-							<div class="userid">작성자(id)</div>
-						</div>
-					</div>			
-				
-				</div>
-			</div>
-			<div><hr/></div>
-			<div>
-				<div class="productList">
-				
-					<div class="leftFrame">
-						<div class="productImg">
-							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
-						</div>
-					</div>
-					
-					<div class="rightFrame">
-						<div class="productTitle">제목</div>
-						<div class="rightFrameSub">
-							<div class="regdate">등록날짜</div>
-							<div class="userid">작성자(id)</div>
-						</div>
-					</div>			
-				
-				</div>
-			</div>
-			<div><hr/></div>
-			<div>
-				<div class="productList">
-				
-					<div class="leftFrame">
-						<div class="productImg">
-							<img src="http://blogfiles.naver.net/MjAxNzA3MTBfOTEg/MDAxNDk5NjgyNzM5Njk2.dkgQfKAWoufXEFdZchBBCfGodXXIIpAOF4yjZlZIAN8g.GF13NXZ8XM5ntdgVbd4EJ32dj1W8QAnUKyYU4izgWV4g.JPEG.carezzz/rrr%C5%A9%B1%E2%BA%AF%C8%AF_cm26002144.jpg" width="100px" height="100px">
-						</div>
-					</div>
-					
-					<div class="rightFrame">
-						<div class="productTitle">제목</div>
-						<div class="rightFrameSub">
-							<div class="regdate">등록날짜</div>
-							<div class="userid">작성자(id)</div>
-						</div>
-					</div>			
-				
-				</div>
-			</div>
+				</c:forEach>			
+			</c:if>
 			
 		</div>
 	

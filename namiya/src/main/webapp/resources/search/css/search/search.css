@@ -2,13 +2,13 @@
 
 @font-face {
 	font-family: 'NanumGothic';
-	src: url(../fonts/NanumGothicCoding.ttf) format('truetype');
+	src: url(../fonts/EcoSansMono.ttf) format('truetype');
 }
 
 body {
 	margin: 0 auto;	
 	background-color: #2A3D4C;
-	font-family: NanumGothic;
+	font-family: 'Jeju Gothic', Eco Sans Mono;
 	overflow:scroll;
 	overflow-x:hidden;
 }

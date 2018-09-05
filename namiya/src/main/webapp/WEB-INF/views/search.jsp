@@ -32,6 +32,7 @@ var category = "product";	// 검색 옵션 선택
 							// product : 양도
 							// talent : 재능
 							// trade : 교환
+var alarmMax = 0;
 
 $(function(){
 	
@@ -44,10 +45,6 @@ $(function(){
 		
 		$("#depth1 div").css("backgroundColor","#FFFFFF");
 		$("#depth1 div").css("color","#000000");
-	});
-	
-	$(".btn-danger").on("click",function(){
-		location.href="result";
 	});
 	
 	// 위치 초기화( 거래 알림창, 프로필 )
@@ -88,6 +85,60 @@ $(function(){
 			.css("margin-left","50px");
 	} );
 	
+	// 검색
+	$(".btn-danger").on("click",function(){
+		var searchWord = $(".form-control").val();
+		var currentPage1 = $("#currentPage").val();
+		
+		if(!currentPage1) {
+			currentPage1 = 1;
+		}
+		
+		location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&searchFlag=on";
+	});
+	
+	function noticeRealtime() {
+		$.ajax({
+			method : "get",
+			url : "noticeForAll",
+			dataType : "json",
+			success : function(resp) {
+				//alert(JSON.stringify(resp));
+				var val = "";	
+				
+				if(alarmMax < resp.boardnum) {
+					val += '<div class="noticeItem" data-boardnum="' + resp.boardnum + '">'; 
+					val += '<div class="noticeItemDisplay" id="noticeItemContent">';
+						
+					val += '<div id="noticeText">';
+					val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';
+					val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp.content;
+					val += '</div>';
+					val += '<div id="noticeDate">';
+					val += resp.regdate;
+					val += '</div>';
+					val += '</div>';
+					val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc">';
+					
+					val += '</div>';
+					val += '<hr/>';
+				
+					$("#notice").append(val);
+					
+					alarmMax = resp.boardnum;
+				}
+				
+				$('.noticeItem').off().on('click', function(){
+					alert($(this).attr('data-boardnum'));
+				});
+			}
+		});
+	}
+	
+	setInterval(noticeRealtime, 1000);
+	
+	
+	
 	
 });
 
@@ -117,6 +168,21 @@ function setPositionInit() {
 	
 }
 
+// 대분류 클릭 이벤트 함수
+function majorCategoryClick(categorynum) {
+	location.href = "result?currentPage2=1" + "&parentnum=" + categorynum + "&categoryGroup=major";
+}
+
+// 중분류 클릭 이벤트 함수
+function mediumCategoryClick(categorynum) {
+	location.href = "result?currentPage3=1" + "&parentnum=" + categorynum + "&categoryGroup=medium";
+}
+
+// 소분류 클릭 이벤트 함수
+function minorCategoryClick(categorynum) {
+	location.href = "result?currentPage4=1" + "&parentnum=" + categorynum + "&categoryGroup=minor";
+}
+
 function majorCategory() {
 	
 	$.ajax({
@@ -126,17 +192,17 @@ function majorCategory() {
 			for(var i in resp) {
 				if(i == 0) {
 					$("#depth1").append(
-						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth1").append(
-						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else {
 					$("#depth1").append(
-						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 			}
@@ -184,17 +250,17 @@ function mediumCategory(categoryM) {
 			for(var i in resp) {
 				if(i == 0) {
 					$("#depth2").append(
-						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:mediumCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth2").append(
-						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:mediumCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else {
 					$("#depth2").append(
-						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:mediumCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);	
 				}
 				
@@ -250,21 +316,21 @@ function minerCategory(category_m) {
 			
 			$("#depth3").css("top",ht);
 			
-			// 중분류 카테고리 출력
+			// 소분류 카테고리 출력
 			for(var i in resp) {
 				if(i == 0) {
 					$("#depth3").append(
-						"<div style='border-top: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-top: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth3").append(
-						"<div style='border-bottom: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-bottom: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 				else {
 					$("#depth3").append(
-						"<div style='border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "'>" + resp[i].categoryname + "</div>"
+						"<div style='border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
 					);
 				}
 			}
@@ -284,6 +350,19 @@ function minerCategory(category_m) {
 </head>
 <body>
 
+<input id="searchWord" type="hidden" value="${searchWord}">
+<input id="currentPage1" type="hidden" value="${currentPage1}">
+<input id="currentPage2" type="hidden" value="${currentPage2}">
+<input id="currentPage3" type="hidden" value="${currentPage3}">
+<input id="currentPage4" type="hidden" value="${currentPage4}">
+<input id="categoryGroup" type="hidden" value="${categoryGroup}">
+<input id="pagePerGroup" type="hidden" value="${navi.pagePerGroup}">
+<input id="startPageGroup" type="hidden" value="${navi.startPageGroup}">
+<input id="endPageGroup" type="hidden" value="${navi.endPageGroup}">
+<input id="totalRecordCount" type="hidden" value="${totalRecordCount}">
+<input id="searchFlag" type="hidden" value="${searchFlag}">
+<input id="parentnum" type="hidden" value="${parentnum}">
+
 <div id="container">
 
 	<!-- 레이아웃(로고, 검색) -->
@@ -294,14 +373,14 @@ function minerCategory(category_m) {
 		<!-- 검색 -->
 		<div id="custom-search-input">
 			<div class="input-group col-md-12">				
-				<input type="text" class="  search-query form-control" placeholder="Search" /> <span class="input-group-btn">
+				<input type="text" class="  search-query form-control" placeholder="Search" value="${searchWord}" /> <span class="input-group-btn">
 					<button class="btn btn-danger" type="button">
 						<span class=" glyphicon glyphicon-search"></span>
 					</button>
 				</span>
 			</div>
 		</div>
-	</div>	
+	</div>
 	
 	<!-- 레이아웃(카테고리, 실시간알림, 프로필) -->
 	<div id="layoutBottom" align="center">
@@ -326,7 +405,7 @@ function minerCategory(category_m) {
 						2018-08-01 14:15
 					</div>
 				</div>
-				<img id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="https://blogfiles.pstatic.net/MjAxNzEwMjhfMjQ5/MDAxNTA5MTkzNzE1MTk3.tm78jGE8Bqw2rzbh7c28aTXDAJ81Yhb1IhhtAufywAog.gczgHFDX6xmS5lAcJLwSkzBRxIMzaTx9m0sDYGnZYfQg.JPEG.bkh9376/20171027_102255.jpg">
+				<img onError="this.src='resources/search/image/noimage.png'" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc">
 			</div>
 			<hr/>
 			<div class="noticeItem">
@@ -340,87 +419,38 @@ function minerCategory(category_m) {
 						2018-08-01 14:15
 					</div>
 				</div>
-				<img id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="https://blogfiles.pstatic.net/MjAxNzEwMjhfMjQ5/MDAxNTA5MTkzNzE1MTk3.tm78jGE8Bqw2rzbh7c28aTXDAJ81Yhb1IhhtAufywAog.gczgHFDX6xmS5lAcJLwSkzBRxIMzaTx9m0sDYGnZYfQg.JPEG.bkh9376/20171027_102255.jpg">
-			</div>
-			<hr/><div class="noticeItem">
-				<div class="noticeItemDisplay" id="noticeItemContent">
-					
-					<div id="noticeText">
-						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
-					</div>
-					<div id="noticeDate">
-						2018-08-01 14:15
-					</div>
-				</div>
-				<img id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="https://blogfiles.pstatic.net/MjAxNzEwMjhfMjQ5/MDAxNTA5MTkzNzE1MTk3.tm78jGE8Bqw2rzbh7c28aTXDAJ81Yhb1IhhtAufywAog.gczgHFDX6xmS5lAcJLwSkzBRxIMzaTx9m0sDYGnZYfQg.JPEG.bkh9376/20171027_102255.jpg">
-			</div>
-			<hr/><div class="noticeItem">
-				<div class="noticeItemDisplay" id="noticeItemContent">
-					
-					<div id="noticeText">
-						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
-					</div>
-					<div id="noticeDate">
-						2018-08-01 14:15
-					</div>
-				</div>
-				<img id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="https://blogfiles.pstatic.net/MjAxNzEwMjhfMjQ5/MDAxNTA5MTkzNzE1MTk3.tm78jGE8Bqw2rzbh7c28aTXDAJ81Yhb1IhhtAufywAog.gczgHFDX6xmS5lAcJLwSkzBRxIMzaTx9m0sDYGnZYfQg.JPEG.bkh9376/20171027_102255.jpg">
-			</div>
-			<hr/><div class="noticeItem">
-				<div class="noticeItemDisplay" id="noticeItemContent">
-					
-					<div id="noticeText">
-						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
-					</div>
-					<div id="noticeDate">
-						2018-08-01 14:15
-					</div>
-				</div>
-				<img id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="https://blogfiles.pstatic.net/MjAxNzEwMjhfMjQ5/MDAxNTA5MTkzNzE1MTk3.tm78jGE8Bqw2rzbh7c28aTXDAJ81Yhb1IhhtAufywAog.gczgHFDX6xmS5lAcJLwSkzBRxIMzaTx9m0sDYGnZYfQg.JPEG.bkh9376/20171027_102255.jpg">
-			</div>
-			<hr/><div class="noticeItem">
-				<div class="noticeItemDisplay" id="noticeItemContent">
-					
-					<div id="noticeText">
-						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
-					</div>
-					<div id="noticeDate">
-						2018-08-01 14:15
-					</div>
-				</div>
-				<img id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="https://blogfiles.pstatic.net/MjAxNzEwMjhfMjQ5/MDAxNTA5MTkzNzE1MTk3.tm78jGE8Bqw2rzbh7c28aTXDAJ81Yhb1IhhtAufywAog.gczgHFDX6xmS5lAcJLwSkzBRxIMzaTx9m0sDYGnZYfQg.JPEG.bkh9376/20171027_102255.jpg">
-			</div>
-			<hr/><div class="noticeItem">
-				<div class="noticeItemDisplay" id="noticeItemContent">
-					
-					<div id="noticeText">
-						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
-					</div>
-					<div id="noticeDate">
-						2018-08-01 14:15
-					</div>
-				</div>
-				<img id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="https://blogfiles.pstatic.net/MjAxNzEwMjhfMjQ5/MDAxNTA5MTkzNzE1MTk3.tm78jGE8Bqw2rzbh7c28aTXDAJ81Yhb1IhhtAufywAog.gczgHFDX6xmS5lAcJLwSkzBRxIMzaTx9m0sDYGnZYfQg.JPEG.bkh9376/20171027_102255.jpg">
-			</div>
-			<hr/><div class="noticeItem">
-				<div class="noticeItemDisplay" id="noticeItemContent">
-					
-					<div id="noticeText">
-						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
-					</div>
-					<div id="noticeDate">
-						2018-08-01 14:15
-					</div>
-				</div>
-				<img id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="https://blogfiles.pstatic.net/MjAxNzEwMjhfMjQ5/MDAxNTA5MTkzNzE1MTk3.tm78jGE8Bqw2rzbh7c28aTXDAJ81Yhb1IhhtAufywAog.gczgHFDX6xmS5lAcJLwSkzBRxIMzaTx9m0sDYGnZYfQg.JPEG.bkh9376/20171027_102255.jpg">
+				<img onError="this.src='resources/search/image/noimage.png'" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc">
 			</div>
 			<hr/>
+			<div class="noticeItem">
+				<div class="noticeItemDisplay" id="noticeItemContent">
+					
+					<div id="noticeText">
+						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
+						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
+					</div>
+					<div id="noticeDate">
+						2018-08-01 14:15
+					</div>
+				</div>
+				<img onError="this.src='resources/search/image/noimage.png'" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc">
+			</div>
+			<hr/>
+<!-- 			<div class="noticeItem"> -->
+<!-- 				<div class="noticeItemDisplay" id="noticeItemContent"> -->
+					
+<!-- 					<div id="noticeText"> -->
+<!-- 						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3> -->
+<!-- 						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다. -->
+<!-- 					</div> -->
+<!-- 					<div id="noticeDate"> -->
+<!-- 						2018-08-01 14:15 -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<img onError="this.src='resources/search/image/noimage.png'" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc"> -->
+<!-- 			</div> -->
+<!-- 			<hr/>			 -->
+			
 		</div>
 	
 		<!-- 프로필 -->

@@ -34,6 +34,7 @@
 		<mapper resource="mappers/productMapper.xml"/>
 		<mapper resource="mappers/reviewMapper.xml"/>
 		<mapper resource="mappers/savingMapper.xml"/>
+		<mapper resource="mappers/searchMapper.xml"/>
 		
 	</mappers>
 </configuration>
