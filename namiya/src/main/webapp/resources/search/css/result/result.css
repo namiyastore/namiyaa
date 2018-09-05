@@ -22,27 +22,27 @@ body {
 
 /* 로고 */
 #logo {
-	position: relative;	
-	width: 150px;	
-	height: 50px
+    position: relative;
+    width: 190px;
+    height: 50px;
 }
 
 /* 검색 */
 #custom-search-input {
-	position: relative;
-	top: 15px;
-	left: 10px;
-	width: 900px;
-	display: inline-block;
+    position: relative;
+    top: 15px;
+    left: 50px;
+    width: 600px;
+    display: inline-block;
 }
 
 /* 프로필 */
 #profile {
- 	position: relative;
- 	width: 250px;
- 	height: 500px;
- 	background-color: #FFFFFF;
-	border-radius: 5px;
+    width: 250px;
+    height: 300px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    margin-top: -85px;
 }
 
 /* 프로필 사진 프레임 */
@@ -59,25 +59,18 @@ body {
 
 /* 프로필 버튼 */
 .profileBtn {
-	margin: 30px;
-	margin-left: 25px;
-	
-	text-align: center;
-	font-size: 1.5em;
-	
-	border: 1px solid;
-	border-radius: 5px;
-	
-	width: 200px;
-	height: 65px;
-	
-	line-height: 65px;
-	
-	cursor: pointer;
-	
-	background-color: #2A3D4C;
-	color: #FFFFFF;
-	
+    margin: 17px;
+    margin-left: 25px;
+    text-align: center;
+    font-size: 1.4em;
+    border: 1px solid;
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    line-height: 35px;
+    cursor: pointer;
+    background-color: #2A3D4C;
+    color: #FFFFFF;
 }
 
 /* 프로필 버튼 ( on mouse ) */
