@@ -14,8 +14,8 @@
 <script>
 	
 var background = {
-    	'width' : 800,
-    	'height': 400
+    	'width' : 700,
+    	'height': 350
     };
     var i = 0;
     var canvas;
@@ -187,19 +187,20 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 		background-color: #fff9e7;
 		width:1180px;
 		height:545px;
-		padding-top: 5px;
-		padding-left: 5px;
+		padding-top: 12px;
+		padding-left: 12px;
 		padding-right: 0px;
 		border-color: #fff9e7;
 	}
 	
 	#mystore {
-		width: 865px;
+		width: 863px;
 		height: 545px;
 		border-radius: 25px;
 		background-color: white;
 		padding: 1px;
 		float : left;
+		padding-top: 20px;
 	}
 	
 	#profile {
@@ -301,11 +302,11 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 	</div>
 	<div id="mystore">
 		<h1><b>Welcome My Store</b></h1>
-		<div id="url" style="border-top: 1px solid #e3e9ed; border-bottom: 1px solid #e3e9ed; background-color:#e3e9ed; width:800px; padding-top:10px; padding-bottom:10px;" align="right">
-			www.namiya.com/sosori93
+		<div id="url" style="border-top: 1px solid #e3e9ed; border-bottom: 1px solid #e3e9ed; background-color:#e3e9ed; width:700px; padding-top:10px; padding-bottom:10px;" align="right">
+			www.namiya.com/sosori93 &nbsp;
 		</div>
 		
-		<canvas id="myCanvas"  width="800" height="400"></canvas> 
+		<canvas id="myCanvas"  width="700px" height="350px"></canvas> 
     
 		
 		<!-- <div id="store" style="width:800px; height:400px; background-color: #97c2e5;">
@@ -314,14 +315,14 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 		
 	</div>
 	
-	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
+	<div id="list" style="float:left; width: 90px; text-align:right; height:545px; padding-top: 3px;">
 		<ul>
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
 		</ul>
 	</div>
 	

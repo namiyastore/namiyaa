@@ -4,10 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.BoardMapper">
 	<insert id="insertBrd" parameterType="Board">
-		insert into board values(boardnum_seq.nextval, #{productnum}, #{userid}, sysdate, #{title}, #{content}, #{service}, 'aaaa', 'aaaa')
+		insert into board (boardnum, productnum, userid, regdate, title, content, service
+		<if test="originalfile != null and savedfile != null">
+		, originalfile, savedfile</if>) 
+		values (boardnum_seq.nextval, #{productnum}, #{userid}, sysdate, #{title}, #{content}, #{service}
+		<if test="originalfile != null and savedfile != null">
+		, #{originalfile}, #{savedfile}
+		</if>)
 	</insert>
 	
-	<select id="selectGiveList" resultType="Board" parameterType="String">
-		select boardnum, productnum, userid, to_char(regdate,'YYYY-MM-DD') regdate, title, content, service, originalfile, savedfile from board where service=#{service} order by boardnum desc
+	<select id="selectList" resultType="map" parameterType="map">
+		select b.boardnum, b.productnum, b.userid, to_char(b.regdate, 'YYYY-MM-DD') regdate, b.title, b.content, b.service, b.originalfile, b.savedfile, p.sstatus from board b, product p where b.productnum = p.productnum and service=#{service} and userid=#{userid} order by boardnum desc
 	</select>
+	
+	<select id="selectOne" resultType="Board" parameterType="Integer">
+		select boardnum, productnum, userid, to_char(regdate,'YYYY-MM-DD') regdate, title, content, service, originalfile, savedfile from board where boardnum=#{boardnum}
+	</select>
+	
+	<select id="getTotalPage" parameterType="String" resultType="Integer">
+		select count(*) from board where service=#{service} and userid=#{userid}
+	</select>
+	
+	<delete id="deleteOne" parameterType="Integer">
+		delete board where boardnum=#{boardnum}
+	</delete>
+	
+	<update id="boardUpdate" parameterType="Board">
+		update board set title = #{title}, content=#{content}, originalfile=#{originalfile}, savedfile=#{savedfile} where boardnum=#{boardnum}	
+	</update>
 </mapper>

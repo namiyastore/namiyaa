@@ -13,8 +13,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 var background = {
-	'width' : 800,
-	'height': 400
+	'width' : 700,
+	'height': 350
 };
 var currentBackgroundPage = 1;
 var currentFurniturePage = 1;
@@ -55,7 +55,7 @@ function imageOutput(resp) {
 		currentFurniturePage = resp["navi"].currentPage;
 	var result = '';
 	result +=  '<tr>';
-	result +=  '<td>';
+	result +=  '<td align="center">';
 	if(resp["list"][0]["TYPE"] == "background")
 		result +=  '<a href=javascript:pagingItem("type","background"'+',-1)>';
 	else if(resp["list"][0]["TYPE"] == "furniture")
@@ -66,20 +66,20 @@ function imageOutput(resp) {
     	result +=  '<a href=javascript:pagingItem("type","top"'+',-1)>';
     else if(resp["list"][0]["TYPE"] == "bottom")
         result +=  '<a href=javascript:pagingItem("type","bottom"'+',-1)>';
-	result +=  '	<img alt="" src="resources/img/furniture/cat0.png" width="50" height="10">';
+	result +=  '	<img alt="" src="resources/images/arrow5.png" width="50" height="30">';
 	result +=  '</a>';
 	result +=  '</td>';
 	result +=  '</tr>'; 
     $.each(resp["list"],function(index, item) {
    		result +=  '<tr >';
-    	result +=  '<td id="line">';
+    	result +=  '<td id="line" align="center">';
         result +=  '	<a href=javascript:createTexture('+item["TOTALFRAMES"]+','+
         item["WIDTH"]+','+item["HEIGHT"]+',"'+item["FILENAME"]+'","'+item["TYPE"]+'",'+
         item["ITEMNUM"]+')>';
         if(item["TYPE"] == "background")
-        	result +=  '		<img src="resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'/'+item["FILENAME"]+'0.png" width="100" height="100">';
+        	result +=  '		<img src="resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';
         else
-        	result +=  '		<img src="resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'0.png" width="100" height="100">';	
+        	result +=  '		<img src="resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';	
         result +=  '	</a>';
         result +=  '</td>';  
         result +=  '</tr>';
@@ -87,7 +87,7 @@ function imageOutput(resp) {
     
      
     result +=  '<tr>';
-    result +=  '<td>';
+    result +=  '<td align="center">';
     if(resp["list"][0]["TYPE"] == "background")
 		result +=  '<a href=javascript:pagingItem("type","background"'+',1)>';
 	else if(resp["list"][0]["TYPE"] == "furniture")
@@ -98,7 +98,7 @@ function imageOutput(resp) {
        	result +=  '<a href=javascript:pagingItem("type","top"'+',+1)>';
     else if(resp["list"][0]["TYPE"] == "bottom")
             result +=  '<a href=javascript:pagingItem("type","bottom"'+',+1)>';
-    result +=  '		<img alt="" src="resources/img/furniture/cat0.png" width="50" height="10">';
+    result +=  '		<img alt="" src="resources/images/arrow6.png" width="50" height="30">';
     result +=  '	</a>';
     result +=  '</td>'; 
     result +=  '</tr>';
@@ -223,8 +223,10 @@ $(document).ready(function() {
       
       ix = $(this).offset().left;
       iy = $(this).offset().top;
+      
       var px = sx -ix; // 상대좌표
       var py = sy -iy; // 상대좌표
+      
       dx=dy=0;
                 
       if(selected != -1) { // 선택되었을때
@@ -624,6 +626,7 @@ function pagingItem(searchItem,searchWord,gap) {
   		-moz-background-size: cover;
   		-o-background-size: cover;
   		background-size: cover;
+  		overflow: hidden;
 	}
 	
 	#wrapper {
@@ -632,24 +635,33 @@ function pagingItem(searchItem,searchWord,gap) {
 		background-color: #fff9e7;
 		width:1180px;
 		height:545px;
-		padding-top: 5px;
-		padding-left: 5px;
+		padding-top: 12px;
+		padding-left: 12px;
 		padding-right: 0px;
 		border-color: #fff9e7;
 	}
 	
-	#edit {
-		width: 831px;
-		height: 545px;
+	/* #edit {
 		border-radius: 25px;
 		background-color: white;
 		padding-top: 5px;
 		padding-bottom: 5px;
+	} */
+	
+	
+	.menulist{
+    	display: block;
+   		list-style-type: disc;
+    	-webkit-margin-before: 1em;
+    	-webkit-margin-after: 1em;
+   	 	-webkit-margin-start: 0px;
+   	 	-webkit-margin-end: 0px;
+    	-webkit-padding-start: 0px;
+    	-webkit-padding-end: 0px;
 	}
 	
-	
-	ul, list, dir {
-    	display: block;
+	list, dir {
+		display: block;
    		list-style-type: disc;
     	-webkit-margin-before: 1em;
     	-webkit-margin-after: 1em;
@@ -675,9 +687,9 @@ function pagingItem(searchItem,searchWord,gap) {
 	}
 	
 	body {
-		font-family: 'Jeju Gothic', sans-serif;
+		font-family: 'Jeju Gothic', Eco Sans Mono;
 	}
-	
+/* 	
 	#profile {
 		width: 120px;
 		height: 545px;
@@ -685,61 +697,83 @@ function pagingItem(searchItem,searchWord,gap) {
 		background-color: white;
 		padding: 1px;
 		float : left;
+	} */
+	
+	#save {
+		display: inline-block;
+		width: 60px;
+		border: none;
+		color: #fff;
+		border-radius: 5px;
+		background-color: var(--color-primary);
+		-webkit-box-shadow: 0 2px 7px var(--color-semidark);
+	        	box-shadow: 0 2px 7px var(--color-semidark);
+		outline: 0;
+		cursor: pointer;
+		-webkit-transition: all .5s;
+		-o-transition: all .5s;
+		transition: all .5s;
+		background-color:#105531;
+		font-family: Eco Sans Mono;
+		font-size: 18px;
 	}
 	
-	
+	#save:hover {
+		opacity: .9;
+	}
 </style>
 </head>
 <body>
 <div id="wrapper" align="center">
-	<div id="list" style="float:left; width: 100px; text-align:right; height:545px;">
-		<ul class="nav nav-pills nav-stacked">
-    <li >
-   		 <a href="javascript:pagingItem('type','background',0)">Background</a>
-    </li>
-    <li >
-    	<a href="javascript:pagingItem('type','furniture',0)">Furniture</a>
-    </li>
-    <li >
-    	<a href="javascript:pagingItem('type','head',0)">헤어스타일</a>
-    </li>
-    <li >
-    	<a href="javascript:pagingItem('type','top',0)">상의</a>
-    </li>
-    <li >
-    	<a href="javascript:pagingItem('type','bottom',0)">하의</a>
-    </li>
-  </ul>
-	</div>
-	<div id="profile">
-		 <div class="tab-content">
-   			<div id="background" class="tab-pane active">
-    			<table style="border-radius: 10px;" id ="bk">
-	
-      			</table>  
-   		 	</div>
-   		 	<div id="fu" class="tab-pane"> 
-    		</div>
- 		</div>
-	</div>	
-	<div id="scroll" style="float:left; width: 831px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
-	
-		<div id="edit">
-			<p><b>Edit My Store</b></p>
-			<hr/>
-			<canvas id="myCanvas"  width="800" height="400"></canvas> 
-			<hr/>
-    	<input type="button" value="저장" onclick="saveTexture()"/>
+	<div id="scroll" style="float:left; width: 1073px; height:545px; border-radius: 25px; background-color: white;">
+		<h1><b>Edit My Store</b></h1>
+		<hr style="width: 1040px; border-color:black;"/>
+		<div id="selected" style="float:left; width:280px; height:430px; padding-left: 20px;">
+			<div id="list" style="float:left; width: 100px; text-align:right; height:430px; padding-top: 30px; margin-left :10px;">
+				<ul class="nav nav-pills nav-stacked">
+				    <li >
+				   		 <a href="javascript:pagingItem('type','background',0)">Background</a>
+				    </li>
+				    <li >
+				    	<a href="javascript:pagingItem('type','furniture',0)">Furniture</a>
+				    </li>
+				    <li >
+				    	<a href="javascript:pagingItem('type','head',0)">Hair</a>
+				    </li>
+				    <li >
+				    	<a href="javascript:pagingItem('type','top',0)">Top</a>
+				    </li>
+				    <li >
+				    	<a href="javascript:pagingItem('type','bottom',0)">Bottom</a>
+				    </li>
+				 </ul>
+			</div>
+			<div class="tab-content" style="float:left; width:150px; height:430px; margin: 0px;">
+	   			<div id="background" class="tab-pane active" style="height:430px;">
+	    			<table id ="bk">
+	      			</table>  
+	   		 	</div>
+	   		 	<div id="fu" class="tab-pane"></div>
+	 		</div>
+		</div>
+		
+		<div id="edit" style="width:750px;float:left;margin-top: 35px;">
+			<canvas id="myCanvas"  width="700" height="350"></canvas>
+			<br/>
+			<br/>
+			<input id="save" type="button" value="Save" onclick="saveTexture()">
 		</div>
 	</div>
-	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
-		<ul>
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px;"></a></li>
+	
+	
+	<div id="list" style="float:left; width: 90px; text-align:right; height:545px; padding-top: 3px;">
+		<ul class="menulist">
+			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
 		</ul>
 	</div>
 	

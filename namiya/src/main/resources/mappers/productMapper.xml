@@ -10,4 +10,16 @@
 	<select id="selectOne" resultType="Product">
 		select productnum, categorynum, productname, sstatus from product where productnum in (select max(productnum) from product)
 	</select>
+	
+	<select id="seletPC" parameterType="Integer" resultType="map">
+		select p.productnum, p.categorynum, p.productname, p.sstatus, c.categoryname from product p, categories c where p.categorynum=c.categorynum and p.productnum=#{productnum} 
+	</select>
+	
+	<update id="updatePdt" parameterType="Product">
+		update product set categorynum=#{categorynum}, productname=#{productname} where productnum=#{productnum}
+	</update>
+	
+	<select id="selectPdt" resultType="Product" parameterType="Integer">
+		select productnum, categorynum, productname, sstatus from product where productnum=#{productnum}
+	</select>
 </mapper>
