@@ -310,6 +310,7 @@ function  formCheck() {
 			</div>
 		</div>
 	</form>
+	
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
 		<ul>
 			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px;"></a></li>

@@ -279,7 +279,6 @@
 			
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
 		<ul>
-		<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>

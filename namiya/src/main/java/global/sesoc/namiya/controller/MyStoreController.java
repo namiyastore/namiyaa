@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +41,14 @@ import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.CategoriesRepository;
 import global.sesoc.namiya.dao.MystoreRepository;
 import global.sesoc.namiya.dao.ProductRepository;
+import global.sesoc.namiya.dao.ReviewRepository;
 import global.sesoc.namiya.util.FileService;
 import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
 import global.sesoc.namiya.vo.Mystore;
 import global.sesoc.namiya.vo.Product;
+import global.sesoc.namiya.vo.Review;
 
 @Controller
 public class MyStoreController {
@@ -58,9 +61,11 @@ public class MyStoreController {
 	@Autowired
 	ProductRepository p_repository;
 	
-
 	@Autowired
 	MystoreRepository m_repository;
+	
+	@Autowired
+	ReviewRepository r_repository;
 	
 	final String uploadPath = "/boardfile";
 	
@@ -598,11 +603,33 @@ public class MyStoreController {
 	/** 후기게시판 관련 controller **/
 	// review 창 띄우기 
 	@RequestMapping(value="/review")
-	public String review() {
+	public String review(Model model) {
+		String store_owner = "bbb";
+		
+		List<Review> list = r_repository.selectReviewAll(store_owner);
+		model.addAttribute("list", list);
 		
 		return "mystore/review";
 	}
 	
+	// review 작성하기 
+	@RequestMapping(value="/insertReview", method=RequestMethod.POST)
+	public String insertReview(Review review) {
+		int result = r_repository.insertReview(review);
+		
+		return "redirect:/review";
+	}
+	
+	// review 삭제 
+	@ResponseBody
+	@RequestMapping(value="/deleteReview", method=RequestMethod.GET)
+	public String deleteReview(int reviewnum) {
+		int result = r_repository.deleteReview(reviewnum);
+		
+		return "delete!";
+	}
+	
+	/** setting 게시판 controller **/
 	// 임시 : setting
 	@RequestMapping(value="/setting")
 	public String setting(Model model) {
