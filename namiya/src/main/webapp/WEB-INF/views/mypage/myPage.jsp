@@ -4,9 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>My page</title>
 </head>
 <body>
-
+	<h2>my page</h2>
+	<ul>
+		<li><a href="favoriteList" name="favoriteList">즐겨찾기</a></li>
+		<li><a href="interestList" name="interestList">관심상품</a></li>
+		<li><a href="historyList" name="historyList">구매내역</a></li>
+		<li><a href="keywordList" name="keywordList">키워드</a></li>
+		<li><a href="messageList" name="messageList">쪽지함</a></li>
+		<li><a href="noticeList" name="noticeList">알림</a></li>
+	</ul>
 </body>
 </html>

@@ -3,7 +3,46 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.HistoryMapper">
-	
-	
-	
+	<select id="hListAll" resultType="History">
+		select
+			historynum, boardnum ,sellerid, regdate
+		from
+			history
+		order by
+			historynum desc
+		
+	</select>
+	<select id="hSelectOne" parameterType="int" resultType="History">
+		select
+			historynum, boardnum ,sellerid, regdate
+		from
+			history
+		where
+			historynum = #{historynum}
+	</select>
+	<insert id="hInsert" parameterType="History">
+		insert into 
+		history
+			(historynum, boardnum ,sellerid, buyerid, regdate)
+		values
+			(historynum_seq.nextval, #{boardnum} , #{sellerid}, #{buyerid}, sysdate)
+		
+	</insert>
+	<delete id="hDelete" parameterType="int">
+		delete from 
+			history
+		where
+			historynum = #{historynum}
+	</delete>
+	<update id="hUpdate" parameterType="History">
+		update
+			history
+		set
+			boardnum = #{boardnum},
+			sellerid = #{sellerid},
+			buyerid = #{buyerid},
+			regdate = sysdate
+		where
+			historynum = #{historynum}
+	</update>
 </mapper>
