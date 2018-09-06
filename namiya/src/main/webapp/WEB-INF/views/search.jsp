@@ -82,10 +82,23 @@ $(function(){
 			.css("top", "101px")
 			.css("left", (parseInt(left_notice)+600) + "px")
 			.css("margin-left","50px");
+		
+		// < 채팅창 위치 >
+		
+		// 채팅창 위치조정
+		$("#chat").css("position", "absolute")
+			.css("top", 350 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+		
+		// 채팅창 검색버튼 위치조정	
+		$("#custom-search-input2").css("position","absolute")
+			.css("top", 560 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+		
 	} );
 	
 	// 검색
-	$(".btn-danger").on("click",function(){
+	$("#searchBtnClick").on("click",function(){
 		var searchWord = $(".form-control").val();
 		var currentPage1 = $("#currentPage").val();
 		
@@ -162,6 +175,15 @@ function setPositionInit() {
 		.css("left", (parseInt(left_notice)+600) + "px")
 		.css("margin-left","50px");
 	
+	// 채팅창 위치조정
+	$("#chat").css("position", "absolute")
+		.css("top", 350 + "px")
+		.css("left", (parseInt(left_notice)+650) + "px");
+	
+	// 채팅창 검색버튼 위치조정	
+	$("#custom-search-input2").css("position","absolute")
+		.css("top", 560 + "px")
+		.css("left", (parseInt(left_notice)+650) + "px");
 }
 
 // 대분류 클릭 이벤트 함수
@@ -369,7 +391,7 @@ function minerCategory(category_m) {
 		<div id="custom-search-input">
 			<div class="input-group col-md-12">				
 				<input type="text" class="  search-query form-control" placeholder="Search" value="${searchWord}" /> <span class="input-group-btn">
-					<button class="btn btn-danger" type="button">
+					<button id="searchBtnClick" class="btn btn-danger" type="button">
 						<span class=" glyphicon glyphicon-search"></span>
 					</button>
 				</span>
@@ -461,9 +483,30 @@ function minerCategory(category_m) {
 		
 		<!-- 채팅창 -->
 		<div id="chat">
-			asdf
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
+			&nbsp;asdf<br/>
 		</div>
-		
+		<div id="custom-search-input2">
+			<div class="input-group col-md-12">				
+				<input type="text" class="  search-query form-control" value="${searchWord}" /> <span class="input-group-btn">
+					<button id="chatBtnClick" class="btn btn-danger" type="button">
+						<span class=" glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
+		</div>
 	</div>
 	
 </div>

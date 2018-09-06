@@ -29,7 +29,7 @@ public class SearchRepository {
 		RowBounds rb = new RowBounds(startRecord,countPerPage);
 		
 		SearchMapper mapper = session.getMapper(SearchMapper.class);		
-		Map<String,String> map = new HashMap<>();
+		Map<String,String> map = new HashMap<String,String>();
 		
 		map.put("searchWord", searchWord);
 		

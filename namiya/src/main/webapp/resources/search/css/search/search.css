@@ -36,7 +36,14 @@ body {
     display: inline-block;
 }
 
-
+/* 채팅 */
+#custom-search-input2 {
+    position: relative;
+    top: 15px;
+    left: 50px;
+    width: 250px;
+    display: inline-block;
+}
 
 /* 거래 외침 내용 */
 #notice {
@@ -209,4 +216,14 @@ body {
 
 #noticeDate {
 	text-align: right;
+}
+
+#chat {
+    width: 250px;
+    height: 200px;
+    background: white;
+    border: thin solid white;
+    border-radius: 5px;
+    text-align: left;
+    overflow:scroll;
 }
