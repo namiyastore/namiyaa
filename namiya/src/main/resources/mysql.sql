@@ -160,12 +160,12 @@ CREATE TABLE product
 
 CREATE TABLE review
 (
-	reviewnum number NOT NULL,
-	userid varchar2(100) NOT NULL,
-	review_content varchar2(1000) NOT NULL,
-	regdate date DEFAULT sysdate,
-	store_owner varchar2(100) NOT NULL constraint userid4_fk references members(userid),
-	PRIMARY KEY (reviewnum)
+        reviewnum number NOT NULL,
+        userid varchar2(100) NOT NULL,
+        review_content varchar2(1000) NOT NULL,
+        regdate date DEFAULT sysdate,
+        store_owner varchar2(100) NOT NULL,
+        PRIMARY KEY (reviewnum)
 );
 
 
@@ -191,6 +191,6 @@ create sequence messagenum_seq;
 create sequence keywordnum_seq;
 create sequence historynum_seq;
 create sequence noticenum_seq;
-create sequence imagenum_seq;
+create sequence mystore_seq;
 create sequence imageitem_seq;
 create sequence useritem_seq;
