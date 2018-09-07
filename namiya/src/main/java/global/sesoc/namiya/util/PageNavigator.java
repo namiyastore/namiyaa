@@ -2,8 +2,8 @@ package global.sesoc.namiya.util;
 
 public class PageNavigator {
 	// 멤버
-	private final int countPerPage = 4;	// 한 페이지당 글개수
-	private final int pagePerGroup = 4;		// 페이지 그룹
+	private int countPerPage ;	// 한 페이지당 글개수
+	private int pagePerGroup ;		// 페이지 그룹
 	private int currentPage;		// 현재 페이지
 	private int totalRecordCount; 	// 전체 글 개수
 	private int totalPageCount;		// 총 페이지수
@@ -15,9 +15,10 @@ public class PageNavigator {
 	// srow, erow 계산하지 않고, mybatis의 기능의 RowBounds 사용
 	
 	// 생성자
-	public PageNavigator(int currentPage, int totalRecordCount) {
+	public PageNavigator(int currentPage, int totalRecordCount,int countPerPage,int pagePerGroup) {
 		this.totalRecordCount =  totalRecordCount;
-		
+		this.countPerPage = countPerPage;
+		this.pagePerGroup = pagePerGroup;
 		// 전체 글개수 152개라면 ? 총 페이지 16페이지
 		// 전체 글개수 150개라면 ? 총 페이지 15 페이지
 		totalPageCount = (totalRecordCount + countPerPage - 1) / countPerPage;

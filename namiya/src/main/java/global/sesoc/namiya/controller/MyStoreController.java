@@ -675,7 +675,7 @@ public class MyStoreController {
 			Model model) {
 		
 		int totalItemCount = m_repository.getItemCount(searchItem,searchWord);
-		PageNavigator navi = new PageNavigator(currentPage, totalItemCount);
+		PageNavigator navi = new PageNavigator(currentPage, totalItemCount,4,4);
 		List<Map<String,Object>> list = m_repository.selectUserItem(searchItem,searchWord, navi.getStartRecord(), navi.getCountPerPage());
 		System.out.println("list: "+ list);
 		Map<String,Object> map = new HashMap<String,Object>();
