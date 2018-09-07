@@ -180,6 +180,16 @@ CREATE TABLE saving
 	PRIMARY KEY (userid)
 );
 
+create table profile (
+	profile_seq number not null,
+	userid varchar2(100)  NOT NULL constraint profile_fk references members(userid),
+	originalfile varchar2(100),
+	savedfile varchar2(100),
+	content varchar2(1000),
+	nickname varchar2(100),
+	PRIMARY KEY (profile_seq)
+);
+
 
 /* Create Tables */
 create sequence boardnum_seq;
@@ -195,3 +205,4 @@ create sequence noticenum_seq;
 create sequence mystore_seq;
 create sequence imageitem_seq;
 create sequence useritem_seq;
+create sequence profile_seq;
