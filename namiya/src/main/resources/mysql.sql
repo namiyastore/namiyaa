@@ -81,16 +81,17 @@ CREATE TABLE keyword
 
 
 CREATE TABLE members
-(
-	userid varchar2(100) NOT NULL,
-	password varchar2(30) NOT NULL,
-	username varchar2(20) NOT NULL,
-	email varchar2(100) NOT NULL,
-	phone varchar2(30) NOT NULL,
-	zip varchar2(10) NOT NULL,
-	address varchar2(150) NOT NULL,
-	myurl varchar2(50) NOT NULL UNIQUE,
-	PRIMARY KEY (userid)
+(   
+   userid varchar2(100) primary key,
+   password varchar2(30) NOT NULL,
+   username varchar2(20) NOT NULL,
+   birthday varchar2(30) NOT NULL,
+   gender varchar2(10) NOT NULL,
+   email varchar2(100) NOT NULL,
+   phoneno varchar2(30) NOT NULL,
+   fulladdr varchar2(100) NOT NULL,
+   zipcode varchar2(10) NOT NULL,
+   myurl varchar2(50) NOT NULL UNIQUE
 );
 
 
