@@ -59,7 +59,7 @@ public class SearchController {
 		// 검색버튼 클릭
 		if(searchFlag.equals("on"))	{
 			totalRecordCount = search_repository.getTotalBoard(searchWord);
-			navi = new PageNavigator(currentPage1, totalRecordCount);
+			navi = new PageNavigator(currentPage1, totalRecordCount, 5, 5);
 			list = search_repository.selectAll(searchWord, navi.getStartRecord(), navi.getCountPerPage());
 		}
 		// 카테고리 클릭
@@ -68,17 +68,17 @@ public class SearchController {
 			
 			if(categoryGroup.equals("major")) {
 				totalRecordCount = search_repository.getTotalBoardbyMajorCategory(pnum);
-				navi = new PageNavigator(currentPage2, totalRecordCount);
+				navi = new PageNavigator(currentPage2, totalRecordCount, 5, 5);
 				list = search_repository.selectAllbyCategory(pnum, navi.getStartRecord(), navi.getCountPerPage());
 			}
 			else if(categoryGroup.equals("medium")) {
 				totalRecordCount = search_repository.getTotalBoardbyMediumCategory(pnum);
-				navi = new PageNavigator(currentPage3, totalRecordCount);
+				navi = new PageNavigator(currentPage3, totalRecordCount, 5, 5);
 				list = search_repository.selectAllbyCategoryMedium(pnum, navi.getStartRecord(), navi.getCountPerPage());
 			}
 			else if(categoryGroup.equals("minor")) {
 				totalRecordCount = search_repository.getTotalBoardbyMinorCategory(pnum);
-				navi = new PageNavigator(currentPage4, totalRecordCount);
+				navi = new PageNavigator(currentPage4, totalRecordCount, 5, 5);
 				list = search_repository.selectAllbyCategoryMinor(pnum, navi.getStartRecord(), navi.getCountPerPage());
 			}
 		}
