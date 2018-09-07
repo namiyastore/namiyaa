@@ -170,14 +170,13 @@ CREATE TABLE review
 );
 
 
-CREATE TABLE saving
-(
-	userid varchar2(100) NOT NULL,
-	point number DEFAULT 0,
-	priority number(1) DEFAULT 0,
-	service varchar2(20) NOT NULL,
-	regdate date,
-	PRIMARY KEY (userid)
+create table saving (
+	saving_seq number,
+	userid varchar2(100) not null constraint saving_fk references members(userid),
+	point number  NOT NULL ,
+	type varchar2(50) not null,
+	regdate date default sysdate,
+	PRIMARY KEY (saving_seq) 
 );
 
 create table profile (
