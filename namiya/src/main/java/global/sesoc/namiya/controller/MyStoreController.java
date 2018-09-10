@@ -46,6 +46,8 @@ import global.sesoc.namiya.util.FileService;
 import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
+import global.sesoc.namiya.vo.Interest;
+import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Mystore;
 import global.sesoc.namiya.vo.Product;
 import global.sesoc.namiya.vo.Review;
@@ -60,24 +62,14 @@ public class MyStoreController {
 	
 	@Autowired
 	ProductRepository p_repository;
-	
-	@Autowired
-	MystoreRepository m_repository;
-	
+		
 	@Autowired
 	ReviewRepository r_repository;
 	
 	final String uploadPath = "/boardfile";
 	
-	// myStore 띄우기 
-	@RequestMapping(value="/myStore")
-	public String myStore(Model model) {
-		
-		List<Map<String,String>> list = m_repository.selectAll("aaa");
-		model.addAttribute("list", list);
-		System.out.println(list);
-		return "mystore/myStore";
-	}
+	final int COUNT_PER_PAGE = 5;
+	
 	
 	// 사진 보여주기 
 	@RequestMapping(value=uploadPath+"/{image_name:.+}", method= RequestMethod.GET) 
@@ -140,15 +132,21 @@ public class MyStoreController {
 	/** 양도 관련 controller **/
 	// give 페이지 띄우기 
 	@RequestMapping(value="/give")
-	public String give(Model model) {
+	public String give(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage) {
 		String service = "양도";
-		String userid = "aaa";
+		String userid = (String)session.getAttribute("loginId");
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
-		List<HashMap<String, Object>> map = b_repository.selectList(parm);
 		
+		
+		int totalRecordCount = b_repository.getTotalPage(parm);
+		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount, 5, 5);
+		
+		List<HashMap<String, Object>> map = b_repository.selectList(parm, navi.getStartRecord(), navi.getCountPerPage());
 		model.addAttribute("map", map);
+		model.addAttribute("navi", navi);
+		model.addAttribute("currentPage", currentPage);
 		
 		return "mystore/give";
 	}
@@ -185,7 +183,7 @@ public class MyStoreController {
 	public String write(Board board, MultipartFile upload, HttpSession session, Product product) {
 		String originalfile = upload.getOriginalFilename();
 		String savedfile = FileService.saveFile(upload, uploadPath);
-		String userid = "aaa";
+		String userid = (String)session.getAttribute("loginId");
 
 		int result1 = p_repository.insertPdt(product);
 		Product pr = p_repository.selectOne();
@@ -307,14 +305,21 @@ public class MyStoreController {
 	/** 교환 관련 controller **/
 	// trade 창 띄우기 
 	@RequestMapping(value="/trade")
-	public String trade(Model model) {
+	public String trade(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage) {
 		String service = "교환";
-		String userid= "aaa";
+		String userid = (String)session.getAttribute("loginId");
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
-		List<HashMap<String, Object>> map = b_repository.selectList(parm);
+		
+		int totalRecordCount = b_repository.getTotalPage(parm);
+		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount, 5, 5);
+		
+		List<HashMap<String, Object>> map = b_repository.selectList(parm, navi.getStartRecord(), navi.getCountPerPage());
 		model.addAttribute("map", map);
+		model.addAttribute("navi", navi);
+		model.addAttribute("currentPage", currentPage);
+		
 		return "mystore/trade";
 	}
 	
@@ -332,7 +337,7 @@ public class MyStoreController {
 	public String tradewrite(Board board, MultipartFile upload, HttpSession session, Product product) {
 		String originalfile = upload.getOriginalFilename();
 		String savedfile = FileService.saveFile(upload, uploadPath);
-		String userid = "aaa";
+		String userid = (String)session.getAttribute("loginId");
 
 		int result1 = p_repository.insertPdt(product);
 		Product pr = p_repository.selectOne();
@@ -454,14 +459,21 @@ public class MyStoreController {
 	/** 재능기부 관련 controller **/
 	// talent 창 띄우기 
 	@RequestMapping(value="/talent")
-	public String talent(Model model) {
+	public String talent(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage) {
 		String service = "재능기부";
-		String userid= "aaa";
+		String userid = (String)session.getAttribute("loginId");
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
-		List<HashMap<String, Object>> map = b_repository.selectList(parm);
+		
+		int totalRecordCount = b_repository.getTotalPage(parm);
+		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount, 5, 5);
+		
+		List<HashMap<String, Object>> map = b_repository.selectList(parm, navi.getStartRecord(), navi.getCountPerPage());
 		model.addAttribute("map", map);
+		model.addAttribute("navi", navi);
+		model.addAttribute("currentPage", currentPage);
+		
 		return "mystore/talent";
 	}
 	
@@ -479,7 +491,7 @@ public class MyStoreController {
 	public String talentwrite(Board board, MultipartFile upload, HttpSession session, Product product) {
 		String originalfile = upload.getOriginalFilename();
 		String savedfile = FileService.saveFile(upload, uploadPath);
-		String userid = "aaa";
+		String userid = (String)session.getAttribute("loginId");
 			
 		int result1 = p_repository.insertPdt(product);
 		Product pr = p_repository.selectOne();
@@ -629,65 +641,16 @@ public class MyStoreController {
 		return "delete!";
 	}
 	
-	/** setting 게시판 controller **/
-	// 임시 : setting
-	@RequestMapping(value="/setting")
-	public String setting(Model model) {
-		
-		List<Map<String,String>> list = m_repository.selectAll("aaa");
-		model.addAttribute("list", list);
-		System.out.println(list);
-		return "mystore/setting";
-	}
 	
-	// 프로필 편집창 띄우기 
-	@RequestMapping(value="/profileEdit")
-	public String profileEdit() {
-		
-		return "mystore/profileEdit";
-	}
 	
-	// 미니룸 정보 저장
+	/** insert check **/
 	@ResponseBody
-	@RequestMapping(value="/saveMiniRoom", method=RequestMethod.POST)
-	public List<Mystore> saveMiniRoom(@RequestBody List<Mystore> list , Model model) {
+	@RequestMapping(value="/selectItr", method=RequestMethod.POST)
+	public Interest selectItr(@RequestBody Interest interest) {
+		Interest itr = b_repository.selectItr(interest);
+		System.out.println(itr);
 		
-		//System.out.println(list.get(0));
-		
-		m_repository.deleteAll("aaa");
-		for (int i = 0; i < list.size(); i++) {
-			list.get(i).setUserid("aaa");
-			list.get(i).setImageorder(i);
-			System.out.println(list.get(i));
-			m_repository.insert(list.get(i));
-		}
-		
-		return list;
-	}
-	
-	// 가구 반환
-	@ResponseBody
-	@RequestMapping(value="/reqFurniture", method=RequestMethod.GET)
-	public Map<String, Object> reqFurniture(
-			@RequestParam(value="currentPage",defaultValue="1") int currentPage,
-			@RequestParam(value="searchItem", defaultValue="type") String searchItem,
-			@RequestParam(value="searchWord", defaultValue="background") String searchWord,
-			Model model) {
-		
-		int totalItemCount = m_repository.getItemCount(searchItem,searchWord);
-		PageNavigator navi = new PageNavigator(currentPage, totalItemCount,4,4);
-		List<Map<String,Object>> list = m_repository.selectUserItem(searchItem,searchWord, navi.getStartRecord(), navi.getCountPerPage());
-		System.out.println("list: "+ list);
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("list", list);
-		map.put("totalPage", navi.getTotalRecordCount());
-		map.put("navi", navi);
-		
-		
-		//int srow = COUNT_PER_PAGE * (currentPage -1) + 1;
-		//int erow = (totalPageCount == currentPage) ?  : COUNT_PER_PAGE * currentPage;
-		
-		return map;
+		return itr;
 	}
 	
 }
