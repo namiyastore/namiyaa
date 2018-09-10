@@ -25,6 +25,35 @@ public class MiniRoomController {
 	@Autowired
 	MystoreRepository m_repository;
 	
+	// myStore 띄우기 
+		@RequestMapping(value="/myStore")
+		public String myStore(Model model, HttpSession session) {
+			String loginId = (String)session.getAttribute("loginId");
+			List<Map<String,String>> list = m_repository.selectAll(loginId);
+			model.addAttribute("list", list);
+			System.out.println(list);
+			return "mystore/myStore";
+		}
+	
+	/** setting 게시판 controller **/
+	// 임시 : setting
+	@RequestMapping(value="/setting")
+	public String setting(Model model, HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		List<Map<String,String>> list = m_repository.selectAll(loginId);
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "mystore/setting";
+	}
+	
+	// 프로필 편집창 띄우기 
+	@RequestMapping(value="/profileEdit")
+	public String profileEdit() {
+		
+		return "mystore/profileEdit";
+	}
+	
+	
 	// 미니룸 정보 저장
 		@ResponseBody
 		@RequestMapping(value="/saveMiniRoom", method=RequestMethod.POST)
@@ -50,11 +79,11 @@ public class MiniRoomController {
 				@RequestParam(value="currentPage",defaultValue="1") int currentPage,
 				@RequestParam(value="searchItem", defaultValue="type") String searchItem,
 				@RequestParam(value="searchWord", defaultValue="background") String searchWord,
-				Model model) {
-			
-			int totalItemCount = m_repository.getItemCount(searchItem,searchWord);
+				Model model, HttpSession session) {
+			String loginId = (String)session.getAttribute("loginId");
+			int totalItemCount = m_repository.getItemCount(searchItem,searchWord,loginId);
 			PageNavigator navi = new PageNavigator(currentPage, totalItemCount,4,4);
-			List<Map<String,Object>> list = m_repository.selectUserItem(searchItem,searchWord, navi.getStartRecord(), navi.getCountPerPage());
+			List<Map<String,Object>> list = m_repository.selectUserItem(searchItem,searchWord, navi.getStartRecord(), navi.getCountPerPage(),loginId);
 			System.out.println("list: "+ list);
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("list", list);
