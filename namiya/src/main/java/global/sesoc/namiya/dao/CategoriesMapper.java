@@ -10,4 +10,9 @@ public interface CategoriesMapper {
 	public List<Categories> selectClist();
 	public List<Categories> selectMlist(int categorynum);
 	public List<Categories> selectSlist(int categorynum);
+	
+	public List<Categories> Clist(Map<String,String> map);
+	public List<Categories> Mlist(Map<String, Object> map);
+	public List<Categories> Slist(Map<String, Object> map);
+
 }

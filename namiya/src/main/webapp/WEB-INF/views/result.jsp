@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,15 @@
 <!-- 검색 -->
 <link href="resources/search/css/search/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="resources/search/css/result/result.css" rel="stylesheet">
+
+<!-- websocket -->
+<!-- jQuery CDN-->
+<script src="https://code.jquery.com/jquery-1.9.0.js"
+  integrity="sha256-TXsBwvYEO87oOjPQ9ifcb7wn3IrrW91dhj6EMEtRLvM="
+  crossorigin="anonymous"></script>
+  
+<!-- Web socket CDN -->
+<script src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script>
 
 <script>
 var idx1 = "";	// 대분류 index
@@ -65,6 +75,11 @@ $(function(){
 		window.open("myStore","mystoreWindow","width:1200","height:650");
 	});
 	
+	// 마이 페이지 이동
+	$("#myPageClick").on("click",function(){
+		location.href = "myPage";
+	});
+	
 	// 창 크기에 따라 좌표 지정 ( 창크기 변경 감지 )
 	$( window ).resize( function() {
 		
@@ -93,6 +108,18 @@ $(function(){
 			.css("top", 101 + "px")
 			.css("left", (parseInt(left_product)+600) + "px")
 			.css("margin-left","50px");
+		
+		// < 채팅창 위치 >
+		
+		// 채팅창 위치조정
+		$("#chat").css("position", "absolute")
+			.css("top", 350 + "px")
+			.css("left", (parseInt(left_product)+650) + "px");
+		
+		// 채팅창 검색버튼 위치조정	
+		$("#custom-search-input2").css("position","absolute")
+			.css("top", 560 + "px")
+			.css("left", (parseInt(left_product)+650) + "px");
 	} );
 	
 	$("#pagingFirst").on("click",function(){
@@ -369,12 +396,17 @@ $(function(){
 		$("#pagingLast").removeClass('is-active');
 	});
 	
-	
+	// 검색결과 중 원한는 항목 클릭
+	$(".productList").on("click",function(){
+		alert($(this).attr('data-boardnum'));
+	});
 	
 //	$("#pagingLeft")
 //	$("#pagingRight")
 //	$("#pagingLast")
 });
+
+
 
 function setPositionInit() {
 	
@@ -402,6 +434,15 @@ function setPositionInit() {
 		.css("left", (parseInt(left_productContainer)+600) + "px")
 		.css("margin-left","50px");
 	
+	// 채팅창 위치조정
+	$("#chat").css("position", "absolute")
+		.css("top", 350 + "px")
+		.css("left", (parseInt(left_productContainer)+650) + "px");
+	
+	// 채팅창 검색버튼 위치조정	
+	$("#custom-search-input2").css("position","absolute")
+		.css("top", 560 + "px")
+		.css("left", (parseInt(left_productContainer)+650) + "px");
 }
 
 // 대분류 클릭 이벤트 함수
@@ -424,24 +465,29 @@ function minorCategoryClick(categorynum) {
 
 function majorCategory() {
 	
+	var lang = $('#lang').val();
+	
 	$.ajax({
 		method : "get",
-		url : "majorCategory",
+		url : "majorCategory?" + "lang=" + lang,
 		success : function(resp) {			
 			for(var i in resp) {
 				if(i == 0) {
 					$("#depth1").append(
 						"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth1").append(
 						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
 				else {
 					$("#depth1").append(
 						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
 			}
@@ -454,12 +500,36 @@ function majorCategory() {
 				$(this).css("backgroundColor",colorMajor);
 				$(this).css("color","#FFFFFF");
 				
+				// 카테고리명의 길이가 너무 긴지 확인(28자 까지만 가능)
+				if($(this).text().length >= 28) {
+					var num = $(this).attr('data-num');					
+					$("#tooltipnum" + num).attr('style','visibility:visible');
+				}
+				
 				// 카테고리 중분류 가져오기
 				idx1 = $(this).attr("data-idx");
 				
 				mediumCategory($(this));
 				
 				$("#depth3").html('');
+				
+				// 툴팁 z-index 최상위로 변경
+				var num = 1;
+				
+				$("div").each(function(){
+					var z = $(this).css("z-index");
+					
+					if( z != "auto" && parseInt(z) >= num ) {
+						num = z + 1;
+					}
+				});
+				$(".tooltiptext").css({"z-index":num});
+			});
+			
+			// 대분류에서 마우스가 떠나면 툴팁창 숨기기
+			$("#depth1 div").mouseleave(function(){
+				$(".tooltiptext").attr('style','visibility:hidden');			
+				
 			});
 		}
 	});
@@ -472,11 +542,13 @@ function mediumCategory(categoryM) {
 	var dataIdx = categoryM.attr("data-idx");	// 카테고리 위치
 	var dataName = categoryM.html();			// 카테고리 이름
 	
+	var lang = $('#lang').val();
+	
 	$.ajax({
 		method : "get",
 		url : "mediumCategory",
 		async: false,
-		data : "categorynum=" + dataNum,
+		data : "categorynum=" + dataNum + "&lang=" + lang,
 		success : function(resp) {
 			
  			$("#depth2").html('');
@@ -490,16 +562,19 @@ function mediumCategory(categoryM) {
 				if(i == 0) {
 					$("#depth2").append(
 						"<div style='color: white; background-color: rgb(70, 102, 128); border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:mediumCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth2").append(
 						"<div style='color: white; background-color: rgb(70, 102, 128); border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:mediumCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
 				else {
 					$("#depth2").append(
 						"<div style='color: white; background-color: rgb(70, 102, 128);' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:mediumCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);	
 				}
 				
@@ -515,13 +590,37 @@ function mediumCategory(categoryM) {
 				$(this).css("backgroundColor",colorMedium);
 				$(this).css("color","#FFFFFF");
 				
-				// 카테고리 중분류 가져오기
+				// 카테고리명의 길이가 너무 긴지 확인(28자 까지만 가능)
+				if($(this).text().length >= 28) {
+					var num = $(this).attr('data-num');					
+					$("#tooltipnum" + num).attr('style','visibility:visible');
+				}
+				
+				// 카테고리 소분류 가져오기
 				idx2 = $(this).attr("data-idx");
 				minerCategory($(this));
 			});
 			
 			document.getElementById("depth2").style.zIndex = 1;
 			document.getElementById("productContainer").style.zIndex = 0;
+			
+			// z-index 맨위로 올리기
+			var noticeZindex = parseInt($(".tooltiptext").css("z-index"));
+			var tooltiptextZindex = parseInt($("#notice").css("z-index"));
+			
+			noticeZindex++;
+			$("#depth3").css({"z-index":noticeZindex});
+			
+			noticeZindex++;
+			$("#depth2").css({"z-index":noticeZindex});
+						
+			$("#depth2").css("visibility","visible");
+			
+			// 중분류에서 마우스가 떠나면 툴팁창 숨기기
+			$("#depth2 div").mouseleave(function(){
+				$(".tooltiptext").attr('style','visibility:hidden');			
+				
+			});
 			
 			$("#depth2").css("visibility","visible");
 		}
@@ -542,11 +641,13 @@ function minerCategory(category_m) {
 	var dataIdx = category_m.attr("data-idx");	// 카테고리 위치
 	var dataName = category_m.html();			// 카테고리 이름
 	
+	var lang = $('#lang').val();
+	
 	$.ajax({
 		method : "get",
 		url : "minerCategory",
 		async: false,
-		data : "categorynum=" + dataNum,
+		data : "categorynum=" + dataNum + "&lang=" + lang,
 		success : function(resp) {
 			
 			$("#depth3").html('');
@@ -559,23 +660,38 @@ function minerCategory(category_m) {
 			for(var i in resp) {
 				if(i == 0) {
 					$("#depth3").append(
-						"<div style='border-top: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						"<div style='border-left: 3px solid black; border-top: 3px solid black; border-right: 3px solid black;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth3").append(
-						"<div style='border-bottom: 1px solid gray; border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						"<div style='border-left: 3px solid black; border-bottom: 3px solid black; border-right: 3px solid black;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
 				else {
 					$("#depth3").append(
-						"<div style='border-right: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						"<div style='border-left: 3px solid black; border-right: 3px solid black;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:minorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
 			}
 			
-			document.getElementById("depth3").style.zIndex = 1;
-			document.getElementById("productContainer").style.zIndex = 0;
+			// 중분류에서 마우스가 떠나면 툴팁창 숨기기
+			$("#depth3 div").mouseenter(function(){
+				// 카테고리명의 길이가 너무 긴지 확인(28자 까지만 가능)
+				if($(this).text().length >= 28) {
+					var num = $(this).attr('data-num');					
+					$("#tooltipnum" + num).attr('style','visibility:visible');
+				}	
+			});
+			
+			// 중분류에서 마우스가 떠나면 툴팁창 숨기기
+			$("#depth3 div").mouseleave(function(){
+				$(".tooltiptext").attr('style','visibility:hidden');			
+				
+			});
 			
 			$("#depth3").css("visibility","visible");
 		}
@@ -867,6 +983,8 @@ p, li, a{
 <input id="totalRecordCount" type="hidden" value="${totalRecordCount}">
 <input id="searchFlag" type="hidden" value="${searchFlag}">
 <input id="parentnum" type="hidden" value="${parentnum}">
+<input id="userid" type="hidden" value="${sessionScope.loginId }">
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 
 <div id="container">
 
@@ -946,18 +1064,26 @@ p, li, a{
 						<div class="productList" data-boardnum="${ptList.boardnum}">
 							<div class="leftFrame">
 								<div class="productImg">
-									<img onError="this.src='resources/search/image/noimage.png'" src="a" width="100px" height="100px">
+									<c:if test="${!status.first}">
+										<hr/>
+									</c:if>									
+									<img onError="this.src='resources/search/image/noimage.png'" src="boardfile/${ptList.savedfile}" width="100px" height="100px">
+									
 								</div>
 							</div>
 							
 							<div class="rightFrame">
+								<c:if test="${!status.first}">
+									<hr/>
+								</c:if>
 								<div class="productTitle">${ptList.title}</div>
 								<div class="rightFrameSub">
 									<div class="regdate">${ptList.regdate}</div>
 									<div class="userid">${ptList.userid}</div>
+									
 								</div>
-							</div>			
-						
+								
+							</div>
 						</div>
 					</div>
 				</c:forEach>			
@@ -966,16 +1092,91 @@ p, li, a{
 		</div>
 		<!-- 프로필 -->
 		<div id="profile">
+		
 			<div id="profilePicture">
 				<img src="resources/search/image/jennifer.jpg" width="100px">
 			</div>
-			<div class="profileBtn">My Page</div>
-			<div id="myStoreClick" class="profileBtn">My Store</div>
-			<div class="profileBtn">Logout</div>
+			<div id="myPageClick" class="profileBtn"><spring:message code="search.profileBtn.myPageClick" /></div>
+			<div id="myStoreClick" class="profileBtn"><spring:message code="search.profileBtn.myStoreClick" /></div>
+			<div id="myInfoClick" class="profileBtn"><spring:message code="search.profileBtn.myInfoClick" /></div>
+			<div id="logoutClick" class="profileBtn"><spring:message code="search.profileBtn.logoutClick" /></div>
+		</div>
+		
+		<!-- 채팅창 -->
+		<div id="chat">
+		</div>
+		<div id="custom-search-input2">
+			<div class="input-group col-md-12">				
+				<input id="message" type="text" class="  search-query form-control" value="" /> <span class="input-group-btn">
+					<button id="chatBtnClick" class="btn btn-danger" type="button">
+						<span class=" glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
 		</div>
 	</div>
 	
 </div>
 
 </body>
+<script type="text/javascript">
+		var msgHeightAdd = 0;
+		var userid = "";
+		
+		$(document).ready(function() {
+			userid = $("#userid").val();
+			
+			$("#chatBtnClick").click(function() {
+				sendMessage();
+				$('#message').val('');
+			});
+
+			$("#message").keydown(function(key) {
+				if (key.keyCode == 13) {// 엔터
+					sendMessage();
+					$('#message').val('');
+				}
+			});
+        });
+		
+		// 해당 ID에 맞는 홈피 열기
+		function openMiniHome(obj) {
+			var uri = "myStore/" + $(obj).attr('data-id');
+			
+			window.open(uri,"mystoreWindow","width=1200","height=650");
+		}
+
+        // 웹소켓을 지정한 url로 연결한다.
+        let sock = new SockJS("<c:url value="/echo"/>");
+
+        sock.onmessage = onMessage;
+        sock.onclose = onClose;
+
+        // 메시지 전송
+        function sendMessage() {
+        	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + userid + "</a>" + " : " + $("#message").val() + "<br/>";
+        	
+        	
+        	
+        	
+        	sock.send(tag);
+        	//sock.send( + $("#message").val());
+        }
+
+        // 서버로부터 메시지를 받았을 때
+        function onMessage(msg) {
+        	var data = msg.data;
+        	
+        	$("#chat").append(data);
+        	msgHeightAdd = msgHeightAdd + 20;
+        	$("#chat").scrollTop(($("#chat").height() + msgHeightAdd));
+        }
+
+        // 서버와 연결을 끊었을 때
+        function onClose(evt) {
+        	$("#chat").append("연결 끊김");
+        }
+
+</script>
+
 </html>

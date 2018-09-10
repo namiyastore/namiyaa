@@ -3,16 +3,68 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.CategoriesMapper">
-	<select resultType="Categories" id="selectClist"> 
-		select categorynum, categoryname, depth, parentnum from categories where depth=1 
-	</select>
+	<select id="selectClist" parameterType="string" resultType="Categories"> 
+		select categorynum,	categoryname, depth, parentnum from	categories where depth=1</select>
 
-	<select resultType="Categories" id="selectMlist" parameterType="Integer"> 
+	<select id="selectMlist" parameterType="Integer" resultType="Categories"> 
 		select categorynum, categoryname, depth, parentnum from categories where depth=2 and parentnum=#{categorynum} 
 	</select>
 
-	<select resultType="Categories" id="selectSlist" parameterType="Integer"> 
+	<select id="selectSlist" parameterType="Integer" resultType="Categories"> 
 		select categorynum, categoryname, depth, parentnum from categories where depth=3 and parentnum=#{categorynum} 
+	</select>
+	
+	<select id="Clist" parameterType="map" resultType="Categories"> 
+		select 
+			categorynum, 
+			categoryname, 
+			depth, 
+			parentnum
+		from
+		<choose>
+			<when test="lang == 'ko'">categories</when>
+			<when test="lang == 'ja'">categoriesja</when>
+			<when test="lang == 'en'">categoriesen</when>
+		</choose> 
+		where 
+			depth=1 
+	</select>
+	
+	<select id="Mlist" parameterType="map" resultType="Categories">
+		 select 
+		 	categorynum, 
+		 	categoryname, 
+		 	depth, 
+		 	parentnum 
+		 
+		 from 
+		 <choose>
+			<when test="lang == 'ko'">categories</when>
+			<when test="lang == 'ja'">categoriesja</when>
+			<when test="lang == 'en'">categoriesen</when>
+		</choose>
+		 where 
+		 	depth=2 
+		 and 
+		 	parentnum=#{categorynum}
+	</select>
+	
+	<select id="Slist" parameterType="map" resultType="Categories"> 
+		select 
+			categorynum, 
+			categoryname, 
+			depth, 
+			parentnum 
+		from 
+		<choose>
+			<when test="lang == 'ko'">categories</when>
+			<when test="lang == 'ja'">categoriesja</when>
+			<when test="lang == 'en'">categoriesen</when>
+		</choose>
+		where 
+			depth=3 
+		and 
+			parentnum=#{categorynum} 
 	</select>
 	
 </mapper>

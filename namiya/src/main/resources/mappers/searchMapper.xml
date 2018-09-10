@@ -120,8 +120,11 @@
 			board 
 		where 
 			regdate 
-				between to_date(to_char(sysdate, 'YYYY-MM-DD')) and 
-				to_date(to_char(sysdate, 'YYYY-MM-DD'))+1 and 
+			between 
+				to_date(to_char(trunc(sysdate), 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') 
+			and 
+				to_date(to_char(to_date(to_char(trunc(sysdate), 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') + (1/24/60/60 * 86399), 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') 
+		and 
 			boardnum = (select max(boardnum) from board)
 	</select>
 	
