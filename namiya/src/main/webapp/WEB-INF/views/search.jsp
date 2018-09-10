@@ -41,6 +41,8 @@ var category = "product";	// 검색 옵션 선택
 							// product : 양도
 							// talent : 재능
 							// trade : 교환
+							
+							
 var alarmMax = 0;
 
 $(function(){
