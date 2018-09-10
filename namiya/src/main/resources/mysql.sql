@@ -53,11 +53,13 @@ CREATE TABLE favorite
 
 CREATE TABLE history
 (
-	historynum number NOT NULL,
-	sellerid varchar2(100) NOT NULL,
-	buyerid varchar2(100) NOT NULL,
-	regdate date DEFAULT sysdate,
-	PRIMARY KEY (historynum)
+   historynum number NOT NULL,
+    productnum number NOT NULL,
+   sellerid varchar2(100) NOT NULL,
+   buyerid varchar2(100),
+   deal_start date,
+    deal_end date,
+   PRIMARY KEY (historynum)
 );
 
 
@@ -189,6 +191,23 @@ create table profile (
 	PRIMARY KEY (profile_seq)
 );
 
+CREATE TABLE categoriesen
+(
+	categorynum number NOT NULL,
+	categoryname varchar2(200) NOT NULL,
+	depth number NOT NULL,
+	parentnum number NOT NULL,
+	PRIMARY KEY (categorynum)
+);
+
+CREATE TABLE categoriesja
+(
+	categorynum number NOT NULL,
+	categoryname varchar2(200) NOT NULL,
+	depth number NOT NULL,
+	parentnum number NOT NULL,
+	PRIMARY KEY (categorynum)
+);
 
 /* Create Tables */
 create sequence boardnum_seq;

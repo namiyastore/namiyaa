@@ -23,6 +23,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- CookieLocaleResolver Language Change by Parameter -->
+   <interceptors>
+        <beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <beans:property name="paramName" value="lang"/>
+        </beans:bean>
+    </interceptors>
 	
 	<beans:bean id="echoHandler" class="global.sesoc.namiya.util.EchoHandler" />
 
