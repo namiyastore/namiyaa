@@ -1,5 +1,6 @@
 package global.sesoc.namiya.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,39 @@ public class CategoriesRepository {
 	public List<Categories> selectSlist(int categorynum) {
 		CategoriesMapper mapper = session.getMapper(CategoriesMapper.class);
 		List<Categories> list = mapper.selectSlist(categorynum);
+		
+		return list;
+	}
+
+	public List<Categories> Clist(Map<String,String> map) {
+		CategoriesMapper mapper = session.getMapper(CategoriesMapper.class);
+		List<Categories> list = mapper.Clist(map);
+		
+		return list;
+	}
+
+	public List<Categories> Mlist(int categorynum, String lang) {
+		CategoriesMapper mapper = session.getMapper(CategoriesMapper.class);
+		
+		Map<String,Object> map = new HashMap<>();
+		
+		map.put("categorynum", categorynum);
+		map.put("lang", lang);
+		
+		List<Categories> list = mapper.Mlist(map);
+		
+		return list;
+	}
+
+	public List<Categories> Slist(int categorynum, String lang) {
+		CategoriesMapper mapper = session.getMapper(CategoriesMapper.class);
+		
+		Map<String,Object> map = new HashMap<>();
+		
+		map.put("categorynum", categorynum);
+		map.put("lang", lang);
+		
+		List<Categories> list = mapper.Slist(map);
 		
 		return list;
 	}
