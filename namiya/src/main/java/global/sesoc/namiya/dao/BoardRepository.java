@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import global.sesoc.namiya.vo.Board;
+import global.sesoc.namiya.vo.Interest;
+import global.sesoc.namiya.vo.Members;
 
 @Repository
 public class BoardRepository {
@@ -23,9 +25,11 @@ public class BoardRepository {
 		return result;
 	}
 
-	public  List<HashMap<String, Object>> selectList(Map<String,String> parm) {
+	public  List<HashMap<String, Object>> selectList(Map<String,String> parm, int startRecord, int countPerPage) {
+		RowBounds rb = new RowBounds(startRecord, countPerPage);
 		BoardMapper mapper = session.getMapper(BoardMapper.class);
-		 List<HashMap<String, Object>> map = mapper.selectList(parm);
+		
+		List<HashMap<String, Object>> map = mapper.selectList(parm, rb);
 		
 		return map;
 	}
@@ -35,13 +39,6 @@ public class BoardRepository {
 		Board board = mapper.selectOne(boardnum);
 		
 		return board;
-	}
-
-
-	public int getTotalPage(String service, String userid) {
-		BoardMapper mapper = session.getMapper(BoardMapper.class);
-		int recordCount = mapper.getTotalPage(service, userid);
-		return recordCount;
 	}
 
 	public int deleteOne(int boardnum) {
@@ -57,7 +54,25 @@ public class BoardRepository {
 		
 		return result;
 	}
-	
-	
+
+	public int getTotalPage(Map<String, String> parm) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int recordCount = mapper.getTotalPage(parm);
 		
+		return recordCount;
+	}
+
+	public Members selectMember(String userid) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		Members member = mapper.selectMember(userid);
+		
+		return member;
+	}
+
+	public Interest selectItr(Interest interest) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		Interest itr = mapper.selectItr(interest);
+		
+		return itr;
+	}
 }
