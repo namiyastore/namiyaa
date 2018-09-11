@@ -1,5 +1,7 @@
 package global.sesoc.namiya.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -59,9 +61,9 @@ public class SavingRepository {
 	/*
 	 * 포인트 기록 조회
 	 */
-	public Saving pointRecord(String userid) {
+	public List<Saving> pointRecord(String userid) {
 		SavingMapper mapper = session.getMapper(SavingMapper.class);
-		Saving result = mapper.pointRecord(userid);
+		List<Saving> result = mapper.pointRecord(userid);
 		
 		return result;
 	}

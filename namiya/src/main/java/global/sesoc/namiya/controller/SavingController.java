@@ -1,5 +1,7 @@
 package global.sesoc.namiya.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,11 +87,11 @@ public class SavingController {
 	/*
 	 * 포인트 기록 조회
 	 */
-	@RequestMapping(value="pointRecord", method=RequestMethod.POST)
+	@RequestMapping(value="pointRecord", method=RequestMethod.GET)
 	public String pointRecord(HttpSession session, Model model) {
 		String userid = session.getAttribute("loginId").toString();
 		
-		Saving result = repository.pointRecord(userid);
+		List<Saving> result = repository.pointRecord(userid);
 		
 		model.addAttribute("pointRecord", result);
 		
