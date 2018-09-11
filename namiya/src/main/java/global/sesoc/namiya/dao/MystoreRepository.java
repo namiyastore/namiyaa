@@ -51,7 +51,7 @@ public class MystoreRepository {
 	}
 	
 	// 전체 글갯수를 얻어온다
-		public int getItemCount(String searchItem, String searchWord) {
+		public int getItemCount(String searchItem, String searchWord, String userid) {
 			MystoreMapper mapper = session.getMapper(MystoreMapper.class);
 			
 			Map<String,String> map = new HashMap<>();
@@ -59,14 +59,14 @@ public class MystoreRepository {
 			map.put("searchItem", searchItem);
 			map.put("searchWord", searchWord);
 			// userid 세션에서 받기
-			map.put("userid", "aaa");
+			map.put("userid", userid);
 			
 			int itemCount =  mapper.getTotalItem(map);
 			
 			return itemCount;
 		}
 		
-		public List<Map<String,Object>> selectUserItem(String searchItem, String searchWord, int startRecord, int countPerPage) {
+		public List<Map<String,Object>> selectUserItem(String searchItem, String searchWord, int startRecord, int countPerPage, String userid) {
 			// RowBound는 start레코드와 end레코드를 전달받게 되어있다.
 			// 
 			RowBounds rb = new RowBounds(startRecord,countPerPage);
@@ -76,7 +76,7 @@ public class MystoreRepository {
 			
 			map.put("searchItem", searchItem);
 			map.put("searchWord", searchWord);
-			map.put("userid", "aaa");
+			map.put("userid", userid);
 			
 			
 			List<Map<String,Object>>  list = mapper.selectUserItem(map,rb);

@@ -3,7 +3,51 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.MembersMapper">
+	<select id="selectOne" parameterType="Members" resultType="Members">
+		select
+			userid
+			,password
+			,username
+			,birthday
+			,gender
+			,email
+			,phoneno
+			,fulladdr
+			,zipcode
+			,myurl
+		from
+			members
+		where
+		<if test="password != null">
+			userid=#{userid}
+			and
+			password=#{password}
+		</if>
+		<if test="password == null and email == null">
+			userid=#{userid}
+		</if>
+  		<if test ="password == null and userid==null">
+  			email=#{email}
+  		</if>
+  		
+	</select>
 	
+	<insert id="insertMembers" parameterType="Members">
+		insert into
+			members
+		values(
+			#{userid},
+			#{password},
+			#{username},
+			#{birthday},
+			#{gender},
+			#{email},
+			#{phoneNo},
+			#{fullAddr},
+			#{zipcode},
+			#{myurl}
+		)
+	</insert>
 	
 	
 </mapper>

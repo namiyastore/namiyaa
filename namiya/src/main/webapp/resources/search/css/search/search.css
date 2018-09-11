@@ -36,7 +36,14 @@ body {
     display: inline-block;
 }
 
-
+/* 채팅 */
+#custom-search-input2 {
+    position: relative;
+    top: 15px;
+    left: 50px;
+    width: 250px;
+    display: inline-block;
+}
 
 /* 거래 외침 내용 */
 #notice {
@@ -81,19 +88,18 @@ body {
 
 /* 프로필 버튼 */
 .profileBtn {
-	margin: 17px;
+	margin: 14px;
     margin-left: 25px;
     text-align: center;
-    font-size: 1.4em;
+    font-size: 1.2em;
     border: 1px solid;
     border-radius: 5px;
     width: 200px;
-    height: 40px;
-    line-height: 35px;
+    height: 30px;
+    line-height: 25px;
     cursor: pointer;
     background-color: #2A3D4C;
     color: #FFFFFF;
-	
 }
 
 /* 프로필 버튼 ( on mouse ) */
@@ -131,6 +137,41 @@ body {
 #sideMenu > #depth3 > div:hover {
 	color: #FFFFFF;
 	background-color: rgb(255,90,90);
+}
+
+/* 카테고리명이 너무 길때 처리 */
+#sideMenu > #depth1 > div {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#sideMenu > #depth2 > div {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#sideMenu > #depth3 > div {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* 툴팁디자인 */
+.tooltiptext {
+	visibility: hidden;
+    width: 300px;
+    vertical-align: middle;
+    background-color: maroon;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
 }
 
 /* 대분류 */
@@ -207,6 +248,21 @@ body {
 	overflow:hidden;
 }
 
+/* 실시간 등록내용 날짜 오른쪽 정렬 */
 #noticeDate {
 	text-align: right;
 }
+
+/* 전체 채팅창 */
+#chat {
+    width: 250px;
+    height: 200px;
+    background: white;
+    border: thin solid white;
+    border-radius: 5px;
+    text-align: left;
+    overflow:scroll;
+    overflow-x:hidden;
+    visibility: visible;
+}
+

@@ -13,7 +13,7 @@ DROP TABLE members CASCADE CONSTRAINTS;
 DROP TABLE message CASCADE CONSTRAINTS;
 DROP TABLE mystore CASCADE CONSTRAINTS;
 DROP TABLE saving CASCADE CONSTRAINTS;
-
+DROP TABLE wish CASCADE CONSTRAINTS;
 
 /* Create Tables */
 
@@ -53,11 +53,13 @@ CREATE TABLE favorite
 
 CREATE TABLE history
 (
-	historynum number NOT NULL,
-	sellerid varchar2(100) NOT NULL,
-	buyerid varchar2(100) NOT NULL,
-	regdate date DEFAULT sysdate,
-	PRIMARY KEY (historynum)
+   historynum number NOT NULL,
+    productnum number NOT NULL,
+   sellerid varchar2(100) NOT NULL,
+   buyerid varchar2(100),
+   deal_start date,
+    deal_end date,
+   PRIMARY KEY (historynum)
 );
 
 
@@ -81,16 +83,17 @@ CREATE TABLE keyword
 
 
 CREATE TABLE members
-(
-	userid varchar2(100) NOT NULL,
-	password varchar2(30) NOT NULL,
-	username varchar2(20) NOT NULL,
-	email varchar2(100) NOT NULL,
-	phone varchar2(30) NOT NULL,
-	zip varchar2(10) NOT NULL,
-	address varchar2(150) NOT NULL,
-	myurl varchar2(50) NOT NULL UNIQUE,
-	PRIMARY KEY (userid)
+(   
+   userid varchar2(100) primary key,
+   password varchar2(30) NOT NULL,
+   username varchar2(20) NOT NULL,
+   birthday varchar2(30) NOT NULL,
+   gender varchar2(10) NOT NULL,
+   email varchar2(100) NOT NULL,
+   phoneno varchar2(30) NOT NULL,
+   fulladdr varchar2(100) NOT NULL,
+   zipcode varchar2(10) NOT NULL,
+   myurl varchar2(50) NOT NULL UNIQUE
 );
 
 
@@ -160,25 +163,67 @@ CREATE TABLE product
 
 CREATE TABLE review
 (
-	reviewnum number NOT NULL,
-	userid varchar2(100) NOT NULL,
-	review_content varchar2(1000) NOT NULL,
-	regdate date DEFAULT sysdate,
-	store_owner varchar2(100) NOT NULL constraint userid4_fk references members(userid),
-	PRIMARY KEY (reviewnum)
+        reviewnum number NOT NULL,
+        userid varchar2(100) NOT NULL,
+        review_content varchar2(1000) NOT NULL,
+        regdate date DEFAULT sysdate,
+        store_owner varchar2(100) NOT NULL,
+        PRIMARY KEY (reviewnum)
 );
 
 
-CREATE TABLE saving
+create table saving (
+	saving_seq number,
+	userid varchar2(100) not null constraint saving_fk references members(userid),
+	point number  NOT NULL ,
+	type varchar2(50) not null,
+	regdate date default sysdate,
+	PRIMARY KEY (saving_seq) 
+);
+
+create table profile (
+	profile_seq number not null,
+	userid varchar2(100)  NOT NULL constraint profile_fk references members(userid),
+	originalfile varchar2(100),
+	savedfile varchar2(100),
+	content varchar2(1000),
+	nickname varchar2(100),
+	PRIMARY KEY (profile_seq)
+);
+
+CREATE TABLE categoriesen
 (
-	userid varchar2(100) NOT NULL,
-	point number DEFAULT 0,
-	priority number(1) DEFAULT 0,
-	service varchar2(20) NOT NULL,
-	regdate date,
-	PRIMARY KEY (userid)
+	categorynum number NOT NULL,
+	categoryname varchar2(200) NOT NULL,
+	depth number NOT NULL,
+	parentnum number NOT NULL,
+	PRIMARY KEY (categorynum)
 );
 
+CREATE TABLE categoriesja
+(
+	categorynum number NOT NULL,
+	categoryname varchar2(200) NOT NULL,
+	depth number NOT NULL,
+	parentnum number NOT NULL,
+	PRIMARY KEY (categorynum)
+);
+
+CREATE TABLE linenotify (
+    userid      varchar2(100) NOT NULL constraint userid4_fk references members(userid),
+    token       varchar2(500),
+    onoff       number DEFAULT 1,
+    PRIMARY KEY(userid)
+);
+
+
+CREATE TABLE wish
+(
+	wishnum number NOT NULL,
+	boardnum number NOT NULL constraint wish_fk references board(boardnum),
+	userid varchar2(100) NOT NULL,
+	PRIMARY KEY (wishnum)
+);
 
 /* Create Tables */
 create sequence boardnum_seq;
@@ -191,6 +236,8 @@ create sequence messagenum_seq;
 create sequence keywordnum_seq;
 create sequence historynum_seq;
 create sequence noticenum_seq;
-create sequence imagenum_seq;
+create sequence mystore_seq;
 create sequence imageitem_seq;
 create sequence useritem_seq;
+create sequence profile_seq;
+create sequence wishnum_seq;

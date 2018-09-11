@@ -4,6 +4,78 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.SavingMapper">
 	
+	<select id="pointCheck" parameterType="Saving" resultType="int">
+		select 
+			sum(point) point 
+		from 
+			saving 
+		where 
+			userid = #{userid} 
+		and 
+			type = #{type} 
+		and 
+			regdate 
+		between 
+			to_date(to_char(trunc(sysdate), 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') 
+		and 
+			to_date(to_char(to_date(to_char(trunc(sysdate), 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') + (1/24/60/60 * 86399), 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss')
+	</select>
 	
+	<insert id="pointAdd" parameterType="Saving">
+		insert into 
+		saving
+		(
+			saving_seq, 
+			userid, 
+			point, 
+			type
+		) 
+		values
+		(
+			saving_seq.nextval, 
+			#{userid}, 
+			10, 
+			#{type}
+		)
+	</insert>
+	
+	<select id="pointTotal" parameterType="string" resultType="int">
+		select 
+			sum(point) point 
+		from 
+			saving 
+		where 
+			userid = #{userid}
+	</select>
+	
+	<insert id="pointMinus" parameterType="Saving">
+		insert into 
+		saving
+		(
+			saving_seq, 
+			userid, 
+			point, 
+			type
+		) 
+		values
+		(
+			saving_seq.nextval, 
+			#{test1}, 
+			#{point}, 
+			'포인트사용'
+		)
+	</insert>
+	
+	<select id="pointRecord" parameterType="string" resultType="Saving">
+		select 
+			point, 
+			type, 
+			to_char(regdate, 'YYYY-MM-DD hh24:mi:ss') as regdate 
+		from 
+			saving 
+		where 
+			userid = #{userid} 
+		order by regdate
+	</select>
 	
 </mapper>

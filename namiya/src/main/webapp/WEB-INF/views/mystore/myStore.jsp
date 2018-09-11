@@ -317,12 +317,12 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 	
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px; padding-top: 3px;">
 		<ul>
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 3px;"></a></li>
+			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
 		</ul>
 	</div>
 	

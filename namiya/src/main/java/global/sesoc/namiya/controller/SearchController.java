@@ -1,6 +1,8 @@
 package global.sesoc.namiya.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +32,7 @@ public class SearchController {
 	 * @return
 	 */
 	@RequestMapping(value="search", method=RequestMethod.GET)
-	public String search() {
-		
+	public String search() {		
 		return "search";
 	}
 	
@@ -59,7 +60,7 @@ public class SearchController {
 		// 검색버튼 클릭
 		if(searchFlag.equals("on"))	{
 			totalRecordCount = search_repository.getTotalBoard(searchWord);
-			navi = new PageNavigator(currentPage1, totalRecordCount);
+			navi = new PageNavigator(currentPage1, totalRecordCount, 5, 5);
 			list = search_repository.selectAll(searchWord, navi.getStartRecord(), navi.getCountPerPage());
 		}
 		// 카테고리 클릭
@@ -68,17 +69,17 @@ public class SearchController {
 			
 			if(categoryGroup.equals("major")) {
 				totalRecordCount = search_repository.getTotalBoardbyMajorCategory(pnum);
-				navi = new PageNavigator(currentPage2, totalRecordCount);
+				navi = new PageNavigator(currentPage2, totalRecordCount, 5, 5);
 				list = search_repository.selectAllbyCategory(pnum, navi.getStartRecord(), navi.getCountPerPage());
 			}
 			else if(categoryGroup.equals("medium")) {
 				totalRecordCount = search_repository.getTotalBoardbyMediumCategory(pnum);
-				navi = new PageNavigator(currentPage3, totalRecordCount);
+				navi = new PageNavigator(currentPage3, totalRecordCount, 5, 5);
 				list = search_repository.selectAllbyCategoryMedium(pnum, navi.getStartRecord(), navi.getCountPerPage());
 			}
 			else if(categoryGroup.equals("minor")) {
 				totalRecordCount = search_repository.getTotalBoardbyMinorCategory(pnum);
-				navi = new PageNavigator(currentPage4, totalRecordCount);
+				navi = new PageNavigator(currentPage4, totalRecordCount, 5, 5);
 				list = search_repository.selectAllbyCategoryMinor(pnum, navi.getStartRecord(), navi.getCountPerPage());
 			}
 		}
@@ -99,14 +100,27 @@ public class SearchController {
 		return "result";
 	}
 	
+	/*
+	 * 내정보 확인
+	 */
+	@RequestMapping(value="myPage", method=RequestMethod.GET)
+	public String myPage() {
+		
+		return "mypage/myPage";
+	}
+	
 	/**
 	 * 카테고리 대분류 가져오기
 	 * @return
 	 */
 	@RequestMapping(value="majorCategory", method=RequestMethod.GET)
-	public @ResponseBody List<Categories> majorCategory() {
-		List<Categories> c_list = repository.selectClist();
-		System.out.println(c_list);
+	public @ResponseBody List<Categories> majorCategory(String lang) {
+		
+		Map<String,String> map = new HashMap<String,String>();
+		
+		map.put("lang", lang);
+		
+		List<Categories> c_list = repository.Clist(map);
 		
 		return c_list;
 	}
@@ -117,9 +131,8 @@ public class SearchController {
 	 * @return
 	 */
 	@RequestMapping(value="mediumCategory", method=RequestMethod.GET)
-	public @ResponseBody List<Categories> mediumCategory(int categorynum) {
-		List<Categories> m_list = repository.selectMlist(categorynum);
-		System.out.println(m_list);
+	public @ResponseBody List<Categories> mediumCategory(int categorynum, String lang) {		
+		List<Categories> m_list = repository.Mlist(categorynum, lang);
 		
 		return m_list;
 	}
@@ -130,9 +143,8 @@ public class SearchController {
 	 * @return
 	 */
 	@RequestMapping(value="minerCategory", method=RequestMethod.GET)
-	public @ResponseBody List<Categories> minerCategory(int categorynum) {
-		List<Categories> s_list = repository.selectSlist(categorynum);
-		System.out.println(s_list);
+	public @ResponseBody List<Categories> minerCategory(int categorynum, String lang) {
+		List<Categories> s_list = repository.Slist(categorynum, lang);
 		
 		return s_list;
 	}
@@ -141,9 +153,27 @@ public class SearchController {
 	 * 실시간 알림
 	 */
 	@RequestMapping(value="noticeForAll", method=RequestMethod.GET)
-	public @ResponseBody Board noticeForAll() {
+	public @ResponseBody Board noticeForAll(String lang) {
 		Board result = search_repository.noticeForAll();
-		System.out.println(result);
+		
+		if(result != null) {
+			if(lang.equals("en")) {
+				if(result.getService().equals("양도"))
+					result.setService("Transfer");
+				else if(result.getService().equals("재능기부"))
+					result.setService("Talent donation");
+				else if(result.getService().equals("교환"))
+					result.setService("barter");
+			}
+			else if(lang.equals("ja")) {
+				if(result.getService().equals("양도"))
+					result.setService("譲渡");
+				else if(result.getService().equals("재능기부"))
+					result.setService("才能寄付");
+				else if(result.getService().equals("교환"))
+					result.setService("才能");
+			}
+		}
 		
 		return result;
 	}

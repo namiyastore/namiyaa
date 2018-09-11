@@ -8,7 +8,36 @@
 <title>후기게시판</title>
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script>
+	function writeReview() {
+		var answer = confirm("후기를 등록하시겠습니까?");
+		if (answer) {
+			document.form.submit();
+		}
+	}
 	
+	function deleteReview(reviewnum) {
+		var answer = confirm("후기를 삭제하시겠습니까?");
+		var reviewnum = reviewnum;
+		
+		if (answer) {
+			$.ajax({
+				method: 'get',
+				url : 'deleteReview',
+				data : {"reviewnum" : reviewnum},
+				success : function(resp) {
+					alert("삭제 되었습니다!");
+					location.href="review";
+				},
+				error : function(resp) {
+					alert("error: "+ error);
+				}
+			});
+		}
+	}
+	
+	
+	
+
 </script>
 <style>
 ::-webkit-scrollbar{width: 16px;}
@@ -118,54 +147,154 @@
 	}
 	
 	body, p {
-		font-family: 'Jeju Gothic', sans-serif;
+		font-family: 'Jeju Gothic', Eco Sans Mono;
 	}
 	
+	.btn {
+		display: inline-block;
+		width: 60px;
+		height: 25px;
+		border: none;
+		color: #fff;
+		border-radius: 5px;
+		background-color: var(--color-primary);
+		-webkit-box-shadow: 0 2px 7px var(--color-semidark);
+	        	box-shadow: 0 2px 7px var(--color-semidark);
+		outline: 0;
+		cursor: pointer;
+		-webkit-transition: all .5s;
+		-o-transition: all .5s;
+		transition: all .5s;
+		background-color:#105531;
+		font-family: Eco Sans Mono;
+		font-size: 15px;
+	}
 	
+	.btn:hover {
+		opacity: .9;
+	}
+	
+	hr {
+		width:950px;
+	}
+	
+	#page {
+		width: 150px;
+		display:flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 </style>
 </head>
 <body>
 <div id="wrapper" align="center">
 	<div id="scroll" style="float:left; width: 1073px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
 		<div id="givedetail">
+		<form name="form" action="insertReview" method="post">
+		<input type="hidden" name="userid" value="aaa">
+		<input type="hidden" name="store_owner" value="bbb">
 			<h1><b>Review</b></h1>
 			<hr/>
-			
+			<br/>
+				<%-- 후기작성 칸 --%>
+				<div style="width:550px; height:185px; background-color: #edf0f2; border-radius: 15px;">
+					<table align="center">
+						<tr>
+							<td>
+								<img src="resources/images/rabit.png" style="width:130px; height: 134px; margin-top: 5px; margin-right: 20px;">
+							</td>
+							<td>
+								<textarea rows="9" cols="50" style="resize: none; margin-top: 5px; outline: none;" id="review_content" name="review_content"></textarea>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2" align="right" style="padding-top: 8px;">
+								<input class="btn" id="write" type="button" value="Write" onclick="writeReview()">
+							</td>
+						</tr>
+					</table>
+				</div>
+		</form>
+		<br/>
+		<hr/>
+		<br/>
 				<c:if test="${empty list}"> 
 					<p>등록된 후기가 없습니다.</p>
 				</c:if>
-		
-				<br/>
-			<%-- 	<c:if test="${not empty list}">
+				<c:if test="${not empty list}">
 					<c:forEach var="list" items="${list}" varStatus="status">
-				<table>
-					<tr>
-						<td rowspan="2" id="image"><img src="resources/images/rabit.png"></td>
-						<td colspan="2" id="title"><a href="diaryView?diarynum=${list.diarynum}" style="text-decoration:none; color:black;"><span id="diary_title"><b>${list.diary_title}</b></span></a></td>
-					</tr>
-					
-					<tr>
-						<td id="writer">Write by&nbsp;<span><b>${list.userid}</b></span></td>
-						<td id="date">Date &nbsp;<span><b>${list.regdate}</b></span></td>
-					</tr>
-				</table>
-					<tr></tr>
+						<div style="width:550px; height:220px; background-color: #f2f6f9; border-radius: 15px;">
+						<table align="center">
+							<tr>
+								<td align="center" style="padding-top: 8px; padding-bottom: 5px;">Write by <b>${list.userid}</b></td>
+								<td align="right" style="padding-top: 8px; padding-bottom: 5px;font-family: 'Jeju Gothic';">${list.regdate}</td>
+							</tr>
+							<tr>
+								<td>
+									<img align="center" src="resources/images/rabit.png" style="width:130px; height: 134px; margin-top: 5px; margin-right: 20px;">
+								</td>
+								<td>
+									<textarea rows="9" cols="50" style="resize: none; margin-top: 5px; outline: none; " id="review_content" name="review_content">${list.review_content}</textarea>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" align="right" style="padding-top: 5px;">
+									<input class="btn" style="background-color:#2a3d4c;" id="deleted" type="button" value="Delete" onclick="deleteReview(${list.reviewnum})">
+								</td>
+							</tr>
+						</table>
+						</div>
+						<br/>
 					</c:forEach>
-				</c:if> --%>
+					
+					<div id="page">
+						<div>
+							<a href="review?currentPage=${navi.currentPage-navi.pagePerGroup}"><img src="resources/images/arrow2.png" style="width:20px; height:30px;"></a>
+						</div>
+						
+						<div>
+							<a href="review?currentPage=${navi.currentPage-1}"><img src="resources/images/arrow4.png" style="width:20px; height:30px;"></a>
+						</div>
+						
+						<c:forEach var="page" begin="${navi.startPageGroup}" end="${navi.endPageGroup}">
+							<c:if test="${page == navi.currentPage}">
+								<div>
+									<span style="color:#0081C6; font-weight:bold; text-decoration:none; color:black;"><dr>${page}</dr></span>&nbsp;
+								</div>
+							</c:if>	
+							
+							<c:if test="${page != navi.currentPage}">
+								<div>
+									<a style="text-decoration:none; color:black;" href="give?currentPage=${page}">${page}</a>&nbsp;
+								</div>
+							</c:if>
+						</c:forEach>
+						
+						<div>
+							<a href="review?currentPage=${navi.currentPage+1}"><img src="resources/images/arrow3.png" style="width:20px; height:30px;"></a>
+						</div>
+						
+						<div>
+							<a href="review?currentPage=${navi.currentPage+navi.pagePerGroup}"><img src="resources/images/arrow1.png" style="width:20px; height:30px;"></a>
+						</div>
+					</div>
+				</c:if> 
+				<br/>
+				</div>
 			</div>
-	</div>
 		
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
 		<ul>
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; "></a></li>
+			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 		</ul>
 	</div>
-	
+
 </div>
 </body>
 </html>
