@@ -5,6 +5,7 @@ public class Linenotify {
 	String userid;
     String token;
     String onoff;
+    
 	
     public Linenotify(String userid, String token, String onoff) {
 		super();
