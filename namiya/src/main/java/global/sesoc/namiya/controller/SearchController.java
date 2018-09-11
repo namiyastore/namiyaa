@@ -32,8 +32,7 @@ public class SearchController {
 	 * @return
 	 */
 	@RequestMapping(value="search", method=RequestMethod.GET)
-	public String search() {
-		
+	public String search() {		
 		return "search";
 	}
 	
