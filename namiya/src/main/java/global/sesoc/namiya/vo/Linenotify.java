@@ -1,12 +1,12 @@
 package global.sesoc.namiya.vo;
 
-public class linenotify {
+public class Linenotify {
 	
 	String userid;
     String token;
     String onoff;
 	
-    public linenotify(String userid, String token, String onoff) {
+    public Linenotify(String userid, String token, String onoff) {
 		super();
 		this.userid = userid;
 		this.token = token;
