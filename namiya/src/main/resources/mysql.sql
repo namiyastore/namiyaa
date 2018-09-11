@@ -209,6 +209,13 @@ CREATE TABLE categoriesja
 	PRIMARY KEY (categorynum)
 );
 
+CREATE TABLE linenotify (
+    userid      varchar2(100) NOT NULL constraint userid4_fk references members(userid),
+    token       varchar2(500),
+    onoff       number DEFAULT 1,
+    PRIMARY KEY(userid)
+);
+
 /* Create Tables */
 create sequence boardnum_seq;
 create sequence reviewnum_seq;

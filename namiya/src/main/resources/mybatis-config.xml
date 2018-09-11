@@ -18,6 +18,7 @@
 		<typeAlias type="global.sesoc.namiya.vo.Review" alias="Review"/>
 		<typeAlias type="global.sesoc.namiya.vo.Saving" alias="Saving"/>
 		<typeAlias type="global.sesoc.namiya.vo.Profile" alias="Profile"/>
+		<typeAlias type="global.sesoc.namiya.vo.Linenotify" alias="Linenotify"/>
 	</typeAliases>
 	
 	
@@ -37,5 +38,6 @@
 		<mapper resource="mappers/savingMapper.xml"/>
 		<mapper resource="mappers/searchMapper.xml"/>
 		<mapper resource="mappers/profileMapper.xml"/>
+		<mapper resource="mappers/linenotifyMapper.xml"/>
 	</mappers>
 </configuration>
