@@ -19,6 +19,7 @@
 		<typeAlias type="global.sesoc.namiya.vo.Saving" alias="Saving"/>
 		<typeAlias type="global.sesoc.namiya.vo.Profile" alias="Profile"/>
 		<typeAlias type="global.sesoc.namiya.vo.Linenotify" alias="Linenotify"/>
+		<typeAlias type="global.sesoc.namiya.vo.Wish" alias="Wish"/>
 	</typeAliases>
 	
 	
@@ -39,5 +40,6 @@
 		<mapper resource="mappers/searchMapper.xml"/>
 		<mapper resource="mappers/profileMapper.xml"/>
 		<mapper resource="mappers/linenotifyMapper.xml"/>
+		<mapper resource="mappers/wishMapper.xml"/>
 	</mappers>
 </configuration>
