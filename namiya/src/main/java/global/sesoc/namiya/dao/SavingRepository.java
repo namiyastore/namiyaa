@@ -20,6 +20,7 @@ public class SavingRepository {
 	 */
 	public int pointCheck(Saving saving) {
 		SavingMapper mapper = session.getMapper(SavingMapper.class);
+		
 		int result = mapper.pointCheck(saving);
 		
 		return result;

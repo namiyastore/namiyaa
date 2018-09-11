@@ -6,6 +6,7 @@ import global.sesoc.namiya.vo.Saving;
 
 
 public interface SavingMapper {
+	
 	/*
 	 * 포인트 확인(String : type -> '양도' 또는 '기부')
 	 * ajax로 호출

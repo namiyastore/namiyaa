@@ -32,6 +32,7 @@ public class SavingController {
 		saving.setType(type);
 		saving.setUserid(userid);
 		
+		
 		int result = repository.pointCheck(saving);
 		
 		return result;
