@@ -13,7 +13,7 @@ DROP TABLE members CASCADE CONSTRAINTS;
 DROP TABLE message CASCADE CONSTRAINTS;
 DROP TABLE mystore CASCADE CONSTRAINTS;
 DROP TABLE saving CASCADE CONSTRAINTS;
-
+DROP TABLE wish CASCADE CONSTRAINTS;
 
 /* Create Tables */
 
@@ -216,6 +216,15 @@ CREATE TABLE linenotify (
     PRIMARY KEY(userid)
 );
 
+
+CREATE TABLE wish
+(
+	wishnum number NOT NULL,
+	boardnum number NOT NULL constraint wish_fk references board(boardnum),
+	userid varchar2(100) NOT NULL,
+	PRIMARY KEY (wishnum)
+);
+
 /* Create Tables */
 create sequence boardnum_seq;
 create sequence reviewnum_seq;
@@ -231,3 +240,4 @@ create sequence mystore_seq;
 create sequence imageitem_seq;
 create sequence useritem_seq;
 create sequence profile_seq;
+create sequence wishnum_seq;
