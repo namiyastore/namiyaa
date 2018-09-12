@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -6,8 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+
+
+/* body { */
+/* 	background-image: url("resources/images/NaviBackGround.png"); */
+/* 	background-size: 80%; */
+/* 	font-family: 'EcoSansMono', 'JejuGothic'; */
+/* } */
+
+/* 수정된 CSS */
 body {
 	background-image: url("resources/images/NaviBackGround.png");
+	background-attachment: fixed;
 	background-size: 80%;
 	font-family: 'EcoSansMono', 'JejuGothic';
 }
@@ -200,43 +210,49 @@ body {
 
 .rightSide .rightSide_MyInfoBox {
 	display: flex;
-	flex-direction:column;
-	width: 100%;
-	height: 90%;
-	background-color: #BDBDBD;
+    flex-direction: column;
+    width: 90%;
+    height: 90%;
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 13px;
 }
 
 .rightSide_MyInfoBox .rightSide_MyInfoBoxUp {
 	display: flex;
-	width: 100%;
-	height: 30%;
-	background-color: yellow;
-	flex-direction: column;
-/* 	justify-content: space-between;
- */
+    width: 100%;
+    height: 30%;
+    background-color: #FFFFFF;
+    flex-direction: column;
  }
 
 #rightSide_MyInfoBoxUp_profileImg_profile_pic {
 	width: 40%;
-	height: 100%;
+    height: 100%;
+    border: thin solid;
+    border-color: #FFFFFF;
+    border-radius: 10px;
 }
 
 .rightSide_MyInfoBoxUp .rightSide_MyInfoBoxUp_profileImg {
-	height: 45%;
-	border: 1px black solid;
-	text-align: center;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
 }
 
 .rightSide_MyInfoBoxUp .rightSide_MyInfoBoxUp_userId {
 	height: 25%;
-	border: 1px black solid;
-	text-align: center;
+    border: 1px black solid;
+    text-align: center;
+    background-color: #FFFFFF;
 }
 
 .rightSide_MyInfoBoxUp .rightSide_MyInfoBoxUp_userName {
 	height: 25%;
-	border: 1px black solid;
-	text-align: center;	
+    border: 1px black solid;
+    text-align: center;
+    background-color: #FFFFFF;
 }
 
 .rightSide_MyInfoBoxUp .rightSide_MyInfoBoxUp_profileImg{
@@ -315,17 +331,117 @@ body {
 	
 }
 
-.rightSide_MyInfoBoxDown > div{
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	height: 20%;
-	width: 80%;
-	border: 1px solid black;
-	background-color: white;
+.rightSide_MyInfoBoxDown > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    width: 80%;
+    border: 1px solid #2A3D4C;
+    border-radius: 9px;
+    background-color: #2A3D4C;
+    font-size: 1.1em;
+    color: white;
 }
+
+.rightSide_MyInfoBoxDown > div:hover {
+	background-color: white;
+	color: #2A3D4C;
+}
+
+/* 세훈 */
+.rightSide_MyInfoBoxDown_goToHome {
+	cursor: pointer;
+}
+
+.rightSide_MyInfoBoxDown_myStore {
+	cursor: pointer;
+}
+
+.rightSide_MyInfoBoxDown_logOut {
+	cursor: pointer;
+}
+
+.rightSide_MyInfoBoxDown_signOut {
+	cursor: pointer;
+}
+
+#customers tr:nth-child(odd) {
+    background-color: #FFF9E7;
+}
+
+#customers tr:nth-child(odd):hover {
+    background-color: #DDDDDD;
+}
+
+#noticeService {
+	cursor: pointer;
+	text-align: center;
+	width: 150px;
+}
+
 </style>
 <title>Point</title>
+<script src="resources/search/js/common/jquery-1.12.4.js"></script>
+
+<script>
+
+
+$(function(){
+	
+	// ajax로 총 포인트 가져오는 부분
+	$.ajax({
+		method : 'post',
+		url : 'pointTotal',
+		success : function(resp){
+			$('#pointTotal').html(resp);
+		}
+	});
+	
+	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){
+		location.href = './';		
+	});
+	
+	$('.rightSide_MyInfoBoxDown_myStore').on('click',function(){
+		location.href = 'myStore';		
+	});
+	
+	$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){
+		location.href = 'logOut';		
+	});
+	
+	$('.rightSide_MyInfoBoxDown_signOut').on('click',function(){
+		location.href = 'signOut';		
+	});
+	
+});
+
+
+
+// 라인 인증키 등록
+function noticeService() {
+	$.ajax({
+		method : "post",
+		url : "LinenotifyIdCheck",
+		success : function(resp) {
+			if(resp == 1) {
+				alert('이미 등록되어 있습니다');
+			}
+			else {
+				window.open("https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=j1pv2YPVmD4wAI5oJhXxBp&redirect_uri=http://localhost:8081/namiya/linenotify&scope=notify&state=oi","MsgWindow", "width=1013,height=1188");
+			}
+		}
+	});	
+	
+}
+
+// 인증키가 등록되었다는 메세지 출력
+function alertMsg() {
+	alert("등록되었습니다.");
+}
+
+</script>
+
 </head>
 <body>
 	<h2 style="color: white; text-align: center; ">Point</h2>
@@ -359,7 +475,8 @@ body {
 			<div class="leftSide_searchBar">
 				<input type="text" id="inputBar" class="inputBar">
 				<a href="검색 컨트롤러"><img src="resources/images/searchTool.png" class="searchIcon"></a>
-			</div>
+				<img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" />
+			</div>			
 			
  			<!-- 여기부터 받은쪽지함/보낸쪽지함 탭 -->
 			<!-- <div class="leftSide_searchBar_inoutMsgBoxTabs">
@@ -367,31 +484,48 @@ body {
 				<div class="leftSide_searchBar_inoutMsgBoxTabs_out"><a href="mOutBoxListAll">Outbox message</a></div>
 			</div> -->
 			
+			<!-- 라인 인증키 얻는 링크 -->
+<!-- 			<input id="noticeService" type="button" value="Line 알림 서비스 등록" onclick="noticeService()" /> -->
+			
+			
  			<!-- 여기부터 테이블 -->
 			<div class="leftSide_table">
 				<table id="customers">
-					<tr>
-						<th>No.</th>
-						<th>Title</th>
-						<th>Sender</th>
-						<th>Date</th>
-					</tr>
-					<c:if test="${empty InboxList }">
+					<c:if test="${empty pointRecord }">
 						<tr>
 							<td colspan="4">
 								<p>받은 쪽지가 없습니다</p>
 							</td>
 						</tr>
 					</c:if>
-					<c:if test="${not empty InboxList }">
-						<c:forEach var="PointList" items="${PointList}">
+					<c:if test="${not empty pointRecord }">
+						<thead>
+						<tr>
+							<th>Point</th>
+							<th>Service</th>
+							<th>Date</th>
+						</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="PointList" items="${pointRecord}">
 							<tr class="leftSide_table_rows">
 								<!--포인트 추가시 수정부분 -->
-								<td><a href="selectOnePoint?pointnum=${PointList.messagenum}">${InboxList.title }</a>></td>
-								<td>${pointList.userid }</td>
-								<td>${pointList.date }</td>
+								<td>${PointList.point}</td>
+								<td>${PointList.type}</td>
+								<td>${PointList.regdate}</td>
+<%-- 								<td><a href="selectOnePoint?pointnum=${PointList.messagenum}">${InboxList.title }</a>></td> --%>
+<%-- 								<td>${pointList.userid }</td> --%>
+<%-- 								<td>${pointList.date }</td> --%>
 							</tr>
 						</c:forEach>
+						</tbody>
+						<tfoot>
+						<tr>
+							<td colspan="3">
+								현재포인트 : <span id="pointTotal"></span>
+							</td>
+						</tr>
+						<tfoot>
 					</c:if>
 				</table>
 			</div><!-- 테이블의 div 닫음 -->
@@ -432,16 +566,16 @@ body {
 				</div>
 				<div class="rightSide_MyInfoBoxDown">
 					<div class="rightSide_MyInfoBoxDown_goToHome">
-						<a href="./">Go To Home</a>
+						Go To Home
 					</div><!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_myStore">
-						<a href="myStore">My Store</a>
+						My Store
 					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_logOut">
-						<a href="logOut">Logout</a>
+						Logout
 					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_signOut">
-						<a href="signOut">SignOut</a>
+						SignOut
 					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
 				</div><!-- rightSide_MyInfoBoxDown div닫힘 -->
 			</div><!-- rightSide_MyInfoBox div 닫음 -->
