@@ -20,7 +20,7 @@ public class SearchRepository {
 	public int getTotalBoard(String searchWord) {
 		SearchMapper mapper = session.getMapper(SearchMapper.class);
 		
-		int result = mapper.getTotalBoard(searchWord);
+		int result = mapper.getTotalBoard(searchWord);		
 		
 		return result;
 	}

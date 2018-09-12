@@ -9,7 +9,7 @@
     </bean>
     
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="ja"/>
+        <property name="defaultLocale" value="ko"/>
     </bean>
     
 </beans>
