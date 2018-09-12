@@ -4,15 +4,9 @@ public class Linenotify {
 	
 	String userid;
     String token;
-    String onoff;
+    int onoff;
     
-	
-    public Linenotify(String userid, String token, String onoff) {
-		super();
-		this.userid = userid;
-		this.token = token;
-		this.onoff = onoff;
-	}
+    public Linenotify() { }
 
 	public String getUserid() {
 		return userid;
@@ -22,7 +16,7 @@ public class Linenotify {
 		return token;
 	}
 
-	public String getOnoff() {
+	public int getOnoff() {
 		return onoff;
 	}
 
@@ -34,13 +28,13 @@ public class Linenotify {
 		this.token = token;
 	}
 
-	public void setOnoff(String onoff) {
+	public void setOnoff(int onoff) {
 		this.onoff = onoff;
 	}
 
 	@Override
 	public String toString() {
-		return "linenotify [userid=" + userid + ", token=" + token + ", onoff=" + onoff + "]";
+		return "Linenotify [userid=" + userid + ", token=" + token + ", onoff=" + onoff + "]";
 	}
     
 }
