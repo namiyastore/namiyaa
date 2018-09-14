@@ -7,7 +7,10 @@
 
 body {
 	margin: 0 auto;	
-	background-color: #2A3D4C;
+/* 	background-color: #2A3D4C; */
+	background-image: url(../../image/background.png);
+	background-attachment: fixed;
+	
 	font-family: 'Jeju Gothic', Eco Sans Mono;
 	overflow:scroll;
 	overflow-x:hidden;

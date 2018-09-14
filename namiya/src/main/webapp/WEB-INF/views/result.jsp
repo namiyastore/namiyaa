@@ -1000,7 +1000,7 @@ p, li, a{
 	<!-- 레이아웃(로고, 검색) -->
 	<div id="layoutTop">
 		<!-- 로고 -->
-		<a href="${pageContext.request.contextPath}/search"><img id="logo" src="resources/search/image/logo.jpg"/></a>
+		<a href="${pageContext.request.contextPath}/search"><img id="logo" src="resources/search/image/logo.gif"/></a>
 		<!-- 검색 -->
 		<div id="custom-search-input">
 			<div class="input-group col-md-12">				
