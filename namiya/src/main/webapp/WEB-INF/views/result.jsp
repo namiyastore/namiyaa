@@ -968,6 +968,15 @@ p, li, a{
   font-weight: bold;
 }
 
+/* 검색 결과가 없을때 보여주는 태그 */
+#searchEmpty {
+    width: 600px;
+    height: 427px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    line-height: 427px;
+}
+
 </style>
 <body>
 
@@ -1051,7 +1060,9 @@ p, li, a{
 		        <a href="#" id="pagingLast"><li>last</li></a>
 		      </ul>
 		    </div>		
-			
+			<c:if test="${empty list}">
+				<div id="searchEmpty"><spring:message code="result.searchEmpty" /></div>
+			</c:if>
 			<c:if test="${not empty list}">
 				<c:forEach var="ptList" items="${list}" varStatus="status">
 					<c:if test="${status.first}">
@@ -1067,7 +1078,7 @@ p, li, a{
 									<c:if test="${!status.first}">
 										<hr/>
 									</c:if>									
-									<img onError="this.src='resources/search/image/noimage.png'" src="boardfile/${ptList.savedfile}" width="100px" height="100px">
+									<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/boardfile/${ptList.savedfile}" width="100px" height="100px">
 									
 								</div>
 							</div>
