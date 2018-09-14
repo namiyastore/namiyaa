@@ -179,6 +179,10 @@ $(function(){
 		});
 	}
 	
+	var bgSize = (window.innerWidth || document.body.clientWidth) + "px " + (window.innerHeight || document.body.clientHeight) + "px";
+	
+	$('body').css('backgroundSize', bgSize);
+	
 	setInterval(noticeRealtime, 5000);
 	
 });

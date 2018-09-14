@@ -401,9 +401,10 @@ $(function(){
 		alert($(this).attr('data-boardnum'));
 	});
 	
-//	$("#pagingLeft")
-//	$("#pagingRight")
-//	$("#pagingLast")
+	var bgSize = (window.innerWidth || document.body.clientWidth) + "px " + (window.innerHeight || document.body.clientHeight) + "px";
+	
+	$('body').css('backgroundSize', bgSize);
+	
 });
 
 
