@@ -1071,8 +1071,11 @@ p, li, a{
 					</c:if>
 					<c:if test="${status.last}">
 						<input id="pnumLast" type="hidden" value="${status.count + navi.startRecord}">
+						<div style="margin-bottom: 100px;">
 					</c:if>
-					<div>
+					<c:if test="${!status.last}">
+						<div>
+					</c:if>
 						<div class="productList" data-boardnum="${ptList.boardnum}">
 							<div class="leftFrame">
 								<div class="productImg">

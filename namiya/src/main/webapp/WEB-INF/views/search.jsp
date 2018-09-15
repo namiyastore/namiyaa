@@ -48,7 +48,7 @@ var alarmMax = 0;
 $(function(){
 	// 카테고리 대분류 가져오기
 	majorCategory();
-
+	
 	$("#sideMenu").mouseleave(function(){		
 		$("#depth2").css("visibility","hidden");
 		$("#depth3").css("visibility","hidden");
@@ -182,6 +182,7 @@ $(function(){
 	var bgSize = (window.innerWidth || document.body.clientWidth) + "px " + (window.innerHeight || document.body.clientHeight) + "px";
 	
 	$('body').css('backgroundSize', bgSize);
+	$('body').css('height', '1100px');	
 	
 	setInterval(noticeRealtime, 5000);
 	
