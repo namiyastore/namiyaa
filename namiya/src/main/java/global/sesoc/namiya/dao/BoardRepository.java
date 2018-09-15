@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import global.sesoc.namiya.vo.Board;
+import global.sesoc.namiya.vo.History;
 import global.sesoc.namiya.vo.Interest;
 import global.sesoc.namiya.vo.Members;
+import global.sesoc.namiya.vo.Message;
+import global.sesoc.namiya.vo.Wish;
 
 @Repository
 public class BoardRepository {
@@ -69,10 +72,80 @@ public class BoardRepository {
 		return member;
 	}
 
-	public Interest selectItr(Interest interest) {
+	public Interest selectItr(Map<String, String> parm) {
 		BoardMapper mapper = session.getMapper(BoardMapper.class);
-		Interest itr = mapper.selectItr(interest);
+		Interest itr = mapper.selectItr(parm);
 		
 		return itr;
+	}
+
+	public int insertItr(Interest interest) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int result = mapper.insertItr(interest);
+		
+		return result;
+	}
+
+	public int insertHst(History history) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int result = mapper.insertHst(history);
+		
+		return result;
+	}
+
+	public Wish selectWish(Map<String, String> param) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		Wish wsh = mapper.selectWish(param);
+		
+		return wsh;
+	}
+
+	public int insertWish(Wish wish) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int result = mapper.insertWish(wish);
+		
+		return result;
+	}
+
+	public List<Wish> selectWishAll(int boardnum) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		List<Wish> list = mapper.selectWishAll(boardnum);
+		
+		return list;
+	}
+
+	public History selectHst(int historynum) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		History history = mapper.selectHst(historynum);
+		
+		return history;
+	}
+
+	public Board selectBoard(int productnum) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		Board board = mapper.selectBoard(productnum);
+		
+		return board;
+	}
+
+	public int insertMsg(Message message) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int result = mapper.insertMsg(message);
+		
+		return result;
+	}
+
+	public History selectHstone(int productnum) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		History history = mapper.selectHstone(productnum);
+		
+		return history;
+	}
+
+	public int updateHst(History history) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int result = mapper.updateHst(history);
+		
+		return result;
 	}
 }
