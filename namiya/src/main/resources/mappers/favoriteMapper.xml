@@ -37,6 +37,50 @@
 			favoritenum = #{favoritenum}
 	</select>
 	
+	<select id="fSelectOne2" parameterType="Favorite" resultType="Favorite">
+		select
+			favoritenum,myurl,userid
+		from
+			favorite
+		where
+			myurl = #{myurl}
+		and
+			userid = #{userid}
+	</select>
+	
+	<select id="fSelect" parameterType="Favorite" resultType="Favorite">
+		select
+			favoritenum,myurl,userid
+		from
+			favorite
+		where
+		<if test="favoritenum != null">
+			favoritenum = #{favoritenum}
+		</if>
+		<if test="myurl != null">
+		and
+			myurl = #{myurl}
+		</if>
+  		<if test ="userid != null">
+  		and
+  			userid = #{userid}
+  		</if>
+	</select>
+	
+	
+	<select id="fList" parameterType="String" resultType="map">
+		select
+			favoritenum,favorite.myurl,favorite.userid,savedfile
+		from
+			favorite,profile,members
+		where
+			profile.userid = members.userid
+		and
+			members.myurl = favorite.myurl
+		and
+  			favorite.userid = #{userid}
+	</select>
+	
 	<update id="fUpdate" parameterType="Favorite">
 	update
 		favorite
@@ -45,5 +89,6 @@
 	where
 		favoritenum = #{favoritenum}
 	</update>
+	
 	
 </mapper>

@@ -40,11 +40,25 @@ public class FavoriteRepository{
 		
 		return result;
 	}
+	
 
 	public Favorite fSelectOne(int favoritenum) {
 		FavoriteMapper mapper = session.getMapper(FavoriteMapper.class);
 		Favorite favorite = mapper.fSelectOne(favoritenum);
 		return favorite;
+	}
+	
+	public List<Map<String,String>> fList(String userid){
+		FavoriteMapper mapper = session.getMapper(FavoriteMapper.class);
+		List<Map<String,String>> list = mapper.fList(userid);
+		System.out.println("뽑아보자: "+list);
+		return list;
+	}
+	
+	public Favorite fSelect(Favorite favorite) {
+		FavoriteMapper mapper = session.getMapper(FavoriteMapper.class);
+		Favorite f = mapper.fSelect(favorite);
+		return f;
 	}
 	
 	public int fUpdate(Favorite favorite) {
