@@ -891,9 +891,10 @@ p, li, a{
 }
 
 .p8 .is-active{
-  background-color: #fff;
-  color: #2ecc71;
-  text-decoration: none;
+/*   background-color: #fff; */
+/*   color: #2ecc71; */
+	cursor: pointer;
+	text-decoration: none;
 }
 
 /* NINE */

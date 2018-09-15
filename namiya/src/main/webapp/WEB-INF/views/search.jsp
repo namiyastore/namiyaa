@@ -139,6 +139,36 @@ $(function(){
 		}
 	});
 	
+	// 실시간 목록 초기화(처음 한번만 10개 가져오기)
+	$.ajax({
+		method : "get",
+		url : "searchPageInit",
+		success : function(resp) {
+			alarmMax = resp[0].boardnum;
+			
+			var val = "";
+			for(var i in resp) {
+				val += '<hr/>';
+				val += '<div class="noticeItem" data-boardnum="' + resp[i].boardnum + '">'; 
+				val += '<div class="noticeItemDisplay" id="noticeItemContent">';
+					
+				val += '<div id="noticeText">';
+				val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';
+				val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp[i].content;
+				val += '</div>';
+				val += '<div id="noticeDate">';
+				val += resp[i].regdate;
+				val += '</div>';
+				val += '</div>';
+				val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp.savedfile + '">';
+				
+				val += '</div>';
+			}
+			
+			$("#notice").prepend(val);
+		}
+	});
+	
 	// 실시간 목록 가져오기
 	var lang = $('#lang').val();
 	function noticeRealtime() {
@@ -548,52 +578,7 @@ function minerCategory(category_m) {
 		</div>
 	
 		<!-- 실시간 알림 -->
-		<div id="notice">
-			<hr/>
-			<div class="noticeItem">
-				<div class="noticeItemDisplay" id="noticeItemContent">
-					
-					<div id="noticeText">
-						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
-					</div>
-					<div id="noticeDate">
-						2018-08-01 14:15
-					</div>
-				</div>
-				<img onError="this.src='resources/search/image/noimage.png'" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc">
-			</div>
-			<hr/>
-			<div class="noticeItem">
-				<div class="noticeItemDisplay" id="noticeItemContent">
-					
-					<div id="noticeText">
-						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
-					</div>
-					<div id="noticeDate">
-						2018-08-01 14:15
-					</div>
-				</div>
-				<img onError="this.src='resources/search/image/noimage.png'" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc">
-			</div>
-			<hr/>
-			<div class="noticeItem">
-				<div class="noticeItemDisplay" id="noticeItemContent">
-					
-					<div id="noticeText">
-						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다.
-					</div>
-					<div id="noticeDate">
-						2018-08-01 14:15
-					</div>
-				</div>
-				<img onError="this.src='resources/search/image/noimage.png'" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc">
-			</div>
-			<hr/>
-			
-		</div>
+		<div id="notice"></div>
 	
 		<!-- 프로필 -->
 		<div id="profile">
