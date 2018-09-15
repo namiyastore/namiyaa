@@ -294,19 +294,19 @@ body {
 	display: inline-block;
 }
 
-.pagingBtn div {
+/* .pagingBtn div { */
 /* 	color: #6c58bF; */
 /* 	font-weight: bold; */
-}
+/* } */
 
-.pagingBtn:hover {
+/* .pagingBtn:hover { */
 /* 	color: white; */
 /* 	background-color: rgb(140,227,061); */
-}
+/* } */
 
 #pagingNum {
 	color: white;
-	font-size: 1.3em;	
+/* 	font-size: 1.3em;	 */
 }
 
 #chat {

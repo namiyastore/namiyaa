@@ -978,6 +978,10 @@ p, li, a{
     line-height: 427px;
 }
 
+.pagingBtnCss {
+	width: 20px;
+}
+
 </style>
 <body>
 
@@ -1028,12 +1032,19 @@ p, li, a{
 			<!-- 페이징 -->
 			<div class="pagination p8">
 		      <ul>
-		      	<a href="#" id="pagingFirst"><li>first</li></a>
-		        <a href="#" id="pagingLeft"><li>prev</li></a>
+<!-- 		      	<a href="#" id="pagingFirst"><li>first</li></a> -->
+<!-- 		        <a href="#" id="pagingLeft"><li>prev</li></a> -->
+<!-- 		        <span id="pagingNum"> -->
+<!-- 				</span> -->
+<!-- 		        <a href="#" id="pagingRight"><li>next</li></a> -->
+<!-- 		        <a href="#" id="pagingLast"><li>last</li></a> -->
+		        
+		        <img class="pagingBtnCss" id="pagingFirst" src="resources/images/arrow2.png" />
+		        <img class="pagingBtnCss" id="pagingLeft" src="resources/images/arrow4.png" />
 		        <span id="pagingNum">
 				</span>
-		        <a href="#" id="pagingRight"><li>next</li></a>
-		        <a href="#" id="pagingLast"><li>last</li></a>
+		        <img class="pagingBtnCss" id="pagingRight" src="resources/images/arrow3.png" />
+		        <img class="pagingBtnCss" id="pagingLast" src="resources/images/arrow1.png" />
 		      </ul>
 		    </div>		
 			<c:if test="${empty list}">
@@ -1098,8 +1109,8 @@ p, li, a{
 		<div id="custom-search-input2">
 			<div class="input-group col-md-12">				
 				<input id="message" type="text" class="  search-query form-control" value="" /> <span class="input-group-btn">
-					<button id="chatBtnClick" class="btn btn-danger" type="button">
-						<span class=" glyphicon glyphicon-search"></span>
+					<button id="chatBtnClick" class="btn btn-danger" type="button">					
+						<span class="glyphicon glyphicon-pencil"></span>
 					</button>
 				</span>
 			</div>

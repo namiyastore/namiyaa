@@ -592,20 +592,6 @@ function minerCategory(category_m) {
 				<img onError="this.src='resources/search/image/noimage.png'" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc">
 			</div>
 			<hr/>
-<!-- 			<div class="noticeItem"> -->
-<!-- 				<div class="noticeItemDisplay" id="noticeItemContent"> -->
-					
-<!-- 					<div id="noticeText"> -->
-<!-- 						<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 양도 ]</h3> -->
-<!-- 						&nbsp;&nbsp;&nbsp;&nbsp;책상 드립니다. 깨끗한 책상입니다. 이한 사정으로 처분하게 되었습니다. -->
-<!-- 					</div> -->
-<!-- 					<div id="noticeDate"> -->
-<!-- 						2018-08-01 14:15 -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				<img onError="this.src='resources/search/image/noimage.png'" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="abc"> -->
-<!-- 			</div> -->
-<!-- 			<hr/>			 -->
 			
 		</div>
 	

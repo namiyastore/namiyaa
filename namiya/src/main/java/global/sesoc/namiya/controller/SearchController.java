@@ -37,6 +37,24 @@ public class SearchController {
 	}
 	
 	/**
+	 * 실시간 페이지 첫내용 확인
+	 * @return
+	 */
+	@RequestMapping(value="searchPageInit", method=RequestMethod.GET)
+	public @ResponseBody List<Board> searchPageInit() {
+		int totalRecordCount = 0;
+		PageNavigator navi = null;
+		List<Board> result = null;
+		int pageCountSet = 10;
+				
+		totalRecordCount = search_repository.getTotalBoard("");
+		navi = new PageNavigator(1, totalRecordCount, pageCountSet, pageCountSet);
+		result = search_repository.selectAll("", navi.getStartRecord(), navi.getCountPerPage());
+				
+		return result;
+	}
+	
+	/**
 	 * 검색결과 페이지로 이동
 	 * @return
 	 */
