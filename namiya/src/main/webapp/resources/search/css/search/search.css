@@ -271,3 +271,13 @@ body {
 	margin-top: 0px;
 	margin-bottom: 20px;
 }
+
+#chatBtnClick {
+	border-color: #22FFFF;
+	background-color: #22FFFF;
+}
+
+#chatBtnClick:hover {
+	border-color: #00DBDB;
+	background-color: #00DBDB;
+}

@@ -1050,7 +1050,11 @@ p, li, a{
 		        <img class="pagingBtnCss" id="pagingRight" src="resources/images/arrow9.png" />
 		        <img class="pagingBtnCss" id="pagingLast" src="resources/images/arrow10.png" />
 		      </ul>
-		    </div>		
+		    </div>
+		    
+		    <div id="listScroll">	
+		    
+		    	
 			<c:if test="${empty list}">
 				<div id="searchEmpty"><spring:message code="result.searchEmpty" /></div>
 			</c:if>
@@ -1061,7 +1065,7 @@ p, li, a{
 					</c:if>
 					<c:if test="${status.last}">
 						<input id="pnumLast" type="hidden" value="${status.count + navi.startRecord}">
-						<div style="margin-bottom: 100px;">
+						<div>
 					</c:if>
 					<c:if test="${!status.last}">
 						<div>
@@ -1093,7 +1097,7 @@ p, li, a{
 					</div>
 				</c:forEach>			
 			</c:if>
-			
+			</div>
 		</div>
 		<!-- 프로필 -->
 		<div id="profile">

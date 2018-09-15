@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.namiya.dao.CategoriesRepository;
+import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.dao.SearchRepository;
 import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
+import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Profile;
 
 @Controller
@@ -34,6 +36,9 @@ public class SearchController {
 	@Autowired
 	ProfileRepository profile_repository;
 	
+	@Autowired
+	MembersRepository Members_repository;
+	
 	/**
 	 * 검색 페이지로 이동
 	 * @return
@@ -42,9 +47,13 @@ public class SearchController {
 	public String search(HttpSession session, Model model) {
 		String userid = session.getAttribute("loginId").toString();
 		
-		Profile result = profile_repository.select(userid);
+		Members m = new Members();
 		
-		model.addAttribute("profile",result);
+		m.setUserid(userid);
+		
+		Members result1 = Members_repository.selectOne(m);
+		
+		model.addAttribute("myurl",result1.getMyurl());
 		
 		return "search";
 	}

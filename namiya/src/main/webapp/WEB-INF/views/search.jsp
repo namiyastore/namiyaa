@@ -167,7 +167,12 @@ $(function(){
 			}
 			
 			$("#notice").prepend(val);
+			
+			$('.noticeItem').off().on('click', function(){
+				alert($(this).attr('data-boardnum'));
+			});
 		}
+	
 	});
 	
 	// 실시간 목록 가져오기
