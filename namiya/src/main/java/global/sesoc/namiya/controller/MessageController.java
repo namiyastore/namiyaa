@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import global.sesoc.namiya.dao.MessageRepository;
-import global.sesoc.namiya.util.PageNavigatorMypage;
+import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Message;
 
 @Controller
@@ -23,7 +23,7 @@ public class MessageController {
 			@RequestParam(value="searchWord",defaultValue = "") String searchWord,Model model) {
 		
 		int totalRecordCount = repository.getInboxRecordCount(searchWord);
-		PageNavigatorMypage navi = new PageNavigatorMypage(currentPage, totalRecordCount);
+		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount,10,5);
 		
 		List<Message> InboxList = repository.Inbox_select_result(searchWord,navi.getStartRecord(),navi.getCurrentPage());
 		
@@ -56,7 +56,7 @@ public class MessageController {
 			@RequestParam(value="searchWord",defaultValue = "") String searchWord,Model model) {
 		
 		int totalRecordCount = repository.getOutboxRecordCount(searchWord);
-		PageNavigatorMypage navi = new PageNavigatorMypage(currentPage, totalRecordCount);
+		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount,10,5);
 		
 		List<Message> OutboxList = repository.Outbox_select_result(searchWord,navi.getStartRecord(),navi.getCountPerPage());
 		
