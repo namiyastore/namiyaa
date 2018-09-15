@@ -13,7 +13,7 @@
 		<li><a href="interestList" name="interestList">관심상품</a></li>
 		<li><a href="historyList" name="historyList">구매내역</a></li>
 		<li><a href="keywordList" name="keywordList">키워드</a></li>
-		<li><a href="messageList" name="messageList">쪽지함</a></li>
+		<li><a href="mInBoxListAll" name="mInBoxListAll">쪽지함</a></li>
 		<li><a href="noticeList" name="noticeList">알림</a></li>
 		<li><a href="pointRecord" name="pointRecord">포인트</a></li>
 	</ul>
