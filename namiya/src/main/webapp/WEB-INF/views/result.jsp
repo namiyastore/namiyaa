@@ -981,6 +981,7 @@ p, li, a{
 
 .pagingBtnCss {
 	width: 20px;
+	height: 20px;
 }
 
 </style>
@@ -1040,12 +1041,12 @@ p, li, a{
 <!-- 		        <a href="#" id="pagingRight"><li>next</li></a> -->
 <!-- 		        <a href="#" id="pagingLast"><li>last</li></a> -->
 		        
-		        <img class="pagingBtnCss" id="pagingFirst" src="resources/images/arrow2.png" />
-		        <img class="pagingBtnCss" id="pagingLeft" src="resources/images/arrow4.png" />
+		        <img class="pagingBtnCss" id="pagingFirst" src="resources/images/arrow7.png" />
+		        <img class="pagingBtnCss" id="pagingLeft" src="resources/images/arrow8.png" />
 		        <span id="pagingNum">
 				</span>
-		        <img class="pagingBtnCss" id="pagingRight" src="resources/images/arrow3.png" />
-		        <img class="pagingBtnCss" id="pagingLast" src="resources/images/arrow1.png" />
+		        <img class="pagingBtnCss" id="pagingRight" src="resources/images/arrow9.png" />
+		        <img class="pagingBtnCss" id="pagingLast" src="resources/images/arrow10.png" />
 		      </ul>
 		    </div>		
 			<c:if test="${empty list}">

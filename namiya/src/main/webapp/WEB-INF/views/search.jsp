@@ -645,10 +645,6 @@ function minerCategory(category_m) {
         // 메시지 전송
         function sendMessage() {
         	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + userid + "</a>" + " : " + $("#message").val() + "<br/>";
-        	
-        	
-        	
-        	
         	sock.send(tag);
         	//sock.send( + $("#message").val());
         }
