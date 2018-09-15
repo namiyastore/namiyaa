@@ -40,6 +40,11 @@ public class Favorite {
 		this.userid = userid;
 	}
 
+	@Override
+	public String toString() {
+		return "Favorite [favoritenum=" + favoritenum + ", myurl=" + myurl + ", userid=" + userid + "]";
+	}
+
 	
 	
 }
