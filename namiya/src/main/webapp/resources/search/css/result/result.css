@@ -337,6 +337,7 @@ body {
 
 #listScroll {
 	overflow: scroll;
-	overflow-x: hidden;
-	height: 410px;
+    overflow-x: hidden;
+    height: 910px;
+    margin-bottom: 110px;
 }
