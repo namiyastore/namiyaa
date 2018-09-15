@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <title>My store main</title>
-<!-- <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	
@@ -25,6 +25,8 @@ var background = {
     var drawTimer = null;
     var tempList = []; // 가비지 콜렉터가 현재 gif배경에서는 안일어나게 하기위해....
     var clothesList = [];
+    var eidtwindow;
+    
 
     function drawPicture(context, x, y, list) { // context is the canvas 2d context.
 	    for(var a = 0; a<list.length; a++) {
@@ -49,7 +51,7 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 	    	if(list[a].type == "background") {
 	    		list[a].currentframe = (list[a].currentframe + 1) % list[a].totalframes;
 	    		var img = new Image();
-	    		var name = 'resources/img/'+list[a].type+'/'+list[a].filename+'/'+list[a].filename+list[a].currentframe+'.png';
+	    		var name = '${pageContext.request.contextPath}/resources/img/'+list[a].type+'/'+list[a].filename+'/'+list[a].filename+list[a].currentframe+'.png';
 	    		img.src = name;
 	    		img.onload = imageChanged(list[a],img); 
 	    	}
@@ -60,7 +62,7 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 	    for(var a = 1; a<imgList[0].totalframes; a++) {
 	    	
 	    	var img = new Image();
-	    	var name = 'resources/img/'+imgList[0].type+'/'+imgList[0].filename+'/'+imgList[0].filename+a+'.png';
+	    	var name = '${pageContext.request.contextPath}/resources/img/'+imgList[0].type+'/'+imgList[0].filename+'/'+imgList[0].filename+a+'.png';
 	    	img.src = name;
 	    	img.onload = imageLoaded;
 	    	tempList.push(img);
@@ -82,6 +84,7 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 	
 	 $(document).ready(function() {
 		 onBodyLoad();
+		 
 	 });
 	 
 	 function setImage(totalframes,currentframe,width,height,filename,px,py,imageorder,type,itemnum) {
@@ -111,9 +114,9 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 	    	imgObject.itemnum = itemnum;
 	    	var name;
 			if(type == "background")
-				name = 'resources/img/'+imgObject.type+'/'+imgObject.filename+'/'+imgObject.filename+imgObject.currentframe+'.png';
+				name = '${pageContext.request.contextPath}/resources/img/'+imgObject.type+'/'+imgObject.filename+'/'+imgObject.filename+imgObject.currentframe+'.png';
 			else	
-				name = 'resources/img/'+imgObject.type+'/'+imgObject.filename+imgObject.currentframe+'.png';
+				name = '${pageContext.request.contextPath}/resources/img/'+imgObject.type+'/'+imgObject.filename+imgObject.currentframe+'.png';
 	    	var img = new Image();
 	    	img.src = name;
 	    	img.onload = imageLoaded;
@@ -150,13 +153,55 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 		 })(context, imgList), 10);  
     }
     
-	function profileEdit() {
-		window.open("profileEdit", "profileEdit", "top=200,left=300,width=450,height=250");
-        //(request(get방식/서버로의 요청), 새로운 창의 이름(창 이름이 같으면 그 위에 오버라이딩 가능), 창에 대한 모양)  
+	function profileEdit(homeid,userid) {
+		if(homeid != userid){
+			alert("다른id");
+			return;
+		}
+		eidtwindow = window.open("${pageContext.request.contextPath}/profileEdit", "profileEdit", "top=200,left=300,width=620,height=830");
+        //(request(get방식/서버로의 요청), 새로운 창의 이름(창 이름이 같으면 그 위에 오버라이딩 가능), 창에 대한 모양) 
+        eidtwindow.onbeforeunload = function () {
+			// processing event here
+    		$.ajax({
+    			method : 'POST'
+    			,async : false
+    			,url : '${pageContext.request.contextPath}/reqProfile' 
+    			,dataType : "json"
+    			,contentType: "application/json"
+    			,success : function(profile){
+    				//alert("wwww "+profile.content);
+    				$('#pimg').attr("src", "${pageContext.request.contextPath}/profile/"+profile.savedfile); 
+    				$('#tx').html(profile.content);
+    				$('#nick').html(profile.nickname);
+    			}
+    			
+    		});
+		}
 	}
 	
-	function favorite() {
-		alert("즐겨찾기에 추가되었습니다!");
+	function favorite(homeid,userid) {
+		
+		if(userid == '' || homeid == userid){
+			alert("같은id이거나 로그인안함");
+			return;
+		}
+		alert(userid);
+		var sendData = {
+			'homeid' : homeid,
+			'userid' : userid	
+		};
+		$.ajax({
+			method : 'POST'
+			,data: JSON.stringify(sendData)
+			,url : 'reqFavorite' 
+			,dataType : "text"
+			,contentType: "application/json"
+			,success : function(resp){
+				alert(resp);
+			}
+			
+		});
+		
 		
 	}
 </script>
@@ -174,7 +219,7 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 	}
 	
 	body {
-		background: url('resources/images/mystore.png') no-repeat center center fixed; 
+		background: url('${pageContext.request.contextPath}/resources/images/mystore.png') no-repeat center center fixed; 
  		-webkit-background-size: cover;
   		-moz-background-size: cover;
   		-o-background-size: cover;
@@ -282,28 +327,33 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 </style>
 </head>
 <body>
-
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <div id="wrapper" align="center">
 	<div id="profile">
+		
 		<div id="image" style="padding-top: 80px;" align="center">
-			<img src="resources/images/girl.jpg" style="width:180px; height:181px;">
+			<b id="nick" >${profile.nickname}</b>
+			<img id="pimg" src="${pageContext.request.contextPath}/profile/${profile.savedfile}" style="width:180px; height:181px;">
 		</div>
-		<img src="resources/images/favorite.png" style="width:50px; heignt:50px;" onclick="favorite()">
+		
+		<img src="${pageContext.request.contextPath}/resources/images/favorite.png" style="width:50px; heignt:50px;" onclick="favorite('${homeuserid}','${sessionScope.loginId}')">
+		
 		<div id="say" align="center">
-			<textarea rows="8" cols="25" style="resize: none; outline: none; border: white;" readonly="readonly">안녕하세요 나미야 잡화점 입니다. 감사합니다. 
-			</textarea>
+			<textarea id="tx" rows="8" cols="25" style="resize: none; outline: none; border: white;" readonly="readonly">${profile.content}</textarea>
 		</div>
 		
 		<br/>
-		<input id="edit" type="button" value="EDIT" onclick="profileEdit()">
+		
+		<input id="edit" type="button" value="EDIT" onclick="profileEdit('${homeuserid}','${sessionScope.loginId}')">
+		
 	</div>	
 	<div id="zero">
 	
 	</div>
 	<div id="mystore">
-		<h1><b>Welcome My Store</b></h1>
+		<h1><b><spring:message code="mystore.Title" /></b></h1>
 		<div id="url" style="border-top: 1px solid #e3e9ed; border-bottom: 1px solid #e3e9ed; background-color:#e3e9ed; width:700px; padding-top:10px; padding-bottom:10px;" align="right">
-			www.namiya.com/sosori93 &nbsp;
+			${pageContext.request.contextPath}/${url} &nbsp;
 		</div>
 		
 		<canvas id="myCanvas"  width="700px" height="350px"></canvas> 
@@ -317,12 +367,12 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 	
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px; padding-top: 3px;">
 		<ul>
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="home"><img src="${pageContext.request.contextPath}/resources/images/home.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="give"><img src="${pageContext.request.contextPath}/resources/images/give.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
 		</ul>
 	</div>
 	

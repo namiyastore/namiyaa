@@ -9,55 +9,112 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import global.sesoc.namiya.dao.FavoriteRepository;
+import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.MystoreRepository;
+import global.sesoc.namiya.dao.ProfileRepository;
+import global.sesoc.namiya.util.FileService;
 import global.sesoc.namiya.util.PageNavigator;
+import global.sesoc.namiya.vo.Board;
+import global.sesoc.namiya.vo.Favorite;
+import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Mystore;
+import global.sesoc.namiya.vo.Product;
+import global.sesoc.namiya.vo.Profile;
 
 @Controller
 public class MiniRoomController {
 	
+	
+	final String uploadPath = "/profile";
+	
+	@Autowired
+	MembersRepository mb_repository;
+	
 	@Autowired
 	MystoreRepository m_repository;
 	
-	// myStore 띄우기 
-		@RequestMapping(value="/myStore")
-		public String myStore(Model model, HttpSession session) {
-			String loginId = (String)session.getAttribute("loginId");
-			List<Map<String,String>> list = m_repository.selectAll(loginId);
+	@Autowired
+	ProfileRepository p_repository;
+	
+	
+	@Autowired
+	FavoriteRepository f_repository;
+	
+	@Autowired
+	MyStoreController ms_controller;
+	
+	/*// myStore 띄우기 
+		@RequestMapping(value="/myStore"+"/{miniurl}"+"/{func}")
+		public String myStore(Model model, HttpSession session, @PathVariable("miniurl")String miniurl,@PathVariable("func")String func) {
+			String userid = (String)session.getAttribute("loginId"); // 로그인유저아이디
+			Members m= m_repository.select(miniurl); // 미니룸 멤버
+			 				
+			if(func.equals("home")) {
+				System.out.println("if문");
+				home(model,session,miniurl);
+			}else if(func.equals("give")) {
+				ms_controller.give(model, session, 1, miniurl);
+			}else if(func.equals("trade")) {
+			//	ms_controller.trade(model, session, 1, miniurl);
+			}else if(func.equals("talent")) {
+			//	ms_controller.give(model, session, 1, miniurl);
+			}else if(func.equals("review")) {
+				ms_controller.give(model, session, 1, miniurl);
+			}else if(func.equals("setting")) {
+				setting(model,session,miniurl);
+			}
+			return "";
+		}*/
+	
+		@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/home")
+		public String home(Model model, HttpSession session,@PathVariable("miniurl")String miniurl) {
+			System.out.println("miniurl: "+miniurl);
+			String userid = (String)session.getAttribute("loginId"); // 로그인유저아이디
+			Members m= m_repository.select(miniurl); // 미니룸 멤버
+			List<Map<String,String>> list = m_repository.selectAll(m.getUserid());
+			Profile p = p_repository.select(m.getUserid());
+			model.addAttribute("homeuserid", m.getUserid());
+			model.addAttribute("url", m.getMyurl());
+			model.addAttribute("profile", p);
 			model.addAttribute("list", list);
-			System.out.println(list);
 			return "mystore/myStore";
 		}
 	
+	
 	/** setting 게시판 controller **/
 	// 임시 : setting
-	@RequestMapping(value="/setting")
-	public String setting(Model model, HttpSession session) {
+	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/setting") // 인터셉터로 현재미니룸주인과 다른아이디이거나 로그인 안된유저면 팅겨버러야함
+	public String setting(Model model, HttpSession session,@PathVariable("miniurl")String miniurl) {
 		String loginId = (String)session.getAttribute("loginId");
 		List<Map<String,String>> list = m_repository.selectAll(loginId);
 		model.addAttribute("list", list);
-		System.out.println(list);
+		System.out.println("setting: "+list);
 		return "mystore/setting";
 	}
 	
 	// 프로필 편집창 띄우기 
 	@RequestMapping(value="/profileEdit")
-	public String profileEdit() {
-		
+	public String profileEdit(Model model, HttpSession session) {
+		String userid = (String)session.getAttribute("loginId");
+		Profile p = p_repository.select(userid);
+		model.addAttribute("profile", p);
 		return "mystore/profileEdit";
 	}
 	
 	
 	// 미니룸 정보 저장
 		@ResponseBody
-		@RequestMapping(value="/saveMiniRoom", method=RequestMethod.POST)
-		public List<Mystore> saveMiniRoom(@RequestBody List<Mystore> list , Model model, HttpSession session) {
+		@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/saveMiniRoom", method=RequestMethod.POST)
+		public List<Mystore> saveMiniRoom(@RequestBody List<Mystore> list , Model model, HttpSession session, @PathVariable("miniurl")String miniurl) {
 			
 			//System.out.println(list.get(0));
 			String loginId = (String)session.getAttribute("loginId");
@@ -74,13 +131,15 @@ public class MiniRoomController {
 		
 		// 가구 반환
 		@ResponseBody
-		@RequestMapping(value="/reqFurniture", method=RequestMethod.GET)
+		@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/reqFurniture", method=RequestMethod.GET)
 		public Map<String, Object> reqFurniture(
-				@RequestParam(value="currentPage",defaultValue="1") int currentPage,
+				@RequestParam(value="currentPage", defaultValue="1") int currentPage,
 				@RequestParam(value="searchItem", defaultValue="type") String searchItem,
 				@RequestParam(value="searchWord", defaultValue="background") String searchWord,
-				Model model, HttpSession session) {
+				Model model, HttpSession session,
+				@PathVariable("miniurl")String miniurl) {
 			String loginId = (String)session.getAttribute("loginId");
+			System.out.println("loginId: "+ loginId);
 			int totalItemCount = m_repository.getItemCount(searchItem,searchWord,loginId);
 			PageNavigator navi = new PageNavigator(currentPage, totalItemCount,4,4);
 			List<Map<String,Object>> list = m_repository.selectUserItem(searchItem,searchWord, navi.getStartRecord(), navi.getCountPerPage(),loginId);
@@ -98,9 +157,62 @@ public class MiniRoomController {
 		}
 		
 		
-		@RequestMapping(value="/profileEdit", method=RequestMethod.GET)
-		public String profileForm() {
-			return "mystore/profileEdit";
+	
+		@ResponseBody
+		@RequestMapping(value="/profileEdit", method=RequestMethod.POST)
+		public Profile Editprofile(MultipartFile upload, HttpSession session, Profile profile) {
+			
+			String originalfile = upload.getOriginalFilename();
+			String savedfile = FileService.saveFile(upload, uploadPath);
+			String userid = (String)session.getAttribute("loginId");
+			System.out.println(originalfile+", "+savedfile+", "+userid);
+			Profile p = p_repository.select(userid);
+			
+			if(!originalfile.equals("")) { // 파일 첨부가 있을때
+				// 기존파일삭제후 넣기
+				if(p.getSavedfile() !=null && !p.getSavedfile().equals("")) { // 기존프로필 저장파일이 있으면
+					String fullPath = uploadPath + "/" + p.getSavedfile();
+					System.out.println(fullPath);
+					FileService.deleteFile(fullPath);
+				}
+				p.setOriginalfile(originalfile);
+				p.setSavedfile(savedfile);
+			}
+			
+			p.setContent(profile.getContent());
+			p.setNickname(profile.getNickname());
+			p_repository.update(p);
+
+			return profile;
+		}
+		
+		@ResponseBody
+		@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/reqFavorite", method=RequestMethod.POST)
+		public String reqFavorite(HttpSession session, @RequestBody Map<String,String> idmap, @PathVariable("miniurl")String miniurl) {
+			System.out.println("fafafa");
+			System.out.println("idmap: " + idmap);
+			Favorite tempFavorite = new Favorite();
+			Members member = new Members();
+			member.setUserid(idmap.get("homeid"));
+			Members m = mb_repository.selectOne(member);
+			System.out.println("m: "+m);
+			tempFavorite.setMyurl(m.getMyurl());
+			tempFavorite.setUserid(idmap.get("userid"));
+			System.out.println("tempFavorite: "+tempFavorite);
+			Favorite f = f_repository.fSelect(tempFavorite);
+			System.out.println("f: "+f);
+			if(f == null) {
+				//insert
+				
+				tempFavorite.setMyurl(m.getMyurl());
+				tempFavorite.setUserid(idmap.get("userid"));
+				f_repository.fInsert(tempFavorite);
+				return "Favorite insert";
+			}else {
+				//delete
+				f_repository.fDelete(f.getFavoritenum());
+				return "Favorite delete";
+			}
 		}
 	
 }

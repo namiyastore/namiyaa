@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Mystore;
 
 
@@ -29,6 +30,15 @@ public class MystoreRepository {
 		List<Map<String,String>> list = mapper.selectAll(userid);
 		
 		return list;
+	}
+	
+public Members select(String myurl) {
+		
+		MystoreMapper mapper = session.getMapper(MystoreMapper.class);
+		
+		Members member = mapper.select(myurl);
+		
+		return member;
 	}
 	
 	public int insert(Mystore store) {
@@ -80,7 +90,7 @@ public class MystoreRepository {
 			
 			
 			List<Map<String,Object>>  list = mapper.selectUserItem(map,rb);
-			
+			System.out.println("repuserid: "+userid);
 			return list;
 		}
 	

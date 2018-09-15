@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html >
 <html>
 <head>
@@ -67,7 +68,7 @@ function imageOutput(resp) {
     	result +=  '<a href=javascript:pagingItem("type","top"'+',-1)>';
     else if(resp["list"][0]["TYPE"] == "bottom")
         result +=  '<a href=javascript:pagingItem("type","bottom"'+',-1)>';
-	result +=  '	<img alt="" src="resources/images/arrow5.png" width="50" height="30">';
+	result +=  '	<img alt="" src="${pageContext.request.contextPath}/resources/images/arrow5.png" width="50" height="30">';
 	result +=  '</a>';
 	result +=  '</td>';
 	result +=  '</tr>'; 
@@ -78,9 +79,9 @@ function imageOutput(resp) {
         item["WIDTH"]+','+item["HEIGHT"]+',"'+item["FILENAME"]+'","'+item["TYPE"]+'",'+
         item["ITEMNUM"]+')>';
         if(item["TYPE"] == "background")
-        	result +=  '		<img src="resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';
+        	result +=  '		<img src="${pageContext.request.contextPath}/resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';
         else
-        	result +=  '		<img src="resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';	
+        	result +=  '		<img src="${pageContext.request.contextPath}/resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';	
         result +=  '	</a>';
         result +=  '</td>';  
         result +=  '</tr>';
@@ -90,7 +91,7 @@ function imageOutput(resp) {
     for(var i =0; i<c; i++) {
     	result +=  '<tr>';
 		result +=  '<td id="line" align="center">';
-		result += '<img src="resources/img/bottom/invisibleBottom0.png" width="90" height="90">';
+		result += '<img src="${pageContext.request.contextPath}/resources/img/bottom/invisibleBottom0.png" width="90" height="90">';
 		result +=  '</td>';  
     	result +=  '</tr>';
     	//alert("ssss");
@@ -108,7 +109,7 @@ function imageOutput(resp) {
        	result +=  '<a href=javascript:pagingItem("type","top"'+',+1)>';
     else if(resp["list"][0]["TYPE"] == "bottom")
             result +=  '<a href=javascript:pagingItem("type","bottom"'+',+1)>';
-    result +=  '		<img alt="" src="resources/images/arrow6.png" width="50" height="30">';
+    result +=  '		<img alt="" src="${pageContext.request.contextPath}/resources/images/arrow6.png" width="50" height="30">';
     result +=  '	</a>';
     result +=  '</td>'; 
     result +=  '</tr>';
@@ -156,7 +157,7 @@ function setGifPicture(context, x, y, list) { // context is the canvas 2d contex
 	    		list[a].currentframe = (list[a].currentframe + 1) % list[a].totalframes;
 	    	// onload event 써서 수정할것
 	    		var img = new Image();
-	    		var name = 'resources/img/'+list[a].type+'/'+list[a].filename+'/'+list[a].filename+list[a].currentframe+'.png';
+	    		var name = '${pageContext.request.contextPath}/resources/img/'+list[a].type+'/'+list[a].filename+'/'+list[a].filename+list[a].currentframe+'.png';
 	    		img.src = name;
 	    		img.onload = imageChanged(list[a],img); 
 	    	}
@@ -167,7 +168,7 @@ function loadGifPicture() {
     for(var a = 1; a<imgList[0].totalframes; a++) {
     	
     	var img = new Image();
-    	var name = 'resources/img/'+imgList[0].type+'/'+imgList[0].filename+'/'+imgList[0].filename+a+'.png';
+    	var name = '${pageContext.request.contextPath}/resources/img/'+imgList[0].type+'/'+imgList[0].filename+'/'+imgList[0].filename+a+'.png';
     	img.src = name;
     	img.onload = imageLoaded;
     	tempList.push(img);
@@ -365,9 +366,9 @@ function createTexture(totalframes, width, height, filename, type, itemnum) {
 	imgObject.itemnum = itemnum;
 	var name;
 	if(type == "background")
-		name = 'resources/img/'+imgObject.type+'/'+imgObject.filename+'/'+imgObject.filename+imgObject.currentframe+'.png';
+		name = '${pageContext.request.contextPath}/resources/img/'+imgObject.type+'/'+imgObject.filename+'/'+imgObject.filename+imgObject.currentframe+'.png';
 	else	
-		name = 'resources/img/'+imgObject.type+'/'+imgObject.filename+imgObject.currentframe+'.png';
+		name = '${pageContext.request.contextPath}/resources/img/'+imgObject.type+'/'+imgObject.filename+imgObject.currentframe+'.png';
 
 	var img = new Image();
 	img.src = name;
@@ -396,7 +397,7 @@ function setMenu(filename,px,py,width,height) {
 	imgObject.px = px;
 	imgObject.py = py;
 	imgObject.filename = filename;
-	var name = 'resources/img/item/'+imgObject.filename+imgObject.currentframe+'.png';
+	var name = '${pageContext.request.contextPath}/resources/img/item/'+imgObject.filename+imgObject.currentframe+'.png';
 	var img = new Image();
 	img.src = name;
 	img.onload = imageLoaded;
@@ -431,9 +432,9 @@ function setImage(totalframes,currentframe,width,height,filename,px,py,imageorde
 	imgObject.itemnum = itemnum;
 	var name;
 	if(type == "background")
-		name = 'resources/img/'+imgObject.type+'/'+imgObject.filename+'/'+imgObject.filename+imgObject.currentframe+'.png';
+		name = '${pageContext.request.contextPath}/resources/img/'+imgObject.type+'/'+imgObject.filename+'/'+imgObject.filename+imgObject.currentframe+'.png';
 	else	
-		name = 'resources/img/'+imgObject.type+'/'+imgObject.filename+imgObject.currentframe+'.png';
+		name = '${pageContext.request.contextPath}/resources/img/'+imgObject.type+'/'+imgObject.filename+imgObject.currentframe+'.png';
 	var img = new Image();
 	img.src = name;
 	img.onload = imageLoaded;
@@ -499,7 +500,7 @@ function changeDirection(sel) {
 	imgList[sel].currentframe = (Number(imgList[sel].currentframe) + 1) % imgList[sel].totalframes;
 	
 		var img = new Image();
-		var name = 'resources/img/'+imgList[sel].type+'/'+imgList[sel].filename+imgList[sel].currentframe+'.png';
+		var name = '${pageContext.request.contextPath}/resources/img/'+imgList[sel].type+'/'+imgList[sel].filename+imgList[sel].currentframe+'.png';
 		img.src = name;
 		img.onload = imageChanged(imgList[sel],img); 
 	
@@ -675,7 +676,7 @@ function pagingItem(searchItem,searchWord,gap) {
 	}
 	
 	body {
-		background: url('resources/images/mystore.png') no-repeat center center fixed; 
+		background: url('${pageContext.request.contextPath}/resources/images/mystore.png') no-repeat center center fixed; 
  		-webkit-background-size: cover;
   		-moz-background-size: cover;
   		-o-background-size: cover;
@@ -799,29 +800,30 @@ function pagingItem(searchItem,searchWord,gap) {
 </style>
 </head>
 <body>
-<img id="loadingImage" alt="" src="resources/img/furniture/tori0.png">
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
+<img id="loadingImage" alt="" src="${pageContext.request.contextPath}/resources/img/furniture/tori0.png">
  <div id="wrapper" align="center">
 	<div id="scroll" style="float:left; width: 1073px; height:545px; border-radius: 25px; background-color: white;">
 		
-		<h1><b>Edit My Store</b></h1>
+		<h1><b><spring:message code="setting.Title" /></b></h1>
 		<hr style="width: 1040px; border-color:black;"/>
 		<div id="selected" style="float:left; width:280px; height:430px; padding-left: 20px;">
 			<div id="list" style="float:left; width: 100px; text-align:right; height:430px; padding-top: 30px; margin-left :10px;">
 				<ul class="nav nav-pills nav-stacked">
 				    <li >
-				   		 <a href="javascript:pagingItem('type','background',0)">Background</a>
+				   		 <a href="javascript:pagingItem('type','background',0)"><spring:message code="setting.Background" /></a>
 				    </li>
 				    <li >
-				    	<a href="javascript:pagingItem('type','furniture',0)">Furniture</a>
+				    	<a href="javascript:pagingItem('type','furniture',0)"><spring:message code="setting.Furniture" /></a>
 				    </li>
 				    <li >
-				    	<a href="javascript:pagingItem('type','head',0)">Hair</a>
+				    	<a href="javascript:pagingItem('type','head',0)"><spring:message code="setting.Head" /></a>
 				    </li>
 				    <li >
-				    	<a href="javascript:pagingItem('type','top',0)">Top</a>
+				    	<a href="javascript:pagingItem('type','top',0)"><spring:message code="setting.Top" /></a>
 				    </li>
 				    <li >
-				    	<a href="javascript:pagingItem('type','bottom',0)">Bottom</a>
+				    	<a href="javascript:pagingItem('type','bottom',0)"><spring:message code="setting.Bottom" /></a>
 				    </li>
 				 </ul>
 			</div>
@@ -839,19 +841,19 @@ function pagingItem(searchItem,searchWord,gap) {
 			<canvas id="myCanvas"  width="700" height="350"></canvas>
 			<br/>
 			<br/>
-			<input id="save" type="button" value="Save" onclick="saveTexture()">
+			<input id="save" type="button" value=<spring:message code="setting.Save" /> onclick="saveTexture()">
 		</div>
 	</div>
 	
 	
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px; padding-top: 3px;">
 		<ul class="menulist">
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
+			<li><a href="home"><img src="${pageContext.request.contextPath}/resources/images/home.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
+			<li><a href="give"><img src="${pageContext.request.contextPath}/resources/images/give.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
+			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
+			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
+			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
+			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 		</ul>
 	</div>
 	

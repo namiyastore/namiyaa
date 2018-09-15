@@ -45,7 +45,7 @@ CREATE TABLE categories
 CREATE TABLE favorite
 (
 	favoritenum number NOT NULL,
-	myurl varchar2(50) NOT NULL,
+	myurl varchar2(50) NOT NULL ,
 	userid varchar2(100) NOT NULL constraint userid2_fk references members(userid),
 	PRIMARY KEY (favoritenum)
 );
@@ -216,7 +216,6 @@ CREATE TABLE linenotify (
     PRIMARY KEY(userid)
 );
 
-
 CREATE TABLE wish
 (
 	wishnum number NOT NULL,
@@ -224,6 +223,8 @@ CREATE TABLE wish
 	userid varchar2(100) NOT NULL,
 	PRIMARY KEY (wishnum)
 );
+
+
 
 /* Create Tables */
 create sequence boardnum_seq;

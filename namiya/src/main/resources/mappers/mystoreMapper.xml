@@ -15,6 +15,14 @@
 		order by IMAGEORDER
 	</select>
 	
+	<select id="select" parameterType="String" resultType="Members">
+		select 
+		 	*
+		from members 
+		where 
+			myurl = #{myurl}
+	</select>
+	
 	<insert id="insert" parameterType="Mystore">
 		insert into mystore values (
 			mystore_seq.nextval,

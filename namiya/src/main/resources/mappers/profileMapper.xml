@@ -4,4 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.ProfileMapper">
 
+	<select id="select" parameterType="String" resultType="Profile">
+		select * from profile where userid = #{userid}
+	</select>
+	
+	<update id="update" parameterType="Profile">
+		update 
+			profile 
+		set 
+			nickname = #{nickname}, content = #{content}, originalfile = #{originalfile}, savedfile = #{savedfile} 
+		where
+			userid = #{userid} 
+		
+	</update>
+	
 </mapper>
