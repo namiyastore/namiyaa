@@ -1026,31 +1026,6 @@ p, li, a{
 		<!-- 상품 리스트 -->
 		<div id="productContainer">
 			<!-- 페이징 -->
-<!-- 			<div id="paging"> -->
-<!-- 				<div class="pagingBtn" id="pagingFirst"> -->
-<!-- 					<div>&lt;&lt;</div> -->
-<!-- 				</div> -->
-						
-<!-- 				<div class="pagingBtn" id="pagingLeft"> -->
-<!-- 					<div>&lt;</div> -->
-<!-- 				</div> -->
-				
-<!-- 				<span id="pagingNum"> -->
-<!-- 				</span> -->
-
-
-
-				
-<!-- 				<div class="pagingBtn" id="pagingRight"> -->
-<!-- 					<div>&gt;</div> -->
-<!-- 				</div> -->
-				
-<!-- 				<div class="pagingBtn" id="pagingLast"> -->
-<!-- 					<div>&gt;&gt;</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-			
-			<!-- 페이징 버튼 CSS테스트 -->
 			<div class="pagination p8">
 		      <ul>
 		      	<a href="#" id="pagingFirst"><li>first</li></a>

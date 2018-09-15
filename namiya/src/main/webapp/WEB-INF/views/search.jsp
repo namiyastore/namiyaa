@@ -628,7 +628,7 @@ function minerCategory(category_m) {
 			<div class="input-group col-md-12">				
 				<input id="message" type="text" class="  search-query form-control" value="" /> <span class="input-group-btn">
 					<button id="chatBtnClick" class="btn btn-danger" type="button">
-						<span class=" glyphicon glyphicon-search"></span>
+						<span class=" glyphicon glyphicon-pencil"></span>
 					</button>
 				</span>
 			</div>

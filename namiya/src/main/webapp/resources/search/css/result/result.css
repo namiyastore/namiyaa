@@ -300,8 +300,8 @@ body {
 }
 
 .pagingBtn:hover {
-	color: white;
-	background-color: rgb(140,227,061);
+/* 	color: white; */
+/* 	background-color: rgb(140,227,061); */
 }
 
 #pagingNum {
