@@ -62,7 +62,8 @@ $(function(){
 	
 	// 미니홈피 창 열기
 	$("#myStoreClick").on("click",function(){
-		window.open("myStore","mystoreWindow","width=1200","height=650");
+		var myurl = $('#myurl').val();
+		window.open("myStore/" + myurl + "/home","mystoreWindow","width=1200","height=650");
 	});
 	
 	// 마이 페이지 이동
@@ -212,7 +213,7 @@ $(function(){
 	var bgSize = (window.innerWidth || document.body.clientWidth) + "px " + (window.innerHeight || document.body.clientHeight) + "px";
 	
 	$('body').css('backgroundSize', bgSize);
-	$('body').css('height', '1100px');	
+	$('body').css('height', '1100px');
 	
 	setInterval(noticeRealtime, 5000);
 	
@@ -548,6 +549,7 @@ function minerCategory(category_m) {
 <input id="parentnum" type="hidden" value="${parentnum}">
 <input id="userid" type="hidden" value="${sessionScope.loginId }">
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
+<input id="myurl" type="hidden" value="${myurl}" />
 
 <div id="container">
 

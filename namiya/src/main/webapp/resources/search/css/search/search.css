@@ -267,3 +267,7 @@ body {
     visibility: visible;
 }
 
+.pagination p8 {
+	margin-top: 0px;
+	margin-bottom: 20px;
+}

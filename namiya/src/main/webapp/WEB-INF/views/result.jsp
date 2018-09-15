@@ -405,6 +405,8 @@ $(function(){
 	
 	$('body').css('backgroundSize', bgSize);
 	
+	$('.pagination p8').css('margin-bottom','20px');
+	
 });
 
 

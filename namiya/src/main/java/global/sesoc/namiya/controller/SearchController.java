@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.namiya.dao.CategoriesRepository;
+import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.dao.SearchRepository;
 import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
+import global.sesoc.namiya.vo.Profile;
 
 @Controller
 public class SearchController {
@@ -27,12 +31,21 @@ public class SearchController {
 	@Autowired
 	SearchRepository search_repository;
 	
+	@Autowired
+	ProfileRepository profile_repository;
+	
 	/**
 	 * 검색 페이지로 이동
 	 * @return
 	 */
 	@RequestMapping(value="search", method=RequestMethod.GET)
-	public String search() {		
+	public String search(HttpSession session, Model model) {
+		String userid = session.getAttribute("loginId").toString();
+		
+		Profile result = profile_repository.select(userid);
+		
+		model.addAttribute("profile",result);
+		
 		return "search";
 	}
 	
