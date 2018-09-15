@@ -62,7 +62,7 @@ public class MemberController {
 			session.setAttribute("loginName", member.getUsername());
 			model.addAttribute("message", "로그인 성공!");
 			
-			return "search";
+			return "redirect:/search";
 		}else {
 			System.out.println("로그인실패");
 			model.addAttribute("message", "아이디와 비밀번호를 확인해주세요.");
@@ -71,23 +71,92 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value="/addressForm", method=RequestMethod.POST)
-	public String getAddress() {
-		System.out.println("주소전달");
-		return "member/joinForm";
+	@RequestMapping(value="editForm",method=RequestMethod.GET)
+	public String editMember(HttpSession session, Model model) {
+		System.out.println("회원정보수정");
+		Members m = new Members();
+		m.setUserid((String)session.getAttribute("loginId"));
+		m.setUsername((String)session.getAttribute("loginName"));
+		
+		m = repository.selectOne(m);
+		
+		model.addAttribute(m);
+		return "editForm";//뷰로 넘기는거 해야함
 	}
 	
-	/*@RequestMapping(value="popup", method=RequestMethod.GET)
-    public String jusoPopup(@ModelAttribute("paramVO") ParamVO paramVO) throws Exception {
+	@RequestMapping(value="edit_form",method=RequestMethod.POST)
+	public String editForm(Members member, HttpSession session, Model model) {
+		System.out.println("회원수정정보");
+		System.out.println(member);
+		int result = 0;
+		String oMsg = null;
 
-		System.out.println("주소팝팝");
-		return "popup/jusoPopup";
-    }*/
-	@RequestMapping(value="popup", method=RequestMethod.GET)
+		result  = repository.updateMembers(member);
+		
+		if(result==1) {
+			System.out.println("수정완료");
+			oMsg="정보 수정 완료. 다시 로그인해주세요.";
+		}
+		if(result==0) {
+			oMsg="정보가 수정되지 않았습니다.";
+		}
+		model.addAttribute("msg", oMsg);
+		session.removeAttribute("loginId");
+		session.removeAttribute("loginName");
+		session.invalidate();
+		
+		return "member/loginForm";
+	}
+	
+	@RequestMapping(value="pop", method=RequestMethod.GET)
 	public String popup() {
 		System.out.println("주소팝팝");
-		return "popup/jusoPopup";
+		return "member/jusoPopup";
 	}
+	
+	@RequestMapping(value="pop", method = RequestMethod.POST)
+	public String pop2(Model model,HttpServletRequest request) {
+		String inputYn = request.getParameter("inputYn");
+		String roadFullAddr = request.getParameter("roadFullAddr"); 
+		String roadAddrPart1 = request.getParameter("roadAddrPart1"); 
+		String roadAddrPart2 = request.getParameter("roadAddrPart2"); 
+		String engAddr = request.getParameter("engAddr"); 
+		String jibunAddr = request.getParameter("jibunAddr"); 
+		String zipNo = request.getParameter("zipNo"); 
+		String addrDetail = request.getParameter("addrDetail");
+		
+		System.out.println("주소전체: "+roadFullAddr);
+		System.out.println("우편번호: "+zipNo);
+		
+		model.addAttribute("inputYn", inputYn);
+		model.addAttribute("fullAddr", roadFullAddr);
+		model.addAttribute("zipcode", zipNo);
+		
+		return "redirect:/addrBuffer";
+	}
+	
+	@RequestMapping(value="addrBuffer", method=RequestMethod.GET)
+	public String addrBuffer
+	(
+		String inputYn,
+		String fullAddr,
+		String roadAddrPart1,
+		String roadAddrPart2,
+		String engAddr,
+		String jibunAddr,
+		String zipcode,
+		String addrDetail,
+		Model model
+	)
+	{
+		System.out.println("값뿌려진다.");
+		System.out.println(fullAddr);
+		System.out.println(zipcode);
+		model.addAttribute("fullAddr", fullAddr);
+		model.addAttribute("zipcode",zipcode);
+		return "member/addrBuffer";
+	}
+	
 	//endregion
 	
 	//region formprocessing

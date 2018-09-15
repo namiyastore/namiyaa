@@ -11,5 +11,9 @@ public interface MembersMapper {
 	public Members selectOne(Members m);
 
 	public int insertMembers(Members members);
+
+	public int updateMembers(Members member);
+	
+	public Members selectUrl(Members m);
 	
 }

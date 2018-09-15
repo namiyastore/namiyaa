@@ -23,6 +23,11 @@
 			and
 			password=#{password}
 		</if>
+		<if test="password == null and username != null">
+			userid=#{userid}
+			and
+			username=#{username}
+		</if>
 		<if test="password == null and email == null">
 			userid=#{userid}
 		</if>
@@ -49,5 +54,34 @@
 		)
 	</insert>
 	
+	<update id="updateMembers" parameterType="Members">
+		update
+			members
+		set
+			password=#{password},
+			birthday=#{birthday},
+			email=#{email},
+			phone#{phoneNo},
+			fullAddr=#{fullAddr},
+			zipcode=#{zipcode}
+		where
+			userid=#{userid}
+	</update>
 	
+	<select id="selectUrl" parameterType="String" resultType="Members">
+      select
+         userid
+         ,password
+         ,username
+         ,birthday
+         ,gender
+         ,email
+         ,phoneno
+         ,fulladdr
+         ,zipcode
+         ,myurl
+      from
+         members
+      where myurl=#{myurl}
+   </select>
 </mapper>

@@ -26,6 +26,21 @@ public class MembersRepository {
 		result = mapper.insertMembers(members);
 		return result;
 	}
+
+	public int updateMembers(Members member) {
+		MembersMapper mapper = session.getMapper(MembersMapper.class);
+		int result = 0;
+		result = mapper.updateMembers(member);
+		return result;
+	}
+	
+	public Members selectUrl(Members m) {
+	      MembersMapper mapper = session.getMapper(MembersMapper.class);
+	      Members member = new Members();
+	      member = mapper.selectUrl(m);
+	      
+	      return member;
+	   }
 	
 	
 	
