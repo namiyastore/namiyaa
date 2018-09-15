@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>양도 글 자세히 보기</title>
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
 	function interest() {
 		alert("관심상품에 추가되었습니다!");
@@ -64,7 +64,7 @@
 	}
 	
 	body {
-		background: url('resources/images/mystore.png') no-repeat center center fixed; 
+		background: url('${pageContext.request.contextPath}/resources/images/mystore.png') no-repeat center center fixed; 
  		-webkit-background-size: cover;
   		-moz-background-size: cover;
   		-o-background-size: cover;
@@ -214,8 +214,8 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="right">
-							<img src="resources/images/interest.png" onclick="interest()" style="width:55px; height:40px;">
-							<img src="resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
+							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest()" style="width:55px; height:40px;">
+							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
 							<hr/>
 						</td>
 					</tr>
@@ -241,7 +241,7 @@
 							<div id="content" style="width:950px;" >
 								<c:if test="${not empty board.originalfile}">
 								<div align="center">
-										<img alt="" src="boardfile/${board.savedfile}" style="width:200px; height:150px;">
+										<img alt="" src="${pageContext.request.contextPath}/boardfile/${board.savedfile}" style="width:200px; height:150px;">
 										<br/>
 								</div>
 								<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Jeju Gothic', Eco Sans Mono;" readonly="readonly">${board.content}</textarea>
@@ -270,21 +270,21 @@
 					</tr>
 				</table>
 				<br/>
-				<img src="resources/images/board.png" style="width:60px; height:40px;" onclick="give()">
-				<img src="resources/images/update.png" style="width:60px; height:40px;" onclick="giveUpdate(${board.boardnum})">
-				<img src="resources/images/delete.png" style="width:60px; height:40px;" onclick="deleted(${board.boardnum})">
+				<img src="${pageContext.request.contextPath}/resources/images/board.png" style="width:60px; height:40px;" onclick="give()">
+				<img src="${pageContext.request.contextPath}/resources/images/update.png" style="width:60px; height:40px;" onclick="giveUpdate(${board.boardnum})">
+				<img src="${pageContext.request.contextPath}/resources/images/delete.png" style="width:60px; height:40px;" onclick="deleted(${board.boardnum})">
 				<br/><br/>
 			</div>
 	</div>
 			
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
 		<ul>
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; "></a></li>
+			<li><a href="myStore"><img src="${pageContext.request.contextPath}/resources/images/home.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="give"><img src="${pageContext.request.contextPath}/resources/images/give.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; "></a></li>
 		</ul>
 	</div>
 	

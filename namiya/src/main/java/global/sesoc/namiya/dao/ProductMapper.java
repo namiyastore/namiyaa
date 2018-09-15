@@ -19,5 +19,9 @@ public interface ProductMapper {
 
 	public Product selectPdt(int productnum);
 
+	public int updatePstt(Product product);
+
+	public int updatePstt2(String date);
+
 	
 }

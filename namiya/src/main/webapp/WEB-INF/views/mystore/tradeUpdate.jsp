@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>교환글 수정 폼</title>
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
 function formCheck() {
 	var title = document.getElementById("title");
@@ -48,7 +48,7 @@ function formCheck() {
 	}
 	
 	body {
-		background: url('resources/images/mystore.png') no-repeat center center fixed; 
+		background: url('${pageContext.request.contextPath}/resources/images/mystore.png') no-repeat center center fixed; 
  		-webkit-background-size: cover;
   		-moz-background-size: cover;
   		-o-background-size: cover;
@@ -161,7 +161,7 @@ function formCheck() {
 <body>
 <div id="wrapper" align="center">
 	<form name="form1" action="tradeupdate" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="userid" value="aaa" id="userid">
+	<input type="hidden" name="userid" value="${sessionScope.loginId}" id="userid">
 	<input type="hidden" name="boardnum" value="${board.boardnum }">
 		<div class="scl" id="scroll">
 			<div id="tradeform">
@@ -224,7 +224,7 @@ function formCheck() {
 						<td class="sort"><b>첨부파일</b></td>
 						<td class="scontent">
 						<c:if test="${not empty board.originalfile}">
-							<img src="boardfile/${board.savedfile}" style="width:100px; height:50px;">
+							<img src="${pageContext.request.contextPath}/boardfile/${board.savedfile}" style="width:100px; height:50px;">
 						</c:if>
 						<!-- 기 첨부된 파일이 존재할 경우 출력 -->
 						<c:if test="${board.originalfile != null}">
@@ -237,20 +237,20 @@ function formCheck() {
 					</tr>
 				</table>
 				<br/>
-				<input id="update" type="image" src="resources/images/update.png" style="width:60px; height:40px; outline: none;" onclick="return formCheck()">
-				<a href="trade"><img src="resources/images/board.png" style="width:60px; height:40px;"></a>
+				<input id="update" type="image" src="${pageContext.request.contextPath}/resources/images/update.png" style="width:60px; height:40px; outline: none;" onclick="return formCheck()">
+				<a href="trade"><img src="${pageContext.request.contextPath}/resources/images/board.png" style="width:60px; height:40px;"></a>
 				<br/><br/>
 			</div>
 		</div>
 	</form>
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
 		<ul>
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; "></a></li>
+			<li><a href="myStore"><img src="${pageContext.request.contextPath}/resources/images/home.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="give"><img src="${pageContext.request.contextPath}/resources/images/give.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; "></a></li>
 		</ul>
 	</div>
 	

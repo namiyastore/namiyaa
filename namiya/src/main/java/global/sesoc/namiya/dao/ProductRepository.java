@@ -48,6 +48,20 @@ public class ProductRepository {
 		return product;
 	}
 
+	public int updatePstt(Product product) {
+		ProductMapper mapper = session.getMapper(ProductMapper.class);
+		int result = mapper.updatePstt(product);
+		
+		return result;
+	}
+
+	public int updatePstt2(String date) {
+		ProductMapper mapper = session.getMapper(ProductMapper.class);
+		int result = mapper.updatePstt2(date);
+		
+		return result;
+	}
+
 	
 	
 	

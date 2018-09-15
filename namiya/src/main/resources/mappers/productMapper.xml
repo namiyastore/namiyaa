@@ -22,4 +22,12 @@
 	<select id="selectPdt" resultType="Product" parameterType="Integer">
 		select productnum, categorynum, productname, sstatus from product where productnum=#{productnum}
 	</select>
+	
+	<update id="updatePstt" parameterType="Product" >
+		update product set sstatus=#{sstatus} where productnum=#{productnum}
+	</update>
+	
+	<update id="updatePstt2" parameterType="String">
+		update product set sstatus='진행완료' where productnum in (select productnum from history where deal_end =#{deal_end})
+	</update>
 </mapper>

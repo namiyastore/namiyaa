@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>교환 글 작성 폼</title>
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
 function formCheck() {
 	var title = document.getElementById("title");
@@ -47,7 +47,7 @@ function formCheck() {
 	}
 	
 	body {
-		background: url('resources/images/mystore.png') no-repeat center center fixed; 
+		background: url('${pageContext.request.contextPath}/resources/images/mystore.png') no-repeat center center fixed; 
  		-webkit-background-size: cover;
   		-moz-background-size: cover;
   		-o-background-size: cover;
@@ -215,20 +215,20 @@ function formCheck() {
 					</tr>
 				</table>
 				<br/>
-				<input id="insert" type="image" src="resources/images/insert.png" style="width:60px; height:40px; outline: none;" onclick="return formCheck()">
-				<a href="trade"><img src="resources/images/board.png" style="width:60px; height:40px;"></a>
+				<input id="insert" type="image" src="${pageContext.request.contextPath}/resources/images/insert.png" style="width:60px; height:40px; outline: none;" onclick="return formCheck()">
+				<a href="trade"><img src="${pageContext.request.contextPath}/resources/images/board.png" style="width:60px; height:40px;"></a>
 				<br/><br/>
 			</div>
 		</div>
 	</form>
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
 		<ul>
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; "></a></li>
+			<li><a href="myStore"><img src="${pageContext.request.contextPath}/resources/images/home.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="give"><img src="${pageContext.request.contextPath}/resources/images/give.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; "></a></li>
 		</ul>
 	</div>
 	

@@ -9,10 +9,14 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -21,10 +25,13 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +46,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.CategoriesRepository;
+import global.sesoc.namiya.dao.InterestRepository;
 import global.sesoc.namiya.dao.MystoreRepository;
 import global.sesoc.namiya.dao.ProductRepository;
 import global.sesoc.namiya.dao.ReviewRepository;
@@ -46,13 +54,18 @@ import global.sesoc.namiya.util.FileService;
 import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
+import global.sesoc.namiya.vo.History;
 import global.sesoc.namiya.vo.Interest;
 import global.sesoc.namiya.vo.Members;
+import global.sesoc.namiya.vo.Message;
 import global.sesoc.namiya.vo.Mystore;
 import global.sesoc.namiya.vo.Product;
 import global.sesoc.namiya.vo.Review;
+import global.sesoc.namiya.vo.Wish;
 
 @Controller
+@Configuration
+@EnableScheduling
 public class MyStoreController {
 	@Autowired
 	CategoriesRepository repository;
@@ -66,11 +79,33 @@ public class MyStoreController {
 	@Autowired
 	ReviewRepository r_repository;
 	
+	@Autowired
+	MystoreRepository m_repository;
+	
+	@Autowired
+	InterestRepository i_repository;
+	
 	final String uploadPath = "/boardfile";
 	
 	final int COUNT_PER_PAGE = 5;
 	
 	
+	
+	/** deal_end 시간 카운트 **/
+	@Scheduled(cron="*/59 */59 */23 * * *")
+	public void updateDeal_end() {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = Calendar.getInstance().getTime();     
+		String date = df.format(today);
+		
+		System.out.println("cron test:"+date);
+		
+		int result = p_repository.updatePstt2(date);
+	}
+	
+	
+	
+	/** 공통부분 **/
 	// 사진 보여주기 
 	@RequestMapping(value=uploadPath+"/{image_name:.+}", method= RequestMethod.GET) 
 	public String getContentMediaImage(@PathVariable("image_name")String image_name, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
@@ -116,8 +151,8 @@ public class MyStoreController {
 		
 	// 게시글 삭제하기 
 	@ResponseBody
-	@RequestMapping(value="/deleted", method=RequestMethod.GET)
-	public int giveDelete(int boardnum) {
+	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/deleted", method=RequestMethod.GET)
+	public int giveDelete(int boardnum, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		String fullPath = uploadPath + "/" + board.getSavedfile();
 		FileService.deleteFile(fullPath);
@@ -131,8 +166,8 @@ public class MyStoreController {
 	
 	/** 양도 관련 controller **/
 	// give 페이지 띄우기 
-	@RequestMapping(value="/give")
-	public String give(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/give")
+	public String give(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @PathVariable("miniurl")String miniurl) {
 		String service = "양도";
 		String userid = (String)session.getAttribute("loginId");
 		Map<String, String> parm = new HashMap<String, String>();
@@ -152,8 +187,8 @@ public class MyStoreController {
 	}
 	
 	// give글작성 폼 + 대분류 불러오기 
-	@RequestMapping(value="/giveForm")
-	public String giveForm(Model model) {
+	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/giveForm")
+	public String giveForm(Model model, @PathVariable("miniurl")String miniurl) {
 		List<Categories> c_list = repository.selectClist();
 		model.addAttribute("c_list", c_list);
 		
@@ -162,8 +197,8 @@ public class MyStoreController {
 	
 	// 중분류 불러오기
 	@ResponseBody
-	@RequestMapping(value="/selectMlist", method=RequestMethod.GET)
-	public List<Categories> selectMlist(int categorynum) {
+	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/selectMlist", method=RequestMethod.GET)
+	public List<Categories> selectMlist(int categorynum, @PathVariable("miniurl")String miniurl) {
 		List<Categories> m_list = repository.selectMlist(categorynum);
 		
 		return m_list;
@@ -171,16 +206,16 @@ public class MyStoreController {
 	
 	// 소분류 불러오기 
 	@ResponseBody
-	@RequestMapping(value="/selectSlist", method=RequestMethod.GET)
-	public List<Categories> selectSlist(int categorynum) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/selectSlist", method=RequestMethod.GET)
+	public List<Categories> selectSlist(int categorynum, @PathVariable("miniurl")String miniurl) {
 		List<Categories> s_list = repository.selectSlist(categorynum);
 
 		return s_list;
 	}
 	
 	// give 글작성
-	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public String write(Board board, MultipartFile upload, HttpSession session, Product product) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/write", method=RequestMethod.POST)
+	public String write(Board board, MultipartFile upload, HttpSession session, Product product, History history, @PathVariable("miniurl")String miniurl) {
 		String originalfile = upload.getOriginalFilename();
 		String savedfile = FileService.saveFile(upload, uploadPath);
 		String userid = (String)session.getAttribute("loginId");
@@ -195,13 +230,19 @@ public class MyStoreController {
 		board.setSavedfile(savedfile);
 		
 		int result2 = b_repository.insertBrd(board);
-
+		
+		history.setProductnum(pr.getProductnum());
+		history.setSellerid(userid);
+		
+		int result3 = b_repository.insertHst(history);
+		
+		
 		return "redirect:/give";
 	}
 	
 	// give 글 상세보기 
-	@RequestMapping(value="/giveView", method=RequestMethod.GET)
-	public String giveView(int boardnum, Model model) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/giveView", method=RequestMethod.GET)
+	public String giveView(int boardnum, Model model, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		int productnum = board.getProductnum();
 		
@@ -226,8 +267,8 @@ public class MyStoreController {
 	}
 	
 	// 게시글 수정폼 불러오기 
-	@RequestMapping(value="/giveUpdate", method=RequestMethod.GET)
-	public String giveUpdate(Model model, int boardnum) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/giveUpdate", method=RequestMethod.GET)
+	public String giveUpdate(Model model, int boardnum, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		List<Categories> c_list = repository.selectClist();
 		int productnum = board.getProductnum();
@@ -241,8 +282,8 @@ public class MyStoreController {
 	}
 	
 	// 게시글 수정하기 
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(Board board, Product product, MultipartFile upload) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/update", method=RequestMethod.POST)
+	public String update(Board board, Product product, MultipartFile upload, @PathVariable("miniurl")String miniurl) {
 		int boardnum = board.getBoardnum();
 		Board old = b_repository.selectOne(boardnum);
 		
@@ -285,8 +326,8 @@ public class MyStoreController {
 	}
 	
 	// 등록된 사진 지우기 
-	@RequestMapping(value="/deletefile", method=RequestMethod.GET)
-	public String deletefile(int boardnum, RedirectAttributes rttr, HttpSession session) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/deletefile", method=RequestMethod.GET)
+	public String deletefile(int boardnum, RedirectAttributes rttr, HttpSession session, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		String fullPath = uploadPath + "/" + board.getSavedfile();
 		FileService.deleteFile(fullPath);
@@ -304,8 +345,8 @@ public class MyStoreController {
 	
 	/** 교환 관련 controller **/
 	// trade 창 띄우기 
-	@RequestMapping(value="/trade")
-	public String trade(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/trade")
+	public String trade(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @PathVariable("miniurl")String miniurl) {
 		String service = "교환";
 		String userid = (String)session.getAttribute("loginId");
 		Map<String, String> parm = new HashMap<String, String>();
@@ -324,8 +365,8 @@ public class MyStoreController {
 	}
 	
 	// trade 글 작성 폼 불러오기
-	@RequestMapping(value="/tradeForm")
-	public String tradeForm(Model model) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/tradeForm")
+	public String tradeForm(Model model, @PathVariable("miniurl")String miniurl) {
 		List<Categories> c_list = repository.selectClist();
 		model.addAttribute("c_list", c_list);
 		
@@ -333,8 +374,8 @@ public class MyStoreController {
 	}
 	
 	// tradeform 작성 
-	@RequestMapping(value="/tradewrite", method=RequestMethod.POST) 
-	public String tradewrite(Board board, MultipartFile upload, HttpSession session, Product product) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/tradewrite", method=RequestMethod.POST) 
+	public String tradewrite(Board board, MultipartFile upload, HttpSession session, Product product, History history, @PathVariable("miniurl")String miniurl) {
 		String originalfile = upload.getOriginalFilename();
 		String savedfile = FileService.saveFile(upload, uploadPath);
 		String userid = (String)session.getAttribute("loginId");
@@ -350,12 +391,17 @@ public class MyStoreController {
 		
 		int result2 = b_repository.insertBrd(board);
 
+		history.setProductnum(pr.getProductnum());
+		history.setSellerid(userid);
+		
+		int result3 = b_repository.insertHst(history);
+		
 		return "redirect:/trade";
 	}
 	
 	// trade 게시판 상세보기 
-	@RequestMapping(value="/tradeView", method=RequestMethod.GET)
-	public String tradeView(int boardnum, Model model) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/tradeView", method=RequestMethod.GET)
+	public String tradeView(int boardnum, Model model, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		int productnum = board.getProductnum();
 		
@@ -381,8 +427,8 @@ public class MyStoreController {
 	}
 	
 	// 교환글 수정폼 불러오기 
-	@RequestMapping(value="/tradeUpdate", method=RequestMethod.GET)
-	public String tradeUpdate(Model model, int boardnum) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/tradeUpdate", method=RequestMethod.GET)
+	public String tradeUpdate(Model model, int boardnum, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		List<Categories> c_list = repository.selectClist();
 		int productnum = board.getProductnum();
@@ -396,8 +442,8 @@ public class MyStoreController {
 	}
 	
 	// 교환 게시글 수정하기 
-	@RequestMapping(value="/tradeupdate", method=RequestMethod.POST)
-	public String tradeupdate(Board board, Product product, MultipartFile upload) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/tradeupdate", method=RequestMethod.POST)
+	public String tradeupdate(Board board, Product product, MultipartFile upload, @PathVariable("miniurl")String miniurl) {
 		int boardnum = board.getBoardnum();
 		Board old = b_repository.selectOne(boardnum);
 			
@@ -439,8 +485,8 @@ public class MyStoreController {
 	}	
 		
 	// 등록된 사진 지우기 
-	@RequestMapping(value="/deleteTradeFile", method=RequestMethod.GET)
-	public String deleteTradeFile(int boardnum, RedirectAttributes rttr, HttpSession session) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/deleteTradeFile", method=RequestMethod.GET)
+	public String deleteTradeFile(int boardnum, RedirectAttributes rttr, HttpSession session, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		String fullPath = uploadPath + "/" + board.getSavedfile();
 		FileService.deleteFile(fullPath);
@@ -458,8 +504,8 @@ public class MyStoreController {
 	
 	/** 재능기부 관련 controller **/
 	// talent 창 띄우기 
-	@RequestMapping(value="/talent")
-	public String talent(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/talent")
+	public String talent(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @PathVariable("miniurl")String miniurl) {
 		String service = "재능기부";
 		String userid = (String)session.getAttribute("loginId");
 		Map<String, String> parm = new HashMap<String, String>();
@@ -478,8 +524,8 @@ public class MyStoreController {
 	}
 	
 	// talent 글 작성 폼 불러오기
-	@RequestMapping(value="/talentForm")
-	public String talentForm(Model model) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/talentForm")
+	public String talentForm(Model model, @PathVariable("miniurl")String miniurl) {
 		List<Categories> c_list = repository.selectClist();
 		model.addAttribute("c_list", c_list);
 		
@@ -487,8 +533,8 @@ public class MyStoreController {
 	}
 	
 	// talentform 작성 
-	@RequestMapping(value="/talentwrite", method=RequestMethod.POST) 
-	public String talentwrite(Board board, MultipartFile upload, HttpSession session, Product product) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/talentwrite", method=RequestMethod.POST) 
+	public String talentwrite(Board board, MultipartFile upload, HttpSession session, Product product, History history, @PathVariable("miniurl")String miniurl) {
 		String originalfile = upload.getOriginalFilename();
 		String savedfile = FileService.saveFile(upload, uploadPath);
 		String userid = (String)session.getAttribute("loginId");
@@ -504,12 +550,17 @@ public class MyStoreController {
 			
 		int result2 = b_repository.insertBrd(board);
 
+		history.setProductnum(pr.getProductnum());
+		history.setSellerid(userid);
+		
+		int result3 = b_repository.insertHst(history);
+		
 		return "redirect:/talent";
 	}
 	
 	// 재능기부 글 상세보기 
-	@RequestMapping(value="/talentView", method=RequestMethod.GET)
-	public String talentView(int boardnum, Model model) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/talentView", method=RequestMethod.GET)
+	public String talentView(int boardnum, Model model, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		int productnum = board.getProductnum();
 		
@@ -535,8 +586,8 @@ public class MyStoreController {
 	}
 	
 	// 재능기부 수정폼 불러오기 
-		@RequestMapping(value="/talentUpdate", method=RequestMethod.GET)
-		public String talentUpdate(Model model, int boardnum) {
+		@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/talentUpdate", method=RequestMethod.GET)
+		public String talentUpdate(Model model, int boardnum, @PathVariable("miniurl")String miniurl) {
 			Board board = b_repository.selectOne(boardnum);
 			List<Categories> c_list = repository.selectClist();
 			int productnum = board.getProductnum();
@@ -550,8 +601,8 @@ public class MyStoreController {
 		}
 		
 	// 재능기부 게시글 수정하기 
-	@RequestMapping(value="/talentupdate", method=RequestMethod.POST)
-	public String talentupdate(Board board, Product product, MultipartFile upload) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/talentupdate", method=RequestMethod.POST)
+	public String talentupdate(Board board, Product product, MultipartFile upload, @PathVariable("miniurl")String miniurl) {
 		int boardnum = board.getBoardnum();
 		Board old = b_repository.selectOne(boardnum);
 				
@@ -594,8 +645,8 @@ public class MyStoreController {
 	}	
 			
 	// 등록된 사진 지우기 
-	@RequestMapping(value="/deleteTalentFile", method=RequestMethod.GET)
-	public String deleteTalentFile(int boardnum, RedirectAttributes rttr, HttpSession session) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/deleteTalentFile", method=RequestMethod.GET)
+	public String deleteTalentFile(int boardnum, RedirectAttributes rttr, HttpSession session, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		String fullPath = uploadPath + "/" + board.getSavedfile();
 		FileService.deleteFile(fullPath);
@@ -609,13 +660,11 @@ public class MyStoreController {
 		
 		return "redirect:/talentUpdate";
 	}
-	
-		
 		
 	/** 후기게시판 관련 controller **/
 	// review 창 띄우기 
-	@RequestMapping(value="/review")
-	public String review(Model model) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/review")
+	public String review(Model model, @PathVariable("miniurl")String miniurl) {
 		String store_owner = "bbb";
 		
 		List<Review> list = r_repository.selectReviewAll(store_owner);
@@ -625,8 +674,8 @@ public class MyStoreController {
 	}
 	
 	// review 작성하기 
-	@RequestMapping(value="/insertReview", method=RequestMethod.POST)
-	public String insertReview(Review review) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/insertReview", method=RequestMethod.POST)
+	public String insertReview(Review review, @PathVariable("miniurl")String miniurl) {
 		int result = r_repository.insertReview(review);
 		
 		return "redirect:/review";
@@ -634,8 +683,8 @@ public class MyStoreController {
 	
 	// review 삭제 
 	@ResponseBody
-	@RequestMapping(value="/deleteReview", method=RequestMethod.GET)
-	public String deleteReview(int reviewnum) {
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/deleteReview", method=RequestMethod.GET)
+	public String deleteReview(int reviewnum, @PathVariable("miniurl")String miniurl) {
 		int result = r_repository.deleteReview(reviewnum);
 		
 		return "delete!";
@@ -643,14 +692,169 @@ public class MyStoreController {
 	
 	
 	
-	/** insert check **/
+	/** interest controller **/
 	@ResponseBody
-	@RequestMapping(value="/selectItr", method=RequestMethod.POST)
-	public Interest selectItr(@RequestBody Interest interest) {
-		Interest itr = b_repository.selectItr(interest);
-		System.out.println(itr);
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/selectItr", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String selectItr(@RequestBody Interest interest, @PathVariable("miniurl")String miniurl) {
+		Map<String, String> parm = new HashMap<String, String>();
+		parm.put("userid", interest.getUserid());
+		parm.put("boardnum", ""+interest.getBoardnum());
 		
-		return itr;
+		Interest itr = b_repository.selectItr(parm);
+		
+		if (itr == null) {
+			int result = b_repository.insertItr(interest);
+			return "관심상품 목록에 추가되었습니다!";
+		} else {
+			return "이미 관심상품목록에 존재합니다!";
+		}
+	}
+	
+	
+	
+	/** 거래내역 controller **/
+	@RequestMapping(value="/deal", method=RequestMethod.GET)
+	public String deal(int historynum, Model model) {
+		// 양도신청자 띄우기
+		History history = b_repository.selectHst(historynum);
+		int productnum = history.getProductnum();
+		Product product = p_repository.selectPdt(productnum);
+		
+		Board board = b_repository.selectBoard(productnum);
+		List<Wish> wlist = b_repository.selectWishAll(board.getBoardnum());
+		
+		
+		// 거래내역 띄우기 
+		
+		
+		
+		
+		// 결과 넘기기
+		model.addAttribute("wlist", wlist);
+		model.addAttribute("history", history);
+		model.addAttribute("board", board);
+		model.addAttribute("product", product);
+		
+		
+		return "mystore/deal";
+	}
+	
+	
+	
+	/** 쪽지보내기 controller **/
+	// 쪽지 보내는 창 띄우기
+	@RequestMapping(value="/sendMsg", method=RequestMethod.GET)
+	public String sendMsg(String userid, Model model) {
+		model.addAttribute("userid", userid);
+		
+		return "mystore/sendMsg";
+	}
+	
+	// 쪽지보내기 
+	@RequestMapping(value="/insertMsg", method=RequestMethod.POST)
+	public String insertMsg(Message message, Model model) {
+		System.out.println(message);
+		int result = b_repository.insertMsg(message);
+		
+		model.addAttribute("userid", message.getUserid());
+
+		System.out.println("쪽지보내기 result: "+result);
+		
+		return "redirect:/sendMsg";
+		 
+	}
+	
+	
+	/** 양도신청 controller **/
+	@ResponseBody
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/selectWish", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String selectWish(@RequestBody Wish wish, Model model, @PathVariable("miniurl")String miniurl) {
+		System.out.println(wish);
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("userid", wish.getUserid());
+		param.put("boardnum", ""+wish.getBoardnum());
+		
+		Board board = b_repository.selectOne(wish.getBoardnum());
+		System.out.println(board);
+		
+		Product product = p_repository.selectPdt(board.getProductnum());
+		System.out.println(product);
+		
+		String status = "진행중";
+		
+		product.setSstatus(status);
+		
+		int pudt = p_repository.updatePstt(product);
+		
+		System.out.println("update product :"+product);
+		System.out.println("product 결과:"+pudt);
+		
+		History history = b_repository.selectHstone(board.getProductnum());
+		
+		System.out.println("history거래내역:"+history);
+		
+		Wish wsh = b_repository.selectWish(param);
+		System.out.println(wsh);
+		if (wsh == null) {
+			int result = b_repository.insertWish(wish);
+			
+			String deal_end = null;
+			String deal_start = null;
+			
+			// deal_start 설정
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date today = Calendar.getInstance().getTime();     
+			deal_start = df.format(today);
+			
+			history.setDeal_start(deal_start);
+			
+			// deal_end 설정
+			Date date = new Date();
+			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd"); 
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.add(Calendar.DATE, 5);
+			deal_end = sdformat.format(cal.getTime());  
+			
+			history.setDeal_end(deal_end);
+			
+			int result2 = b_repository.updateHst(history);
+			
+			System.out.println("history update 결과:"+result2);
+			
+			return "양도신청이 완료되었습니다!";
+		} else {
+			return "이미 양도신청을 하셨습니다!";
+		}
+	}
+	
+	
+	
+	/** 당첨자 추천 **/
+	@ResponseBody 
+	@RequestMapping(value="/selectWinner", method=RequestMethod.POST)
+	public String selectWinner(int historynum, Model model) {
+		History history = b_repository.selectHst(historynum);
+		int productnum = history.getProductnum();
+		Board board = b_repository.selectBoard(productnum);
+		List<Wish> wlist = b_repository.selectWishAll(board.getBoardnum());
+		
+		String [] winner = new String[wlist.size()];
+		
+		for (int i=0; i < wlist.size(); i++) {
+			winner[i] = wlist.get(i).getUserid();
+		}
+		
+		
+		int wn = (int) ((Math.random()*winner.length)-1);
+		System.out.println(wn);
+		
+		String winid = winner[wn];
+		
+		System.out.println("winner : "+winner[wn]);
+		
+		return winid;
+		
 	}
 	
 }

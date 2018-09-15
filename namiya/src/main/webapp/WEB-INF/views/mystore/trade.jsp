@@ -6,10 +6,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>교환게시판</title>
-<script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
-	function interest() {
-		alert("관심상품에 추가되었습니다!");
+	function interest(boardnum, userid) {
+		var boardnum = boardnum;
+		var userid = userid;
+		
+		var sendData = {"userid" : userid, "boardnum" : boardnum};
+		
+	    $.ajax({
+	       	url : 'selectItr',
+	       	method : 'post',
+	       	data : JSON.stringify(sendData),
+	       	contentType : 'application/json; charset=UTF-8',
+	       	success : function(resp) {
+	 			alert(resp);
+	       	}
+	       	,
+	       	error : function(error) {
+	       		alert("interest error : "+error);
+	       	}
+	       });
 	}
 
 	function want() {
@@ -30,7 +47,7 @@
 	}
 	
 	body {
-		background: url('resources/images/mystore.png') no-repeat center center fixed; 
+		background: url('${pageContext.request.contextPath}/resources/images/mystore.png') no-repeat center center fixed; 
  		-webkit-background-size: cover;
   		-moz-background-size: cover;
   		-o-background-size: cover;
@@ -181,7 +198,7 @@
 			<h1><b>Exchange Things</b></h1>
 			<hr/>
 			
-				<a href="tradeForm"><img src="resources/images/write.png" style="width:70px; height:40px;"></a>
+				<a href="tradeForm"><img src="${pageContext.request.contextPath}/resources/images/write.png" style="width:70px; height:40px;"></a>
 				
 				<hr/>
 				<c:if test="${empty map}"> 
@@ -198,17 +215,17 @@
 					<tr>
 						<td style="width:50px; font-family: 'Jeju Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
 						<c:if test="${map.ORIGINALFILE != null}">
-						<td id="image"><img src="boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
+						<td id="image"><img src="${pageContext.request.contextPath}/boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
 						</c:if>
 						<c:if test="${map.ORIGINALFILE == null}">
-						<td id="image"><img src="resources/images/rabit.png" style="width:150px; height:100px;"></td>
+						<td id="image"><img src="${pageContext.request.contextPath}/resources/images/rabit.png" style="width:150px; height:100px;"></td>
 						</c:if>
 						<td id="title"><a href="tradeView?boardnum=${map.BOARDNUM}" style="text-decoration:none; color:black;"><span id="title"><b>${map.TITLE}</b></span></a></td>
 						<td id="date">${map.REGDATE}</td>
 						<td id="btn">
-							<img src="resources/images/interest.png" onclick="interest()" style="width:55px; height:40px;">
+							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 							&nbsp;
-							<img src="resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
+							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
 						</td>
 					</tr>
 				</table>
@@ -219,33 +236,33 @@
 			<br/>
 			<div id="page">
 				<div>
-					<a href="trade?currentPage=${navi.currentPage-navi.pagePerGroup}"><img src="resources/images/arrow2.png" style="width:20px; height:30px;"></a>
+					<a href="trade?currentPage=${navi.currentPage-navi.pagePerGroup}"><img src="${pageContext.request.contextPath}/resources/images/arrow2.png" style="width:20px; height:30px;"></a>
 				</div>
 				
 				<div>
-					<a href="trade?currentPage=${navi.currentPage-1}"><img src="resources/images/arrow4.png" style="width:20px; height:30px;"></a>
+					<a href="trade?currentPage=${navi.currentPage-1}"><img src="${pageContext.request.contextPath}/resources/images/arrow4.png" style="width:20px; height:30px;"></a>
 				</div>
 				
 				<c:forEach var="page" begin="${navi.startPageGroup}" end="${navi.endPageGroup}">
 					<c:if test="${page == navi.currentPage}">
 						<div>
-							<span style="color:#0081C6; font-weight:bold; text-decoration:none; color:black;"><dr>${page}</dr></span>&nbsp;
+							<span style="color:#0081C6; font-weight:bold; text-decoration:none; color:black;"><dr>&nbsp;${page}</dr></span>&nbsp;
 						</div>
 					</c:if>	
 					
 					<c:if test="${page != navi.currentPage}">
 						<div>
-							<a style="text-decoration:none; color:black;" href="trade?currentPage=${page}">${page}</a>&nbsp;
+							<a style="text-decoration:none; color:black;" href="trade?currentPage=${page}">&nbsp;${page}</a>&nbsp;
 						</div>
 					</c:if>
 				</c:forEach>
 				
 				<div>
-					<a href="trade?currentPage=${navi.currentPage+1}"><img src="resources/images/arrow3.png" style="width:20px; height:30px;"></a>
+					<a href="trade?currentPage=${navi.currentPage+1}"><img src="${pageContext.request.contextPath}/resources/images/arrow3.png" style="width:20px; height:30px;"></a>
 				</div>
 				
 				<div>
-					<a href="trade?currentPage=${navi.currentPage+navi.pagePerGroup}"><img src="resources/images/arrow1.png" style="width:20px; height:30px;"></a>
+					<a href="trade?currentPage=${navi.currentPage+navi.pagePerGroup}"><img src="${pageContext.request.contextPath}/resources/images/arrow1.png" style="width:20px; height:30px;"></a>
 				</div>
 			</div>
 			</c:if>
@@ -254,12 +271,12 @@
 	</div>
 	<div id="list" style="float:left; width: 90px; text-align:right; height:545px;">
 		<ul>
-			<li><a href="myStore"><img src="resources/images/home.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
-			<li><a href="give"><img src="resources/images/give.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
-			<li><a href="trade"><img src="resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
-			<li><a href="talent"><img src="resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
-			<li><a href="review"><img src="resources/images/review.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
-			<li><a href="setting"><img src="resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="myStore"><img src="${pageContext.request.contextPath}/resources/images/home.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="give"><img src="${pageContext.request.contextPath}/resources/images/give.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 		</ul>
 	</div>
 	
