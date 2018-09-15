@@ -17,6 +17,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,6 +70,12 @@ public class MemberController {
 			return "member/loginForm";
 		}
 		
+	}
+	
+	@RequestMapping(value="logout",method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "main";
 	}
 	
 	@RequestMapping(value="editForm",method=RequestMethod.GET)
