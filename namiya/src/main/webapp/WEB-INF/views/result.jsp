@@ -80,6 +80,11 @@ $(function(){
 		location.href = "myPage";
 	});
 	
+	// 로그아웃
+	$("#logoutClick".on("click",function(){
+		location.href = "logout";
+	}
+	
 	// 창 크기에 따라 좌표 지정 ( 창크기 변경 감지 )
 	$( window ).resize( function() {
 		

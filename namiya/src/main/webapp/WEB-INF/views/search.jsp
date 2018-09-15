@@ -46,6 +46,15 @@ var category = "product";	// 검색 옵션 선택
 var alarmMax = 0;
 
 $(function(){
+	$.ajax({
+		method : 'post',
+		url : 'pointAdd',
+		data : 'type=양도',
+		success : function(resp) {
+			alert(resp);
+		}
+	});
+	
 	// 카테고리 대분류 가져오기
 	majorCategory();
 	
