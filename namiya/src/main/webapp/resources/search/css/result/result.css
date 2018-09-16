@@ -343,3 +343,24 @@ body {
     background-color: #FFFFFF;
     
 }
+
+/* pie chart */
+#flot-pie-chart-wrapper {
+	width: 250px;
+    height: 371px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 20px;
+    padding-top: 6px;
+    border: 1px solid #2A3D4C;
+}
+
+#flot-pie-chart {
+	width: 210px;
+    height: 331px;
+}
+
+#pieChartTitle {
+	text-align: center;
+	color: gray;
+}

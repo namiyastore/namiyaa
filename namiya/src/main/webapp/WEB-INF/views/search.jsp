@@ -25,6 +25,8 @@
 <!-- Web socket CDN -->
 <script src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script>
 
+
+
 <script>
 var idx1 = "";	// 대분류 index
 var idx2 = "";	// 중분류 index
@@ -45,8 +47,7 @@ var category = "product";	// 검색 옵션 선택
 							
 var alarmMax = 0;
 
-$(function(){
-	
+$(function(){	
 	// 카테고리 대분류 가져오기
 	majorCategory();
 	
@@ -123,8 +124,52 @@ $(function(){
 			.css("top", 560 + "px")
 			.css("left", (parseInt(left_notice)+650) + "px");
 		
+		// 파이차트 위치조정
+		$("#flot-pie-chart-wrapper").css("position","absolute")
+			.css("top", 630 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+		
 	} );
 	
+	function setPositionInit() {
+		
+		// 카테고리 위치값
+		var left_category = $("#sideMenu").offset().left;
+		var top_category = $("#sideMenu").offset().top;
+		
+		// 거래 알림창 위치 지정
+		$("#notice").css("position", "absolute")
+			.css("top", "101px")
+			.css("left", (parseInt(left_category)+250) + "px");
+		
+		document.getElementById("sideMenu").style.zIndex = 1;
+		
+		
+		// 거래 알림창 위치값
+		var left_notice = $("#notice").offset().left;
+		var top_notice = $("#notice").offset().top;
+		
+		// 프로필 위치 지정
+		$("#profile").css("position", "absolute")
+			.css("top", top_notice)
+			.css("left", (parseInt(left_notice)+600) + "px")
+			.css("margin-left","50px");
+		
+		// 채팅창 위치조정
+		$("#chat").css("position", "absolute")
+			.css("top", 350 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+		
+		// 채팅창 검색버튼 위치조정	
+		$("#custom-search-input2").css("position","absolute")
+			.css("top", 560 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+		
+		// 파이차트 위치조정
+		$("#flot-pie-chart-wrapper").css("position","absolute")
+			.css("top", 630 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+	}
 	
 	// 검색(버튼)
 	$("#searchBtnClick").on("click",function(){
@@ -239,40 +284,7 @@ $(function(){
 	
 });
 
-function setPositionInit() {
-	
-	// 카테고리 위치값
-	var left_category = $("#sideMenu").offset().left;
-	var top_category = $("#sideMenu").offset().top;
-	
-	// 거래 알림창 위치 지정
-	$("#notice").css("position", "absolute")
-		.css("top", "101px")
-		.css("left", (parseInt(left_category)+250) + "px");
-	
-	document.getElementById("sideMenu").style.zIndex = 1;
-	
-	
-	// 거래 알림창 위치값
-	var left_notice = $("#notice").offset().left;
-	var top_notice = $("#notice").offset().top;
-	
-	// 프로필 위치 지정
-	$("#profile").css("position", "absolute")
-		.css("top", top_notice)
-		.css("left", (parseInt(left_notice)+600) + "px")
-		.css("margin-left","50px");
-	
-	// 채팅창 위치조정
-	$("#chat").css("position", "absolute")
-		.css("top", 350 + "px")
-		.css("left", (parseInt(left_notice)+650) + "px");
-	
-	// 채팅창 검색버튼 위치조정	
-	$("#custom-search-input2").css("position","absolute")
-		.css("top", 560 + "px")
-		.css("left", (parseInt(left_notice)+650) + "px");
-}
+
 
 // 대분류 클릭 이벤트 함수
 function majorCategoryClick(categorynum) {
@@ -628,6 +640,11 @@ function minerCategory(category_m) {
 		</div>
 	</div>
 	
+	<div id="flot-pie-chart-wrapper">
+		<div id="flot-pie-chart"></div>
+	</div>
+	
+	
 </div>
 
 </body>
@@ -686,5 +703,16 @@ function minerCategory(category_m) {
         }
 
 </script>
+
+<!-- Flot Charts JavaScript -->
+<script src="resources/search/js/search/flotchart/jquery.min.js"></script>
+<script src="resources/search/js/search/flotchart/excanvas.min.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.pie.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.resize.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.time.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.tooltip.min.js"></script>
+<script src="resources/search/js/search/flotchart/flot-data.js"></script>
+
 
 </html>

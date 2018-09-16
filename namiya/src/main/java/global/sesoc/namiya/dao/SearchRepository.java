@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import global.sesoc.namiya.vo.Board;
+import global.sesoc.namiya.vo.Product;
 
 @Repository
 public class SearchRepository {
@@ -122,6 +123,13 @@ public class SearchRepository {
 	public Board noticeForAll() {
 		SearchMapper mapper = session.getMapper(SearchMapper.class);
 		Board result = mapper.noticeForAll();
+		
+		return result;
+	}
+
+	public List<Product> selectItemRanking() {
+		SearchMapper mapper = session.getMapper(SearchMapper.class);
+		List<Product> result = mapper.selectItemRanking();
 		
 		return result;
 	}

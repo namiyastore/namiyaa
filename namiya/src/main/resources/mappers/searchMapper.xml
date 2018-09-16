@@ -128,4 +128,6 @@
 			boardnum = (select max(boardnum) from board)
 	</select>
 	
+	
+	
 </mapper>

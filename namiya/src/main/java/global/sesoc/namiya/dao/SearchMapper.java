@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 
 import global.sesoc.namiya.vo.Board;
+import global.sesoc.namiya.vo.Product;
 
 public interface SearchMapper {
 	
@@ -70,4 +71,10 @@ public interface SearchMapper {
 	 * @return
 	 */
 	public Board noticeForAll();
+	
+	/**
+	 * 등록 랭킹
+	 * @return
+	 */
+	public List<Product> selectItemRanking();
 }

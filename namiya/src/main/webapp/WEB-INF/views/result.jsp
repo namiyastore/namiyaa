@@ -128,7 +128,54 @@ $(function(){
 		$("#custom-search-input2").css("position","absolute")
 			.css("top", 560 + "px")
 			.css("left", (parseInt(left_product)+650) + "px");
-	} );
+		
+		// 파이차트 위치조정
+		$("#flot-pie-chart-wrapper").css("position","absolute")
+			.css("top", 630 + "px")
+			.css("left", (parseInt(left_product)+650) + "px");
+	});
+	
+	function setPositionInit() {
+		
+		// 카테고리 위치값
+		var left_category = $("#sideMenu").offset().left;
+		var top_category = $("#sideMenu").offset().top;
+		
+		// 검색결과창 위치 지정
+		$("#productContainer").css("position", "absolute")
+//	 		.css("top", (parseInt(top_category)+40) + "px")
+			.css("top", 60 + "px")
+			.css("left", (parseInt(left_category)+250) + "px")
+			.css("margin-top","40px");
+		
+		document.getElementById("sideMenu").style.zIndex = 1;
+		
+		// 검색결과창 위치값
+		var left_productContainer = $("#productContainer").offset().left;
+		var top_productContainer = $("#productContainer").offset().top;
+		
+		// 프로필 위치 지정
+		$("#profile").css("position", "absolute")
+//	 		.css("top", parseInt(top_category)+40 + "px")
+			.css("top", 101 + "px")
+			.css("left", (parseInt(left_productContainer)+600) + "px")
+			.css("margin-left","50px");
+		
+		// 채팅창 위치조정
+		$("#chat").css("position", "absolute")
+			.css("top", 350 + "px")
+			.css("left", (parseInt(left_productContainer)+650) + "px");
+		
+		// 채팅창 검색버튼 위치조정	
+		$("#custom-search-input2").css("position","absolute")
+			.css("top", 560 + "px")
+			.css("left", (parseInt(left_productContainer)+650) + "px");
+		
+		// 파이차트 위치조정
+		$("#flot-pie-chart-wrapper").css("position","absolute")
+			.css("top", 630 + "px")
+			.css("left", (parseInt(left_productContainer)+650) + "px");
+	}
 	
 	$("#pagingFirst").on("click",function(){
 		
@@ -417,45 +464,6 @@ $(function(){
 	$('.pagination p8').css('margin-bottom','20px');
 	
 });
-
-
-
-function setPositionInit() {
-	
-	// 카테고리 위치값
-	var left_category = $("#sideMenu").offset().left;
-	var top_category = $("#sideMenu").offset().top;
-	
-	// 검색결과창 위치 지정
-	$("#productContainer").css("position", "absolute")
-// 		.css("top", (parseInt(top_category)+40) + "px")
-		.css("top", 60 + "px")
-		.css("left", (parseInt(left_category)+250) + "px")
-		.css("margin-top","40px");
-	
-	document.getElementById("sideMenu").style.zIndex = 1;
-	
-	// 검색결과창 위치값
-	var left_productContainer = $("#productContainer").offset().left;
-	var top_productContainer = $("#productContainer").offset().top;
-	
-	// 프로필 위치 지정
-	$("#profile").css("position", "absolute")
-// 		.css("top", parseInt(top_category)+40 + "px")
-		.css("top", 101 + "px")
-		.css("left", (parseInt(left_productContainer)+600) + "px")
-		.css("margin-left","50px");
-	
-	// 채팅창 위치조정
-	$("#chat").css("position", "absolute")
-		.css("top", 350 + "px")
-		.css("left", (parseInt(left_productContainer)+650) + "px");
-	
-	// 채팅창 검색버튼 위치조정	
-	$("#custom-search-input2").css("position","absolute")
-		.css("top", 560 + "px")
-		.css("left", (parseInt(left_productContainer)+650) + "px");
-}
 
 // 대분류 클릭 이벤트 함수
 function majorCategoryClick(categorynum) {
@@ -1013,8 +1021,8 @@ p, li, a{
 <input id="searchFlag" type="hidden" value="${searchFlag}">
 <input id="parentnum" type="hidden" value="${parentnum}">
 <input id="userid" type="hidden" value="${sessionScope.loginId }">
-<input id="myurl" type="hidden" value="${myurl}" />
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
+<input id="myurl" type="hidden" value="${myurl}" />
 
 <div id="container">
 
@@ -1137,6 +1145,15 @@ p, li, a{
 		</div>
 	</div>
 	
+	<div id="flot-pie-chart-wrapper">
+		<div>
+			<h2 id="pieChartTitle">
+				<spring:message code="search.pieChartTitle" />
+			</h2>
+		</div>
+		<div id="flot-pie-chart"></div>
+	</div>
+	
 </div>
 
 </body>
@@ -1199,5 +1216,15 @@ p, li, a{
         }
 
 </script>
+
+<!-- Flot Charts JavaScript -->
+<script src="resources/search/js/result/flotchart/jquery.min.js"></script>
+<script src="resources/search/js/result/flotchart/excanvas.min.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.pie.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.resize.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.time.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.tooltip.min.js"></script>
+<script src="resources/search/js/result/flotchart/flot-data.js"></script>
 
 </html>

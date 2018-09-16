@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import global.sesoc.namiya.dao.CategoriesRepository;
 import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.ProfileRepository;
@@ -22,6 +24,7 @@ import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
 import global.sesoc.namiya.vo.Members;
+import global.sesoc.namiya.vo.Product;
 import global.sesoc.namiya.vo.Profile;
 
 @Controller
@@ -45,7 +48,9 @@ public class SearchController {
 	 */
 	@RequestMapping(value="search", method=RequestMethod.GET)
 	public String search(HttpSession session, Model model) {
-		String userid = session.getAttribute("loginId").toString();
+//		String userid = session.getAttribute("loginId").toString();
+		String userid = "test1";
+		
 		
 		Members m = new Members();
 		
@@ -221,6 +226,18 @@ public class SearchController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value="selectItemRanking", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public @ResponseBody String selectItemRanking() {
+		
+		List<Product> result = search_repository.selectItemRanking();
+		
+		Gson gson = new Gson();
+		
+		String json = gson.toJson(result);
+		
+		return json;
 	}
 	
 }
