@@ -8,10 +8,11 @@
 			messagenum,writerid,msg_title,msg_content,regdate,userid,copy
 		FROM
 			message
-		ORDER BY
-			messagenum DESC
 		WHERE
 			copy = 0
+		ORDER BY
+			messagenum DESC
+		
 	</select>
 	
 	<select id="mOutBoxListAll" resultType="Message">
@@ -19,10 +20,11 @@
 			messagenum,writerid,msg_title,msg_content,regdate,userid,copy
 		FROM
 			message
-		ORDER BY
-			messagenum DESC
 		WHERE
 			copy = 1
+		ORDER BY
+			messagenum DESC
+		
 	</select>
 	
 	<insert id="mInBoxInsert" parameterType="Message">
@@ -128,5 +130,69 @@
 		WHERE
 			messagenum = #{messagenum}
 	</update>
+	
+	<select id="getInboxRecordCount" resultType="int">
+		SELECT
+			count(messagenum)
+		FROM
+			message
+		WHERE
+			msg_title = #{searchWord}
+		OR
+			msg_content = #{searchWord}
+		AND
+			copy = 0
+	</select>
+	
+	<select id="getOutboxRecordCount" resultType="int">
+		SELECT
+			count(messagenum)
+		FROM
+			message
+		WHERE
+			msg_title = #{searchWord}
+		OR
+			msg_content = #{searchWord}
+		AND
+			copy = 1
+	</select>
+	
+	<select id="Inbox_select_result" resultType="Message">
+		SELECT
+			messagenum,
+			writerid,
+			msg_title,
+			msg_content,
+			regdate,
+			userid,
+			copy
+		FROM
+			message
+		WHERE
+			msg_title = #{searchWord}
+		OR
+			msg_content = #{searchWord}
+		AND
+			copy = 0
+	</select>
+	
+	<select id="Outbox_select_result" resultType="Message">
+		SELECT
+			messagenum,
+			writerid,
+			msg_title,
+			msg_content,
+			regdate,
+			userid,
+			copy
+		FROM
+			message
+		WHERE
+			msg_title = #{searchWord}
+		OR
+			msg_content = #{searchWord}
+		AND
+			copy = 1
+	</select>
 	
 </mapper>

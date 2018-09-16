@@ -64,7 +64,7 @@ public class MessageController {
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("navi", navi);
 		model.addAttribute("currentPage", currentPage);
-		return "mypage/oubBoxMessage";
+		return "mypage/outBoxMessage";
 	}
 	@RequestMapping(value="mOutBoxInsert", method = RequestMethod.POST)
 	public String mOutBoxInsert(Message message) {

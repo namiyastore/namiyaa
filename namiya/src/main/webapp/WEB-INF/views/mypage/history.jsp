@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>history</title>
+<link rel="stylesheet" href="resources/mypage/css/mypageCommon.css">
 <script>
 	function detailView(historynum) {
 		alert("상세보기");

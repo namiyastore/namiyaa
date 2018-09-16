@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>favorite</title>
+<link rel="stylesheet" href="resources/mypage/css/mypageCommon.css">
 <script type="text/javascript">
 function fdelete(num) {
 	location.href="fDelete?favoritenum="+num;

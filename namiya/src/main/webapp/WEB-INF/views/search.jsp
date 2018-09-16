@@ -42,21 +42,17 @@ var category = "product";	// 검색 옵션 선택
 							// talent : 재능
 							// trade : 교환
 							
-							
-var alarmMax = 0;
+var myurl = "";		// 고유 url
+var lang = "";
 
-$(function(){
-// 	$.ajax({
-// 		method : 'post',
-// 		url : 'pointAdd',
-// 		data : 'type=양도',
-// 		success : function(resp) {
-// 			alert(resp);
-// 		}
-// 	});
-	
+var alarmMax = 0;	// 실시간 알림글 가장 최근 번호
+
+$(function(){	
 	// 카테고리 대분류 가져오기
 	majorCategory();
+	
+	myurl = $("#myurl").val();
+	lang = $("#lang").val();
 	
 	$("#sideMenu").mouseleave(function(){		
 		$("#depth2").css("visibility","hidden");
@@ -126,7 +122,56 @@ $(function(){
 			.css("top", 560 + "px")
 			.css("left", (parseInt(left_notice)+650) + "px");
 		
-	} );
+		// 파이차트 위치조정
+		$("#flot-pie-chart-wrapper").css("position","absolute")
+			.css("top", 630 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+		
+		// 배경화면 다시 고정
+		$("body").css("background-image","resources/images/background.png")
+		.css("background-attachment","fixed");
+		
+	});
+	
+	function setPositionInit() {
+		
+		// 카테고리 위치값
+		var left_category = $("#sideMenu").offset().left;
+		var top_category = $("#sideMenu").offset().top;
+		
+		// 거래 알림창 위치 지정
+		$("#notice").css("position", "absolute")
+			.css("top", "101px")
+			.css("left", (parseInt(left_category)+250) + "px");
+		
+		document.getElementById("sideMenu").style.zIndex = 1;
+		
+		
+		// 거래 알림창 위치값
+		var left_notice = $("#notice").offset().left;
+		var top_notice = $("#notice").offset().top;
+		
+		// 프로필 위치 지정
+		$("#profile").css("position", "absolute")
+			.css("top", top_notice)
+			.css("left", (parseInt(left_notice)+600) + "px")
+			.css("margin-left","50px");
+		
+		// 채팅창 위치조정
+		$("#chat").css("position", "absolute")
+			.css("top", 350 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+		
+		// 채팅창 검색버튼 위치조정	
+		$("#custom-search-input2").css("position","absolute")
+			.css("top", 560 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+		
+		// 파이차트 위치조정
+		$("#flot-pie-chart-wrapper").css("position","absolute")
+			.css("top", 630 + "px")
+			.css("left", (parseInt(left_notice)+650) + "px");
+	}
 	
 	// 검색(버튼)
 	$("#searchBtnClick").on("click",function(){
@@ -137,7 +182,7 @@ $(function(){
 			currentPage1 = 1;
 		}
 		
-		location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&searchFlag=on";
+		location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 	});
 	
 	// 검색(엔터)
@@ -150,7 +195,7 @@ $(function(){
 				currentPage1 = 1;
 			}
 			
-			location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&searchFlag=on";
+			location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 		}
 	});
 	
@@ -168,14 +213,39 @@ $(function(){
 				val += '<div class="noticeItemDisplay" id="noticeItemContent">';
 					
 				val += '<div id="noticeText">';
-				val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';
+				if(lang == 'ko') {
+					if(resp[i].service == '양도')val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';	
+				}
+				else if(lang == 'ja') {
+					if(resp[i].service == '양도') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 譲渡 ]</h3>';	
+					}
+					else if(resp[i].service == '재능기부') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能寄付 ]</h3>';
+					}
+					else if(resp[i].service == '교환') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能 ]</h3>';
+					}
+				}
+				else if(lang == 'en') {
+					if(resp[i].service == '양도') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Transfer ]</h3>';	
+					}
+					else if(resp[i].service == '재능기부') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Talent donation ]</h3>';
+					}
+					else if(resp[i].service == '교환') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ barter ]</h3>';
+					}
+				}
+				
 				val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp[i].content;
 				val += '</div>';
 				val += '<div id="noticeDate">';
 				val += resp[i].regdate;
 				val += '</div>';
 				val += '</div>';
-				val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp.savedfile + '">';
+				val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp[i].savedfile + '">';
 				
 				val += '</div>';
 			}
@@ -183,7 +253,10 @@ $(function(){
 			$("#notice").prepend(val);
 			
 			$('.noticeItem').off().on('click', function(){
-				alert($(this).attr('data-boardnum'));
+				var boardnum = $(this).attr('data-boardnum');
+				
+				var myurl = $('#myurl').val();
+				window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
 			});
 		}
 	
@@ -197,34 +270,35 @@ $(function(){
 			url : "noticeForAll?lang=" + lang,
 			dataType : "json",
 			success : function(resp) {
-				//alert(JSON.stringify(resp));
 				var val = "";	
-				
-				if(alarmMax < resp.boardnum) {
-					val += '<hr/>';
-					val += '<div class="noticeItem" data-boardnum="' + resp.boardnum + '">'; 
-					val += '<div class="noticeItemDisplay" id="noticeItemContent">';
+				if(resp != null) {
+					if(alarmMax < resp.boardnum) {
+						val += '<hr/>';
+						val += '<div class="noticeItem" data-boardnum="' + resp.boardnum + '">'; 
+						val += '<div class="noticeItemDisplay" id="noticeItemContent">';
+							
+						val += '<div id="noticeText">';
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';
+						val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp.content;
+						val += '</div>';
+						val += '<div id="noticeDate">';
+						val += resp.regdate;
+						val += '</div>';
+						val += '</div>';
+						val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp.savedfile + '">';
 						
-					val += '<div id="noticeText">';
-					val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';
-					val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp.content;
-					val += '</div>';
-					val += '<div id="noticeDate">';
-					val += resp.regdate;
-					val += '</div>';
-					val += '</div>';
-					val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp.savedfile + '">';
+						val += '</div>';					
 					
-					val += '</div>';					
-				
-					$("#notice").prepend(val);
+						$("#notice").prepend(val);
+						
+						alarmMax = resp.boardnum;
+					}
 					
-					alarmMax = resp.boardnum;
+					$('.noticeItem').off().on('click', function(){
+						var boardnum = $(this).attr('data-boardnum');
+						window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+					});
 				}
-				
-				$('.noticeItem').off().on('click', function(){
-					alert($(this).attr('data-boardnum'));
-				});
 			}
 		});
 	}
@@ -238,54 +312,21 @@ $(function(){
 	
 });
 
-function setPositionInit() {
-	
-	// 카테고리 위치값
-	var left_category = $("#sideMenu").offset().left;
-	var top_category = $("#sideMenu").offset().top;
-	
-	// 거래 알림창 위치 지정
-	$("#notice").css("position", "absolute")
-		.css("top", "101px")
-		.css("left", (parseInt(left_category)+250) + "px");
-	
-	document.getElementById("sideMenu").style.zIndex = 1;
-	
-	
-	// 거래 알림창 위치값
-	var left_notice = $("#notice").offset().left;
-	var top_notice = $("#notice").offset().top;
-	
-	// 프로필 위치 지정
-	$("#profile").css("position", "absolute")
-		.css("top", top_notice)
-		.css("left", (parseInt(left_notice)+600) + "px")
-		.css("margin-left","50px");
-	
-	// 채팅창 위치조정
-	$("#chat").css("position", "absolute")
-		.css("top", 350 + "px")
-		.css("left", (parseInt(left_notice)+650) + "px");
-	
-	// 채팅창 검색버튼 위치조정	
-	$("#custom-search-input2").css("position","absolute")
-		.css("top", 560 + "px")
-		.css("left", (parseInt(left_notice)+650) + "px");
-}
+
 
 // 대분류 클릭 이벤트 함수
 function majorCategoryClick(categorynum) {
-	location.href = "result?currentPage2=1" + "&parentnum=" + categorynum + "&categoryGroup=major";
+	location.href = "result?currentPage2=1" + "&parentnum=" + categorynum + "&categoryGroup=major" + "&myurl=" + myurl;
 }
 
 // 중분류 클릭 이벤트 함수
 function mediumCategoryClick(categorynum) {
-	location.href = "result?currentPage3=1" + "&parentnum=" + categorynum + "&categoryGroup=medium";
+	location.href = "result?currentPage3=1" + "&parentnum=" + categorynum + "&categoryGroup=medium" + "&myurl=" + myurl;
 }
 
 // 소분류 클릭 이벤트 함수
 function minorCategoryClick(categorynum) {
-	location.href = "result?currentPage4=1" + "&parentnum=" + categorynum + "&categoryGroup=minor";
+	location.href = "result?currentPage4=1" + "&parentnum=" + categorynum + "&categoryGroup=minor" + "&myurl=" + myurl;
 }
 
 function majorCategory() {
@@ -627,6 +668,15 @@ function minerCategory(category_m) {
 		</div>
 	</div>
 	
+	<div id="flot-pie-chart-wrapper">
+		<div>
+			<h3 id="pieChartTitle">
+				<spring:message code="search.pieChartTitle" />
+			</h3>
+		</div>
+		<div id="flot-pie-chart"></div>
+	</div>
+	
 </div>
 
 </body>
@@ -685,5 +735,15 @@ function minerCategory(category_m) {
         }
 
 </script>
+
+<!-- Flot Charts JavaScript -->
+<script src="resources/search/js/search/flotchart/jquery.min.js"></script>
+<script src="resources/search/js/search/flotchart/excanvas.min.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.pie.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.resize.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.time.js"></script>
+<script src="resources/search/js/search/flotchart/jquery.flot.tooltip.min.js"></script>
+<script src="resources/search/js/search/flotchart/flot-data.js"></script>
 
 </html>

@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import com.google.gson.Gson;
 
 import global.sesoc.namiya.dao.CategoriesRepository;
 import global.sesoc.namiya.dao.MembersRepository;
@@ -22,6 +25,7 @@ import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
 import global.sesoc.namiya.vo.Members;
+import global.sesoc.namiya.vo.Product;
 import global.sesoc.namiya.vo.Profile;
 
 @Controller
@@ -91,6 +95,7 @@ public class SearchController {
 		@RequestParam(value="parentnum", defaultValue="") String parentnum,
 		@RequestParam(value="searchFlag", defaultValue="off") String searchFlag,
 		@RequestParam(value="categoryGroup", defaultValue="none") String categoryGroup,
+		String myurl,
 		Model model
 	) {
 		int totalRecordCount = 0;
@@ -137,6 +142,8 @@ public class SearchController {
 		model.addAttribute("searchFlag", searchFlag);
 		model.addAttribute("parentnum", parentnum);
 		model.addAttribute("categoryGroup", categoryGroup);
+		
+		model.addAttribute("myurl", myurl);
 		
 		return "result";
 	}
@@ -217,6 +224,23 @@ public class SearchController {
 		}
 		
 		return result;
+	}
+	
+	/*
+	 * 등록순위
+	 */
+	@RequestMapping(value="selectItemRanking", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public @ResponseBody String selectItemRanking(HttpSession session) {
+		String lang = session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME).toString();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("lang", lang);
+		List<Product> result = search_repository.selectItemRanking(map);
+		
+		Gson gson = new Gson();
+		
+		String json = gson.toJson(result);
+		
+		return json;
 	}
 	
 }

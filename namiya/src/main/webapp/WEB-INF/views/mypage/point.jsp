@@ -176,9 +176,9 @@ function alertMsg() {
 								<c:if test="${PointList.point gt 0}"> 
 									<td class="table_1st_td">+ ${PointList.point}</td> 
 								</c:if> 
-								<%-- <c:if test="${PointList.point lt 0}"> 
-									<td class="table_1st_td">- ${PointList.point}</td> 
-								</c:if>  --%>
+								 <c:if test="${PointList.point lt 0}"> 
+									<td class="table_1st_td">${PointList.point}</td> 
+								</c:if>
 									<td class="table_2nd_td">${PointList.type}</td> 
 									<td class="table_3rd_td">${PointList.regdate}</td> 
 								</tr> 

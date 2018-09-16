@@ -46,6 +46,9 @@ $(function(){
 	
 	// 카테고리 대분류 가져오기
 	majorCategory();
+	
+	// 고유 url
+	var myurl = $("#myurl").val();
 
 	$("#sideMenu").mouseleave(function(){		
 		$("#depth2").css("visibility","hidden");
@@ -72,7 +75,8 @@ $(function(){
 	
 	// 미니홈피 창 열기
 	$("#myStoreClick").on("click",function(){
-		window.open("myStore","mystoreWindow","width:1200","height:650");
+		var myurl = $('#myurl').val();
+		window.open("myStore/" + myurl + "/home","mystoreWindow","width=1200, height=650");
 	});
 	
 	// 마이 페이지 이동
@@ -125,7 +129,54 @@ $(function(){
 		$("#custom-search-input2").css("position","absolute")
 			.css("top", 560 + "px")
 			.css("left", (parseInt(left_product)+650) + "px");
-	} );
+		
+		// 파이차트 위치조정
+		$("#flot-pie-chart-wrapper").css("position","absolute")
+			.css("top", 630 + "px")
+			.css("left", (parseInt(left_product)+650) + "px");
+	});
+	
+	function setPositionInit() {
+		
+		// 카테고리 위치값
+		var left_category = $("#sideMenu").offset().left;
+		var top_category = $("#sideMenu").offset().top;
+		
+		// 검색결과창 위치 지정
+		$("#productContainer").css("position", "absolute")
+//	 		.css("top", (parseInt(top_category)+40) + "px")
+			.css("top", 60 + "px")
+			.css("left", (parseInt(left_category)+250) + "px")
+			.css("margin-top","40px");
+		
+		document.getElementById("sideMenu").style.zIndex = 1;
+		
+		// 검색결과창 위치값
+		var left_productContainer = $("#productContainer").offset().left;
+		var top_productContainer = $("#productContainer").offset().top;
+		
+		// 프로필 위치 지정
+		$("#profile").css("position", "absolute")
+//	 		.css("top", parseInt(top_category)+40 + "px")
+			.css("top", 101 + "px")
+			.css("left", (parseInt(left_productContainer)+600) + "px")
+			.css("margin-left","50px");
+		
+		// 채팅창 위치조정
+		$("#chat").css("position", "absolute")
+			.css("top", 350 + "px")
+			.css("left", (parseInt(left_productContainer)+650) + "px");
+		
+		// 채팅창 검색버튼 위치조정	
+		$("#custom-search-input2").css("position","absolute")
+			.css("top", 560 + "px")
+			.css("left", (parseInt(left_productContainer)+650) + "px");
+		
+		// 파이차트 위치조정
+		$("#flot-pie-chart-wrapper").css("position","absolute")
+			.css("top", 630 + "px")
+			.css("left", (parseInt(left_productContainer)+650) + "px");
+	}
 	
 	$("#pagingFirst").on("click",function(){
 		
@@ -142,10 +193,10 @@ $(function(){
 			currentPage = $("#currentPage1").val();
 			
 			if((parseInt(currentPage) - parseInt(pagePerGroup)) > 1) {
-				location.href="result?currentPage1=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&searchFlag=on";
+				location.href="result?currentPage1=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 			}
 			else {
-				location.href="result?currentPage1=1" + "&searchWord=" + searchWord + "&searchFlag=on";
+				location.href="result?currentPage1=1" + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 			}
 		}
 		else {
@@ -161,24 +212,24 @@ $(function(){
 			
 			if((parseInt(currentPage) - parseInt(pagePerGroup)) > 1) {
 				if(categoryGroup == 'major') {
-					location.href="result?currentPage2=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+					location.href="result?currentPage2=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=major";
 				}
 				else if(categoryGroup == 'medium') {
-					location.href="result?currentPage3=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+					location.href="result?currentPage3=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=medium";
 				}
 				else if(categoryGroup == 'minor') {
-					location.href="result?currentPage4=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+					location.href="result?currentPage4=" + (parseInt(currentPage) - parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=minor";
 				}
 			}
 			else {
 				if(categoryGroup == 'major') {					
-					location.href="result?currentPage2=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+					location.href="result?currentPage2=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=major";
 				}
 				else if(categoryGroup == 'medium') {
-					location.href="result?currentPage3=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+					location.href="result?currentPage3=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=medium";
 				}
 				else if(categoryGroup == 'minor') {
-					location.href="result?currentPage4=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+					location.href="result?currentPage4=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=minor";
 				}
 				
 			}
@@ -201,10 +252,10 @@ $(function(){
 			currentPage = $("#currentPage1").val();
 			
 			if((parseInt(currentPage) - 1) > 1) {
-				location.href="result?currentPage1=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&searchFlag=on";
+				location.href="result?currentPage1=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 			}
 			else {
-				location.href="result?currentPage1=1" + "&searchWord=" + searchWord + "&searchFlag=on";
+				location.href="result?currentPage1=1" + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 			}
 		}
 		else {
@@ -220,24 +271,24 @@ $(function(){
 			
 			if((parseInt(currentPage) - 1) > 1) {
 				if(categoryGroup == 'major') {
-					location.href="result?currentPage2=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+					location.href="result?currentPage2=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=major";
 				}
 				else if(categoryGroup == 'medium') {
-					location.href="result?currentPage3=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+					location.href="result?currentPage3=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=medium";
 				}
 				else if(categoryGroup == 'minor') {
-					location.href="result?currentPage4=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+					location.href="result?currentPage4=" + (parseInt(currentPage) - 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=minor";
 				}					
 			}
 			else {
 				if(categoryGroup == 'major') {
-					location.href="result?currentPage2=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+					location.href="result?currentPage2=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=major";
 				}
 				else if(categoryGroup == 'medium') {
-					location.href="result?currentPage3=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+					location.href="result?currentPage3=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=medium";
 				}
 				else if(categoryGroup == 'minor') {
-					location.href="result?currentPage4=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+					location.href="result?currentPage4=1" + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=minor";
 				}				
 			}
 			
@@ -259,10 +310,10 @@ $(function(){
 			currentPage = $("#currentPage1").val();
 			
 			if(endPageGroup >= (parseInt(currentPage) + 1)) {
-				location.href="result?currentPage1=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&searchFlag=on";
+				location.href="result?currentPage1=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 			}
 			else {
-				location.href="result?currentPage1=" + endPageGroup + "&searchWord=" + searchWord + "&searchFlag=on";
+				location.href="result?currentPage1=" + endPageGroup + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 			}
 		}
 		else {
@@ -278,24 +329,24 @@ $(function(){
 			
 			if(endPageGroup >= (parseInt(currentPage) + 1)) {
 				if(categoryGroup == 'major') {
-					location.href="result?currentPage2=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+					location.href="result?currentPage2=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=major";
 				}
 				if(categoryGroup == 'medium') {
-					location.href="result?currentPage3=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+					location.href="result?currentPage3=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=medium";
 				}
 				if(categoryGroup == 'minor') {
-					location.href="result?currentPage4=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+					location.href="result?currentPage4=" + (parseInt(currentPage) + 1)  + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=minor";
 				}
 			}
 			else {
 				if(categoryGroup == 'major') {
-					location.href="result?currentPage2=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";	
+					location.href="result?currentPage2=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=major";	
 				}
 				if(categoryGroup == 'medium') {
-					location.href="result?currentPage3=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+					location.href="result?currentPage3=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=medium";
 				}
 				if(categoryGroup == 'minor') {
-					location.href="result?currentPage4=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+					location.href="result?currentPage4=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=minor";
 				}
 			}
 		}
@@ -316,10 +367,10 @@ $(function(){
 			currentPage = $("#currentPage1").val();
 			
 			if(endPageGroup  >= (parseInt(currentPage) + parseInt(pagePerGroup))) {
-				location.href="result?currentPage1=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&searchFlag=on";	
+				location.href="result?currentPage1=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";	
 			}
 			else {
-				location.href="result?currentPage1=" + endPageGroup + "&searchWord=" + searchWord + "&searchFlag=on";
+				location.href="result?currentPage1=" + endPageGroup + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 			}
 		}
 		else {
@@ -335,24 +386,24 @@ $(function(){
 			
 			if(endPageGroup >= (parseInt(currentPage) + parseInt(pagePerGroup))) {
 				if(categoryGroup == 'major') {
-					location.href="result?currentPage2=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+					location.href="result?currentPage2=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=major";
 				}
 				if(categoryGroup == 'medium') {
-					location.href="result?currentPage3=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+					location.href="result?currentPage3=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=medium";
 				}
 				if(categoryGroup == 'minor') {
-					location.href="result?currentPage4=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+					location.href="result?currentPage4=" + (parseInt(currentPage) + parseInt(pagePerGroup)) + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=minor";
 				}
 			}
 			else {
 				if(categoryGroup == 'major') {
-					location.href="result?currentPage2=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=major";
+					location.href="result?currentPage2=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=major";
 				}
 				if(categoryGroup == 'medium') {
-					location.href="result?currentPage3=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=medium";
+					location.href="result?currentPage3=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=medium";
 				}
 				if(categoryGroup == 'minor') {
-					location.href="result?currentPage4=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&categoryGroup=minor";
+					location.href="result?currentPage4=" + endPageGroup + "&searchWord=" + searchWord + "&parentnum=" + parentnum + "&myurl=" + myurl + "&categoryGroup=minor";
 				}
 			}
 		}
@@ -403,7 +454,8 @@ $(function(){
 	
 	// 검색결과 중 원한는 항목 클릭
 	$(".productList").on("click",function(){
-		alert($(this).attr('data-boardnum'));
+		var boardnum = $(this).attr('data-boardnum');
+		window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
 	});
 	
 	var bgSize = (window.innerWidth || document.body.clientWidth) + "px " + (window.innerHeight || document.body.clientHeight) + "px";
@@ -414,61 +466,22 @@ $(function(){
 	
 });
 
-
-
-function setPositionInit() {
-	
-	// 카테고리 위치값
-	var left_category = $("#sideMenu").offset().left;
-	var top_category = $("#sideMenu").offset().top;
-	
-	// 검색결과창 위치 지정
-	$("#productContainer").css("position", "absolute")
-// 		.css("top", (parseInt(top_category)+40) + "px")
-		.css("top", 60 + "px")
-		.css("left", (parseInt(left_category)+250) + "px")
-		.css("margin-top","40px");
-	
-	document.getElementById("sideMenu").style.zIndex = 1;
-	
-	// 검색결과창 위치값
-	var left_productContainer = $("#productContainer").offset().left;
-	var top_productContainer = $("#productContainer").offset().top;
-	
-	// 프로필 위치 지정
-	$("#profile").css("position", "absolute")
-// 		.css("top", parseInt(top_category)+40 + "px")
-		.css("top", 101 + "px")
-		.css("left", (parseInt(left_productContainer)+600) + "px")
-		.css("margin-left","50px");
-	
-	// 채팅창 위치조정
-	$("#chat").css("position", "absolute")
-		.css("top", 350 + "px")
-		.css("left", (parseInt(left_productContainer)+650) + "px");
-	
-	// 채팅창 검색버튼 위치조정	
-	$("#custom-search-input2").css("position","absolute")
-		.css("top", 560 + "px")
-		.css("left", (parseInt(left_productContainer)+650) + "px");
-}
-
 // 대분류 클릭 이벤트 함수
 function majorCategoryClick(categorynum) {
 	var currentPage2 = $("#currentPage2").val();
-	location.href = "result?currentPage2=" + currentPage2 + "&parentnum=" + categorynum + "&categoryGroup=major";
+	location.href = "result?currentPage2=" + currentPage2 + "&parentnum=" + categorynum + "&myurl=" + myurl + "&categoryGroup=major";
 }
 
 // 중분류 클릭 이벤트 함수
 function mediumCategoryClick(categorynum) {
 	var currentPage3 = $("#currentPage3").val();
-	location.href = "result?currentPage3=" + currentPage3 + "&parentnum=" + categorynum + "&categoryGroup=medium";
+	location.href = "result?currentPage3=" + currentPage3 + "&parentnum=" + categorynum + "&myurl=" + myurl + "&categoryGroup=medium";
 }
 
 // 소분류 클릭 이벤트 함수
 function minorCategoryClick(categorynum) {
 	var currentPage4 = $("#currentPage4").val();
-	location.href = "result?currentPage4=" + currentPage4 + "&parentnum=" + categorynum + "&categoryGroup=minor";
+	location.href = "result?currentPage4=" + currentPage4 + "&parentnum=" + categorynum + "&myurl=" + myurl + "&categoryGroup=minor";
 }
 
 function majorCategory() {
@@ -709,8 +722,10 @@ function minerCategory(category_m) {
 }
 </script>
 
-</head>
+
 <style>
+
+/* 기타 CSS */
 
 a{
   text-decoration: none;
@@ -980,10 +995,10 @@ p, li, a{
 /* 검색 결과가 없을때 보여주는 태그 */
 #searchEmpty {
     width: 600px;
-    height: 427px;
+    height: 910px;
     background-color: #FFFFFF;
     border-radius: 10px;
-    line-height: 427px;
+    line-height: 910px;
 }
 
 .pagingBtnCss {
@@ -992,6 +1007,9 @@ p, li, a{
 }
 
 </style>
+
+
+</head>
 <body>
 
 <input id="searchWord" type="hidden" value="${searchWord}">
@@ -1008,6 +1026,7 @@ p, li, a{
 <input id="parentnum" type="hidden" value="${parentnum}">
 <input id="userid" type="hidden" value="${sessionScope.loginId }">
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
+<input id="myurl" type="hidden" value="${myurl}" />
 
 <div id="container">
 
@@ -1130,6 +1149,15 @@ p, li, a{
 		</div>
 	</div>
 	
+	<div id="flot-pie-chart-wrapper">
+		<div>
+			<h3 id="pieChartTitle">
+				<spring:message code="search.pieChartTitle" />
+			</h3>
+		</div>
+		<div id="flot-pie-chart"></div>
+	</div>
+	
 </div>
 
 </body>
@@ -1192,5 +1220,15 @@ p, li, a{
         }
 
 </script>
+
+<!-- Flot Charts JavaScript -->
+<script src="resources/search/js/result/flotchart/jquery.min.js"></script>
+<script src="resources/search/js/result/flotchart/excanvas.min.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.pie.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.resize.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.time.js"></script>
+<script src="resources/search/js/result/flotchart/jquery.flot.tooltip.min.js"></script>
+<script src="resources/search/js/result/flotchart/flot-data.js"></script>
 
 </html>

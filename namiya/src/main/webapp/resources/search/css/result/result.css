@@ -53,6 +53,7 @@ body {
     background-color: #FFFFFF;
     border-radius: 5px;
     margin-top: -85px;
+    border: 1px solid gray;
 }
 
 /* 프로필 사진 프레임 */
@@ -224,8 +225,9 @@ body {
 }
 
 .rightFrame {
- 	display: inline-block;
- 	float: left;
+    width: 480px;
+    display: inline-block;
+    float: left;
 }
 
 .productTitle {
@@ -244,7 +246,7 @@ body {
 }
 
 .userid {
-	width: 232px;
+	width: 202px;
     text-align: center;
     background-color: white;
     display: inline-block;
@@ -336,8 +338,32 @@ body {
 }
 
 #listScroll {
-	overflow: scroll;
+    overflow: scroll;
     overflow-x: hidden;
     height: 910px;
     margin-bottom: 110px;
+    background-color: #FFFFFF;
+    border: 1px solid gray;
 }
+
+/* pie chart */
+#flot-pie-chart-wrapper {
+    width: 250px;
+    height: 422px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 20px;
+    padding-top: 30px;
+    border: 1px solid gray;
+}
+
+#flot-pie-chart {
+	width: 210px;
+    height: 331px;
+}
+
+#pieChartTitle {
+	text-align: center;
+	color: gray;
+}
+
