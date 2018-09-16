@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import global.sesoc.namiya.dao.SavingRepository;
 import global.sesoc.namiya.vo.Saving;
@@ -96,6 +97,41 @@ public class SavingController {
 		String userid = session.getAttribute("loginId").toString();
 		
 		List<Saving> result = repository.pointRecord(userid);
+		
+		String lang = session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME).toString();
+		
+		if(result != null) {
+			if(!lang.equals("ko")) {
+				for(int i=0; i<result.size(); i++) {
+					String type = result.get(i).getType();
+					
+					if(lang.equals("en")) {
+						if(type.equals("양도")) {
+							result.get(i).setType("Transfer");
+						}
+						else if(type.equals("재능기부")) {
+							result.get(i).setType("Talent donation");
+						}
+						else if(type.equals("포인트사용")) {
+							result.get(i).setType("barter");
+						}
+					}
+					else if(lang.equals("ja")) {
+						if(type.equals("양도")) {
+							result.get(i).setType("譲渡");
+						}
+						else if(type.equals("재능기부")) {
+							result.get(i).setType("才能寄付");
+						}
+						else if(type.equals("포인트사용")) {
+							result.get(i).setType("才能");
+						}
+					}
+					
+				}
+			}
+			
+		}		
 		
 		model.addAttribute("pointRecord", result);
 		
