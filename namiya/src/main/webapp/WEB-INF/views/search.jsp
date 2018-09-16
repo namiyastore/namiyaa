@@ -46,14 +46,14 @@ var category = "product";	// 검색 옵션 선택
 var alarmMax = 0;
 
 $(function(){
-	$.ajax({
-		method : 'post',
-		url : 'pointAdd',
-		data : 'type=양도',
-		success : function(resp) {
-			alert(resp);
-		}
-	});
+// 	$.ajax({
+// 		method : 'post',
+// 		url : 'pointAdd',
+// 		data : 'type=양도',
+// 		success : function(resp) {
+// 			alert(resp);
+// 		}
+// 	});
 	
 	// 카테고리 대분류 가져오기
 	majorCategory();
@@ -78,6 +78,11 @@ $(function(){
 	// 마이 페이지 이동
 	$("#myPageClick").on("click",function(){
 		location.href = "myPage";
+	});
+	
+	// 로그아웃
+	$("#logoutClick").on("click",function(){
+		location.href = "logout";
 	});
 	
 	// 창 크기에 따라 좌표 지정 ( 창크기 변경 감지 )
