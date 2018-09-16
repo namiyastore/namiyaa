@@ -126,6 +126,8 @@ $(function(){
 			.css("left", (parseInt(left_notice)+650) + "px");
 		
 		// 배경화면 다시 고정
+		$("body").css("background-image","resources/images/background.png")
+		.css("background-attachment","fixed");
 		
 	});
 	
