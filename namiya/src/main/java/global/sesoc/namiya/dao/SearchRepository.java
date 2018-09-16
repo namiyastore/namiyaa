@@ -127,9 +127,9 @@ public class SearchRepository {
 		return result;
 	}
 
-	public List<Product> selectItemRanking() {
+	public List<Product> selectItemRanking(Map<String,String> lang) {
 		SearchMapper mapper = session.getMapper(SearchMapper.class);
-		List<Product> result = mapper.selectItemRanking();
+		List<Product> result = mapper.selectItemRanking(lang);
 		
 		return result;
 	}

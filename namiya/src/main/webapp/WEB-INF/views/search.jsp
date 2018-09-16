@@ -25,8 +25,6 @@
 <!-- Web socket CDN -->
 <script src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script>
 
-
-
 <script>
 var idx1 = "";	// 대분류 index
 var idx2 = "";	// 중분류 index
@@ -218,7 +216,7 @@ $(function(){
 				val += resp[i].regdate;
 				val += '</div>';
 				val += '</div>';
-				val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp.savedfile + '">';
+				val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp[i].savedfile + '">';
 				
 				val += '</div>';
 			}
@@ -243,34 +241,35 @@ $(function(){
 			url : "noticeForAll?lang=" + lang,
 			dataType : "json",
 			success : function(resp) {
-				//alert(JSON.stringify(resp));
 				var val = "";	
-				
-				if(alarmMax < resp.boardnum) {
-					val += '<hr/>';
-					val += '<div class="noticeItem" data-boardnum="' + resp.boardnum + '">'; 
-					val += '<div class="noticeItemDisplay" id="noticeItemContent">';
+				if(resp != null) {
+					if(alarmMax < resp.boardnum) {
+						val += '<hr/>';
+						val += '<div class="noticeItem" data-boardnum="' + resp.boardnum + '">'; 
+						val += '<div class="noticeItemDisplay" id="noticeItemContent">';
+							
+						val += '<div id="noticeText">';
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';
+						val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp.content;
+						val += '</div>';
+						val += '<div id="noticeDate">';
+						val += resp.regdate;
+						val += '</div>';
+						val += '</div>';
+						val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp.savedfile + '">';
 						
-					val += '<div id="noticeText">';
-					val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';
-					val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp.content;
-					val += '</div>';
-					val += '<div id="noticeDate">';
-					val += resp.regdate;
-					val += '</div>';
-					val += '</div>';
-					val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp.savedfile + '">';
+						val += '</div>';					
 					
-					val += '</div>';					
-				
-					$("#notice").prepend(val);
+						$("#notice").prepend(val);
+						
+						alarmMax = resp.boardnum;
+					}
 					
-					alarmMax = resp.boardnum;
+					$('.noticeItem').off().on('click', function(){
+						var boardnum = $(this).attr('data-boardnum');
+						window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+					});
 				}
-				
-				$('.noticeItem').off().on('click', function(){
-					alert($(this).attr('data-boardnum'));
-				});
 			}
 		});
 	}
@@ -641,9 +640,13 @@ function minerCategory(category_m) {
 	</div>
 	
 	<div id="flot-pie-chart-wrapper">
+		<div>
+			<h2 id="pieChartTitle">
+				<spring:message code="search.pieChartTitle" />
+			</h2>
+		</div>
 		<div id="flot-pie-chart"></div>
 	</div>
-	
 	
 </div>
 
@@ -713,6 +716,5 @@ function minerCategory(category_m) {
 <script src="resources/search/js/search/flotchart/jquery.flot.time.js"></script>
 <script src="resources/search/js/search/flotchart/jquery.flot.tooltip.min.js"></script>
 <script src="resources/search/js/search/flotchart/flot-data.js"></script>
-
 
 </html>

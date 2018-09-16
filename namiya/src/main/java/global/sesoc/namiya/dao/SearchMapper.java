@@ -76,5 +76,5 @@ public interface SearchMapper {
 	 * 등록 랭킹
 	 * @return
 	 */
-	public List<Product> selectItemRanking();
+	public List<Product> selectItemRanking(Map<String,String> lang);
 }

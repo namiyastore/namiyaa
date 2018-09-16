@@ -75,7 +75,7 @@ $(function(){
 	
 	// 미니홈피 창 열기
 	$("#myStoreClick").on("click",function(){
-		window.open("myStore","mystoreWindow","width:1200","height:650");
+		window.open("myStore","mystoreWindow","width:1200, height:650");
 	});
 	
 	// 마이 페이지 이동

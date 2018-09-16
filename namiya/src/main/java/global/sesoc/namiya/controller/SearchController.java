@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.google.gson.Gson;
 
@@ -48,14 +49,11 @@ public class SearchController {
 	 */
 	@RequestMapping(value="search", method=RequestMethod.GET)
 	public String search(HttpSession session, Model model) {
-//		String userid = session.getAttribute("loginId").toString();
-		String userid = "test1";
-		
+		String userid = session.getAttribute("loginId").toString();
 		
 		Members m = new Members();
 		
 		m.setUserid(userid);
-		
 		
 		Members result1 = Members_repository.selectOne(m);
 		
@@ -229,9 +227,11 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="selectItemRanking", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public @ResponseBody String selectItemRanking() {
-		
-		List<Product> result = search_repository.selectItemRanking();
+	public @ResponseBody String selectItemRanking(HttpSession session) {
+		String lang = session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME).toString();
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("lang", lang);
+		List<Product> result = search_repository.selectItemRanking(map);
 		
 		Gson gson = new Gson();
 		
