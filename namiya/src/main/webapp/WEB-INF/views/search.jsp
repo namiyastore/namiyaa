@@ -52,8 +52,6 @@ $(function(){
 	// 고유 url
 	var myurl = $("#myurl").val();
 	
-	
-	
 	$("#sideMenu").mouseleave(function(){		
 		$("#depth2").css("visibility","hidden");
 		$("#depth3").css("visibility","hidden");
@@ -127,7 +125,9 @@ $(function(){
 			.css("top", 630 + "px")
 			.css("left", (parseInt(left_notice)+650) + "px");
 		
-	} );
+		// 배경화면 다시 고정
+		
+	});
 	
 	function setPositionInit() {
 		
