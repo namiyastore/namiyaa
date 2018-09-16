@@ -46,14 +46,6 @@ var category = "product";	// 검색 옵션 선택
 var alarmMax = 0;
 
 $(function(){
-// 	$.ajax({
-// 		method : 'post',
-// 		url : 'pointAdd',
-// 		data : 'type=양도',
-// 		success : function(resp) {
-// 			alert(resp);
-// 		}
-// 	});
 	
 	// 카테고리 대분류 가져오기
 	majorCategory();
@@ -128,6 +120,7 @@ $(function(){
 		
 	} );
 	
+	var myurl = $("#myurl").val();
 	// 검색(버튼)
 	$("#searchBtnClick").on("click",function(){
 		var searchWord = $(".form-control").val();
@@ -137,7 +130,7 @@ $(function(){
 			currentPage1 = 1;
 		}
 		
-		location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&searchFlag=on";
+		location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 	});
 	
 	// 검색(엔터)
@@ -150,7 +143,7 @@ $(function(){
 				currentPage1 = 1;
 			}
 			
-			location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&searchFlag=on";
+			location.href="result?currentPage1=" + currentPage1 + "&searchWord=" + searchWord + "&myurl=" + myurl + "&searchFlag=on";
 		}
 	});
 	
@@ -183,7 +176,10 @@ $(function(){
 			$("#notice").prepend(val);
 			
 			$('.noticeItem').off().on('click', function(){
-				alert($(this).attr('data-boardnum'));
+				var boardnum = $(this).attr('data-boardnum');
+				
+				var myurl = $('#myurl').val();
+				window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
 			});
 		}
 	

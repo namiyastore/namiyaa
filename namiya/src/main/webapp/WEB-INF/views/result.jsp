@@ -404,6 +404,9 @@ $(function(){
 	// 검색결과 중 원한는 항목 클릭
 	$(".productList").on("click",function(){
 		alert($(this).attr('data-boardnum'));
+		
+		var myurl = $('#myurl').val();
+		window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
 	});
 	
 	var bgSize = (window.innerWidth || document.body.clientWidth) + "px " + (window.innerHeight || document.body.clientHeight) + "px";
@@ -1007,6 +1010,7 @@ p, li, a{
 <input id="searchFlag" type="hidden" value="${searchFlag}">
 <input id="parentnum" type="hidden" value="${parentnum}">
 <input id="userid" type="hidden" value="${sessionScope.loginId }">
+<input id="myurl" type="hidden" value="${myurl}" />
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 
 <div id="container">

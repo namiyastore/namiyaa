@@ -91,6 +91,7 @@ public class SearchController {
 		@RequestParam(value="parentnum", defaultValue="") String parentnum,
 		@RequestParam(value="searchFlag", defaultValue="off") String searchFlag,
 		@RequestParam(value="categoryGroup", defaultValue="none") String categoryGroup,
+		String myurl,
 		Model model
 	) {
 		int totalRecordCount = 0;
@@ -137,6 +138,8 @@ public class SearchController {
 		model.addAttribute("searchFlag", searchFlag);
 		model.addAttribute("parentnum", parentnum);
 		model.addAttribute("categoryGroup", categoryGroup);
+		
+		model.addAttribute("myurl", myurl);
 		
 		return "result";
 	}
