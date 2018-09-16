@@ -1147,9 +1147,9 @@ p, li, a{
 	
 	<div id="flot-pie-chart-wrapper">
 		<div>
-			<h2 id="pieChartTitle">
+			<h3 id="pieChartTitle">
 				<spring:message code="search.pieChartTitle" />
-			</h2>
+			</h3>
 		</div>
 		<div id="flot-pie-chart"></div>
 	</div>

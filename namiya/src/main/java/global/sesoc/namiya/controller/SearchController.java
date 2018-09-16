@@ -226,6 +226,9 @@ public class SearchController {
 		return result;
 	}
 	
+	/*
+	 * 등록순위
+	 */
 	@RequestMapping(value="selectItemRanking", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	public @ResponseBody String selectItemRanking(HttpSession session) {
 		String lang = session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME).toString();
