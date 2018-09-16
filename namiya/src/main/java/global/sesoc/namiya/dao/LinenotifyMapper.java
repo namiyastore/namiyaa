@@ -6,6 +6,6 @@ public interface LinenotifyMapper {
 
 	public int insertNotifyToken(Linenotify linenotify);
 
-	public int selectOne(String userid);
+	public Linenotify selectOne(String userid);
 	
 }
