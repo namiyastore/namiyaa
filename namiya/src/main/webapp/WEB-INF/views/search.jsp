@@ -42,15 +42,17 @@ var category = "product";	// 검색 옵션 선택
 							// talent : 재능
 							// trade : 교환
 							
-							
-var alarmMax = 0;
+var myurl = "";		// 고유 url
+var lang = "";
+
+var alarmMax = 0;	// 실시간 알림글 가장 최근 번호
 
 $(function(){	
 	// 카테고리 대분류 가져오기
 	majorCategory();
 	
-	// 고유 url
-	var myurl = $("#myurl").val();
+	myurl = $("#myurl").val();
+	lang = $("#lang").val();
 	
 	$("#sideMenu").mouseleave(function(){		
 		$("#depth2").css("visibility","hidden");
@@ -211,7 +213,32 @@ $(function(){
 				val += '<div class="noticeItemDisplay" id="noticeItemContent">';
 					
 				val += '<div id="noticeText">';
-				val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';
+				if(lang == 'ko') {
+					if(resp[i].service == '양도')val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';	
+				}
+				else if(lang == 'ja') {
+					if(resp[i].service == '양도') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 譲渡 ]</h3>';	
+					}
+					else if(resp[i].service == '재능기부') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能寄付 ]</h3>';
+					}
+					else if(resp[i].service == '교환') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能 ]</h3>';
+					}
+				}
+				else if(lang == 'en') {
+					if(resp[i].service == '양도') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Transfer ]</h3>';	
+					}
+					else if(resp[i].service == '재능기부') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Talent donation ]</h3>';
+					}
+					else if(resp[i].service == '교환') {
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ barter ]</h3>';
+					}
+				}
+				
 				val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp[i].content;
 				val += '</div>';
 				val += '<div id="noticeDate">';
