@@ -19,9 +19,9 @@ public class LinenotifyRepository {
 		return result;
 	}
 
-	public int selectOne(String userid) {
+	public Linenotify selectOne(String userid) {
 		LinenotifyMapper mapper = session.getMapper(LinenotifyMapper.class);
-		int result = mapper.selectOne(userid);
+		Linenotify result = mapper.selectOne(userid);
 		
 		return result;
 	}

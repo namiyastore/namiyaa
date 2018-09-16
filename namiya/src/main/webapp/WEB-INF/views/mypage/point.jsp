@@ -11,8 +11,6 @@
 <script src="resources/search/js/common/jquery-1.12.4.js"></script> 
  
 <script> 
- 
- 
 $(function(){ 
 	 
 	// ajax로 총 포인트 가져오는 부분 
@@ -30,7 +28,11 @@ $(function(){
 	 
 	$('.rightSide_MyInfoBoxDown_myStore').on('click',function(){ 
 		location.href = 'myStore';		 
-	}); 
+	});
+	
+	 $('.rightSide_MyInfoBoxDown_profile').on('click',function(){ 
+		location.href = 'profileEdit';		 
+	});  
 	 
 	$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){ 
 		location.href = 'logOut';		 
@@ -63,7 +65,12 @@ $(function(){
 		location.href = 'pointList';		 
 	}); 
 	 
-}); 
+});
+
+function goProfile(){
+	var goProfile=$('#goProfile');
+	goProfile.submit();
+}
  
  
 // 라인 인증키 등록 
@@ -92,7 +99,7 @@ function alertMsg() {
  
 </head> 
 <body> 
-	<h2 style="color: white; text-align: center; ">Point</h2> 
+	<h2>Point</h2> 
 	<div class="wrapper"> 
 	 
 		<div class="leftSide"> 
@@ -119,11 +126,15 @@ function alertMsg() {
 				<div class="leftSide_tabs_tab7"> 
 					Point 
 				</div> 
-			</div> 
-			<div class="leftSide_searchBar"> 
+			</div>
+			<div class="leftSide_2nd">
+			<div class="leftSide_2nd_searchBar"> 
 				<input type="text" id="inputBar" class="inputBar"> 
-				<a href="검색 컨트롤러"><img src="resources/mypage/images/searchIcon.png" class="searchIcon"></a> 
-				<img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" /> 
+				<a href="검색 컨트롤러"><img src="resources/mypage/images/searchIcon.png" class="searchIcon"></a>
+			</div>
+				<div class="leftSide_2nd_noticeService"> 
+					<img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" /> 
+				</div>
 			</div>			 
 			 
  			<!-- 여기부터 받은쪽지함/보낸쪽지함 탭 --> 
@@ -163,13 +174,13 @@ function alertMsg() {
 								<tr class="leftSide_table_rows"> 
 								<!--포인트 추가시 수정부분 --> 
 								<c:if test="${PointList.point gt 0}"> 
-									<td>+ ${PointList.point}</td> 
+									<td class="table_1st_td">+ ${PointList.point}</td> 
 								</c:if> 
-								<c:if test="${PointList.point lt 0}"> 
-									<td>- ${PointList.point}</td> 
-								</c:if> 
-									<td>${PointList.type}</td> 
-									<td>${PointList.regdate}</td> 
+								<%-- <c:if test="${PointList.point lt 0}"> 
+									<td class="table_1st_td">- ${PointList.point}</td> 
+								</c:if>  --%>
+									<td class="table_2nd_td">${PointList.type}</td> 
+									<td class="table_3rd_td">${PointList.regdate}</td> 
 								</tr> 
 								</c:forEach> 
 							</tbody> 
@@ -178,9 +189,9 @@ function alertMsg() {
 						 
 						<div class="customer_tfoot"> 
 							<tfoot> 
-								<tr> 
+								<tr style="color: white; background-color: #0B3B0B;"> 
 									<td colspan="3"> 
-										현재포인트 : <span id="pointTotal"></span> 
+										현재포인트 : <span id="pointTotal" ></span> 
 									</td> 
 								</tr> 
 							</tfoot> 
@@ -197,10 +208,10 @@ function alertMsg() {
 						<img src="resources/images/parkby.jpg" id="rightSide_MyInfoBoxUp_profileImg_profile_pic"> 
 					</div> 
 					<div class="rightSide_MyInfoBoxUp_userId"> 
-						<p>유저 아이디</p><!-- 세션id가 있으면 거기서 가지고 옮 9/5 <%-- ${"user.userid"} --%>  --> 
+						${sessionScope.loginId} <!-- 세션id가 있으면 거기서 가지고 옮 9/5 <%-- ${"user.userid"} --%>  --> 
 					</div> 
 					<div class="rightSide_MyInfoBoxUp_userName"> 
-						<p>유저 이름</p><!-- 세션id로 해당 user를 찾아내서 입력할 예정 9/5 <%-- ${"user.username"} --%> --> 
+						${sessionScope.loginName} <!-- 세션id로 해당 user를 찾아내서 입력할 예정 9/5 <%-- ${"user.username"} --%> --> 
 					</div> 
 				</div> 
 				 
@@ -211,6 +222,9 @@ function alertMsg() {
 					<div class="rightSide_MyInfoBoxDown_myStore">
 						My Store
 					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_profile">
+						Profile <!-- <span onclick="goProfile()"></span> -->
+					</div><!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
 					<div class="rightSide_MyInfoBoxDown_logOut">
 						Logout
 					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
@@ -221,5 +235,6 @@ function alertMsg() {
 			</div><!-- rightSide_MyInfoBox div 닫음 -->
 		</div><!-- rightSide div 닫음 -->
 	</div>
+	<!-- <form action="reqProfile" method="post" id="goProfile"></form> -->
 </body>
 </html>
