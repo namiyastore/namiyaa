@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Notice</title>
+<link rel="stylesheet" href="resources/mypage/css/mypageCommon.css">
 <script type="text/javascript">
 function ndelete(num) {
 	location.href="nDelete?noticenum="+num;
