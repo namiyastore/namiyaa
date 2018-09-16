@@ -50,6 +50,9 @@ $(function(){
 	// 카테고리 대분류 가져오기
 	majorCategory();
 	
+	// 고유 url
+	var myurl = $("#myurl").val();
+	
 	$("#sideMenu").mouseleave(function(){		
 		$("#depth2").css("visibility","hidden");
 		$("#depth3").css("visibility","hidden");
@@ -120,7 +123,7 @@ $(function(){
 		
 	} );
 	
-	var myurl = $("#myurl").val();
+	
 	// 검색(버튼)
 	$("#searchBtnClick").on("click",function(){
 		var searchWord = $(".form-control").val();
@@ -271,17 +274,17 @@ function setPositionInit() {
 
 // 대분류 클릭 이벤트 함수
 function majorCategoryClick(categorynum) {
-	location.href = "result?currentPage2=1" + "&parentnum=" + categorynum + "&categoryGroup=major";
+	location.href = "result?currentPage2=1" + "&parentnum=" + categorynum + "&categoryGroup=major" + "&myurl=" + myurl;
 }
 
 // 중분류 클릭 이벤트 함수
 function mediumCategoryClick(categorynum) {
-	location.href = "result?currentPage3=1" + "&parentnum=" + categorynum + "&categoryGroup=medium";
+	location.href = "result?currentPage3=1" + "&parentnum=" + categorynum + "&categoryGroup=medium" + "&myurl=" + myurl;
 }
 
 // 소분류 클릭 이벤트 함수
 function minorCategoryClick(categorynum) {
-	location.href = "result?currentPage4=1" + "&parentnum=" + categorynum + "&categoryGroup=minor";
+	location.href = "result?currentPage4=1" + "&parentnum=" + categorynum + "&categoryGroup=minor" + "&myurl=" + myurl;
 }
 
 function majorCategory() {
