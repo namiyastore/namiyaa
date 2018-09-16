@@ -59,8 +59,8 @@ public class MemberController {
 		
 		if(m!=null) {
 			System.out.println("로그인성공");
-			session.setAttribute("loginId", member.getUserid());
-			session.setAttribute("loginName", member.getUsername());
+			session.setAttribute("loginId", m.getUserid());
+			session.setAttribute("loginName", m.getUsername());
 			model.addAttribute("message", "로그인 성공!");
 			
 			return "redirect:/search";
