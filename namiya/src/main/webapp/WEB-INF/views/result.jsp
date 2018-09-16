@@ -990,6 +990,8 @@ p, li, a{
     line-height: 910px;
 }
 
+
+
 .pagingBtnCss {
 	width: 20px;
 	height: 20px;

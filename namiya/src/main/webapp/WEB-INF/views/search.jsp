@@ -53,6 +53,8 @@ $(function(){
 	// 고유 url
 	var myurl = $("#myurl").val();
 	
+	
+	
 	$("#sideMenu").mouseleave(function(){		
 		$("#depth2").css("visibility","hidden");
 		$("#depth3").css("visibility","hidden");

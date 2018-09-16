@@ -51,6 +51,7 @@ public class SearchController {
 		
 		m.setUserid(userid);
 		
+		
 		Members result1 = Members_repository.selectOne(m);
 		
 		model.addAttribute("myurl",result1.getMyurl());
