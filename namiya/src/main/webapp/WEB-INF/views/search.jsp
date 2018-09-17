@@ -646,7 +646,7 @@ function minerCategory(category_m) {
 		<div id="profile">
 		
 			<div id="profilePicture">			
-				<img src="${pageContext.request.contextPath}/profile/${profile.savedfile}" width="80px" height="80px">
+				<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/profile/${profile.savedfile}" width="80px" height="80px">
 			</div>
 			<div id="myPageClick" class="profileBtn"><spring:message code="search.profileBtn.myPageClick" /></div>
 			<div id="myStoreClick" class="profileBtn"><spring:message code="search.profileBtn.myStoreClick" /></div>
