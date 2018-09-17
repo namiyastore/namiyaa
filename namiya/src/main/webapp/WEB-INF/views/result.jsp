@@ -1127,7 +1127,7 @@ p, li, a{
 		<div id="profile">
 		
 			<div id="profilePicture">
-				<img src="resources/search/image/jennifer.jpg" width="100px">
+				<img src="${pageContext.request.contextPath}/profile/${profile.savedfile}" width="80px" height="80px">
 			</div>
 			<div id="myPageClick" class="profileBtn"><spring:message code="search.profileBtn.myPageClick" /></div>
 			<div id="myStoreClick" class="profileBtn"><spring:message code="search.profileBtn.myStoreClick" /></div>

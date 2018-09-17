@@ -90,12 +90,13 @@ public class LinenotifyController {
 	
 	/**
 	 * 라인 메세지 전송
-	 * @param accessToken
-	 * @param message
+	 * @param session
+	 * @param message : 전송할 메세지
+	 * @param receive : 메세지를 받는 사용자 아이디
 	 * @return
 	 */
 	@RequestMapping(value="sendMsg", method=RequestMethod.POST)
-	public @ResponseBody String sendMsg(HttpSession session, String message) {
+	public @ResponseBody String sendMsg(HttpSession session, String message, String receive) {
 		
 		String userid = session.getAttribute("loginId").toString();
 		String urlSetting = "https://notify-api.line.me/api/notify?message=" + message;
