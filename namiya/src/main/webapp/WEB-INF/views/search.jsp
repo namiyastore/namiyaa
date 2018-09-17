@@ -214,7 +214,7 @@ $(function(){
 					
 				val += '<div id="noticeText">';
 				if(lang == 'ko') {
-					if(resp[i].service == '양도')val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';	
+					val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';	
 				}
 				else if(lang == 'ja') {
 					if(resp[i].service == '양도') {
@@ -270,7 +270,8 @@ $(function(){
 			url : "noticeForAll?lang=" + lang,
 			dataType : "json",
 			success : function(resp) {
-				var val = "";	
+				
+				var val = "";				
 				if(resp != null) {
 					if(alarmMax < resp.boardnum) {
 						val += '<hr/>';
@@ -278,7 +279,32 @@ $(function(){
 						val += '<div class="noticeItemDisplay" id="noticeItemContent">';
 							
 						val += '<div id="noticeText">';
-						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';
+						if(lang == 'ko') {
+							val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';	
+						}
+						else if(lang == 'ja') {
+							if(resp.service == '양도') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 譲渡 ]</h3>';	
+							}
+							else if(resp.service == '재능기부') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能寄付 ]</h3>';
+							}
+							else if(resp.service == '교환') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能 ]</h3>';
+							}
+						}
+						else if(lang == 'en') {
+							if(resp.service == '양도') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Transfer ]</h3>';	
+							}
+							else if(resp.service == '재능기부') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Talent donation ]</h3>';
+							}
+							else if(resp.service == '교환') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ barter ]</h3>';
+							}
+						}
+						
 						val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp.content;
 						val += '</div>';
 						val += '<div id="noticeDate">';
@@ -702,7 +728,7 @@ function minerCategory(category_m) {
 		
 		// 해당 ID에 맞는 홈피 열기
 		function openMiniHome(obj) {
-			var uri = "myStore/" + $(obj).attr('data-id');
+			var uri = "myStore/" + $(obj).attr('data-id') + "/home";
 			
 			window.open(uri,"mystoreWindow","width=1200","height=650");
 		}

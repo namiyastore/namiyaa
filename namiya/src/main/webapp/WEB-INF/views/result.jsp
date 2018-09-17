@@ -1027,6 +1027,7 @@ p, li, a{
 <input id="userid" type="hidden" value="${sessionScope.loginId }">
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <input id="myurl" type="hidden" value="${myurl}" />
+<input id="nickname" type="hidden" value="${profile.nickname}" />
 
 <div id="container">
 
@@ -1183,7 +1184,7 @@ p, li, a{
 		
 		// 해당 ID에 맞는 홈피 열기
 		function openMiniHome(obj) {
-			var uri = "myStore/" + $(obj).attr('data-id');
+			var uri = "myStore/" + $(obj).attr('data-id') + "/home";
 			
 			window.open(uri,"mystoreWindow","width=1200, height=650");
 		}
@@ -1196,11 +1197,7 @@ p, li, a{
 
         // 메시지 전송
         function sendMessage() {
-        	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + userid + "</a>" + " : " + $("#message").val() + "<br/>";
-        	
-        	
-        	
-        	
+        	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + $('#nickname').val() + "</a>" + " : " + $("#message").val() + "<br/>";
         	sock.send(tag);
         	//sock.send( + $("#message").val());
         }
