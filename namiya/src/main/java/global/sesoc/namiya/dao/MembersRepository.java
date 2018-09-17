@@ -12,7 +12,7 @@ public class MembersRepository {
 	@Autowired
 	SqlSession session;
 
-	public Members selectOne(Members m) {
+	public Members selectOne(Members m) { 
 		MembersMapper mapper = session.getMapper(MembersMapper.class);
 		Members member = new Members();
 		member = mapper.selectOne(m);
