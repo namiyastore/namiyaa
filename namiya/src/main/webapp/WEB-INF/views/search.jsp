@@ -636,6 +636,7 @@ function minerCategory(category_m) {
 <input id="userid" type="hidden" value="${sessionScope.loginId }">
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <input id="myurl" type="hidden" value="${myurl}" />
+<input id="nickname" type="hidden" value="${profile.nickname}" />
 
 <div id="container">
 
@@ -741,7 +742,7 @@ function minerCategory(category_m) {
 
         // 메시지 전송
         function sendMessage() {
-        	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + userid + "</a>" + " : " + $("#message").val() + "<br/>";
+        	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + $('#nickname').val() + "</a>" + " : " + $("#message").val() + "<br/>";
         	sock.send(tag);
         	//sock.send( + $("#message").val());
         }
