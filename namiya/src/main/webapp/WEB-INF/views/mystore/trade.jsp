@@ -29,8 +29,27 @@
 	       });
 	}
 
-	function want() {
-		alert("이 상품을 원합니다");
+	function want(boardnum, userid) {
+		var boardnum = boardnum;
+		var userid = userid;
+		
+		alert(boardnum+", "+userid);
+		
+		var sendData = {"userid" : userid, "boardnum" : boardnum};
+		
+		$.ajax({
+			url : 'selectWish',
+			method : 'post',
+			data : JSON.stringify(sendData),
+			contentType : 'application/json; charset=UTF-8',
+			success : function(resp) {
+				alert(resp);
+			}	
+			,
+	       	error : function(error) {
+	       		alert("want error : "+error);
+	       	}
+		});
 	}
 </script>
 <style>
@@ -222,11 +241,13 @@
 						</c:if>
 						<td id="title"><a href="tradeView?boardnum=${map.BOARDNUM}" style="text-decoration:none; color:black;"><span id="title"><b>${map.TITLE}</b></span></a></td>
 						<td id="date">${map.REGDATE}</td>
+						<c:if test="${map.USERID != sessionScope.loginId}">
 						<td id="btn">
 							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 							&nbsp;
 							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
 						</td>
+						</c:if>
 					</tr>
 				</table>
 				<hr/>
@@ -276,6 +297,7 @@
 			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 		</ul>
 	</div>

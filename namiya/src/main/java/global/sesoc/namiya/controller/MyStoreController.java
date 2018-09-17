@@ -47,9 +47,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.CategoriesRepository;
 import global.sesoc.namiya.dao.InterestRepository;
+import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.MystoreRepository;
 import global.sesoc.namiya.dao.ProductRepository;
 import global.sesoc.namiya.dao.ReviewRepository;
+import global.sesoc.namiya.dao.SavingRepository;
 import global.sesoc.namiya.util.FileService;
 import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
@@ -61,6 +63,7 @@ import global.sesoc.namiya.vo.Message;
 import global.sesoc.namiya.vo.Mystore;
 import global.sesoc.namiya.vo.Product;
 import global.sesoc.namiya.vo.Review;
+import global.sesoc.namiya.vo.Saving;
 import global.sesoc.namiya.vo.Wish;
 
 @Controller
@@ -84,6 +87,12 @@ public class MyStoreController {
 	
 	@Autowired
 	InterestRepository i_repository;
+	
+	@Autowired
+	MembersRepository mb_repository;
+	
+	@Autowired
+	SavingRepository s_repository;
 	
 	final String uploadPath = "/boardfile";
 	
@@ -169,7 +178,11 @@ public class MyStoreController {
 	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/give")
 	public String give(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @PathVariable("miniurl")String miniurl) {
 		String service = "양도";
-		String userid = (String)session.getAttribute("loginId");
+		
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String userid = member.getUserid();
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
@@ -236,9 +249,23 @@ public class MyStoreController {
 		
 		int result3 = b_repository.insertHst(history);
 		
+		Saving saving = new Saving();
 		
-		return "redirect:/give";
+		saving.setType(board.getService());
+		saving.setUserid(userid);
+		
+		int result = s_repository.pointCheck(saving);
+		
+		if (saving.getType().equals("양도") && result == 0) {
+			int result4 = s_repository.pointAdd(saving);
+		} else if (saving.getType().equals("재능기부") && result < 30) {
+			int result5 = s_repository.pointAdd(saving);
+		}
+		
+		return "redirect:/"+"myStore/" + miniurl + "/give";
 	}
+	
+
 	
 	// give 글 상세보기 
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/giveView", method=RequestMethod.GET)
@@ -322,7 +349,7 @@ public class MyStoreController {
 		int result1 = p_repository.updatePdt(pr);
 		int result2 = b_repository.boardUpdate(board);
 		
-		return "redirect:/give";
+		return "redirect:/"+"myStore/" + miniurl + "/give";
 	}
 	
 	// 등록된 사진 지우기 
@@ -338,7 +365,7 @@ public class MyStoreController {
 		int result = b_repository.boardUpdate(board);
 		
 		rttr.addAttribute("boardnum", boardnum);
-		return "redirect:/giveUpdate";
+		return "redirect:/"+"myStore/" + miniurl + "/giveUpdate";
 	}
 	
 	
@@ -396,7 +423,7 @@ public class MyStoreController {
 		
 		int result3 = b_repository.insertHst(history);
 		
-		return "redirect:/trade";
+		return "redirect:/"+"myStore/" + miniurl + "/trade";
 	}
 	
 	// trade 게시판 상세보기 
@@ -404,9 +431,9 @@ public class MyStoreController {
 	public String tradeView(int boardnum, Model model, @PathVariable("miniurl")String miniurl) {
 		Board board = b_repository.selectOne(boardnum);
 		int productnum = board.getProductnum();
-		
+
 		HashMap<String, Object> map = p_repository.seletPC(productnum);
-		
+
 		String fullPath="";
 		if (board.getSavedfile() != null)
 			fullPath = uploadPath + "/" + board.getSavedfile();
@@ -446,11 +473,12 @@ public class MyStoreController {
 	public String tradeupdate(Board board, Product product, MultipartFile upload, @PathVariable("miniurl")String miniurl) {
 		int boardnum = board.getBoardnum();
 		Board old = b_repository.selectOne(boardnum);
-			
+
 		// 첨부한 경우 
 		if (upload.getSize() != 0) {
 			String fullPath = uploadPath + "/" + old.getSavedfile();
-				
+			System.out.println(fullPath);
+			
 			FileService.deleteFile(fullPath);
 			String originalfile = upload.getOriginalFilename();
 			String savedfile = FileService.saveFile(upload, uploadPath);
@@ -460,7 +488,7 @@ public class MyStoreController {
 			
 			board.setOriginalfile(originalfile);
 			board.setSavedfile(savedfile);
-				
+			
 		} else {
 			if(old.getOriginalfile() != null && old.getSavedfile() != null) {
 				board.setOriginalfile(old.getOriginalfile());
@@ -470,20 +498,20 @@ public class MyStoreController {
 				board.setSavedfile("");
 			}
 		}
-			
+		
 		int productnum = old.getProductnum();
-			
-			
+		
 		Product pr = p_repository.selectPdt(productnum);
 		pr.setCategorynum(product.getCategorynum());
 		pr.setProductname(product.getProductname());
-			
+		
+		
 		int result1 = p_repository.updatePdt(pr);
 		int result2 = b_repository.boardUpdate(board);
 			
-		return "redirect:/trade";
+		return "redirect:/"+"myStore/" + miniurl + "/trade";
 	}	
-		
+	
 	// 등록된 사진 지우기 
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/deleteTradeFile", method=RequestMethod.GET)
 	public String deleteTradeFile(int boardnum, RedirectAttributes rttr, HttpSession session, @PathVariable("miniurl")String miniurl) {
@@ -497,7 +525,7 @@ public class MyStoreController {
 		int result = b_repository.boardUpdate(board);
 			
 		rttr.addAttribute("boardnum", boardnum);
-		return "redirect:/tradeUpdate";
+		return "redirect:/"+"myStore/" + miniurl + "/tradeUpdate";
 	}
 		
 	
@@ -555,7 +583,20 @@ public class MyStoreController {
 		
 		int result3 = b_repository.insertHst(history);
 		
-		return "redirect:/talent";
+		Saving saving = new Saving();
+		
+		saving.setType(board.getService());
+		saving.setUserid(userid);
+		
+		int result = s_repository.pointCheck(saving);
+		
+		if (saving.getType().equals("양도") && result == 0) {
+			int result4 = s_repository.pointAdd(saving);
+		} else if (saving.getType().equals("재능기부") && result < 30) {
+			int result5 = s_repository.pointAdd(saving);
+		}
+		
+		return "redirect:/"+"myStore/" + miniurl + "/talent";
 	}
 	
 	// 재능기부 글 상세보기 
@@ -633,15 +674,13 @@ public class MyStoreController {
 				
 		int productnum = old.getProductnum();
 				
-				
 		Product pr = p_repository.selectPdt(productnum);
 		pr.setCategorynum(product.getCategorynum());
 		pr.setProductname(product.getProductname());
-				
 		int result1 = p_repository.updatePdt(pr);
 		int result2 = b_repository.boardUpdate(board);
 				
-		return "redirect:/talent";
+		return "redirect:/"+"myStore/" + miniurl + "/talent";
 	}	
 			
 	// 등록된 사진 지우기 
@@ -658,7 +697,7 @@ public class MyStoreController {
 				
 		rttr.addAttribute("boardnum", boardnum);
 		
-		return "redirect:/talentUpdate";
+		return "redirect:/"+"myStore/" + miniurl + "/talentUpdate";
 	}
 		
 	/** 후기게시판 관련 controller **/
@@ -678,7 +717,7 @@ public class MyStoreController {
 	public String insertReview(Review review, @PathVariable("miniurl")String miniurl) {
 		int result = r_repository.insertReview(review);
 		
-		return "redirect:/review";
+		return "redirect:/"+"myStore/" + miniurl + "/review";
 	}
 	
 	// review 삭제 
@@ -795,6 +834,7 @@ public class MyStoreController {
 		
 		Wish wsh = b_repository.selectWish(param);
 		System.out.println(wsh);
+	
 		if (wsh == null) {
 			int result = b_repository.insertWish(wish);
 			
@@ -813,7 +853,7 @@ public class MyStoreController {
 			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd"); 
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
-			cal.add(Calendar.DATE, 5);
+			cal.add(Calendar.DATE, 3);
 			deal_end = sdformat.format(cal.getTime());  
 			
 			history.setDeal_end(deal_end);
@@ -822,9 +862,9 @@ public class MyStoreController {
 			
 			System.out.println("history update 결과:"+result2);
 			
-			return "양도신청이 완료되었습니다!";
+			return null;
 		} else {
-			return "이미 양도신청을 하셨습니다!";
+			return "이미 양도신청을 했습니다!";
 		}
 	}
 	
@@ -857,4 +897,12 @@ public class MyStoreController {
 		
 	}
 	
+	
+	
+	/** 포인트 확인 controller **/
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/checkPoint")
+	public String checkPoint(@PathVariable("miniurl")String miniurl) {
+		
+		return "mystore/checkPoint";
+	}
 }
