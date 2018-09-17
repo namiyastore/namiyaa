@@ -26,53 +26,53 @@ public class SavingController {
 	 * 포인트 확인(String : type -> '양도' 또는 '기부')
 	 * ajax로 호출
 	 */
-	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/pointCheck", method=RequestMethod.POST)
-	public @ResponseBody int pointCheck(String type, HttpSession session, @PathVariable("miniurl")String miniurl) {
-		Saving saving = new Saving();
-		String userid = session.getAttribute("loginId").toString();
-		
-		saving.setType(type);
-		saving.setUserid(userid);
-		
-		
-		int result = repository.pointCheck(saving);
-		
-		return result;
-	}
+//	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/pointCheck", method=RequestMethod.POST)
+//	public @ResponseBody int pointCheck(String type, HttpSession session, @PathVariable("miniurl")String miniurl) {
+//		Saving saving = new Saving();
+//		String userid = session.getAttribute("loginId").toString();
+//		
+//		saving.setType(type);
+//		saving.setUserid(userid);
+//		
+//		
+//		int result = repository.pointCheck(saving);
+//		
+//		return result;
+//	}
 	
 	/*
 	 * 포인트 추가(String : type -> '양도' 또는 '재능기부')
 	 * ajax로 호출
 	 */
-	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/pointAdd", method=RequestMethod.POST)
-	public @ResponseBody int pointAdd(String type, HttpSession session, @PathVariable("miniurl")String miniurl) {
-		Saving saving = new Saving();
-		String userid = session.getAttribute("loginId").toString();
-		
-		saving.setType(type);
-		saving.setUserid(userid);
-		
-		int result = repository.pointAdd(saving);
-		
-		return result;
-	}
+//	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/pointAdd", method=RequestMethod.POST)
+//	public @ResponseBody int pointAdd(String type, HttpSession session, @PathVariable("miniurl")String miniurl) {
+//		Saving saving = new Saving();
+//		String userid = session.getAttribute("loginId").toString();
+//		
+//		saving.setType(type);
+//		saving.setUserid(userid);
+//		
+//		int result = repository.pointAdd(saving);
+//		
+//		return result;
+//	}
 	
 	/*
 	 * 포인트 사용(int : point -> 사용할 포인트양)
 	 * ajax로 호출
 	 */
-	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/pointMinus", method=RequestMethod.POST)
-	public @ResponseBody int pointMinus(int point, HttpSession session, @PathVariable("miniurl")String miniurl) {
-		Saving saving = new Saving();
-		String userid = session.getAttribute("loginId").toString();
-		
-		saving.setPoint(point);
-		saving.setUserid(userid);
-		
-		int result = repository.pointMinus(saving);
-		
-		return result;
-	}
+//	@RequestMapping(value="/myStore"+"/{miniurl:.+}"+"/pointMinus", method=RequestMethod.POST)
+//	public @ResponseBody int pointMinus(int point, HttpSession session, @PathVariable("miniurl")String miniurl) {
+//		Saving saving = new Saving();
+//		String userid = session.getAttribute("loginId").toString();
+//		
+//		saving.setPoint(point);
+//		saving.setUserid(userid);
+//		
+//		int result = repository.pointMinus(saving);
+//		
+//		return result;
+//	}
 	
 	///////////////// 아래부터는 My Page 에 포인트 내역 보여주는  내용 /////////////////////
 	
@@ -80,14 +80,14 @@ public class SavingController {
 	 * 총 포인트
 	 * ajax로 호출
 	 */
-	@RequestMapping(value="pointTotal", method=RequestMethod.POST)
-	public @ResponseBody int pointTotal(HttpSession session) {
-		String userid = session.getAttribute("loginId").toString();
-		
-		int result = repository.pointTotal(userid);
-		
-		return result;
-	}
+//	@RequestMapping(value="pointTotal", method=RequestMethod.POST)
+//	public @ResponseBody int pointTotal(HttpSession session) {
+//		String userid = session.getAttribute("loginId").toString();
+//		
+//		int result = repository.pointTotal(userid);
+//		
+//		return result;
+//	}
 	
 	/*
 	 * 포인트 기록 조회
