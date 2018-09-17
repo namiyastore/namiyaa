@@ -84,4 +84,28 @@
          members
       where myurl=#{myurl}
    </select>
+   
+   <update id="updateURL" parameterType="Members">
+      update members set myurl = #{myurl}
+      where
+         userid = #{userid}
+   </update>
+   
+   <select id="selectid" resultType="Members">
+      select 
+         userid
+         ,password
+         ,username
+         ,birthday
+         ,gender
+         ,email
+         ,phoneno
+         ,fulladdr
+         ,zipcode
+         ,myurl
+      from
+         members
+      where
+         userid = #{userid}
+   </select>
 </mapper>

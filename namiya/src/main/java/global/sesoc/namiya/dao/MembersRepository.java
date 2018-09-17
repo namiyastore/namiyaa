@@ -42,7 +42,20 @@ public class MembersRepository {
 	      return member;
 	   }
 	
-	
+	public int updateURL(Members m) {
+	      MembersMapper mapper = session.getMapper(MembersMapper.class);
+	      int result = 0;
+	      result = mapper.updateURL(m);
+	      return result;
+	   }
+
+	public Members selectid(String userid) {
+	      MembersMapper mapper = session.getMapper(MembersMapper.class);
+	      Members member = new Members();
+	      member = mapper.selectid(userid);
+	      
+	      return member;
+	   }
 	
 		
 }

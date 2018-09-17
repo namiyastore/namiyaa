@@ -16,4 +16,8 @@ public interface MembersMapper {
 	
 	public Members selectUrl(Members m);
 	
+	public int updateURL(Members m);
+
+	public Members selectid(String userid);
+	
 }
