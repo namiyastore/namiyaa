@@ -89,23 +89,21 @@ public class LinenotifyController {
 	}
 	
 	/**
-	 * 라인 메세지 전송
-	 * @param session
-	 * @param message : 전송할 메세지
-	 * @param receive : 메세지를 받는 사용자 아이디
+	 * 메세지 보내기
+	 * @param message
+	 * @param receive
 	 * @return
 	 */
-	@RequestMapping(value="sendMsg", method=RequestMethod.POST)
-	public @ResponseBody String sendMsg(HttpSession session, String message, String receive) {
+	@RequestMapping(value="LinenotifySendMsg", method=RequestMethod.GET)
+	public @ResponseBody String LinenotifySendMsg(String message, String receive) {
 		
-		String userid = session.getAttribute("loginId").toString();
 		String urlSetting = "https://notify-api.line.me/api/notify?message=" + message;
 		String json = "";
 		Linenotify rs = repository.selectOne(receive);
 		
 		try {
 			HttpclientSendMsg.url = urlSetting;
-			json = HttpclientSendMsg.sendGet(rs.getToken());
+			json = HttpclientSendMsg.sendPost(rs.getToken());
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,4 +114,5 @@ public class LinenotifyController {
 		
 		return json;
 	}
+	
 }

@@ -1,11 +1,13 @@
 package global.sesoc.namiya.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +23,11 @@ import global.sesoc.namiya.dao.CategoriesRepository;
 import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.dao.SearchRepository;
+import global.sesoc.namiya.util.HttpclientSendMsg;
 import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.Categories;
+import global.sesoc.namiya.vo.Linenotify;
 import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Product;
 import global.sesoc.namiya.vo.Profile;

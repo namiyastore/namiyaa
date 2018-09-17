@@ -47,7 +47,7 @@ var lang = "";
 
 var alarmMax = 0;	// 실시간 알림글 가장 최근 번호
 
-$(function(){	
+$(function(){
 	// 카테고리 대분류 가져오기
 	majorCategory();
 	
@@ -67,6 +67,10 @@ $(function(){
 	
 	// 미니홈피 창 열기
 	$("#myStoreClick").on("click",function(){
+		// 메세지 전송
+		// message -> 전할 내용
+		// receive -> 받을상대 id
+		
 		var myurl = $('#myurl').val();
 		window.open("myStore/" + myurl + "/home","mystoreWindow","width=1200, height=650");
 	});
@@ -83,7 +87,6 @@ $(function(){
 	
 	// 창 크기에 따라 좌표 지정 ( 창크기 변경 감지 )
 	$( window ).resize( function() {
-		
 		// < 알림창 위치 >
 		
 		// 카테고리 위치값
