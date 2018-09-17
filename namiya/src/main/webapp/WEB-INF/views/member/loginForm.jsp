@@ -151,7 +151,7 @@ function showErrorMsg(obj, msg) {
     obj.show();
 }
 </script>
-<body>
+<body class="is-preload">
 	<div id="wrap"class="limiter">
 	<div  class="container-login100">
 	<div class="wrap-login10">
@@ -175,8 +175,8 @@ function showErrorMsg(obj, msg) {
 			<span class="error_next_box" id="pwdMsg" style="display:none"></span>
 			<div style="">
 				<br><br>
-				<a id="loginUp"><img width="120" height="50" alt="" src="resources/images/login.png"/></a>
-				<a id="signup" onclick="signUp()"><img width="120" height="50" alt="" src="resources/images/signup.png"></a>
+				<a id="loginUp" class="clickbutton"><img width="120" height="50" alt="" src="resources/images/login.png"/></a>
+				<a id="signup" class="clickbutton" onclick="signUp()"><img width="120" height="50" alt="" src="resources/images/signup.png"></a>
 				<br>
 				<a href="">아이디/비밀번호 찾기</a>
 			</div>

@@ -13,6 +13,7 @@ import global.sesoc.namiya.vo.Profile;
 public interface ProfileMapper {
 	
 	public Profile select(String userid);
-	
 	public int update(Profile profile);
+	public int insert(String userid);
+	
 }

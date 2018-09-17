@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Point 사용</title>
+<script>
+	function UsePoint(userid) {
+		// 포인트 사용하는 로직
+		$.ajax({
+			method : 'post',
+			url : 'UsePoint',
+			data : {"userid" : userid},
+			success : function(resp) {
+				this.close();
+			},
+			error : function(error) {
+				alert("point error :"  + error);
+			}
+		});
+		
+	}
+	
+	function Closed() {
+		this.close();
+	}
+</script>
+<style>
+	body {
+		background: url('${pageContext.request.contextPath}/resources/images/msgmain.png') no-repeat center center fixed; 
+ 		-webkit-background-size: cover;
+  		-moz-background-size: cover;
+  		-o-background-size: cover;
+  		background-size: cover;
+	}
+	
+	.menu {
+		border: 1px solid #79bfe5;
+   		border-radius:7px;
+   		background-color: #79bfe5;
+   		margin : 0 auto;
+		font-size: 14px;
+		padding: 3px;
+		width:110px;
+	}
+	
+	.content {
+		background-color: #fcfbf9;
+		margin : 0 auto;
+		border: 1px solid #fcfbf9;
+   		border-radius: 7px;
+   		background-color: #fcfbf9;
+   		font-size: 13px;
+		padding: 3px;
+	}
+	
+	#pointcontent {
+		background-color: #fcfbf9;
+		margin : 0 auto;
+		border: 1px solid #fcfbf9;
+   		border-radius: 7px;
+   		background-color: #fcfbf9;
+   		font-size: 13px;
+	}
+	
+	.btn {
+		display: inline-block;
+		width: 70px;
+		height: 25px;
+		border: none;
+		color: #fff;
+		border-radius: 5px;
+		background-color: var(--color-primary);
+		-webkit-box-shadow: 0 2px 7px var(--color-semidark);
+	        	box-shadow: 0 2px 7px var(--color-semidark);
+		outline: 0;
+		cursor: pointer;
+		-webkit-transition: all .5s;
+		-o-transition: all .5s;
+		transition: all .5s;
+		background-color:#105531;
+		font-family: Eco Sans Mono;
+		font-size: 15px;
+	}
+	
+	.btn:hover {
+		opacity: .9;
+	}
+</style>
+</head>
+<body>
+<div id="wrapper" align="center">
+<h1 style="color: white;">Point Use</h1>
+<table style="padding-bottom: 10px;">
+	<tr>
+		<th class="menu">사용가능 포인트</th>
+		<td class="content"></td>
+	</tr>
+	<tr>
+		<th class="menu">사용할 포인트</th>
+		<td class="content"><input id="pointcontent" type="text" id="point"></td>
+	</tr>
+</table>
+<input class="btn" type="button" value="사용하기" onclick="UsePoint('${sessionScope.loginId}')">
+<input class="btn" type="button" value="닫기" onclick="Closed()">
+</div>
+</body>
+</html>

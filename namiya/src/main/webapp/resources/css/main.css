@@ -2,8 +2,13 @@
 body {
 		background-image: url('../images/viewPage.png'); 
  		background-attachment: fixed;
+ 		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
 	}
-
 
 /*// ////////////////////////////////////////////////////////////////
 [ FONT ]*/
@@ -33,6 +38,7 @@ body {
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
+
 
 * {
 	margin: 0px; 
@@ -138,6 +144,14 @@ iframe {
 
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
+.clickbutton{
+	cursor: pointer;
+	outline: none !important;
+	border: none;
+	background: transparent;
+}
+
+.
 .txt1 {
   font-family: Poppins-Regular;
   font-size: 13px;
@@ -182,11 +196,6 @@ iframe {
   overflow: hidden;
   padding: 77px 55px 33px 55px;
 
-  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-  -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-  -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .wrap-login100 {

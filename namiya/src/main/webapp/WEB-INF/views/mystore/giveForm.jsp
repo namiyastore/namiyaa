@@ -88,7 +88,12 @@ function  formCheck() {
 	var middle = document.getElementById("middle");
 	var small = document.getElementById("small");
 	var productname = document.getElementById("productname");
-
+	var type = document.getElementById("service").value;
+	
+	alert("종류:"+type);
+	
+	var sendData = {"type" : type};
+	
 	if (title.value == '' || content.value == '') {
 		alert('제목과 내용을 입력하세요.');
 		return false;
@@ -103,6 +108,7 @@ function  formCheck() {
 		alert('상품명을 정확히 입력하세요.');
 		return false;
 	}
+
 	
 	return true;
 }
@@ -318,6 +324,7 @@ function  formCheck() {
 			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px;"></a></li>
+			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; "></a></li>
 		</ul>
 	</div>

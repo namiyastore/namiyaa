@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import global.sesoc.namiya.dao.MembersRepository;
+import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.vo.Members;
 
 @Controller
@@ -34,6 +35,8 @@ public class MemberController {
 	MembersRepository repository;
 	@Autowired
 	private JavaMailSender mailSender;
+	@Autowired
+	ProfileRepository prepository;
 	
 	//region getPage
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
@@ -172,9 +175,11 @@ public class MemberController {
 		int result = 0;
 		System.out.println("가입폼");
 		System.out.println(members);
+		
 		result = repository.insertMembers(members);
 		
 		if(result!=0) {
+			prepository.select(members.getUserid());
 			return "member/loginForm";
 		}else {
 			return "member/joinForm";

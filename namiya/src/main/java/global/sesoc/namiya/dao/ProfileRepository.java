@@ -27,5 +27,11 @@ public class ProfileRepository {
 		int cnt = mapper.update(profile);
 		return cnt;
 	}
+	
+	public int insert(String userid) {
+		ProfileMapper mapper = session.getMapper(ProfileMapper.class);
+		int cnt = mapper.insert(userid);
+		return cnt;
+	}
 		
 }
