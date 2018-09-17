@@ -17,7 +17,7 @@ public class LanguageController {
 		session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.KOREAN);
 		//System.out.println(session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME));
 		
-		return "redirect:/";
+		return "redirect:/loginForm";
 	}
 	
 	@RequestMapping(value = "/en", method = RequestMethod.GET)
@@ -25,7 +25,7 @@ public class LanguageController {
 		session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.ENGLISH);
 		//System.out.println(session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME));
 		
-		return "redirect:/";
+		return "redirect:/loginForm";
 	}
 	
 	@RequestMapping(value = "/jp", method = RequestMethod.GET)
@@ -33,7 +33,7 @@ public class LanguageController {
 		session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.JAPANESE);
 		//System.out.println(session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME));
 		
-		return "redirect:/";
+		return "redirect:/loginForm";
 	}
 	
 }
