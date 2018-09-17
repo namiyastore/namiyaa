@@ -889,7 +889,7 @@
 							<input type="text" id="email" name="email" class="input100" maxlength="100">
 							<span class="focus-input100" data-placeholder="본인인증 이메일"></span>
                     </div>
-							<input type="button" id="emailCheck" value=" 인증 요청 " onclick="isAuthEmail()"/>
+							<input class="clickbutton" type="button" id="emailCheck" value=" 인증 요청 " onclick="isAuthEmail()"/>
 							<span style="display: block;" class="error_next_box" id="emailMsg" style="display:none"></span>
 					<br>
 					<div style="display: inline-block" class="wrap-input100 validate-input">				
@@ -915,14 +915,14 @@
 	        		<input type="text" id="zipcode" name="zipcode" class="input100" maxlength="16" readonly="readonly">
 					<input type="text" id="fullAddr" name="fullAddr" class="input100" maxlength="16" readonly="readonly" placeholder="도로명 주소">
                 </div>
-				 <input type="button" onClick="goPopup();" value=" 주소 찾기 "/>
+				 <input class="clickbutton" type="button" onClick="goPopup();" value=" 주소 찾기 "/>
 			</div>
 			<span class="error_next_box" id="fullAddrMsg" style="display:none"></span>
            	<br>
        </div>
           		<div>
           		<h3 class="join_title"> </h3>
-          			<input type="button" onClick="mainSubmit()" value="회원가입"/>
+          			<input type="button" onClick="mainSubmit()" value="회원가입" class="clickbutton"/>
          		</div>
          		<br><br>
           </div>
