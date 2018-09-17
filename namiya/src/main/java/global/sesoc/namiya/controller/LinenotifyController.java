@@ -101,7 +101,7 @@ public class LinenotifyController {
 		String userid = session.getAttribute("loginId").toString();
 		String urlSetting = "https://notify-api.line.me/api/notify?message=" + message;
 		String json = "";
-		Linenotify rs = repository.selectOne(userid);
+		Linenotify rs = repository.selectOne(receive);
 		
 		try {
 			HttpclientSendMsg.url = urlSetting;
