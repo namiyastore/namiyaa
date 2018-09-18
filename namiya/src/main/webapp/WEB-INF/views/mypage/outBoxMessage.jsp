@@ -49,7 +49,7 @@ $(function(){
 		location.href = 'noticeList';		 
 	}); 
 	$('.leftSide_tabs_tab7').on('click',function(){ 
-		location.href = 'pointList';		 
+		location.href = 'pointRecord';		 
 	}); 
 	 
 });

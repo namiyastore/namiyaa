@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="resources/mypage/css/mypageCommon.css">
+<link rel="stylesheet" href="resources/mypage/css/mypage_message.css">
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
 <script> 
 $(function(){ 
@@ -50,12 +50,11 @@ $(function(){
 		location.href = 'noticeList';		 
 	}); 
 	$('.leftSide_tabs_tab7').on('click',function(){ 
-		location.href = 'pointList';		 
+		location.href = 'pointRecord';		 
 	}); 
 	 
 });
 
- 
 // 라인 인증키 등록 
 function noticeService() { 
 	$.ajax({ 
@@ -83,105 +82,12 @@ function alertMsg() {
 <%-- <body>
 	<div class="wrapper">
 		<div class="leftSide">
-			<div class="tabs">
-				<div class="leftSide_tabs_tab1">
-					Favorite
-				</div>
-				<div class="leftSide_tabs_tab2">
-					Interest
-				</div>
-				<div class="leftSide_tabs_tab3">
-					History
-				</div>
-				<div class="leftSide_tabs_tab4">
-					Keyword
-				</div>
-				<div class="leftSide_tabs_tab5">
-					Message
-				</div>
-				<div class="leftSide_tabs_tab6">
-					Notice
-				</div>
-				<div class="leftSide_tabs_tab7">
-					Point
-				</div>
-			</div>
 			<div class="leftSide_searchBar">
 				<input type="text" id="inputBar" class="inputBar">
-				<a href="검색 컨트롤러"><img src="images/if_misc-_Search__1276849.svg"
-						class="searchIcon"></a>
+				<a href="검색 컨트롤러"><img src="images/if_misc-_Search__1276849.svg" class="searchIcon"></a>
 			</div>
-			<!-- 여기부터 테이블 -->
-			<div class="leftSide_table">
-				<table id="customers">
-					<tr>
-						<th>No.</th>
-						<th>Title</th>
-						<th>Sender</th>
-						<th>Date</th>
-					</tr>
-					<c:if test="${empty message }">
-						<tr>
-							<td colspan="4">
-								<p>받은 쪽지가 없습니다</p>
-							</td>
-						</tr>
-					</c:if>
-					<c:if test="${not empty message }">
-						<c:forEach var="messageList" items="${InboxMList}">
-							<tr class="leftSide_table_rows">
-								<td><a href="selectOneMessage?messagenum=${messageList.messagenum}">${messageList.title }</a>></td>
-								<td>${messageList.userid }</td>
-								<td>${messageList.date }</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				</table>
-			</div>
-			<!-- 테이블의 div -->
+			
 
-		</div>
-		<div class="rightSide">
-			<div class="rightSide_MyInfoBox">
-				<div class="rightSide_MyInfoBoxUp">
-					<div class="rightSide_MyInfoBoxUp_profileImg">
-						<img src="images/parkby.jpg"
-							id="rightSide_MyInfoBoxUp_profileImg_profile_pic">
-					</div><br/>
-					<div class="rightSide_MyInfoBoxUp_userId">
-						<p>${"user.userid"} 유저 아이디</p><!-- 세션id가 있으면 거기서 가지고 옮 9/5 -->
-					</div><br/>
-					<div class="rightSide_MyInfoBoxUp_userName">
-						<p>${"user.username"}유저 이름</p><!-- 세션id로 해당 user를 찾아내서 입력할 예정 9/5 -->
-					</div>
-				</div>
-				<div class="rightSide_MyInfoBoxMidle">
-					<div class="rightSide_MyInfoBoxMidle_mobile">
-						<img>
-						<p>${"user.userphonenum" }유저 전화번호</p><br/><!-- 세션id로 해당 user의 전화번호 받아오기 현재는 임의로 넣어준것임 9/5 -->
-						<p>${"user.userEmailaddress" } 유저 이메일주소</p><!-- 세션id로 해당 user의 이메일주소 받아오기 현재는 임의로 넣어준것임 9/5 -->
-					</div>
-					<div class="rightSide_MyInfoBoxMidle_email">
-					</div>
-				</div>
-				<div class="rightSide_MyInfoBoxDown">
-					<div class="rightSide_MyInfoBoxDown_goToHome">
-						Go To Home
-					</div><!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_myStore">
-						My Store
-					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_profile">
-						Profile
-					</div><!-- rightSide_MyInfoBoxDown_profile의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_logOut">
-						Logout
-					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_signOut">
-						SignOut
-					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
-				</div>
-			</div>
 		</div>
 
 	</div> --%>
@@ -189,10 +95,6 @@ function alertMsg() {
 	 
 		<div class="leftSide"> 
 			<div class="tabs"> 
- 
-				<!-- <div class="leftSide_tabs_tab1"> 
-					Favorite 
-				</div> --> 
 				<div class="leftSide_tabs_tab2"> 
 					Interest 
 				</div> 
@@ -231,59 +133,33 @@ function alertMsg() {
 			<!-- 라인 인증키 얻는 링크 --> 
 <!-- 			<input id="noticeService" type="button" value="Line 알림 서비스 등록" onclick="noticeService()" /> --> 
 			 
-			 
- 			<!-- 여기부터 테이블 --> 
-			<div class="leftSide_table"> 
-				<table id="customers"> 
-					<c:if test="${empty pointRecord }"> 
-						<tr> 
-							<td colspan="4"> 
-								<p>포인트가 없습니다</p> 
-							</td> 
-						</tr> 
-					</c:if> 
-					<c:if test="${not empty pointRecord }"> 
-						<div class="customers_thead"> 
-							<thead> 
-								<tr> 
-									<th>Point</th> 
-									<th>Service</th> 
-									<th>Date</th> 
-								</tr> 
-							</thead> 
-						</div> 
-						 
-						<div class="customers_tbody"> 
-							<tbody> 
-								<c:forEach var="PointList" items="${pointRecord}"> 
-								<tr class="leftSide_table_rows"> 
-								<!--포인트 추가시 수정부분 --> 
-								<c:if test="${PointList.point gt 0}"> 
-									<td class="table_1st_td">+ ${PointList.point}</td> 
-								</c:if> 
-								 <c:if test="${PointList.point lt 0}"> 
-									<td class="table_1st_td">${PointList.point}</td> 
-								</c:if>
-									<td class="table_2nd_td">${PointList.type}</td> 
-									<td class="table_3rd_td">${PointList.regdate}</td> 
-								</tr> 
-								</c:forEach> 
-							</tbody> 
-							 
-						</div><!-- customers_tbody 닫음 --> 
-						 
-						<div class="customer_tfoot"> 
-							<tfoot> 
-								<tr style="color: white; background-color: #0B3B0B;"> 
-									<td colspan="3"> 
-										현재포인트 : <span id="pointTotal" ></span> 
-									</td> 
-								</tr> 
-							</tfoot> 
-						</div><!-- customer_tfoot div닫음 --> 
-				</table> 
-				</c:if> 
-			</div><!-- 테이블의 div 닫음 --> 
+ 			<!-- 여기부터 테이블 -->
+			<div class="leftSide_table">
+				<table id="customers">
+					<tr>
+						<th>No.</th>
+						<th>Title</th>
+						<th>Sender</th>
+						<th>Date</th>
+					</tr>
+					<c:if test="${empty message }">
+						<tr>
+							<td colspan="4">
+								<p>받은 쪽지가 없습니다</p>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${not empty message }">
+						<c:forEach var="messageList" items="${InboxMList}">
+							<tr class="leftSide_table_rows">
+								<td><a href="selectOneMessage?messagenum=${messageList.messagenum}">${messageList.title }</a>></td>
+								<td>${messageList.userid }</td>
+								<td>${messageList.date }</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</table>
+			</div><!-- 테이블의 div -->
 		</div> 
 		<!-- 개인정보 표시 부분 --> 
 		<div class="rightSide"> 
