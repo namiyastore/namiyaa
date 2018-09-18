@@ -9,7 +9,7 @@
  
 <title>Point</title> 
 <script src="resources/search/js/common/jquery-1.12.4.js"></script> 
- 
+
 <script> 
 $(function(){ 
 	 
@@ -167,7 +167,7 @@ function alertMsg() {
 								<tr class="leftSide_table_rows"> 
 								<!--포인트 추가시 수정부분 --> 
 								<c:if test="${PointList.point gt 0}"> 
-									<td class="table_1st_td">+ ${PointList.point}</td> 
+									<td class="table_1st_td">+${PointList.point}</td> 
 								</c:if> 
 								 <c:if test="${PointList.point lt 0}"> 
 									<td class="table_1st_td">${PointList.point}</td> 
