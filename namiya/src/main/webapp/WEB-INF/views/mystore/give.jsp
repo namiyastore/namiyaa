@@ -9,6 +9,13 @@
 <title>양도게시판</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
+$(document).ready(function(){
+	   $(window).resize(function (){
+	      resizeTo(1217, 728);
+	   });
+});
+
+
 function interest(boardnum, userid) {
 	var boardnum = boardnum;
 	var userid = userid;
@@ -30,8 +37,10 @@ function interest(boardnum, userid) {
        });
 }
 
-	
 function want(boardnum, userid) {
+	window.open("checkPoint?boardnum="+boardnum+"&userid="+userid, "newwindowpoint", "width=400, height=300");
+}
+/* function want(boardnum, userid) {
 	var boardnum = boardnum;
 	var userid = userid;
 	var sendData = {"userid" : userid, "boardnum" : boardnum};
@@ -57,7 +66,8 @@ function want(boardnum, userid) {
        		alert("want error : "+error);
        	}
 	});
-}
+} */
+
 </script>
 <style>
 ::-webkit-scrollbar{width: 16px;}
@@ -78,6 +88,7 @@ function want(boardnum, userid) {
   		-moz-background-size: cover;
   		-o-background-size: cover;
   		background-size: cover;
+  		overflow-x: hidden;
 	}
 	
 	#wrapper {

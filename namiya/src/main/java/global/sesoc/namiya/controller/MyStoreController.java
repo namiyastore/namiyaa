@@ -590,6 +590,8 @@ public class MyStoreController {
 		
 		int result = s_repository.pointCheck(saving);
 		
+		System.out.println("point check result:"+result);
+		
 		if (saving.getType().equals("양도") && result == 0) {
 			int result4 = s_repository.pointAdd(saving);
 		} else if (saving.getType().equals("재능기부") && result < 30) {
@@ -806,7 +808,7 @@ public class MyStoreController {
 	
 	/** 양도신청 controller **/
 	@ResponseBody
-	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/selectWish", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/DontusePoint", method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	public String selectWish(@RequestBody Wish wish, Model model, @PathVariable("miniurl")String miniurl) {
 		System.out.println(wish);
 		Map<String, String> param = new HashMap<String, String>();
@@ -862,7 +864,7 @@ public class MyStoreController {
 			
 			System.out.println("history update 결과:"+result2);
 			
-			return null;
+			return "양도신청을 완료했습니다!";
 		} else {
 			return "이미 양도신청을 했습니다!";
 		}
@@ -901,8 +903,87 @@ public class MyStoreController {
 	
 	/** 포인트 확인 controller **/
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/checkPoint")
-	public String checkPoint(@PathVariable("miniurl")String miniurl) {
-		
+	public String checkPoint(@PathVariable("miniurl")String miniurl, HttpSession session, Model model, int boardnum) {
+		String userid = (String) session.getAttribute("loginId");
+		int point_total = s_repository.pointTotal(userid);
+		model.addAttribute("point_total", point_total);
+		model.addAttribute("boardnum", boardnum);
 		return "mystore/checkPoint";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/UsePoint", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String UsePoint(@RequestBody Wish wish, Model model, @PathVariable("miniurl")String miniurl, String userid, int usepoint, int boardnum) {
+		System.out.println(wish);
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("userid", wish.getUserid());
+		param.put("boardnum", ""+wish.getBoardnum());
+		
+		Board board = b_repository.selectOne(wish.getBoardnum());
+		System.out.println(board);
+		
+		Product product = p_repository.selectPdt(board.getProductnum());
+		System.out.println(product);
+		
+		String status = "진행중";
+		
+		product.setSstatus(status);
+		
+		int pudt = p_repository.updatePstt(product);
+		
+		System.out.println("update product :"+product);
+		System.out.println("product 결과:"+pudt);
+		
+		History history = b_repository.selectHstone(board.getProductnum());
+		
+		System.out.println("history거래내역:"+history);
+		
+		Wish wsh = b_repository.selectWish(param);
+		System.out.println(wsh);
+	
+		if (wsh == null) {
+			Saving saving = new Saving();
+			
+			saving.setPoint(usepoint);
+			saving.setUserid(userid);
+				
+			int result = s_repository.pointMinus(saving);
+			
+			int a = usepoint/200;
+			
+			for (int i = 0; i <= a; i++) {
+				int result1 = b_repository.insertWish(wish);
+			}
+
+			String deal_end = null;
+			String deal_start = null;
+			
+			// deal_start 설정
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date today = Calendar.getInstance().getTime();     
+			deal_start = df.format(today);
+			
+			history.setDeal_start(deal_start);
+			
+			// deal_end 설정
+			Date date = new Date();
+			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd"); 
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.add(Calendar.DATE, 3);
+			deal_end = sdformat.format(cal.getTime());  
+			
+			history.setDeal_end(deal_end);
+			
+			int result2 = b_repository.updateHst(history);
+			
+			System.out.println("history update 결과:"+result2);
+			
+			return "양도신청을 완료했습니다!";
+		} else {
+			return "이미 양도신청을 했습니다!";
+		}
+		
+	}
+	
 }
