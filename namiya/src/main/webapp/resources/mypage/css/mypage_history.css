@@ -251,7 +251,7 @@ h2{
 }
 
 /* 0916추가수정 테이블의 열속 글자 정렬 */
-.table_1st_td{
+/* .table_1st_td{
 	text-align: right;
 } 
 .table_2nd_td{
@@ -259,12 +259,12 @@ h2{
 } 
 .table_3rd_td{
 	text-align: right;
-}
+} */
 
 /* 스크롤 고정 0916 */
-table {
+/* table {
   width: 100%;
-}
+} */
 
 table, td {
   border-collapse: collapse;
@@ -281,22 +281,22 @@ tbody {
   max-height: 373px; e.g.
 } */
 
-th, td {
-    /* width: 33.33%; */
+/* th, td {
+    width: 33.33%;
     padding: 5px;
-    /* word-break: break-all; */
-}
+    word-break: break-all;
+} */
 
-tr {
-  display: table; /* display purpose; th's border */
+/* tr {
+  display: table; display purpose; th's border
   width: 100%;
-}
+} */
 
-td {
+/* td {
   text-align: center;
   border-bottom: none;
   border-left: none;
-}
+} */
 /* 스크롤 고정 여기까지 */
  
 .rightSide .rightSide_MyInfoBox {

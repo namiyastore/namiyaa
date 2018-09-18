@@ -29,7 +29,7 @@ $(function(){
 	});
 	
 	 $('.rightSide_MyInfoBoxDown_profile').on('click',function(){ 
-		location.href = 'profileEdit';		 
+		location.href = 'editForm';		 
 	});  
 	 
 	$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){ 
@@ -65,7 +65,6 @@ $(function(){
 	 
 });
 
- 
 // 라인 인증키 등록 
 function noticeService() { 
 	$.ajax({ 
@@ -80,9 +79,8 @@ function noticeService() {
 			} 
 		} 
 	});	 
-	 
 } 
- 
+
 // 인증키가 등록되었다는 메세지 출력 
 function alertMsg() { 
 	alert("등록되었습니다."); 
@@ -253,7 +251,7 @@ function alertMsg() {
 						My Store
 					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_profile">
-						Profile <!-- <span onclick="goProfile()"></span> -->
+						Edit <!-- <span onclick="goProfile()"></span> -->
 					</div><!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
 					<div class="rightSide_MyInfoBoxDown_logOut">
 						Logout
