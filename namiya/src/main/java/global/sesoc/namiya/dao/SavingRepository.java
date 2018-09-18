@@ -15,6 +15,16 @@ public class SavingRepository {
 	SqlSession session;
 	
 	/*
+	 * 오늘 추가된 포인트가 있는지 확인
+	 */
+	public int pointTodayCount(Saving saving) {
+		SavingMapper mapper = session.getMapper(SavingMapper.class);
+		int result = mapper.pointTodayCount(saving);
+		
+		return result;
+	}
+	
+	/*
 	 * 포인트 확인(String : type -> '양도' 또는 '기부')
 	 * ajax로 호출
 	 */

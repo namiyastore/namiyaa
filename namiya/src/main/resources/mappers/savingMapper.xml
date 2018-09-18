@@ -78,4 +78,21 @@
 		order by regdate
 	</select>
 	
+	<select id="pointTodayCount" parameterType="Saving" resultType="int">
+		select 
+			COUNT(*) 
+		from 
+			saving 
+		where 
+			userid = #{userid} 
+		and 
+			type = #{type} 
+		and 
+			regdate 
+		between 
+			to_date(to_char(trunc(sysdate), 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') 
+		and 
+			to_date(to_char(to_date(to_char(trunc(sysdate), 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') + (1/24/60/60 * 86399), 'YYYY-MM-DD hh24:mi:ss'), 'YYYY-MM-DD hh24:mi:ss') 
+	</select>
+	
 </mapper>

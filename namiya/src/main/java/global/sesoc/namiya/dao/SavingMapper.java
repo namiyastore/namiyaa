@@ -35,4 +35,9 @@ public interface SavingMapper {
 	 * 포인트 기록 조회
 	 */
 	public List<Saving> pointRecord(String userid);
+
+	/*
+	 * 오늘 추가된 포인트가 있는지 확인
+	 */
+	public int pointTodayCount(Saving saving);
 }
