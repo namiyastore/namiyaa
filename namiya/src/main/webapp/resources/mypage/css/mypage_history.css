@@ -26,7 +26,7 @@ h2{
     color: white;
     text-align: center;
 }
- 
+
 .wrapper {
     width: 100%;
     height: 650px;
@@ -35,9 +35,21 @@ h2{
     justify-content: space-between;
     align-items: center;
 }
+
+.wrapper .leftSide {
+    width: 80%;
+    height: 90%;
+    /* border: 1px blue solid;  */
+}
  
+.wrapper .rightSide { 
+	width: 20%; 
+	height: 90%; 
+	/* border: 1px blue solid; */  
+	 
+} 
+
 .leftSide{ 
- 
 	display: flex; 
 	flex-direction: column; 
 	align-items: center; 
@@ -52,18 +64,7 @@ h2{
     /* border: 1px green solid; */
 }
  
-.wrapper .leftSide {
-    width: 80%;
-    height: 90%;
-    /* border: 1px blue solid;  */
-}
- 
-.wrapper .rightSide { 
-	width: 20%; 
-	height: 90%; 
-	/* border: 1px blue solid; */  
-	 
-} 
+
 
 .leftSide .tabs {
     width: 90%;
@@ -155,7 +156,7 @@ h2{
 	justify-content: center; 
 	align-items: center; 
 } 
- 
+
 .leftSide .searchIcon { 
 	width: 100%; 
 	height: 100%; 
@@ -182,7 +183,7 @@ h2{
  
 /* 받은쪽지함 보낸쪽지함 탭 */ 
  
-.leftSide .leftSide_searchBar_inoutMsgBoxTabs{ 
+/* .leftSide .leftSide_searchBar_inoutMsgBoxTabs{ 
 	display: flex; 
 	width:90%; 
 	height:5%; 
@@ -201,10 +202,10 @@ h2{
 	background-color: white; 
 	border-top-left-radius: 10px; 
 	border-top-right-radius: 10px; 
-	/* border: 1px black solid; */ 
+	border: 1px black solid; 
 	align-items: center; 
 	justify-content: center; 
-} 
+}  */
  
 .leftSide .leftSide_table { 
 	display: flex; 
@@ -270,20 +271,18 @@ table, td {
   border: 1px solid #000;
 }
 
-thead {
-  display: table; /* to take the same width as tr */
-  width: 100%; /* - 17px because of the scrollbar width */
+/* thead {
+  display: table; to take the same width as tr
+  width: 100%; - 17px because of the scrollbar width
 }
 
 tbody {
-  display: block; /* to enable vertical scrolling */
-  max-height: 373px; /* e.g. */
-  overflow-y: scroll; /* keeps the scrollbar even if it doesn't need it; display purpose */
-  overflow-x: hidden;
-}
+  display: block; to enable vertical scrolling
+  max-height: 373px; e.g.
+} */
 
 th, td {
-    width: 33.33%;
+    /* width: 33.33%; */
     padding: 5px;
     /* word-break: break-all; */
 }

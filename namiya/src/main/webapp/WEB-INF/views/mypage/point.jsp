@@ -66,13 +66,6 @@ $(function(){
 	}); 
 	 
 });
-
-function goProfile(){
-	var goProfile=$('#goProfile');
-	goProfile.submit();
-}
- 
- 
 // 라인 인증키 등록 
 function noticeService() { 
 	$.ajax({ 
@@ -105,9 +98,9 @@ function alertMsg() {
 		<div class="leftSide"> 
 			<div class="tabs"> 
  
-				<div class="leftSide_tabs_tab1"> 
+				<!-- <div class="leftSide_tabs_tab1"> 
 					Favorite 
-				</div> 
+				</div> --> 
 				<div class="leftSide_tabs_tab2"> 
 					Interest 
 				</div> 

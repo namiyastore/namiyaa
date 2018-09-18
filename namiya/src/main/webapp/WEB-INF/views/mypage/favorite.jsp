@@ -15,64 +15,80 @@ function fdelete(num) {
 function fupdate(num){
 	location.href="fSelectOne?favoritenum="+num;
 }
-</script>
+
+$(function(){ 
+	 
+	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
+		location.href = './';		 
+	}); 
+	 
+	$('.rightSide_MyInfoBoxDown_myStore').on('click',function(){ 
+		location.href = 'myStore';		 
+	});
+	
+	 $('.rightSide_MyInfoBoxDown_profile').on('click',function(){ 
+		location.href = 'profileEdit';		 
+	});  
+	 
+	$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){ 
+		location.href = 'logOut';		 
+	}); 
+	 
+	$('.rightSide_MyInfoBoxDown_signOut').on('click',function(){ 
+		location.href = 'signOut';		 
+	}); 
+	 
+	/* 0915 탭들 hover효과 추가 */ 
+	$('.leftSide_tabs_tab1').on('click',function(){ 
+		location.href = 'favoriteList';		 
+	}); 
+	$('.leftSide_tabs_tab2').on('click',function(){ 
+		location.href = 'interestList';		 
+	}); 
+	$('.leftSide_tabs_tab3').on('click',function(){ 
+		location.href = 'historyList';		 
+	}); 
+	$('.leftSide_tabs_tab4').on('click',function(){ 
+		location.href = 'keywordList';		 
+	}); 
+	$('.leftSide_tabs_tab5').on('click',function(){ 
+		location.href = 'mInBoxListAll';		 
+	}); 
+	$('.leftSide_tabs_tab6').on('click',function(){ 
+		location.href = 'noticeList';		 
+	}); 
+	$('.leftSide_tabs_tab7').on('click',function(){ 
+		location.href = 'pointList';		 
+	}); 
+	 
+});
+
+ 
+// 라인 인증키 등록 
+function noticeService() { 
+	$.ajax({ 
+		method : "post", 
+		url : "LinenotifyIdCheck", 
+		success : function(resp) { 
+			if(resp == 1) { 
+				alert('이미 등록되어 있습니다'); 
+			} 
+			else { 
+				window.open("https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=j1pv2YPVmD4wAI5oJhXxBp&redirect_uri=http://localhost:8081/namiya/linenotify&scope=notify&state=oi","MsgWindow", "width=1013,height=1188"); 
+			} 
+		} 
+	});	 
+	 
+} 
+ 
+// 인증키가 등록되었다는 메세지 출력 
+function alertMsg() { 
+	alert("등록되었습니다."); 
+} 
+ 
+</script> 
 </head>
 <body>
-	<h2>즐겨찾기</h2>
-	<div id="wrapper">
-		<a href="myPage">뒤로가기</a>
-		<table border="1">
-			<tr>
-				<th>No.</th>
-				<th>즐겨찾기URL</th>
-				<th colspan="2">삭제</th>
-			</tr>
-			<c:if test="${not empty flist }">
-				<c:forEach var="fList" items="${flist }">
-					<tr>
-						<th>${fList.favoritenum}</th>
-						<td><a href="${fList.myurl}">${fList.myurl }</a></td>
-						<td><input type="button" value="삭제"	onclick="fdelete(${fList.favoritenum})" /></td>
-						<td><input type="button" value="수정"	onclick="fupdate(${fList.favoritenum})" /></td>
-					</tr>
-				</c:forEach>
-			</c:if>
-		</table>
-		<form action="fInsert" method="post">
-			myurl입력
-			<input type="text" name="myurl" />
-			<br /> userid입력
-			<input type="text" name="userid" />
-			<input type="submit" value="즐겨찾기입력">
-		</form>
-		<br />
-		<hr />
-		<h3>즐겨찾기 수정</h3>
-		<form action="fUpdate" method="post">
-			<input type="hidden" name="favoritenum"	value="${selectedfavorite.favoritenum}" />
-			myurl입력
-			<input type="text" name="myurl" value="${selectedfavorite.myurl}" />
-			<br /> userid입력
-			<input type="text" name="userid" value="${selectedfavorite.userid}" />
-			<input type="submit" value="수정완료">
-		</form>
-		<div class="boardfooter">
-			<a href="listboard?currentPage=${navi.currentPage - navi.pagePerGroup}&searchItem=${searchItem}&searchWord=${searchWord}">◁◁</a>
-			<a href="listboard?currentPage=${navi.currentPage - 1}&searchItem=${searchItem}&searchWord=${searchWord}">◀</a>
-
-			<c:forEach var="page" begin="${navi.startPageGroup }"
-				end="${navi.endPageGroup }">
-				<c:if test="${page == currentPage }">
-					<span style="color: red; font-weight: bolder;">${page} &nbsp</span>
-				</c:if>
-
-				<c:if test="${page != currentPage }">
-					<a href="listboard?currentPage=${page}&searchItem=${searchItem}&searchWord=${searchWord}">${page}&nbsp</a>
-				</c:if>
-			</c:forEach>
-			<a href="listboard?currentPage=${navi.currentPage + 1}&searchItem=${searchItem}&searchWord=${searchWord}">▶</a>
-			<a href="listboard?currentPage=${navi.currentPage + navi.pagePerGroup}&searchItem=${searchItem}&searchWord=${searchWord}">▷▷</a>
-		</div>
-	</div>
+	
 </body>
 </html>
