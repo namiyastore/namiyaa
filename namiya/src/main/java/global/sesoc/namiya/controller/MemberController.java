@@ -85,12 +85,13 @@ public class MemberController {
 	public String editMember(HttpSession session, Model model) {
 		System.out.println("회원정보수정");
 		Members m = new Members();
+		Members member = new Members();
 		m.setUserid((String)session.getAttribute("loginId"));
 		m.setUsername((String)session.getAttribute("loginName"));
 		
-		m = repository.selectOne(m);
+		member = repository.selectOne(m);
 		
-		model.addAttribute(m);
+		model.addAttribute(member);
 		return "editForm";//뷰로 넘기는거 해야함
 	}
 	
