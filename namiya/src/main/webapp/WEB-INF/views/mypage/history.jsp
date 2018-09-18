@@ -24,7 +24,7 @@
 		});
 
 		$('.rightSide_MyInfoBoxDown_profile').on('click', function() {
-			location.href = 'profileEdit';
+			location.href = 'editForm';
 		});
 
 		$('.rightSide_MyInfoBoxDown_logOut').on('click', function() {

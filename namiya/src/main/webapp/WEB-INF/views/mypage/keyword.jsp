@@ -64,7 +64,6 @@ $(function(){
 	}); 
 	 
 });
-
  
 // 라인 인증키 등록 
 function noticeService() { 
@@ -93,23 +92,6 @@ function alertMsg() {
 <body>
 	<h2>키워드</h2>
 	<%-- <a href="myPage">뒤로가기</a>
-	<table border="1">
-		<tr>
-			<th>No.</th>
-			<th>키워드</th>
-			<th colspan="2">삭제</th>
-		</tr>
-		<c:if test="${not empty klist }">
-			<c:forEach var="kList" items="${klist }">
-				<tr>
-					<th>${kList.keywordnum}</th>
-					<td><a href="${kList.keywordname}">${kList.keywordname}</a></td>
-					<td><input type="button" value="삭제"	onclick="kdelete(${kList.keywordnum})" /></td>
-					<td><input type="button" value="수정"	onclick="kupdate(${kList.keywordnum})" /></td>
-				</tr>
-			</c:forEach>
-		</c:if>
-	</table>
 	<form action="kInsert" method="post">
 		keyword입력
 		<input type="text" name="keywordname" />
@@ -118,30 +100,12 @@ function alertMsg() {
 		<br /> userid입력
 		<input type="text" name="userid" />
 		<input type="submit" value="키워드 입력완료">
-	</form>
-	<br />
-	<hr />
-	<h3>즐겨찾기 수정</h3>
-	<form action="kUpdate" method="post">
-		<input type="hidden" name="keywordnum" value="${selectedkeyword.keywordnum}" />
-		keyword입력
-		<input type="text" name="keywordname"
-			value="${selectedkeyword.keywordname}" />
-		<br /> 카테고리 입력
-		<input type="text" name="category" value="${selectedkeyword.category}" />
-		<br /> 아이디 입력
-		<input type="text" name="userid" value="${selectedkeyword.userid}" />
-		<input type="submit" value="수정완료">
-	</form>
- --%>
+	</form> --%>
  <div class="wrapper"> 
 	 
 		<div class="leftSide"> 
 			<div class="tabs"> 
  
-				<!-- <div class="leftSide_tabs_tab1"> 
-					Favorite 
-				</div> --> 
 				<div class="leftSide_tabs_tab2"> 
 					Interest 
 				</div> 
@@ -171,68 +135,34 @@ function alertMsg() {
 				</div>
 			</div>			 
 			 
- 			<!-- 여기부터 받은쪽지함/보낸쪽지함 탭 --> 
-			<!-- <div class="leftSide_searchBar_inoutMsgBoxTabs"> 
-				<div class="leftSide_searchBar_inoutMsgBoxTabs_in"><a href="mInBoxListAll">Inbox message</a></div> 
-				<div class="leftSide_searchBar_inoutMsgBoxTabs_out"><a href="mOutBoxListAll">Outbox message</a></div> 
-			</div> --> 
-			 
 			<!-- 라인 인증키 얻는 링크 --> 
 <!-- 			<input id="noticeService" type="button" value="Line 알림 서비스 등록" onclick="noticeService()" /> --> 
 			 
-			 
  			<!-- 여기부터 테이블 --> 
-			<div class="leftSide_table"> 
-				<table id="customers"> 
-					<c:if test="${empty pointRecord }"> 
-						<tr> 
-							<td colspan="4"> 
-								<p>포인트가 없습니다</p> 
-							</td> 
-						</tr> 
-					</c:if> 
-					<c:if test="${not empty pointRecord }"> 
-						<div class="customers_thead"> 
-							<thead> 
-								<tr> 
-									<th>Point</th> 
-									<th>Service</th> 
-									<th>Date</th> 
-								</tr> 
-							</thead> 
-						</div> 
-						 
-						<div class="customers_tbody"> 
-							<tbody> 
-								<c:forEach var="PointList" items="${pointRecord}"> 
-								<tr class="leftSide_table_rows"> 
-								<!--포인트 추가시 수정부분 --> 
-								<c:if test="${PointList.point gt 0}"> 
-									<td class="table_1st_td">+ ${PointList.point}</td> 
-								</c:if> 
-								 <c:if test="${PointList.point lt 0}"> 
-									<td class="table_1st_td">${PointList.point}</td> 
-								</c:if>
-									<td class="table_2nd_td">${PointList.type}</td> 
-									<td class="table_3rd_td">${PointList.regdate}</td> 
-								</tr> 
-								</c:forEach> 
-							</tbody> 
-							 
-						</div><!-- customers_tbody 닫음 --> 
-						 
-						<div class="customer_tfoot"> 
-							<tfoot> 
-								<tr style="color: white; background-color: #0B3B0B;"> 
-									<td colspan="3"> 
-										현재포인트 : <span id="pointTotal" ></span> 
-									</td> 
-								</tr> 
-							</tfoot> 
-						</div><!-- customer_tfoot div닫음 --> 
-				</table> 
-				</c:if> 
-			</div><!-- 테이블의 div 닫음 --> 
+			<div class="leftSide_table">
+				<table id="customers">
+					<tr>
+						<th>No.</th>
+						<th>키워드</th>
+						<th colspan="2">삭제</th>
+					</tr>
+					<c:if test="${not empty klist }">
+						<c:forEach var="kList" items="${klist }">
+							<tr>
+								<td>${kList.keywordnum}</td>
+								<td><a href="${kList.keywordname}">${kList.keywordname}</a></td>
+								<td><input type="button" value="삭제"	onclick="kdelete(${kList.keywordnum})" /></td>
+								<td><input type="button" value="수정"	onclick="kupdate(${kList.keywordnum})" /></td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty klist }">
+						<tr>
+							<th colspan="4">등록하신 키워드가 없습니다.</th>
+						</tr>
+					</c:if>
+				</table>
+			</div><!-- 테이블의 div 닫음 -->
 		</div> 
 		<!-- 개인정보 표시 부분 --> 
 		<div class="rightSide"> 

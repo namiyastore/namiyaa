@@ -94,23 +94,7 @@ function alertMsg() {
 	<h2>알림</h2>
 	<%-- <a href="myPage">뒤로가기</a>
 	<table border="1">
-		<tr>
-			<th>No.</th>
-			<th>알림게시글</th>
-			<th colspan="2">삭제</th>
-		</tr>
-		<c:if test="${not empty nlist }">
-			<c:forEach var="nList" items="${nlist }">
-				<tr>
-					<th>${nList.noticenum}</th>
-					<td><a href="${nList.boardnum}">${nList.boardnum }</a></td>
-					<td><input type="button" value="삭제"
-							onclick="ndelete(${nList.noticenum})" /></td>
-					<td><input type="button" value="수정"
-							onclick="nupdate(${nList.noticenum})" /></td>
-				</tr>
-			</c:forEach>
-		</c:if>
+		
 	</table>
 	<form action="nInsert" method="post">
 		userid입력
@@ -178,57 +162,30 @@ function alertMsg() {
 			 
 			 
  			<!-- 여기부터 테이블 --> 
-			<div class="leftSide_table"> 
-				<table id="customers"> 
-					<c:if test="${empty pointRecord }"> 
-						<tr> 
-							<td colspan="4"> 
-								<p>포인트가 없습니다</p> 
-							</td> 
-						</tr> 
-					</c:if> 
-					<c:if test="${not empty pointRecord }"> 
-						<div class="customers_thead"> 
-							<thead> 
-								<tr> 
-									<th>Point</th> 
-									<th>Service</th> 
-									<th>Date</th> 
-								</tr> 
-							</thead> 
-						</div> 
-						 
-						<div class="customers_tbody"> 
-							<tbody> 
-								<c:forEach var="PointList" items="${pointRecord}"> 
-								<tr class="leftSide_table_rows"> 
-								<!--포인트 추가시 수정부분 --> 
-								<c:if test="${PointList.point gt 0}"> 
-									<td class="table_1st_td">+ ${PointList.point}</td> 
-								</c:if> 
-								 <c:if test="${PointList.point lt 0}"> 
-									<td class="table_1st_td">${PointList.point}</td> 
-								</c:if>
-									<td class="table_2nd_td">${PointList.type}</td> 
-									<td class="table_3rd_td">${PointList.regdate}</td> 
-								</tr> 
-								</c:forEach> 
-							</tbody> 
-							 
-						</div><!-- customers_tbody 닫음 --> 
-						 
-						<div class="customer_tfoot"> 
-							<tfoot> 
-								<tr style="color: white; background-color: #0B3B0B;"> 
-									<td colspan="3"> 
-										현재포인트 : <span id="pointTotal" ></span> 
-									</td> 
-								</tr> 
-							</tfoot> 
-						</div><!-- customer_tfoot div닫음 --> 
-				</table> 
-				</c:if> 
-			</div><!-- 테이블의 div 닫음 --> 
+			<div class="leftSide_table">
+				<table id="customers">
+					<tr>
+						<th>No.</th>
+						<th>알림게시글</th>
+						<th colspan="2">삭제</th>
+					</tr>
+					<c:if test="${not empty nlist }">
+						<c:forEach var="nList" items="${nlist }">
+							<tr>
+								<td>${nList.noticenum}</td>
+								<td><a href="${nList.boardnum}">${nList.boardnum }</a></td>
+								<td><input type="button" value="삭제" onclick="ndelete(${nList.noticenum})" /></td>
+								<td><input type="button" value="수정" onclick="nupdate(${nList.noticenum})" /></td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty nlist }">
+						<tr>
+							<th colspan="4">알림이 없습니다.</th>
+						</tr>
+					</c:if>
+				</table>
+			</div><!-- 테이블의 div 닫음 -->
 		</div> 
 		<!-- 개인정보 표시 부분 --> 
 		<div class="rightSide"> 
