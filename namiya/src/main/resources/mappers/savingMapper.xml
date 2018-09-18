@@ -60,7 +60,7 @@
 		values
 		(
 			saving_seq.nextval, 
-			#{test1}, 
+			#{userid}, 
 			#{point}, 
 			'포인트사용'
 		)
