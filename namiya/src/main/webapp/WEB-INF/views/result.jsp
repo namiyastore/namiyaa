@@ -455,7 +455,17 @@ $(function(){
 	// 검색결과 중 원한는 항목 클릭
 	$(".productList").on("click",function(){
 		var boardnum = $(this).attr('data-boardnum');
-		window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+		var service = $(this).attr('data-service');
+		
+		if(service == '양도') {
+			window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+		}
+		else if(service == '교환') {
+			window.open("myStore/" + myurl + "/tradeView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+		}
+		else if(service == '재능기부') {
+			window.open("myStore/" + myurl + "/talentView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+		}
 	});
 	
 	var bgSize = (window.innerWidth || document.body.clientWidth) + "px " + (window.innerHeight || document.body.clientHeight) + "px";
@@ -1095,7 +1105,7 @@ p, li, a{
 					<c:if test="${!status.last}">
 						<div>
 					</c:if>
-						<div class="productList" data-boardnum="${ptList.boardnum}">
+						<div class="productList" data-boardnum="${ptList.boardnum}" data-service="${ptList.service}">
 							<div class="leftFrame">
 								<div class="productImg">
 									<c:if test="${!status.first}">

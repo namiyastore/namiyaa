@@ -212,7 +212,7 @@ $(function(){
 			var val = "";
 			for(var i in resp) {
 				val += '<hr/>';
-				val += '<div class="noticeItem" data-boardnum="' + resp[i].boardnum + '">'; 
+				val += '<div class="noticeItem" data-service="' + resp[i].service + '" data-boardnum="' + resp[i].boardnum + '">'; 
 				val += '<div class="noticeItemDisplay" id="noticeItemContent">';
 					
 				val += '<div id="noticeText">';
@@ -278,12 +278,12 @@ $(function(){
 				if(resp != null) {
 					if(alarmMax < resp.boardnum) {
 						val += '<hr/>';
-						val += '<div class="noticeItem" data-boardnum="' + resp.boardnum + '">'; 
+						val += '<div class="noticeItem" data-service="' + resp.service + '" data-boardnum="' + resp.boardnum + '">'; 
 						val += '<div class="noticeItemDisplay" id="noticeItemContent">';
 							
 						val += '<div id="noticeText">';
 						if(lang == 'ko') {
-							val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';	
+							val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';	
 						}
 						else if(lang == 'ja') {
 							if(resp.service == '양도') {
@@ -325,7 +325,17 @@ $(function(){
 					
 					$('.noticeItem').off().on('click', function(){
 						var boardnum = $(this).attr('data-boardnum');
-						window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						var service = $(this).attr('data-service');
+						
+						if(service == '양도') {
+							window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						}
+						else if(service == '교환') {
+							window.open("myStore/" + myurl + "/tradeView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						}
+						else if(service == '재능기부') {
+							window.open("myStore/" + myurl + "/talentView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						}
 					});
 				}
 			}
