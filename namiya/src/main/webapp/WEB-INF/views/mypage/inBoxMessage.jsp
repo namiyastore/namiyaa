@@ -19,7 +19,7 @@ $(function(){
 	});
 	
 	 $('.rightSide_MyInfoBoxDown_profile').on('click',function(){ 
-		location.href = 'profileEdit'; 
+		location.href = 'editForm'; 
 	});  
 	 
 	$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){ 
@@ -308,7 +308,7 @@ function alertMsg() {
 						My Store
 					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_profile">
-						Profile <!-- <span onclick="goProfile()"></span> -->
+						Edit <!-- <span onclick="goProfile()"></span> -->
 					</div><!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
 					<div class="rightSide_MyInfoBoxDown_logOut">
 						Logout

@@ -162,7 +162,7 @@
 					<!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_myStore">My Store</div>
 					<!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_profile">Profile</div>
+					<div class="rightSide_MyInfoBoxDown_profile">Edit</div>
 					<!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
 					<div class="rightSide_MyInfoBoxDown_logOut">Logout</div>
 					<!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
