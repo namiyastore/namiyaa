@@ -18,22 +18,18 @@
 		from
 			members
 		where
-		<if test="password != null">
 			userid=#{userid}
-			and
+		<if test="password != null">
+		and
 			password=#{password}
 		</if>
 		<if test="password == null and username != null">
-			userid=#{userid}
-			and
-			username=#{username}
-		</if>
-		<if test="password == null and email == null">
 			userid=#{userid}
 		</if>
   		<if test ="password == null and userid==null">
   			email=#{email}
   		</if>
+  		
   		
 	</select>
 	

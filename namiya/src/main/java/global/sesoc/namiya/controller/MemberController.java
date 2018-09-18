@@ -92,7 +92,7 @@ public class MemberController {
 		member = repository.selectOne(m);
 		
 		model.addAttribute(member);
-		return "editForm";//뷰로 넘기는거 해야함
+		return "member/editForm";//뷰로 넘기는거 해야함
 	}
 	
 	@RequestMapping(value="edit_form",method=RequestMethod.POST)
