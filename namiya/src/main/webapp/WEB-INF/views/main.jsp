@@ -27,7 +27,7 @@ html, body {
 </style>
 </head>
 <body>
-	<div><a onclick="mystoreOpen()"><img alt="" src="resources/images/houseclick.png"> </a></div>
+	<div><a class="clickbutton" onclick="mystoreOpen()"><img alt="" src="resources/images/houseclick.png"> </a></div>
 	
 </body>
 </html>

@@ -62,9 +62,9 @@ public class MemberController {
 		
 		if(m!=null) {
 			System.out.println("로그인성공");
+			System.out.println(m);
 			session.setAttribute("loginId", m.getUserid());
 			session.setAttribute("loginName", m.getUsername());
-			model.addAttribute("message", "로그인 성공!");
 			
 			return "redirect:/search";
 		}else {
@@ -87,11 +87,10 @@ public class MemberController {
 		Members m = new Members();
 		Members member = new Members();
 		m.setUserid((String)session.getAttribute("loginId"));
-		m.setUsername((String)session.getAttribute("loginName"));
 		
 		member = repository.selectOne(m);
-		
-		model.addAttribute(member);
+		System.out.println(member);
+		model.addAttribute("member", member);
 		return "member/editForm";//뷰로 넘기는거 해야함
 	}
 	

@@ -51,7 +51,7 @@ $(document).ready(function(){
 	$("#password").keydown(function(key) {
         if (key.keyCode == 13) {// 엔터
         	if(idFlag&&pwdFlag&&(!isShift)){
-    			alert("로그인");
+    			alert("엔터누름");
     			$("#login_form").submit();
     		}else{
     			alert("id Fail"+idFlag);
