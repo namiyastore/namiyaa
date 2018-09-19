@@ -99,17 +99,19 @@ public class LinenotifyController {
 		
 		String urlSetting = "https://notify-api.line.me/api/notify?message=" + message;
 		String json = "";
-		Linenotify rs = repository.selectOne(receive);
+		Linenotify rs = repository.selectOne(receive);		
 		
-		try {
-			HttpclientSendMsg.url = urlSetting;
-			json = HttpclientSendMsg.sendPost(rs.getToken());
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(rs != null && rs.getOnoff() == 1) {
+			try {
+				HttpclientSendMsg.url = urlSetting;
+				json = HttpclientSendMsg.sendPost(rs.getToken());
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return json;

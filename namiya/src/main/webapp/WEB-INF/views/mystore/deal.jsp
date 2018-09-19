@@ -12,6 +12,27 @@
 		location.href="historyList";
 	}
 	
+	// 라인 메세지 전송
+	function msgSend(id, content) {
+		var message = content;
+		var receive = id;
+		
+		var jsonData = { 
+			'message' : message,
+			'receive' : receive
+		};
+		
+		$.ajax({
+			method : 'get',
+			url : 'LinenotifySendMsg',
+			data : jsonData,
+			dataType : 'json',
+			success : function(resp) {
+				alert(JSON.stringify(resp));
+			}
+		});
+	}
+	
 	function selected(historynum) {
 		alert("추첨하기");
 		alert(historynum);
@@ -34,6 +55,12 @@
 					a += ')" >';				
 					a += '</td>';
 				$("#winner").html(a);
+				
+				var urlAddr = "http://203.233.199.115:8081";
+				var msg = "추첨%20대상자로%20선정되셨습니다%0Aline:" + urlAddr + "/namiya/sendMsg?userid=" + resp;
+				
+				// 당첨자에게 메세지 전송
+				msgSend(resp, msg);
 			},
 			error : function(error) {
 				alert("추첨 error : "+error);
@@ -152,6 +179,9 @@
 </style>
 </head>
 <body>
+
+<input id="userid" type="hidden" value="${sessionScope.loginId }" />
+
 <div id="wrapper" align="center">
 <div style="width:800px; height:600px;">
 	<%-- 거래정보 --%>
