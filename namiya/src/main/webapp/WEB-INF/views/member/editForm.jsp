@@ -873,7 +873,7 @@
        </div>
           		<div>
           		<h3 class="join_title"> </h3>
-          			<input type="button" onClick="mainSubmit()" value="회원가입" class="clickbutton"/>
+          			<input type="button" onClick="mainSubmit()" value="회원정보수정" class="clickbutton"/>
          		</div>
          		<br><br>
           </div>
