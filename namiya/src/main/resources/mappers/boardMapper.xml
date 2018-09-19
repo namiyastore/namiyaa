@@ -41,9 +41,9 @@
 		select interestnum, userid, boardnum from interest where userid=#{userid} and boardnum=#{boardnum}
 	</select>
 	
-	<select id="insertItr" parameterType="Interest">
+	<insert id="insertItr" parameterType="Interest">
 		insert into interest (interestnum, userid, boardnum) values(interestnum_seq.nextval, #{userid}, #{boardnum})
-	</select>
+	</insert>
 	
 	<insert id="insertHst" parameterType="History">
 		insert into history (historynum, productnum, sellerid) values(historynum_seq.nextval, #{productnum}, #{sellerid})

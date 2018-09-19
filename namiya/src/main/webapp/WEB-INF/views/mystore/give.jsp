@@ -21,7 +21,7 @@ function interest(boardnum, userid) {
 	var userid = userid;
 	
 	var sendData = {"userid" : userid, "boardnum" : boardnum};
-	
+	alert(boardnum+", "+userid)
     $.ajax({
        	url : 'selectItr',
        	method : 'post',
@@ -38,7 +38,7 @@ function interest(boardnum, userid) {
 }
 
 function want(boardnum, userid) {
-	window.open("checkPoint?boardnum="+boardnum+"&userid="+userid, "newwindowpoint", "width=400, height=300");
+	window.open("checkPoint?boardnum="+boardnum+"&userid="+userid, "newwindowpoint", "width=500, height=300");
 }
 /* function want(boardnum, userid) {
 	var boardnum = boardnum;
@@ -254,7 +254,7 @@ function want(boardnum, userid) {
 						<td id="image"><img src="${pageContext.request.contextPath}/boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
 						</c:if>
 						<c:if test="${map.ORIGINALFILE == null}">
-						<td id="image"><img src="${pageContext.request.contextPath}/resources/images/rabit.png" style="width:150px; height:100px;"></td>
+						<td id="image"><img src="${pageContext.request.contextPath}/resources/images/basiclogo.png" style="width:150px; height:50px;"></td>
 						</c:if>
 						<td id="title"><a href="giveView?boardnum=${map.BOARDNUM}" style="text-decoration:none; color:black;"><span id="title"><b>${map.TITLE}</b></span></a></td>
 						<td id="date">${map.REGDATE}</td>

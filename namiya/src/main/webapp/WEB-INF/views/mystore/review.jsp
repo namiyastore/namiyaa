@@ -8,6 +8,12 @@
 <title>후기게시판</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
+$(document).ready(function(){
+	   $(window).resize(function (){
+	      resizeTo(1217, 728);
+	   });
+});
+
 	function writeReview() {
 		var answer = confirm("후기를 등록하시겠습니까?");
 		if (answer) {
@@ -187,8 +193,8 @@
 	<div id="scroll" style="float:left; width: 1073px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
 		<div id="givedetail">
 		<form name="form" action="insertReview" method="post">
-		<input type="hidden" name="userid" value="${session.loginId}">
-		<input type="hidden" name="store_owner" value="bbb">
+		<input type="hidden" name="userid" value="${sessionScope.loginId}">
+		<input type="hidden" name="store_owner" value="${store_owner}">
 			<h1><b>Review</b></h1>
 			<hr/>
 			<br/>
@@ -197,7 +203,7 @@
 					<table align="center">
 						<tr>
 							<td>
-								<img src="${pageContext.request.contextPath}/resources/images/rabit.png" style="width:130px; height: 134px; margin-top: 5px; margin-right: 20px;">
+								<img src="${pageContext.request.contextPath}/resources/images/basiclogo.png" style="width:130px; height: 45px; margin-top: 5px; margin-right: 20px;">
 							</td>
 							<td>
 								<textarea rows="9" cols="50" style="resize: none; margin-top: 5px; outline: none;" id="review_content" name="review_content"></textarea>
@@ -228,7 +234,7 @@
 							</tr>
 							<tr>
 								<td>
-									<img align="center" src="${pageContext.request.contextPath}/resources/images/rabit.png" style="width:130px; height: 134px; margin-top: 5px; margin-right: 20px;">
+									<img align="center" src="${pageContext.request.contextPath}/resources/images/basiclogo.png" style="width:130px; height: 45px; margin-top: 5px; margin-right: 20px;">
 								</td>
 								<td>
 									<textarea rows="9" cols="50" style="resize: none; margin-top: 5px; outline: none; " id="review_content" name="review_content">${list.review_content}</textarea>

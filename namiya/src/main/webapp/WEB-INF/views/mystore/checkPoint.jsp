@@ -12,7 +12,6 @@
 		var userid = userid;
 		var boardnum = boardnum;
 		var total = document.getElementById("total").innerHTML;
-		alert(total);
 		var sendData = {"usepoint" : usepoint, "userid" : userid, "boardnum" : boardnum};
 		
 		if(isNaN(usepoint)) {
@@ -38,13 +37,12 @@
 		alert(boardnum+", "+userid+"," + usepoint);
 		// 포인트 사용하는 로직
 		$.ajax({
-			method : 'post',
-			url : 'UsePoint',
-			data : JSON.stringify(sendData),
+			method : 'get',
+			url : 'usePoint',
+			data : {"usepoint" : usepoint, "userid" : userid, "boardnum" : boardnum},
 			contentType : 'application/json; charset=UTF-8',
 			success : function(resp) {
 				alert(resp);
-				this.close();
 			},
 			error : function(error) {
 				alert("point error :"  + error);
