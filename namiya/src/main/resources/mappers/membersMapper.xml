@@ -17,6 +17,10 @@
 			,myurl
 		from
 			members
+		<if test ="password == null and userid==null">
+  		where	
+  			email=#{email}
+  		</if>
 		where
 			userid=#{userid}
 		<if test="password != null">
@@ -26,8 +30,8 @@
 		<if test="password == null and username != null">
 			userid=#{userid}
 		</if>
-  		<if test ="password == null and userid==null">
-  			email=#{email}
+  		<if test = "password == null and email != null">
+  			
   		</if>
   		
   		

@@ -193,7 +193,7 @@ function showErrorMsg(obj, msg) {
 				<a id="loginUp" class="clickbutton"><img width="120" height="50" alt="" src="resources/images/login.png"/></a>
 				<a id="signup" class="clickbutton" onclick="signUp()"><img width="120" height="50" alt="" src="resources/images/signup.png"></a>
 				<br>
-				<a href="">아이디/비밀번호 찾기</a>
+				<a href="">아이디</a><a href="">비밀번호 찾기</a>
 			</div>
 		</form>
 		

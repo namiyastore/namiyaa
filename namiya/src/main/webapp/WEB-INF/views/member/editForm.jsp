@@ -786,11 +786,12 @@
             <div class="join_content">
                 <!-- 아이디, 비밀번호 입력 -->
                 <div class="row_group">
+                <h6 style="color: #999999" class="join_title">아이디</h6>
                     <div style="display: inline-block" class="wrap-input100 validate-input">      
 							<input type="text" id="id" name="id" class="input100" value="${member.userid}" maxlength="20" readonly="readonly">
-							<span class="focus-input100" data-placeholder="아이디"></span>
+							
                     </div>
-                    <span></span>
+    
                     <div style="display: block"  class="wrap-input100 validate-input">
 							<input type="password" id="pswd1" name="pswd1" class="input100" title="비밀번호 입력" maxlength="20">
 							<span class="focus-input100" data-placeholder="비밀번호"></span>
@@ -810,9 +811,9 @@
                 <div class="row_group">
 
                     <!-- lang = ko_KR -->
+                    <h6 style="color: #999999" class="join_title">이름</h6>
                     <div style="display: inline-block" class="wrap-input100 validate-input">
 						<input type="text" id="name" name="name" class="input100" value="${member.username}" maxlength="40">
-						<span class="focus-input100" data-placeholder="이 름"></span>
                     </div>
                     <span class="error_next_box" id="nameMsg" style="display:none"></span>
                     <!-- lang = ko_KR -->
@@ -851,9 +852,9 @@
                 </div>
 				
                 <!-- 휴대전화 번호 -->
+                <h6 style="color: #999999" class="join_title">전화번호</h6>
                 <div style="display: inline-block" class="wrap-input100 validate-input">
-							<input type="tel" id="phoneNo" name="phoneNo" class="input100" maxlength="16">
-							<span class="focus-input100" data-placeholder="전화번호입력"></span>
+							<input type="tel" id="phoneNo" name="phoneNo" class="input100" value="${member.phoneNo}" maxlength="16">
                 </div>
                 <span class="error_next_box" id="phoneNoMsg" style="display:none"></span>
                 
