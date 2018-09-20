@@ -56,7 +56,9 @@ public class SearchController {
 		m.setUserid(userid);
 		
 		Members result1 = Members_repository.selectOne(m);
+		Profile profile = profile_repository.select(userid);
 		
+		model.addAttribute("profile",profile);
 		model.addAttribute("myurl",result1.getMyurl());
 		
 		return "search";
@@ -95,6 +97,7 @@ public class SearchController {
 		@RequestParam(value="parentnum", defaultValue="") String parentnum,
 		@RequestParam(value="searchFlag", defaultValue="off") String searchFlag,
 		@RequestParam(value="categoryGroup", defaultValue="none") String categoryGroup,
+		HttpSession session,
 		String myurl,
 		Model model
 	) {
@@ -102,6 +105,7 @@ public class SearchController {
 		PageNavigator navi = null;
 		List<Board> list = null;
 		int pageCountSet = 10;
+		String userid = session.getAttribute("loginId").toString();
 		
 		// 검색버튼 클릭
 		if(searchFlag.equals("on"))	{
@@ -114,9 +118,16 @@ public class SearchController {
 			int pnum = Integer.parseInt(parentnum);
 			
 			if(categoryGroup.equals("major")) {
-				totalRecordCount = search_repository.getTotalBoardbyMajorCategory(pnum);
-				navi = new PageNavigator(currentPage2, totalRecordCount, pageCountSet, pageCountSet);
-				list = search_repository.selectAllbyCategory(pnum, navi.getStartRecord(), navi.getCountPerPage());
+				if(pnum <= 1983) {
+					totalRecordCount = search_repository.getTotalBoardbyMajorCategory(pnum);
+					navi = new PageNavigator(currentPage2, totalRecordCount, pageCountSet, pageCountSet);
+					list = search_repository.selectAllbyCategory(pnum, navi.getStartRecord(), navi.getCountPerPage());
+				}
+				else {
+					totalRecordCount = search_repository.getTotalBoardbyMinorCategory(pnum);
+					navi = new PageNavigator(currentPage4, totalRecordCount, pageCountSet, pageCountSet);
+					list = search_repository.selectAllbyCategoryMinor(pnum, navi.getStartRecord(), navi.getCountPerPage());
+				}
 			}
 			else if(categoryGroup.equals("medium")) {
 				totalRecordCount = search_repository.getTotalBoardbyMediumCategory(pnum);
@@ -129,6 +140,10 @@ public class SearchController {
 				list = search_repository.selectAllbyCategoryMinor(pnum, navi.getStartRecord(), navi.getCountPerPage());
 			}
 		}
+		
+		Profile profile = profile_repository.select(userid);
+		
+		model.addAttribute("profile",profile);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("searchWord", searchWord);

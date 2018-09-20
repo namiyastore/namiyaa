@@ -455,7 +455,17 @@ $(function(){
 	// 검색결과 중 원한는 항목 클릭
 	$(".productList").on("click",function(){
 		var boardnum = $(this).attr('data-boardnum');
-		window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+		var service = $(this).attr('data-service');
+		
+		if(service == '양도') {
+			window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+		}
+		else if(service == '교환') {
+			window.open("myStore/" + myurl + "/tradeView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+		}
+		else if(service == '재능기부') {
+			window.open("myStore/" + myurl + "/talentView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+		}
 	});
 	
 	var bgSize = (window.innerWidth || document.body.clientWidth) + "px " + (window.innerHeight || document.body.clientHeight) + "px";
@@ -1027,6 +1037,7 @@ p, li, a{
 <input id="userid" type="hidden" value="${sessionScope.loginId }">
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <input id="myurl" type="hidden" value="${myurl}" />
+<input id="nickname" type="hidden" value="${profile.nickname}" />
 
 <div id="container">
 
@@ -1094,7 +1105,7 @@ p, li, a{
 					<c:if test="${!status.last}">
 						<div>
 					</c:if>
-						<div class="productList" data-boardnum="${ptList.boardnum}">
+						<div class="productList" data-boardnum="${ptList.boardnum}" data-service="${ptList.service}">
 							<div class="leftFrame">
 								<div class="productImg">
 									<c:if test="${!status.first}">
@@ -1127,7 +1138,7 @@ p, li, a{
 		<div id="profile">
 		
 			<div id="profilePicture">
-				<img src="resources/search/image/jennifer.jpg" width="100px">
+				<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/profile/${profile.savedfile}" width="80px" height="80px">
 			</div>
 			<div id="myPageClick" class="profileBtn"><spring:message code="search.profileBtn.myPageClick" /></div>
 			<div id="myStoreClick" class="profileBtn"><spring:message code="search.profileBtn.myStoreClick" /></div>
@@ -1183,7 +1194,7 @@ p, li, a{
 		
 		// 해당 ID에 맞는 홈피 열기
 		function openMiniHome(obj) {
-			var uri = "myStore/" + $(obj).attr('data-id');
+			var uri = "myStore/" + $(obj).attr('data-id') + "/home";
 			
 			window.open(uri,"mystoreWindow","width=1200, height=650");
 		}
@@ -1196,11 +1207,7 @@ p, li, a{
 
         // 메시지 전송
         function sendMessage() {
-        	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + userid + "</a>" + " : " + $("#message").val() + "<br/>";
-        	
-        	
-        	
-        	
+        	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + $('#nickname').val() + "</a>" + " : " + $("#message").val() + "<br/>";
         	sock.send(tag);
         	//sock.send( + $("#message").val());
         }

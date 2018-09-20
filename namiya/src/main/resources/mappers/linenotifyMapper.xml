@@ -20,7 +20,7 @@
 	
 	<select id="selectOne" parameterType="string" resultType="Linenotify">
 		select 
-			userid, token 
+			userid, token, onoff 
 		from 
 			linenotify 
 		where 

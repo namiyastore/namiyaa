@@ -759,7 +759,7 @@
     //endregion
 </script>
 
-<body>
+<body class="is-preload">
 <div id="wrap"class="limiter">
 <div  class="container-login100">
 <div class="wrap-login100">

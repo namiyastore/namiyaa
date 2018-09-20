@@ -14,26 +14,26 @@ public class HttpclientSendMsg {
 	private static final String USER_AGENT = "Mozila/5.0";
 	public static String url = null;
 	
-	public static String sendGet(String accessToken) throws ClientProtocolException, IOException {
+	public static String sendPost(String accessToken) throws ClientProtocolException, IOException {
 		
 		//http client 생성
 		CloseableHttpClient httpClient = HttpClients.createDefault(); 
 		
 		//get 메서드와 URL 설정
-		HttpPost httpGet = new HttpPost(url);
+		HttpPost httpPost = new HttpPost(url);
 		
 		String token = "Bearer " + accessToken;
 		
 		//agent 정보 설정
-		httpGet.addHeader("User-Agent", USER_AGENT);
-		httpGet.setHeader("Access-Control-Allow-Origin", "*");
-		httpGet.setHeader("Authorization", token);
-		httpGet.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
-		httpGet.setHeader("Access-Control-Max-Age", "3600");
-		httpGet.setHeader("Access-Control-Allow-Headers", "x-requested-with, origin, content-type, accept");
+		httpPost.addHeader("User-Agent", USER_AGENT);
+		httpPost.setHeader("Access-Control-Allow-Origin", "*");
+		httpPost.setHeader("Authorization", token);
+		httpPost.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
+		httpPost.setHeader("Access-Control-Max-Age", "3600");
+		httpPost.setHeader("Access-Control-Allow-Headers", "x-requested-with, origin, content-type, accept");
 		
 		//get 요청
-		CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
+		CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
 		
 //		System.out.println("GET Response Status");
 //		System.out.println(httpResponse.getStatusLine().getStatusCode());

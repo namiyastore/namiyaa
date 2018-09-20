@@ -10,14 +10,38 @@
 <title>교환 글 자세히 보기</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
-	function interest() {
-		alert("관심상품에 추가되었습니다!");
-	}
+$(document).ready(function(){
+	   $(window).resize(function (){
+	      resizeTo(1217, 728);
+	   });
+});
+
+
+function interest(boardnum, userid) {
+	var boardnum = boardnum;
+	var userid = userid;
 	
-	function want() {
-		alert("이 상품을 원합니다");
-	}
+	var sendData = {"userid" : userid, "boardnum" : boardnum};
 	
+ $.ajax({
+    	url : 'selectItr',
+    	method : 'post',
+    	data : JSON.stringify(sendData),
+    	contentType : 'application/json; charset=UTF-8',
+    	success : function(resp) {
+			alert(resp);
+    	}
+    	,
+    	error : function(error) {
+    		alert("interest error : "+error);
+    	}
+    });
+}
+
+function want(boardnum, userid) {
+	window.open("checkPoint?boardnum="+boardnum+"&userid="+userid, "newwindowpoint", "width=500, height=300");
+}
+
 	function talent() {
 		location.href="talent";
 	}
@@ -211,8 +235,8 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="right">
-							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest()" style="width:55px; height:40px;">
-							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
+							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
+							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 							<hr/>
 						</td>
 					</tr>

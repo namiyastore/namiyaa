@@ -8,50 +8,36 @@
 <title>재능기부게시판</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
-	function interest(boardnum, userid) {
-		var boardnum = boardnum;
-		var userid = userid;
-		
-		var sendData = {"userid" : userid, "boardnum" : boardnum};
-		
-	    $.ajax({
-	       	url : 'selectItr',
-	       	method : 'post',
-	       	data : JSON.stringify(sendData),
-	       	contentType : 'application/json; charset=UTF-8',
-	       	success : function(resp) {
-	 			alert(resp);
-	       	}
-	       	,
-	       	error : function(error) {
-	       		alert("interest error : "+error);
-	       	}
-	       });
+$(document).ready(function(){
+	   $(window).resize(function (){
+	      resizeTo(1217, 728);
+	   });
+});
+	
+function interest(boardnum, userid) {
+	var boardnum = boardnum;
+	var userid = userid;
+	
+	var sendData = {"userid" : userid, "boardnum" : boardnum};
+	
+    $.ajax({
+       	url : 'selectItr',
+       	method : 'post',
+       	data : JSON.stringify(sendData),
+       	contentType : 'application/json; charset=UTF-8',
+       	success : function(resp) {
+ 			alert(resp);
+       	}
+       	,
+       	error : function(error) {
+       		alert("interest error : "+error);
+       	}
+       });
+}
 
-	}
-
-	function want(boardnum, userid) {
-		var boardnum = boardnum;
-		var userid = userid;
-		
-		alert(boardnum+", "+userid);
-		
-		var sendData = {"userid" : userid, "boardnum" : boardnum};
-		
-		$.ajax({
-			url : 'selectWish',
-			method : 'post',
-			data : JSON.stringify(sendData),
-			contentType : 'application/json; charset=UTF-8',
-			success : function(resp) {
-				alert(resp);
-			}	
-			,
-	       	error : function(error) {
-	       		alert("want error : "+error);
-	       	}
-		});
-	}
+function want(boardnum, userid) {
+	window.open("checkPoint?boardnum="+boardnum+"&userid="+userid, "newwindowpoint", "width=500, height=300");
+}
 </script>
 <style>
 ::-webkit-scrollbar{width: 16px;}
@@ -238,7 +224,7 @@
 						<td id="image"><img src="${pageContext.request.contextPath}/boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
 						</c:if>
 						<c:if test="${map.ORIGINALFILE == null}">
-						<td id="image"><img src="${pageContext.request.contextPath}/resources/images/rabit.png" style="width:150px; height:100px;"></td>
+						<td id="image"><img src="${pageContext.request.contextPath}/resources/images/basiclogo.png" style="width:150px; height:50px;"></td>
 						</c:if>
 						<td id="title"><a href="talentView?boardnum=${map.BOARDNUM}" style="text-decoration:none; color:black;"><span id="title"><b>${map.TITLE}</b></span></a></td>
 						<td id="date">${map.REGDATE}</td>
@@ -246,7 +232,7 @@
 						<td id="btn">
 							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 							&nbsp;
-							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want()" style="width:55px; height:40px;">
+							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 						</td>
 						</c:if>
 					</tr>

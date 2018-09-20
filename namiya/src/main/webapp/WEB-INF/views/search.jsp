@@ -47,7 +47,7 @@ var lang = "";
 
 var alarmMax = 0;	// 실시간 알림글 가장 최근 번호
 
-$(function(){	
+$(function(){
 	// 카테고리 대분류 가져오기
 	majorCategory();
 	
@@ -67,6 +67,10 @@ $(function(){
 	
 	// 미니홈피 창 열기
 	$("#myStoreClick").on("click",function(){
+		// 메세지 전송
+		// message -> 전할 내용
+		// receive -> 받을상대 id
+		
 		var myurl = $('#myurl').val();
 		window.open("myStore/" + myurl + "/home","mystoreWindow","width=1200, height=650");
 	});
@@ -83,7 +87,6 @@ $(function(){
 	
 	// 창 크기에 따라 좌표 지정 ( 창크기 변경 감지 )
 	$( window ).resize( function() {
-		
 		// < 알림창 위치 >
 		
 		// 카테고리 위치값
@@ -209,12 +212,12 @@ $(function(){
 			var val = "";
 			for(var i in resp) {
 				val += '<hr/>';
-				val += '<div class="noticeItem" data-boardnum="' + resp[i].boardnum + '">'; 
+				val += '<div class="noticeItem" data-service="' + resp[i].service + '" data-boardnum="' + resp[i].boardnum + '">'; 
 				val += '<div class="noticeItemDisplay" id="noticeItemContent">';
 					
 				val += '<div id="noticeText">';
 				if(lang == 'ko') {
-					if(resp[i].service == '양도')val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';	
+					val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp[i].service + ' ]</h3>';	
 				}
 				else if(lang == 'ja') {
 					if(resp[i].service == '양도') {
@@ -270,15 +273,41 @@ $(function(){
 			url : "noticeForAll?lang=" + lang,
 			dataType : "json",
 			success : function(resp) {
-				var val = "";	
+				
+				var val = "";				
 				if(resp != null) {
 					if(alarmMax < resp.boardnum) {
 						val += '<hr/>';
-						val += '<div class="noticeItem" data-boardnum="' + resp.boardnum + '">'; 
+						val += '<div class="noticeItem" data-service="' + resp.service + '" data-boardnum="' + resp.boardnum + '">'; 
 						val += '<div class="noticeItemDisplay" id="noticeItemContent">';
 							
 						val += '<div id="noticeText">';
-						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';
+						if(lang == 'ko') {
+							val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';	
+						}
+						else if(lang == 'ja') {
+							if(resp.service == '양도') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 譲渡 ]</h3>';	
+							}
+							else if(resp.service == '재능기부') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能寄付 ]</h3>';
+							}
+							else if(resp.service == '교환') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能 ]</h3>';
+							}
+						}
+						else if(lang == 'en') {
+							if(resp.service == '양도') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Transfer ]</h3>';	
+							}
+							else if(resp.service == '재능기부') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Talent donation ]</h3>';
+							}
+							else if(resp.service == '교환') {
+								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ barter ]</h3>';
+							}
+						}
+						
 						val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp.content;
 						val += '</div>';
 						val += '<div id="noticeDate">';
@@ -296,7 +325,17 @@ $(function(){
 					
 					$('.noticeItem').off().on('click', function(){
 						var boardnum = $(this).attr('data-boardnum');
-						window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						var service = $(this).attr('data-service');
+						
+						if(service == '양도') {
+							window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						}
+						else if(service == '교환') {
+							window.open("myStore/" + myurl + "/tradeView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						}
+						else if(service == '재능기부') {
+							window.open("myStore/" + myurl + "/talentView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						}
 					});
 				}
 			}
@@ -610,6 +649,7 @@ function minerCategory(category_m) {
 <input id="userid" type="hidden" value="${sessionScope.loginId }">
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <input id="myurl" type="hidden" value="${myurl}" />
+<input id="nickname" type="hidden" value="${profile.nickname}" />
 
 <div id="container">
 
@@ -645,8 +685,8 @@ function minerCategory(category_m) {
 		<!-- 프로필 -->
 		<div id="profile">
 		
-			<div id="profilePicture">
-				<img src="resources/search/image/jennifer.jpg" width="100px">
+			<div id="profilePicture">			
+				<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/profile/${profile.savedfile}" width="80px" height="80px">
 			</div>
 			<div id="myPageClick" class="profileBtn"><spring:message code="search.profileBtn.myPageClick" /></div>
 			<div id="myStoreClick" class="profileBtn"><spring:message code="search.profileBtn.myStoreClick" /></div>
@@ -702,7 +742,7 @@ function minerCategory(category_m) {
 		
 		// 해당 ID에 맞는 홈피 열기
 		function openMiniHome(obj) {
-			var uri = "myStore/" + $(obj).attr('data-id');
+			var uri = "myStore/" + $(obj).attr('data-id') + "/home";
 			
 			window.open(uri,"mystoreWindow","width=1200","height=650");
 		}
@@ -715,7 +755,7 @@ function minerCategory(category_m) {
 
         // 메시지 전송
         function sendMessage() {
-        	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + userid + "</a>" + " : " + $("#message").val() + "<br/>";
+        	var tag = "&nbsp;<a href='javascript:void(0);' onclick='openMiniHome(this);' data-id='" + userid + "' style='text-decoration:none;'>" + $('#nickname').val() + "</a>" + " : " + $("#message").val() + "<br/>";
         	sock.send(tag);
         	//sock.send( + $("#message").val());
         }

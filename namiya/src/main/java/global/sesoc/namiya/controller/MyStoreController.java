@@ -183,6 +183,7 @@ public class MyStoreController {
 		m.setMyurl(miniurl);
 		Members member = mb_repository.selectUrl(m);
 		String userid = member.getUserid();
+		
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
@@ -231,7 +232,11 @@ public class MyStoreController {
 	public String write(Board board, MultipartFile upload, HttpSession session, Product product, History history, @PathVariable("miniurl")String miniurl) {
 		String originalfile = upload.getOriginalFilename();
 		String savedfile = FileService.saveFile(upload, uploadPath);
-		String userid = (String)session.getAttribute("loginId");
+		
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String userid = member.getUserid();
 
 		int result1 = p_repository.insertPdt(product);
 		Product pr = p_repository.selectOne();
@@ -254,7 +259,11 @@ public class MyStoreController {
 		saving.setType(board.getService());
 		saving.setUserid(userid);
 		
-		int result = s_repository.pointCheck(saving);
+		int result = 0;
+		
+		if(s_repository.pointTodayCount(saving) > 0) {
+			result = s_repository.pointCheck(saving);
+		} 
 		
 		if (saving.getType().equals("양도") && result == 0) {
 			int result4 = s_repository.pointAdd(saving);
@@ -313,6 +322,7 @@ public class MyStoreController {
 	public String update(Board board, Product product, MultipartFile upload, @PathVariable("miniurl")String miniurl) {
 		int boardnum = board.getBoardnum();
 		Board old = b_repository.selectOne(boardnum);
+		
 		
 		// 첨부한 경우 
 		if (upload.getSize() != 0) {
@@ -375,7 +385,10 @@ public class MyStoreController {
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/trade")
 	public String trade(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @PathVariable("miniurl")String miniurl) {
 		String service = "교환";
-		String userid = (String)session.getAttribute("loginId");
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String userid = member.getUserid();
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
@@ -588,7 +601,11 @@ public class MyStoreController {
 		saving.setType(board.getService());
 		saving.setUserid(userid);
 		
-		int result = s_repository.pointCheck(saving);
+		int result = 0;
+		
+		if(s_repository.pointTodayCount(saving) > 0) {
+			result = s_repository.pointCheck(saving);
+		} 
 		
 		if (saving.getType().equals("양도") && result == 0) {
 			int result4 = s_repository.pointAdd(saving);
@@ -704,10 +721,14 @@ public class MyStoreController {
 	// review 창 띄우기 
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/review")
 	public String review(Model model, @PathVariable("miniurl")String miniurl) {
-		String store_owner = "bbb";
-		
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String store_owner = member.getUserid();
+		System.out.println(member);
 		List<Review> list = r_repository.selectReviewAll(store_owner);
 		model.addAttribute("list", list);
+		model.addAttribute("store_owner", store_owner);
 		
 		return "mystore/review";
 	}
@@ -715,6 +736,7 @@ public class MyStoreController {
 	// review 작성하기 
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/insertReview", method=RequestMethod.POST)
 	public String insertReview(Review review, @PathVariable("miniurl")String miniurl) {
+		System.out.println(review);
 		int result = r_repository.insertReview(review);
 		
 		return "redirect:/"+"myStore/" + miniurl + "/review";
@@ -735,14 +757,20 @@ public class MyStoreController {
 	@ResponseBody
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/selectItr", method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	public String selectItr(@RequestBody Interest interest, @PathVariable("miniurl")String miniurl) {
+		System.out.println(interest);
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("userid", interest.getUserid());
 		parm.put("boardnum", ""+interest.getBoardnum());
+		System.out.println(interest);
 		
 		Interest itr = b_repository.selectItr(parm);
+		System.out.println("itr:"+itr);
 		
 		if (itr == null) {
+			System.out.println("itr null");
+			
 			int result = b_repository.insertItr(interest);
+			System.out.println(result);
 			return "관심상품 목록에 추가되었습니다!";
 		} else {
 			return "이미 관심상품목록에 존재합니다!";
@@ -806,7 +834,7 @@ public class MyStoreController {
 	
 	/** 양도신청 controller **/
 	@ResponseBody
-	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/selectWish", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/DontusePoint", method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	public String selectWish(@RequestBody Wish wish, Model model, @PathVariable("miniurl")String miniurl) {
 		System.out.println(wish);
 		Map<String, String> param = new HashMap<String, String>();
@@ -862,7 +890,7 @@ public class MyStoreController {
 			
 			System.out.println("history update 결과:"+result2);
 			
-			return null;
+			return "양도신청을 완료했습니다!";
 		} else {
 			return "이미 양도신청을 했습니다!";
 		}
@@ -901,8 +929,96 @@ public class MyStoreController {
 	
 	/** 포인트 확인 controller **/
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/checkPoint")
-	public String checkPoint(@PathVariable("miniurl")String miniurl) {
-		
+	public String checkPoint(@PathVariable("miniurl")String miniurl, HttpSession session, Model model, int boardnum) {
+		String userid = (String) session.getAttribute("loginId");
+		int point_total = s_repository.pointTotal(userid);
+		model.addAttribute("point_total", point_total);
+		model.addAttribute("boardnum", boardnum);
 		return "mystore/checkPoint";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/usePoint", method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	public String UsePoint(Model model, @PathVariable("miniurl")String miniurl, String userid, int usepoint, int boardnum) {
+		System.out.println(userid);
+		System.out.println(usepoint);
+		
+		Wish wish = new Wish();
+		wish.setBoardnum(boardnum);
+		wish.setUserid(userid);
+		
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("userid", wish.getUserid());
+		param.put("boardnum", ""+wish.getBoardnum());
+		
+		Board board = b_repository.selectOne(wish.getBoardnum());
+		System.out.println(board);
+		
+		Product product = p_repository.selectPdt(board.getProductnum());
+		System.out.println(product);
+		
+		String status = "진행중";
+		
+		product.setSstatus(status);
+		
+		int pudt = p_repository.updatePstt(product);
+		
+		System.out.println("update product :"+product);
+		System.out.println("product 결과:"+pudt);
+		
+		History history = b_repository.selectHstone(board.getProductnum());
+		
+		System.out.println("history거래내역:"+history);
+		
+		Wish wsh = b_repository.selectWish(param);
+		System.out.println(wsh);
+	
+		if (wsh == null) {
+			System.out.println("wish null");
+			Saving saving = new Saving();
+			
+			saving.setPoint(-(usepoint));
+			saving.setUserid(userid);
+				
+			int result = s_repository.pointMinus(saving);
+			System.out.println(result);
+			
+			int a = usepoint/200;
+			
+			for (int i = 0; i <= a; i++) {
+				int result1 = b_repository.insertWish(wish);
+				System.out.println(result1);
+			}
+
+			String deal_end = null;
+			String deal_start = null;
+			
+			// deal_start 설정
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date today = Calendar.getInstance().getTime();     
+			deal_start = df.format(today);
+			
+			history.setDeal_start(deal_start);
+			
+			// deal_end 설정
+			Date date = new Date();
+			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd"); 
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.add(Calendar.DATE, 3);
+			deal_end = sdformat.format(cal.getTime());  
+			
+			history.setDeal_end(deal_end);
+			
+			int result2 = b_repository.updateHst(history);
+			
+			System.out.println("history update 결과:"+result2);
+			
+			return "양도신청을 완료했습니다!";
+		} else {
+			return "이미 양도신청을 했습니다!";
+		}
+		
+	}
+	
 }

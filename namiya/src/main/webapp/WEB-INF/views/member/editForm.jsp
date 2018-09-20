@@ -4,12 +4,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>joinform.jsp</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<!-- <link rel="icon" type="image/png" href="resources/images/icons/favicon.ico"/> -->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<!-- <link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+<!--===============================================================================================-->
+	<!-- <link rel="stylesheet" type="text/css" href="resources/fonts/iconic/css/material-design-iconic-font.min.css"> -->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="resources/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="resources/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="resources/css/util.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<!--===============================================================================================-->
+<title>editform.jsp</title>
 </head>
+
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script type="text/JavaScript">
     //region define, setter
-    var idFlag = true;
+    var idFlag = false;
     var pwFlag = false;
     var authFlag = false;
     var mailFlag = false;
@@ -18,7 +42,11 @@
 
     $(document).ready(function() {
         defaultScript();
-      
+      	
+        function setAddr2(obj) {
+    		alert(obj);
+    	}	
+        
         //region unreal id
         $("#id").blur(function() {
             idFlag = false;
@@ -122,8 +150,6 @@
         var userid = $("#id").val();
     	var password = $("#pswd2").val();
     	var username = $("#name").val();
-    	var fullAddr= $("#addr").val()+" "+$("#detailAddr").val();
-    	var zipcode = $("#zip").val();
     	var myurl = userid;
     	alert("id"+idFlag);
     	alert("pw"+pwFlag);
@@ -139,8 +165,6 @@
         	$("#userid").val(userid);
         	$("#password").val(password);
         	$("#username").val(username);
-        	$("#fullAddr").val(fullAddr);
-        	$("#zipcode").val(zipcode);
         	$("#myurl").val(myurl);
         	
             $("#form").submit();
@@ -291,11 +315,11 @@
         }
 
         if(yy == "") {
-            showErrorMsg(oMsg,"태어난 년도 4자리를 정확하게 입력하세요.");
+            showErrorMsg(oMsg,"생년월일을 확인해주세요.");
             return false;
         }
         if(yy.length != 4 || yy.indexOf('e') != -1 || yy.indexOf('E') != -1) {
-            showErrorMsg(oMsg,"태어난 년도 4자리를 정확하게 입력하세요.");
+            showErrorMsg(oMsg,"생년월일을 확인해주세요.");
             return false;
         }
         if(mm == "") {
@@ -304,30 +328,30 @@
             return false;
         }
         if(dd == "") {
-            showErrorMsg(oMsg,"태어난 일(날짜) 2자리를 정확하게 입력하세요.");
+            showErrorMsg(oMsg,"태어난 일 확인해주세요");
             return false;
         }
         if(dd.length != 2 || dd.indexOf('e') != -1 || dd.indexOf('E') != -1) {
-            showErrorMsg(oMsg,"태어난 일(날짜) 2자리를 정확하게 입력하세요.");
+            showErrorMsg(oMsg,"태어난 일 확인해주세요");
             return false;
         }
 
         birthday = yy + mm + dd;
         if (!isValidDate(birthday)) {
-            showErrorMsg(oMsg,"생년월일을 다시 확인해주세요.");
+            showErrorMsg(oMsg,"생년월일을 확인해주세요.");
             return false;
         }
         $("#birthday").val(birthday);
 
         var age = calcAge(birthday);
         if (age < 0) {
-            showErrorMsg(oMsg,"사이어인은 가입할 수  없습니다.");
+            showErrorMsg(oMsg,"나이가?예?");
             return false;
         } else if (age >= 100) {
             showErrorMsg(oMsg,"어르신 확실합니까?");
             return false;
         } else if (age < 14) {
-            showErrorMsg(oMsg,"만 14세 미만의 어린이는 가입할 수 없습니다.");
+            showErrorMsg(oMsg,"만 14세 미만은 가입할 수 없습니다.");
             return false;
         } else {
             hideMsg(oMsg);
@@ -396,7 +420,7 @@
     	}
 		if(sendFlag){
 			if(userAuthNo==authNo){
-				showSuccessMsg(oMsg," 완료.");
+				showSuccessMsg(oMsg," 인증완료.");
 				authFlag = true;
 			}else{
 				showErrorMsg(oMsg,"번호가 다릅니다.");
@@ -422,25 +446,11 @@
 	//Addr check
 	function checkAddr(){
 		alert("주소");
-		var addr = $("#addr").val();
-		var oMsg = $("#addrMsg");
+		var addr = $("#fullAddr").val();
+		var oMsg = $("#fullAddrMsg");
 		
 		if(addr == ""){
 			showErrorMsg(oMsg,"필수 정보입니다.");
-			return false;
-		}
-		
-		hideMsg(oMsg);
-		return true;
-	}
-	
-	function checkDetailAddr(){
-		
-		var detailAddr = $("#detailAddr").val();
-		var oMsg = $("#detailAddrMsg");
-		alert("상세주소"+detailAddr);
-		if(detailAddr == ""){
-			showErrorMsg(oMsg,"상세주소 입력해주세요.");
 			return false;
 		}
 		
@@ -706,64 +716,24 @@
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //Korean Address API
-    function getAddr(){
-	// AJAX 주소 검색 요청
-	$.ajax({
-		url:"getAPI"									// 고객사 API 호출할 Controller URL
-		,type:"post"
-		,data:$("#form").serialize() 								// 요청 변수 설정
-		,dataType:"json"											// 데이터 결과 : JSON
-		,success:function(jsonStr){									// jsonStr : 주소 검색 결과 JSON 데이터
-			$("#list").html("");									// 결과 출력 영역 초기화
-			var errCode = jsonStr.results.common.errorCode; 		// 응답코드
-			var errDesc = jsonStr.results.common.errorMessage;		// 응답메시지
-			if(errCode != "0"){ 									// 응답에러시 처리
-				alert(errCode+"="+errDesc);
-			}else{
-				if(jsonStr!= null){
-					makeListJson(jsonStr);							// 결과 JSON 데이터 파싱 및 출력
-				}
-			}
-		}
-		,error: function(xhr,status, error){
-			alert("에러발생");										// AJAX 호출 에러
-		}
-	});
-}
-
-function makeListJson(jsonStr){
-	var htmlStr = "";
-	htmlStr += "<table>";
-	// jquery를 이용한 JSON 결과 데이터 파싱
-	$(jsonStr.results.juso).each(function(){
-		htmlStr += "<tr>";
-		htmlStr += "<td class='roadAddr'>"+this.roadAddr+"</td>";
-		htmlStr += "<td class='zipNo'>"+this.zipNo+"</td>";
-		htmlStr += "<td><input type='button' class='selectAddress' value='선택'/></td>";
-		htmlStr += "</tr>";
-	});
-	htmlStr += "</table>";
-	
-	// 결과 HTML을 FORM의 결과 출력 DIV에 삽입
-	$("#list").html(htmlStr);
-	$("input:button.selectAddress").click(getContent);
-}
-function getContent(){
-		var fullAddr = "";
+	function setAddress(){
+		var roadFullAddr = $('#roadFullAddr').val();
+		var zipNo = $('zipNo').val();
 		
-		var button = $(this);
-		var tr = button.parent().parent();//button.parent().parent() = <tr>
-		var td = tr.children();//button.parent() = <td>
-		
-		var roadAddr = td.eq(0).text();
-		var zipcode = td.eq(1).text();
-		
-		document.getElementById('addr').value = roadAddr;
-		document.getElementById("zip").value = zipcode;
-
-		
+		document.getElementById('fullAddr').value = roadFullAddr;
+		document.getElementById('zipcode').value = zipNo;
 	}
-
+	
+	function goPopup(){
+		// 주소검색을 수행할 팝업 페이지를 호출합니다.
+		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+		var pop = window.open("pop","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		
+		// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+	    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+	}
+	
+	
 	////////////////////////////////////////////////////////////////////////////////////////////인증 팝업구현
     function winOpenAtCenter(sURL, sWindowName, w, h, sScroll) {
         // 화면 중앙으로 Popup 띄우기.. 스크롤바는 옵션..
@@ -789,57 +759,50 @@ function getContent(){
     //endregion
 </script>
 
-<body>
-<div id="wrap">
+<body class="is-preload">
+<div id="wrap"class="limiter">
+<div  class="container-login100">
+<div class="wrap-login100">
 <!-- header -->
-<div id="header" class="join_membership" role="banner">
-    <h1><a href="${pageContext.request.contextPath}" class="h_logo"><span class="blind">Project Name</span></a></h1>
+<div id="header" class="login100-form-title" role="banner">
+    <a href="${pageContext.request.contextPath}"><img style="border-radius: 10px;" width="490px" height="150px" alt="" src="resources/images/logo.gif"> </a>
 </div>
+
 <!-- // header -->
 
-<form action="edit_form" id="form" name="form" method="post">
+<form action="join_form" id="form" name="form" method="post" class="login100-form">
     <input type="hidden" id="userid" name="userid" value="">
     <input type="hidden" id="password" name="password" value="">
     <input type="hidden" id="username" name="username" value="">
     <input type="hidden" id="birthday" name="birthday" value="">
-    <input type="hidden" id="fullAddr" name="fullAddr" value="">
-    <input type="hidden" id="zipcode" name="zipcode" value="">
     <input type="hidden" id="myurl" name="myurl" value="">
     <input type="hidden" id="joinMode" name="joinMode" value="unreal">
-
+	<br><br>
+	
     <!-- container -->
     <div id="container" role="main">
         <div id="content">
-            <!-- tg-text=title -->
-            <h2 class="blind">회원가입</h2>
+            
             <div class="join_content">
                 <!-- 아이디, 비밀번호 입력 -->
                 <div class="row_group">
-                    <div class="join_row">
-                        <h3 class="join_title">아이디</h3>
-                        <span class="ps_box int_id">
-							<input type="text" id="id" name="id" class="int" value="${member.usseid}" title="ID" maxlength="20" readonly="readonly">
-						</span>
-                        <span class="error_next_box" id="idMsg" style="display:none"></span>
+                    <div style="display: inline-block" class="wrap-input100 validate-input">      
+							<input type="text" id="id" name="id" class="input100" value="${member.userid}" maxlength="20" readonly="readonly">
+							<span class="focus-input100" data-placeholder="아이디"></span>
                     </div>
-
-                    <div class="join_row">
-                        <h3 class="join_title">비밀번호</h3>
-                        <span class="ps_box int_pass" id="pswd1Img">
-							<input type="password" id="pswd1" name="pswd1" class="int" title="비밀번호 입력" maxlength="20">
-							<label data-tg-i18n="form.pswd1" for="pswd1" class="lbl">
-								<span id="pswd1Span" class="step_txt"></span>
-							</label>
-						</span>
-                        <span class="error_next_box" id="pswd1Msg" style="display:none">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
-
-                        <h3 class="join_title">비밀번호 재확인</h3>
-                        <span class="ps_box int_pass_check" id="pswd2Img">
-							<input type="password" id="pswd2" name="pswd2" class="int" title="비밀번호 재확인 입력" maxlength="20">
-							<label data-tg-i18n="form.pswd2" for="pswd2" class="lbl"></label>
-						</span>
-                        <span class="error_next_box" id="pswd2Msg" style="display:none"></span>
+                    <span></span>
+                    <div style="display: block"  class="wrap-input100 validate-input">
+							<input type="password" id="pswd1" name="pswd1" class="input100" title="비밀번호 입력" maxlength="20">
+							<span class="focus-input100" data-placeholder="비밀번호"></span>
+					</div>
+					 <span style="display: block;"  class="error_next_box" id="pswd1Msg" style="display:none"></span>
+					<br>
+					<div style="display: block;"  class="wrap-input100 validate-input">
+							<input type="password" id="pswd2" name="pswd2" class="input100" title="비밀번호 재확인 입력" maxlength="20">
+							<span class="focus-input100" data-placeholder="비밀번호 확인"></span>
                     </div>
+                    <span style="display: block;"  class="error_next_box" id="pswd2Msg" style="display:none"></span>
+                    <br>
                 </div>
                 <!-- // 아이디, 비밀번호 입력 -->
 
@@ -847,134 +810,72 @@ function getContent(){
                 <div class="row_group">
 
                     <!-- lang = ko_KR -->
-                    <div class="join_row">
-                        <h3 class="join_title">이름</h3>
-                        <span class="ps_box box_right_space">
-							<input type="text" id="name" name="name" title="이름" value="${member.username}" class="int" maxlength="40" readonly="readonly">
-							<label for="name" class="lbl"></label>
-						</span>
-                        <span class="error_next_box" id="nameMsg" style="display:none"></span>
+                    <div style="display: inline-block" class="wrap-input100 validate-input">
+						<input type="text" id="name" name="name" class="input100" value="${member.username}" maxlength="40">
+						<span class="focus-input100" data-placeholder="이 름"></span>
                     </div>
+                    <span class="error_next_box" id="nameMsg" style="display:none"></span>
                     <!-- lang = ko_KR -->
 
-                    <div class="join_row join_birthday">
-                        <h3 class="join_title">생년월일</h3>
-                        <div class="bir_wrap">
-                            <div class="bir_yy">
-								<span class="ps_box">
-									<input type="text" id="yy" placeholder="년(4자)" class="int" maxlength="4">
-									<label for="yy" class="lbl">년(4자)</label>
-								</span>
+                    <div>
+                        <h6 style="color: #999999" class="join_title">생년월일</h6>
+                        
+                            <div style="display: inline-block;" class="wrap-input10 validate-input">
+								<input type="text" id="yy" placeholder="년(4자)" class="input1" value="${member.birthday}" maxlength="8" readonly="readonly">
                             </div>
-                            <div class="bir_mm">
-								<span class="ps_box">
-									<select id="mm" title="월" class="sel">
-										<option>월</option>
-										  	 			<option value="01">
-                                                            1
-                                                        </option>
-										  	 			<option value="02">
-                                                            2
-                                                        </option>
-										  	 			<option value="03">
-                                                            3
-                                                        </option>
-										  	 			<option value="04">
-                                                            4
-                                                        </option>
-										  	 			<option value="05">
-                                                            5
-                                                        </option>
-										  	 			<option value="06">
-                                                            6
-                                                        </option>
-										  	 			<option value="07">
-                                                            7
-                                                        </option>
-										  	 			<option value="08">
-                                                            8
-                                                        </option>
-										  	 			<option value="09">
-                                                            9
-                                                        </option>
-										  	 			<option value="10">
-                                                            10
-                                                        </option>
-										  	 			<option value="11">
-                                                            11
-                                                        </option>
-										  	 			<option value="12">
-                                                            12
-                                                        </option>
-									</select>
-								</span>
-                            </div>
-                            <div class=" bir_dd">
-								<span class="ps_box">
-									<input type="text" id="dd" placeholder="일" class="int" maxlength="2">
-									<label for="dd" class="lbl">일</label>
-								</span>
-                            </div>
-                        </div>
-                        <span class="error_next_box" id="birthdayMsg" style="display:none"></span>
                     </div>
-
+                    <span style="display: block;" class="error_next_box" id="birthdayMsg" style="display:none"></span>
+`					<br>
                     <div class="join_row join_sex">
-                        <h3 class="join_title">성별</h3>
-                        <div class="ps_box gender_code">
-                            <input type="text" id="gender" name="gender" value="${member.gender}" title="성별" class="int" readonly="readonly"/>
+                        <h6 style="color: #999999" class="join_title">성별</h6>
+                        <div style="display: inline-block;" class="wrap-input10 validate-input">
+								<input type="text" id="gender" class="input1" value="${member.gender}" maxlength="8" readonly="readonly">
                         </div>
                     </div>
-
-                    <div class="join_row join_email">
-                        <h3 class="join_title">본인 확인 이메일<span class="terms_choice"></span></h3>
-                        <span class="email">
-							<input type="text" id="email" name="email" maxlength="100" placeholder="이메일 입력" class="int">
-							<input type="button" id="emailCheck" value="이메일 인증" onclick="isAuthEmail()"/>
-							<span class="error_next_box" id="emailMsg" style="display:none"></span>
-						<br>					
-							<input type="text" id="authNo" name="authNo" maxlength="100" placeholder="인증번호 입력" class="int">
-							<label for="email" class="lbl">이메일 인증</label>
-							<span class="error_next_box" id="authNoMsg" style="display:none"></span>
-						</span>
+                    <span class="error_next_box" id="genderMsg" style="display:none"></span>
+					
+					<br>
+					
+					<div style="display: inline-block" class="wrap-input100 validate-input">      
+							<input type="text" id="email" name="email" class="input100" maxlength="100">
+							<span class="focus-input100" data-placeholder="본인인증 이메일"></span>
                     </div>
+							<input class="clickbutton" type="button" id="emailCheck" value=" 인증 요청 " onclick="isAuthEmail()"/>
+							<span style="display: block;" class="error_next_box" id="emailMsg" style="display:none"></span>
+					<br>
+					<div style="display: inline-block" class="wrap-input100 validate-input">				
+							<input type="text" id="authNo" name="authNo" class="input100" maxlength="100">
+							<span class="focus-input100" data-placeholder="인증번호입력"></span>
+                    </div>
+                    <span class="error_next_box" id="authNoMsg" style="display:none"></span>
                 </div>
-
+				
                 <!-- 휴대전화 번호 -->
-                <div class="join_row join_mobile" id="mobDiv">
-                    <h3 class="join_title">휴대전화</h3>
-      
-                    <div class="int_mobile_area">
-						<span class="ps_box int_mobile">
-							<input type="tel" id="phoneNo" name="phoneNo" placeholder="전화번호 입력" class="int" maxlength="16">
-							<label for="phoneNo" class="lbl">전화번호 입력</label>
-						</span>
-                    <span class="error_next_box" id="phoneNoMsg" style="display:none"></span>
-                    </div>
+                <div style="display: inline-block" class="wrap-input100 validate-input">
+							<input type="tel" id="phoneNo" name="phoneNo" class="input100" maxlength="16">
+							<span class="focus-input100" data-placeholder="전화번호입력"></span>
                 </div>
+                <span class="error_next_box" id="phoneNoMsg" style="display:none"></span>
                 
-           		<!-- region KorAddressAPI -->	                
-          	    <div class="KorAddress">
- 					<h3 class="join_title">주소</h3>
- 					<input type="hidden" name="currentPage" value="1"/>				<!-- 요청 변수 설정 (현재 페이지. currentPage : n > 0) -->
-  					<input type="hidden" name="countPerPage" value="10"/>				<!-- 요청 변수 설정 (페이지당 출력 개수. countPerPage 범위 : 0 < n <= 100) -->
- 			 		<input type="hidden" name="resultType" value="json"/> 			<!-- 요청 변수 설정 (검색결과형식 설정, json) --> 
-  					<input type="hidden" name="confmKey" value="U01TX0FVVEgyMDE4MDgzMTE1MDkzOTEwODEwODM="/>		<!-- 요청 변수 설정 (승인키) -->  
-  					<input type="text"   name="keyword" value=""/>					<!-- 요청 변수 설정 (키워드) -->
-  					<input type="button" onClick="getAddr();" value="주소검색하기"/>
-  					<div id="list"> <!-- 검색 결과 리스트 출력 영역 --> </div>
-  					<input type="text" id="addr" name="addr" value="" readonly="readonly" size="70"/>
-  					<input type="text" id="zip" name="zip" value="" readonly="readonly" size="5"/>
-  					<span class="error_next_box" id="addrMsg" style="display:none"></span> 
-  					<br>
-  					<input type="text" id="detailAddr" name="detailAddr" value="" size="25"/>
-  					<span class="error_next_box" id="detailAddrMsg" style="display:none"></span>
-           		</div> 
-           			
+                <br>
+           		<!-- region KorAddressAPI -->              
+       <div class="KorAddress">
+			<div id="list"></div>
+	        <div id="callBackDiv">
+	        	<div style="display: inline-block" class="wrap-input100 validate-input">
+	        		<input type="text" id="zipcode" name="zipcode" class="input100" maxlength="16" readonly="readonly">
+					<input type="text" id="fullAddr" name="fullAddr" class="input100" maxlength="16" readonly="readonly" placeholder="도로명 주소">
+                </div>
+				 <input class="clickbutton" type="button" onClick="goPopup();" value=" 주소 찾기 "/>
+			</div>
+			<span class="error_next_box" id="fullAddrMsg" style="display:none"></span>
+           	<br>
+       </div>
           		<div>
           		<h3 class="join_title"> </h3>
-          			<input type="button" onClick="mainSubmit()" value="정보수정"/>
+          			<input type="button" onClick="mainSubmit()" value="회원정보수정" class="clickbutton"/>
          		</div>
+         		<br><br>
           </div>
 	</div>
 </div>
@@ -997,6 +898,21 @@ function getContent(){
 	</div>
 	<!-- //footer -->
 </div>
-
+</div>
+</div>
+<!--===============================================================================================-->
+	<script src="resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/bootstrap/js/popper.js"></script>
+	<script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/daterangepicker/moment.min.js"></script>
+	<script src="resources/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="resources/js/main.js"></script>
 </body>
 </html>

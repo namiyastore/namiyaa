@@ -8,6 +8,12 @@
 <title>교환글 수정 폼</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
+$(document).ready(function(){
+	   $(window).resize(function (){
+	      resizeTo(1217, 728);
+	   });
+});
+
 function formCheck() {
 	var title = document.getElementById("title");
 	var content = document.getElementById("content");

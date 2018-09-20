@@ -62,9 +62,9 @@ public class MemberController {
 		
 		if(m!=null) {
 			System.out.println("로그인성공");
+			System.out.println(m);
 			session.setAttribute("loginId", m.getUserid());
 			session.setAttribute("loginName", m.getUsername());
-			model.addAttribute("message", "로그인 성공!");
 			
 			return "redirect:/search";
 		}else {
@@ -85,13 +85,13 @@ public class MemberController {
 	public String editMember(HttpSession session, Model model) {
 		System.out.println("회원정보수정");
 		Members m = new Members();
+		Members member = new Members();
 		m.setUserid((String)session.getAttribute("loginId"));
-		m.setUsername((String)session.getAttribute("loginName"));
 		
-		m = repository.selectOne(m);
-		
-		model.addAttribute(m);
-		return "editForm";//뷰로 넘기는거 해야함
+		member = repository.selectOne(m);
+		System.out.println(member);
+		model.addAttribute("member", member);
+		return "member/editForm";//뷰로 넘기는거 해야함
 	}
 	
 	@RequestMapping(value="edit_form",method=RequestMethod.POST)

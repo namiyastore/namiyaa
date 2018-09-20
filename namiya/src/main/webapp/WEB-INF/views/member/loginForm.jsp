@@ -48,6 +48,20 @@ $(document).ready(function(){
 		}
 	});
 	
+	$("#password").keydown(function(key) {
+        if (key.keyCode == 13) {// 엔터
+        	if(idFlag&&pwdFlag&&(!isShift)){
+    			alert("엔터누름");
+    			$("#login_form").submit();
+    		}else{
+    			alert("id Fail"+idFlag);
+    			alert("pwd Fail"+pwdFlag);
+    			alert("shift Fail"+isShift);
+    			return false;
+    		}
+        }
+     });
+	
 	 $("#userid").blur(function() {
 		 checkId();
      });
@@ -151,11 +165,12 @@ function showErrorMsg(obj, msg) {
     obj.show();
 }
 </script>
+
 <body class="is-preload">
+
 	<div id="wrap"class="limiter">
 	<div  class="container-login100">
 	<div class="wrap-login10">
-	
 	<div id="header" class="login100-form-title p-b-26" role="banner">
    		<a href="${pageContext.request.contextPath}"><img style="border-radius: 10px;" width="540px" height="150px" alt="" src="resources/images/logo.gif"> </a>
 	</div>
@@ -180,13 +195,10 @@ function showErrorMsg(obj, msg) {
 				<br>
 				<a href="">아이디/비밀번호 찾기</a>
 			</div>
-			
 		</form>
 		
 	</div>
 	</div>
-	</div>
-		<p id="msg" style="color: #FF0000;">${message}</p>
 	</div>
 
 
@@ -205,4 +217,5 @@ function showErrorMsg(obj, msg) {
 <!--===============================================================================================-->
 	<script src="resources/js/main.js"></script>	
 </body>
+
 </html>

@@ -9,7 +9,7 @@
  
 <title>Point</title> 
 <script src="resources/search/js/common/jquery-1.12.4.js"></script> 
- 
+
 <script> 
 $(function(){ 
 	 
@@ -31,7 +31,7 @@ $(function(){
 	});
 	
 	 $('.rightSide_MyInfoBoxDown_profile').on('click',function(){ 
-		location.href = 'profileEdit';		 
+		location.href = 'editForm';		 
 	});  
 	 
 	$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){ 
@@ -62,17 +62,10 @@ $(function(){
 		location.href = 'noticeList';		 
 	}); 
 	$('.leftSide_tabs_tab7').on('click',function(){ 
-		location.href = 'pointList';		 
+		location.href = 'pointRecord';		 
 	}); 
 	 
 });
-
-function goProfile(){
-	var goProfile=$('#goProfile');
-	goProfile.submit();
-}
- 
- 
 // 라인 인증키 등록 
 function noticeService() { 
 	$.ajax({ 
@@ -105,9 +98,9 @@ function alertMsg() {
 		<div class="leftSide"> 
 			<div class="tabs"> 
  
-				<div class="leftSide_tabs_tab1"> 
+				<!-- <div class="leftSide_tabs_tab1"> 
 					Favorite 
-				</div> 
+				</div> --> 
 				<div class="leftSide_tabs_tab2"> 
 					Interest 
 				</div> 
@@ -174,7 +167,7 @@ function alertMsg() {
 								<tr class="leftSide_table_rows"> 
 								<!--포인트 추가시 수정부분 --> 
 								<c:if test="${PointList.point gt 0}"> 
-									<td class="table_1st_td">+ ${PointList.point}</td> 
+									<td class="table_1st_td">+${PointList.point}</td> 
 								</c:if> 
 								 <c:if test="${PointList.point lt 0}"> 
 									<td class="table_1st_td">${PointList.point}</td> 
@@ -223,7 +216,7 @@ function alertMsg() {
 						My Store
 					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_profile">
-						Profile <!-- <span onclick="goProfile()"></span> -->
+						Edit <!-- <span onclick="goProfile()"></span> -->
 					</div><!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
 					<div class="rightSide_MyInfoBoxDown_logOut">
 						Logout

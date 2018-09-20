@@ -1,18 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Point 사용</title>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
-	function UsePoint(userid) {
+	function UsePoint(boardnum, userid) {
+		var usepoint = document.getElementById("pointcontent").value;
+		var userid = userid;
+		var boardnum = boardnum;
+		var total = document.getElementById("total").innerHTML;
+		var sendData = {"usepoint" : usepoint, "userid" : userid, "boardnum" : boardnum};
+		
+		if(isNaN(usepoint)) {
+			alert("숫자만 입력해주세요!");	
+			return false;
+		}
+		
+		if(usepoint == 0) {
+			alert("사용할 포인트를 입력해주세요!");
+			return false;
+		}
+		
+		if((usepoint%200) != 0) {
+			alert("포인트는 200점 단위로 사용이 가능합니다.");
+			return false;
+		}
+		
+		if (total < 200) {
+			alert("포인트는 200점 이상부터 사용이 가능합니다!");
+			return false;
+		}
+		
+		alert(boardnum+", "+userid+"," + usepoint);
 		// 포인트 사용하는 로직
 		$.ajax({
-			method : 'post',
-			url : 'UsePoint',
-			data : {"userid" : userid},
+			method : 'get',
+			url : 'usePoint',
+			data : {"usepoint" : usepoint, "userid" : userid, "boardnum" : boardnum},
+			contentType : 'application/json; charset=UTF-8',
 			success : function(resp) {
+				alert(resp);
+			},
+			error : function(error) {
+				alert("point error :"  + error);
+			}
+		});
+		
+	}
+	
+	function DontusePoint(boardnum, userid) {
+		alert(boardnum+", "+userid);
+		var sendData = {"boardnum" : boardnum, "userid" : userid};
+		$.ajax({
+			url : 'DontusePoint',
+			method : 'post',
+			data : JSON.stringify(sendData),
+			contentType : 'application/json; charset=UTF-8',
+			success : function(resp) {
+				alert(resp);
 				this.close();
 			},
 			error : function(error) {
@@ -27,6 +75,10 @@
 	}
 </script>
 <style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	}
+
 	body {
 		background: url('${pageContext.request.contextPath}/resources/images/msgmain.png') no-repeat center center fixed; 
  		-webkit-background-size: cover;
@@ -87,6 +139,14 @@
 	.btn:hover {
 		opacity: .9;
 	}
+	
+	h1 {
+		font-family: Eco Sans Mono;
+	}
+	
+	body, p {
+		font-family: 'Jeju Gothic', Eco Sans Mono;
+	}
 </style>
 </head>
 <body>
@@ -94,15 +154,19 @@
 <h1 style="color: white;">Point Use</h1>
 <table style="padding-bottom: 10px;">
 	<tr>
+		<th colspan="2" style="color:white; font-size: 13px; padding-bottom: 10px;">포인트는 200점 단위로 사용이 가능합니다.</th>
+	</tr>
+	<tr>
 		<th class="menu">사용가능 포인트</th>
-		<td class="content"></td>
+		<td class="content" id="total">${point_total}</td>
 	</tr>
 	<tr>
 		<th class="menu">사용할 포인트</th>
-		<td class="content"><input id="pointcontent" type="text" id="point"></td>
+		<td class="content"><input id="pointcontent" type="number" name="quantity" min="0" step="200" value="0"></td>
 	</tr>
 </table>
-<input class="btn" type="button" value="사용하기" onclick="UsePoint('${sessionScope.loginId}')">
+<input class="btn" type="button" value="사용하기" onclick="UsePoint(${boardnum}, '${sessionScope.loginId}')">
+<input class="btn" type="button" value="사용안함" onclick="DontusePoint(${boardnum}, '${sessionScope.loginId}')">
 <input class="btn" type="button" value="닫기" onclick="Closed()">
 </div>
 </body>
