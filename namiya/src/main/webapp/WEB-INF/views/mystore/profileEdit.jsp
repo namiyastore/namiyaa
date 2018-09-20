@@ -74,13 +74,15 @@
     });
     
     function  formCheck() {
-    	var nickname = document.getElementById("nickname");
     	var content = document.getElementById("content");
+    	var myurl = document.getElementById("myurl");
 
-    	if (nickname.value == '' || content.value == '') {
-    		alert('별명과 코멘트를 입력하세요.');
+    	if (content.value == '' || myurl.value == '') {
+    		alert('코멘트,URL을 입력하세요.');
     		return false;
     	}
+    	
+    	
     	
     	 var form = $('#profileForm')[0];
          var formData = new FormData(form);
@@ -92,9 +94,14 @@
                      contentType: false,
                      data: formData,
                      type: 'POST',
-                     success: function(result){
+                     success: function(myurl){
                          //alert("업로드 성공!!");
-                         window.close();
+                         if(myurl != "") {
+                         	opener.location.href = "${pageContext.request.contextPath}/myStore/"+myurl+"/home";
+                         	window.close();
+                         }else {
+                        	 alert("이미있는 URL "+myurl);
+                         }
                      }
              });
 
@@ -155,12 +162,12 @@
                 </tr>
                 <tr>
                     <th scope="row">
-                        <div class="thcell"><label for="inpNickname">별명</label></div>
+                        <div class="thcell"><label for="inpUrl">URL</label></div>
                     </th>
                     <td>
                         <div class="tdcell">
                             <p class="contxt_webctrl nickname">
-                                <input type="text" name="nickname" id="nickname" value="${profile.nickname}" style="width:254px" >
+                                <input type="text" name="myurl" id="myurl" value="${myurl}" style="width:254px" >
                             </p>
                         </div>
                     </td>

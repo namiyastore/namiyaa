@@ -45,7 +45,7 @@ CREATE TABLE categories
 CREATE TABLE favorite
 (
 	favoritenum number NOT NULL,
-	myurl varchar2(50) NOT NULL ,
+	myurl varchar2(50) NOT NULL constraint url_fk references members(myurl) ,
 	userid varchar2(100) NOT NULL constraint userid2_fk references members(userid),
 	PRIMARY KEY (favoritenum)
 );

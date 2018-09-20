@@ -3,6 +3,7 @@ package global.sesoc.namiya.vo;
 public class Mystore {
 	private int imagenum;
 	private String userid;
+	private int useritemnum;
 	private int itemnum;
 	private int currentframe;
 	private String px;
@@ -12,11 +13,12 @@ public class Mystore {
 	
 	public Mystore() {}
 
-	public Mystore(int imagenum, String userid, int itemnum, int currentframe, String px, String py, int imageorder,
-			String type) {
+	public Mystore(int imagenum, String userid, int useritemnum, int itemnum, int currentframe, String px, String py,
+			int imageorder, String type) {
 		super();
 		this.imagenum = imagenum;
 		this.userid = userid;
+		this.useritemnum = useritemnum;
 		this.itemnum = itemnum;
 		this.currentframe = currentframe;
 		this.px = px;
@@ -39,6 +41,14 @@ public class Mystore {
 
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+
+	public int getUseritemnum() {
+		return useritemnum;
+	}
+
+	public void setUseritemnum(int useritemnum) {
+		this.useritemnum = useritemnum;
 	}
 
 	public int getItemnum() {
@@ -91,8 +101,9 @@ public class Mystore {
 
 	@Override
 	public String toString() {
-		return "Mystore [imagenum=" + imagenum + ", userid=" + userid + ", itemnum=" + itemnum + ", currentframe="
-				+ currentframe + ", px=" + px + ", py=" + py + ", imageorder=" + imageorder + ", type=" + type + "]";
+		return "Mystore [imagenum=" + imagenum + ", userid=" + userid + ", useritemnum=" + useritemnum + ", itemnum="
+				+ itemnum + ", currentframe=" + currentframe + ", px=" + px + ", py=" + py + ", imageorder="
+				+ imageorder + ", type=" + type + "]";
 	}
 
 	

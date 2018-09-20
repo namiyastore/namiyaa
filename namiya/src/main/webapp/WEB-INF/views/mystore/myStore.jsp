@@ -12,7 +12,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-	
+$(document).ready(function(){
+    $(window).resize(function (){
+       resizeTo(1217, 728);
+    });
+});
+
 var background = {
     	'width' : 700,
     	'height': 350
@@ -168,11 +173,16 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
     			,url : '${pageContext.request.contextPath}/reqProfile' 
     			,dataType : "json"
     			,contentType: "application/json"
-    			,success : function(profile){
+    			,success : function(map){
+    				//alert(map["myurl"]);
     				//alert("wwww "+profile.content);
-    				$('#pimg').attr("src", "${pageContext.request.contextPath}/profile/"+profile.savedfile); 
-    				$('#tx').html(profile.content);
-    				$('#nick').html(profile.nickname);
+    				$('#pimg').attr("src", "${pageContext.request.contextPath}/profile/"+map["profile"].savedfile); 
+    				$('#tx').html(map["profile"].content);
+    				$('#nick').html(map["profile"].nickname);
+    				
+    				$('#myurl').html(map["myurl"]);
+    				$("#myurl", opener.document).val(map["myurl"]);
+    				opener.location.href = opener.document.URL;
     			}
     			
     		});
@@ -204,6 +214,8 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 		
 		
 	}
+	
+	
 </script>
 <style>
 ::-webkit-scrollbar{width: 16px;}
@@ -224,6 +236,7 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
   		-moz-background-size: cover;
   		-o-background-size: cover;
   		background-size: cover;
+  		overflow : hidden;
 	}
 	
 	#wrapper {
@@ -351,9 +364,10 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 	
 	</div>
 	<div id="mystore">
-		<h1><b><spring:message code="mystore.Title" /></b></h1>
+		<img src="${pageContext.request.contextPath}/resources/images/storeMain.gif" style="width:500px; height:60px; margin-bottom: 10px;">
+		<br/>
 		<div id="url" style="border-top: 1px solid #e3e9ed; border-bottom: 1px solid #e3e9ed; background-color:#e3e9ed; width:700px; padding-top:10px; padding-bottom:10px;" align="right">
-			${pageContext.request.contextPath}/${url} &nbsp;
+			<b id ="myurl">${pageContext.request.contextPath}/myStore/${myurl}/</b><b>home</b> &nbsp;
 		</div>
 		
 		<canvas id="myCanvas"  width="700px" height="350px"></canvas> 
@@ -371,8 +385,11 @@ context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImag
 			<li><a href="give"><img src="${pageContext.request.contextPath}/resources/images/give.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
 			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
-			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<c:if test="${homeuserid == sessionScope.loginId}">
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
+			</c:if>
 		</ul>
 	</div>
 	
