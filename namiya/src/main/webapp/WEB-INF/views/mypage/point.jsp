@@ -92,7 +92,8 @@ function alertMsg() {
  
 </head> 
 <body> 
-	<h2>Point</h2> 
+	<!-- <h2>Point</h2> -->
+	<img alt="" src="resources/mypage/images/logo2.gif" id="logo">
 	<div class="wrapper"> 
 	 
 		<div class="leftSide"> 

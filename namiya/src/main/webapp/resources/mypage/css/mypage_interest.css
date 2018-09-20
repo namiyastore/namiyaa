@@ -109,15 +109,15 @@ h2{
 } 
  
 /* 여기부터 기존것들 0915기준 */ 
-.tabs>div { 
-	width: 17%; 
-	height: 80%; 
-	border: 1px solid rgb(50, 50, 50); 
-	background-color: white; 
-	border-top-left-radius: 10px; 
-	border-top-right-radius: 10px; 
-	border: 1px solid rgb(50, 50, 50); 
-} 
+.tabs>div {
+    width: 17%;
+    height: 80%;
+    border: 1px solid rgb(50, 50, 50);
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgb(50, 50, 50);
+}
  
 .leftSide_tabs_tab1 { 
 	display: flex; 
@@ -255,20 +255,8 @@ h2{
 }
 
 /* 0916추가수정 테이블의 열속 글자 정렬 */
-/* .table_1st_td{
-	text-align: right;
-} 
-.table_2nd_td{
-	text-align: center;
-} 
-.table_3rd_td{
-	text-align: right;
-} */
 
 /* 스크롤 고정 0916 */
-/* table {
-  width: 100%;
-} */
 
 table, td {
   border-collapse: collapse;

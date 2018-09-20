@@ -51,7 +51,15 @@ $(function(){
 	}); 
 	$('.leftSide_tabs_tab7').on('click',function(){ 
 		location.href = 'pointRecord';		 
-	}); 
+	});
+	
+	/* 0918 받은 쪽지함 보낸 쪽지함 탭 효과 */
+	$('.leftSide_searchBar_inoutMsgBoxTabs_in').on('click',function(){ 
+		location.href = 'mInBoxListAll';		 
+	});
+	$('.leftSide_searchBar_inoutMsgBoxTabs_out').on('click',function(){ 
+		location.href = 'mOutBoxListAll';		 
+	});
 	 
 });
 
@@ -79,20 +87,18 @@ function alertMsg() {
 </script> 
 <title>Inbox message</title>
 </head>
-<%-- <body>
-	<div class="wrapper">
+ <body>
+<!-- 	<div class="wrapper">
 		<div class="leftSide">
 			<div class="leftSide_searchBar">
 				<input type="text" id="inputBar" class="inputBar">
 				<a href="검색 컨트롤러"><img src="images/if_misc-_Search__1276849.svg" class="searchIcon"></a>
 			</div>
-			
-
 		</div>
-
-	</div> --%>
-	<div class="wrapper"> 
-	 
+	</div> 
+ -->
+ 	<img alt="" src="resources/mypage/images/logo2.gif" id="logo">	
+ 	<div class="wrapper"> 
 		<div class="leftSide"> 
 			<div class="tabs"> 
 				<div class="leftSide_tabs_tab2"> 
@@ -115,21 +121,20 @@ function alertMsg() {
 				</div> 
 			</div>
 			<div class="leftSide_2nd">
-			<div class="leftSide_2nd_searchBar"> 
-				<input type="text" id="inputBar" class="inputBar"> 
-				<a href="검색 컨트롤러"><img src="resources/mypage/images/searchIcon.png" class="searchIcon"></a>
-			</div>
-				<div class="leftSide_2nd_noticeService"> 
-					<img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" /> 
+				<div class="leftSide_2nd_searchBar"> 
+					<input type="text" id="inputBar" class="inputBar"> 
+					<a href="검색 컨트롤러"><img src="resources/mypage/images/searchIcon.png" class="searchIcon"></a>
 				</div>
-			</div>			 
-			 
+				<!--<div class="leftSide_2nd_noticeService"> 
+					<img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" /> 
+				</div> -->
+						 
  			<!-- 여기부터 받은쪽지함/보낸쪽지함 탭 --> 
-			<!-- <div class="leftSide_searchBar_inoutMsgBoxTabs"> 
-				<div class="leftSide_searchBar_inoutMsgBoxTabs_in"><a href="mInBoxListAll">Inbox message</a></div> 
-				<div class="leftSide_searchBar_inoutMsgBoxTabs_out"><a href="mOutBoxListAll">Outbox message</a></div> 
-			</div> --> 
-			 
+			 	<div class="leftSide_searchBar_inoutMsgBoxTabs"> 
+					<div class="leftSide_searchBar_inoutMsgBoxTabs_in">Inbox message</div> 
+					<div class="leftSide_searchBar_inoutMsgBoxTabs_out">Outbox message</div> 
+				</div>
+			</div>
 			<!-- 라인 인증키 얻는 링크 --> 
 <!-- 			<input id="noticeService" type="button" value="Line 알림 서비스 등록" onclick="noticeService()" /> --> 
 			 

@@ -15,6 +15,10 @@ body {
 	font-family: 'EcoSansMono', 'JejuGothic'; 
 }
 
+#logo{
+	max-width: 100%;
+}
+
 h2{
 	display: block;
     font-size: 2.5em;
@@ -75,7 +79,14 @@ h2{
 .tabs > div:hover { 
 	background-color: #0B3B0B; 
 	color: white; 
-} 
+}
+
+/* 0918 받은 쪽지함 보낸쪽지함 탭의 hover효과 */ 
+
+.leftSide_searchBar_inoutMsgBoxTabs > div:hover { 
+	background-color: #0B3B0B; 
+	color: white; 
+}
  
 .leftSide_tabs_tab1 { 
 	cursor: pointer; 
@@ -101,18 +112,29 @@ h2{
 } 
 .leftSide_tabs_tab7 { 
 	cursor: pointer; 
+}
+/* 0918추가 받은쪽지함 보낸쪽지함의 탭 */ 
+.leftSide_searchBar_inoutMsgBoxTabs_in {
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.leftSide_searchBar_inoutMsgBoxTabs_out { 
+	cursor: pointer;
+	align-items: center;
+    justify-content: center; 
 } 
  
 /* 여기부터 기존것들 0915기준 */ 
-.tabs>div { 
-	width: 15%; 
-	height: 80%; 
-	border: 1px solid rgb(50, 50, 50); 
-	background-color: white; 
-	border-top-left-radius: 10px; 
-	border-top-right-radius: 10px; 
-	border: 1px solid rgb(50, 50, 50); 
-} 
+.tabs>div {
+    width: 17%;
+    height: 80%;
+    border: 1px solid rgb(50, 50, 50);
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgb(50, 50, 50);
+}
  
 .leftSide_tabs_tab1 { 
 	display: flex; 
@@ -182,28 +204,29 @@ h2{
  
 /* 받은쪽지함 보낸쪽지함 탭 */ 
  
-.leftSide .leftSide_searchBar_inoutMsgBoxTabs{ 
-	display: flex; 
-	width:90%; 
-	height:5%; 
-	border: solid 1px white; 
-} 
+.leftSide .leftSide_searchBar_inoutMsgBoxTabs {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: solid 1px white;
+    justify-content: flex-end;
+}
  
-.leftSide_searchBar_inoutMsgBoxTabs{ 
+/* .leftSide_searchBar_inoutMsgBoxTabs{ 
 	display:flex; 
 	border: 1px white solid; 
 	justify-content: flex-start; 
-} 
+}  */
  
 .leftSide_searchBar_inoutMsgBoxTabs > div{ 
 	display:flex; 
-	width: 15%; 
+	width: 25%; 
 	background-color: white; 
 	border-top-left-radius: 10px; 
 	border-top-right-radius: 10px; 
 	/* border: 1px black solid; */ 
 	align-items: center; 
-	justify-content: center; 
+	justify-content: space-between;
 } 
  
 .leftSide .leftSide_table { 
@@ -283,9 +306,9 @@ tbody {
 }
 
 th, td {
-  width: 33.33%; /* to enable "word-break: break-all" */
-  padding: 5px;
-  word-break: break-all; /* 4. */
+    /* width: 33.33%; */
+    padding: 5px;
+    word-break: break-all;
 }
 
 tr {
