@@ -5,7 +5,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>쪽지보내기</title>
+<script src="resources/search/js/common/jquery-1.12.4.js"></script>
 <script>
+
+	// Mobile Check
+	function detectmob() { 
+		if( navigator.userAgent.match(/Android/i)
+		 || navigator.userAgent.match(/webOS/i)
+		 || navigator.userAgent.match(/iPhone/i)
+		 || navigator.userAgent.match(/iPad/i)
+		 || navigator.userAgent.match(/iPod/i)
+		 || navigator.userAgent.match(/BlackBerry/i)
+		 || navigator.userAgent.match(/Windows Phone/i)
+		){
+		    return true;
+		}
+		else {
+		   return false;
+		}
+	}
+
+	$(function(){
+		if(detectmob()) {
+			$('body').css('height', (window.innerHeight)+'px');
+			$('body').css('width', (window.innerWidth)+'px');
+			$('table').css('width', '80%');
+			$('.menu').css('width', '25%').css('font-size','2em');
+			$('input[type=text]').css('font-size','3em');
+			$('#msg_title').css('font-size','3em');
+			$('textarea').css('font-size','3em');
+			$('textarea').attr('cols','30').attr('rows','23');
+			$('#btn').css('width','20%').css('height','80px').css('line-height','80px').css('font-size','3em');
+		}
+	});
+
 	function sendaMsg() {
 		var msg_title = document.getElementById("msg_title");
 		var msg_content = document.getElementById("msg_content");
@@ -117,6 +150,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" class="content"><textarea cols="50" rows="10" name="msg_content" id="msg_content" style="resize: none; outline: none;"></textarea></td>
+<!-- 		<td colspan="2" class="content"><textarea cols="30" rows="23" name="msg_content" id="msg_content" style="resize: none; outline: none;"></textarea></td> -->
 	</tr>
 </table>
 </form>
