@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.MystoreMapper">
 	
-	<select id="selectAll" parameterType="String" resultType="Map">
+	<select id="selectAll2" parameterType="String" resultType="Map">
 		select 
 		 	*
 		from mystore, imageitem 
@@ -12,6 +12,19 @@
 			userid = #{userid}
 		and
 			imageitem.itemnum = mystore.itemnum
+		order by IMAGEORDER
+	</select>
+	
+	<select id="selectAll" parameterType="String" resultType="Map">
+		select 
+		 	*
+		from mystore, imageitem ,useritem
+		where 
+			mystore.userid = #{userid}
+		and
+			imageitem.itemnum = mystore.itemnum
+		and
+			mystore.useritemnum = useritem.useritemnum
 		order by IMAGEORDER
 	</select>
 	
@@ -27,6 +40,7 @@
 		insert into mystore values (
 			mystore_seq.nextval,
 			#{userid} ,
+			#{useritemnum} ,
 			#{itemnum} ,
 			#{currentframe} ,
 			#{px},

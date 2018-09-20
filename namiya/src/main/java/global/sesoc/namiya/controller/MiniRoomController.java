@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,10 +81,11 @@ public class MiniRoomController {
 			System.out.println("miniurl: "+miniurl);
 			String userid = (String)session.getAttribute("loginId"); // 로그인유저아이디
 			Members m= m_repository.select(miniurl); // 미니룸 멤버
+			System.out.println("member: "+m);
 			List<Map<String,String>> list = m_repository.selectAll(m.getUserid());
 			Profile p = p_repository.select(m.getUserid());
 			model.addAttribute("homeuserid", m.getUserid());
-			model.addAttribute("url", m.getMyurl());
+			model.addAttribute("myurl", m.getMyurl());
 			model.addAttribute("profile", p);
 			model.addAttribute("list", list);
 			return "mystore/myStore";
@@ -96,8 +98,11 @@ public class MiniRoomController {
 	public String setting(Model model, HttpSession session,@PathVariable("miniurl")String miniurl) {
 		String loginId = (String)session.getAttribute("loginId");
 		List<Map<String,String>> list = m_repository.selectAll(loginId);
+		Members m= m_repository.select(miniurl);
 		model.addAttribute("list", list);
+		model.addAttribute("userid", m.getUserid());
 		System.out.println("setting: "+list);
+		
 		return "mystore/setting";
 	}
 	
@@ -106,7 +111,9 @@ public class MiniRoomController {
 	public String profileEdit(Model model, HttpSession session) {
 		String userid = (String)session.getAttribute("loginId");
 		Profile p = p_repository.select(userid);
+		Members m = mb_repository.selectid(userid);
 		model.addAttribute("profile", p);
+		model.addAttribute("myurl", m.getMyurl());
 		return "mystore/profileEdit";
 	}
 	
@@ -160,14 +167,19 @@ public class MiniRoomController {
 	
 		@ResponseBody
 		@RequestMapping(value="/profileEdit", method=RequestMethod.POST)
-		public Profile Editprofile(MultipartFile upload, HttpSession session, Profile profile) {
-			
+		public String Editprofile(MultipartFile upload, HttpSession session, Profile profile, String myurl) {
+			String userid = (String)session.getAttribute("loginId");
+			Members urlM= new Members();
+			urlM.setMyurl(myurl);
+			Members um = mb_repository.selectUrl(urlM);
+			if(um != null && !um.getUserid().equals(userid)) {
+					return "";
+			}
 			String originalfile = upload.getOriginalFilename();
 			String savedfile = FileService.saveFile(upload, uploadPath);
-			String userid = (String)session.getAttribute("loginId");
 			System.out.println(originalfile+", "+savedfile+", "+userid);
 			Profile p = p_repository.select(userid);
-			
+			// member xml에서 update문 추가하기
 			if(!originalfile.equals("")) { // 파일 첨부가 있을때
 				// 기존파일삭제후 넣기
 				if(p.getSavedfile() !=null && !p.getSavedfile().equals("")) { // 기존프로필 저장파일이 있으면
@@ -180,10 +192,13 @@ public class MiniRoomController {
 			}
 			
 			p.setContent(profile.getContent());
-			p.setNickname(profile.getNickname());
 			p_repository.update(p);
-
-			return profile;
+			Members m = new Members();
+			m.setMyurl(myurl);
+			m.setUserid(userid);
+			mb_repository.updateURL(m);
+			
+			return myurl;
 		}
 		
 		@ResponseBody

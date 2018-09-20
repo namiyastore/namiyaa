@@ -13,6 +13,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
+$(document).ready(function(){
+    $(window).resize(function (){
+       resizeTo(1217, 728);
+    });
+});
+
 var background = {
 	'width' : 700,
 	'height': 350
@@ -22,6 +28,9 @@ var currentFurniturePage = 1;
 var currentHeadPage = 1;
 var currentTopPage = 1;
 var currentBottomPage = 1;
+var currentPage; // 현재 페이지
+var currentSearchItem="";
+var currentSearchWord="";
 var furnitureSliderWidth = 500;
 var furnitureSliderHeight = 200;
 var selectedMenu = [];
@@ -48,7 +57,7 @@ function Imageinit() {
 }
 
 function imageOutput(resp) {
-	var c =4;
+	var c =4; // 보여지는 아이템칸수
 	if(resp["list"].length <=0)
 		return;
 	if(resp["list"][0]["TYPE"] == "background")
@@ -77,11 +86,19 @@ function imageOutput(resp) {
     	result +=  '<td id="line" align="center">';
         result +=  '	<a href=javascript:createTexture('+item["TOTALFRAMES"]+','+
         item["WIDTH"]+','+item["HEIGHT"]+',"'+item["FILENAME"]+'","'+item["TYPE"]+'",'+
-        item["ITEMNUM"]+')>';
-        if(item["TYPE"] == "background")
-        	result +=  '		<img src="${pageContext.request.contextPath}/resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';
-        else
-        	result +=  '		<img src="${pageContext.request.contextPath}/resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';	
+        item["ITEMNUM"]+','+item["USERITEMNUM"]+')>';
+        var chk = checkImage(item["USERITEMNUM"]);
+        if(item["TYPE"] == "background"){
+        	if(chk ==0)
+        		result +=  '		<img src="${pageContext.request.contextPath}/resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'/'+item["FILENAME"]+'0.png" width="90" height="90" style="opacity: 0.3 ">';
+        	else
+        		result +=  '		<img src="${pageContext.request.contextPath}/resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'/'+item["FILENAME"]+'0.png" width="90" height="90" >';
+        } else{
+        	if(chk ==0)
+        		result +=  '		<img src="${pageContext.request.contextPath}/resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'0.png" width="90" height="90" style="opacity: 0.3 ">';	
+        	else
+        		result +=  '		<img src="${pageContext.request.contextPath}/resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';
+        }
         result +=  '	</a>';
         result +=  '</td>';  
         result +=  '</tr>';
@@ -138,6 +155,7 @@ function drawCloth(context, minimiImage) {
 			/* context.drawImage(clothesList[0].source,minimiImage.px,minimiImage.py,clothesList[0].width,clothesList[0].height);	
 			context.drawImage(clothesList[1].source,minimiImage.px,Number(minimiImage.py) + 65,clothesList[1].width,clothesList[1].height);
 			context.drawImage(clothesList[2].source,minimiImage.px,Number(minimiImage.py) + 90 ,clothesList[2].width,clothesList[2].height); */
+	
 	context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
 	context.drawImage(clothesList[1].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
 	context.drawImage(clothesList[0].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
@@ -182,7 +200,7 @@ function onBodyLoad() { // <body onload='onBodyLoad()'>...
 	count = ${fn:length(list)} + ${list[0].TOTALFRAMES} + 4 -1; // 메뉴 4개 추가 + 배경이 gif일때
 	 <c:forEach items="${list}" var="item" varStatus ="status">
 	setImage("${item.TOTALFRAMES}","${item.CURRENTFRAME}","${item.WIDTH}","${item.HEIGHT}",
-		"${item.FILENAME}","${item.PX}","${item.PY}","${item.IMAGEORDER}","${item.TYPE}","${item.ITEMNUM}");
+		"${item.FILENAME}","${item.PX}","${item.PY}","${item.IMAGEORDER}","${item.TYPE}","${item.ITEMNUM}","${item.USERITEMNUM}");
 	</c:forEach>
 
 	loadGifPicture();
@@ -339,7 +357,11 @@ $(document).ready(function() {
 });
 
 
-function createTexture(totalframes, width, height, filename, type, itemnum) {
+function createTexture(totalframes, width, height, filename, type, itemnum, useritemnum) {
+	
+  var chk = checkImage(useritemnum);
+	if(chk == 0)
+			return; 
  var imgObject = {
         'source': null,
         'totalframes': 1,
@@ -351,7 +373,8 @@ function createTexture(totalframes, width, height, filename, type, itemnum) {
         'py' : 0,
         'imageorder' : 1,
         'type' : 'furniture',
-        'itemnum' : 5
+        'itemnum' : 5,
+        'useritemnum': -1
    	}; 
 
 	imgObject.totalframes = totalframes;
@@ -364,6 +387,7 @@ function createTexture(totalframes, width, height, filename, type, itemnum) {
 	imgObject.imageorder = imgList.length;
 	imgObject.type = type;
 	imgObject.itemnum = itemnum;
+	imgObject.useritemnum = useritemnum;
 	var name;
 	if(type == "background")
 		name = '${pageContext.request.contextPath}/resources/img/'+imgObject.type+'/'+imgObject.filename+'/'+imgObject.filename+imgObject.currentframe+'.png';
@@ -405,7 +429,7 @@ function setMenu(filename,px,py,width,height) {
 	selectedMenu.push(imgObject);
 }
 
-function setImage(totalframes,currentframe,width,height,filename,px,py,imageorder,type,itemnum) {
+function setImage(totalframes,currentframe,width,height,filename,px,py,imageorder,type,itemnum,useritemnum) {
 	var imgObject = {
             'source': null,
             'totalframes': 1,
@@ -417,8 +441,8 @@ function setImage(totalframes,currentframe,width,height,filename,px,py,imageorde
             'py' : 0,
             'imageorder' : -1,
             'type' : null,
-            'itemnum' : -1
-            
+            'itemnum' : -1,
+            'useritemnum' : -1
        	};
 	imgObject.totalframes = totalframes;
 	imgObject.currentframe = currentframe;
@@ -430,6 +454,7 @@ function setImage(totalframes,currentframe,width,height,filename,px,py,imageorde
 	imgObject.imageorder = imageorder;
 	imgObject.type = type;
 	imgObject.itemnum = itemnum;
+	imgObject.useritemnum = useritemnum;
 	var name;
 	if(type == "background")
 		name = '${pageContext.request.contextPath}/resources/img/'+imgObject.type+'/'+imgObject.filename+'/'+imgObject.filename+imgObject.currentframe+'.png';
@@ -443,6 +468,11 @@ function setImage(totalframes,currentframe,width,height,filename,px,py,imageorde
 		tempList.push(img);
 	if(type == "furniture" || type == "background" || type == "minimi") {
 		imgList.push(imgObject);
+	/* 	if(type == "furniture") {
+			var chk = checkImage(useritemnum);
+			if(chk == 0)
+				return;
+		} */
 	}else if(type == "bottom" || type ==  "top" || type ==  "head") {
 		clothesList.push(imgObject);
 	}
@@ -476,7 +506,13 @@ function newImageLoaded(imgObject,type) {
 	}else if(type == "bottom") {
 		clothesList[2] = imgObject;	
 	}
- 
+	
+	$.ajax({
+		method : 'GET'
+		,url : 'reqFurniture'
+		,data : 'currentPage='+currentPage+'&searchItem=type'+'&searchWord='+currentSearchWord
+		,success : imageOutput}
+	);
 }
 
 function imageChanged(image,img) {
@@ -514,6 +550,12 @@ function deleteItem(sel) {
 	imgList.splice(sel,1);
 	isMenu = false;
 	selected = -1;
+	$.ajax({
+		method : 'GET'
+		,url : 'reqFurniture'
+		,data : 'currentPage='+currentPage+'&searchItem=type'+'&searchWord='+currentSearchWord
+		,success : imageOutput}
+	);
 }
 
 function changeOrder(sel,front) {
@@ -630,7 +672,7 @@ function output(resp) {
 
 
 function pagingItem(searchItem,searchWord,gap) {
-	var currentPage;
+	//var currentPage;
 	if(searchWord == "background") {
 		currentBackgroundPage = Number(currentBackgroundPage) + Number(gap);  
 		currentPage = currentBackgroundPage;
@@ -651,7 +693,7 @@ function pagingItem(searchItem,searchWord,gap) {
 		currentBottomPage = Number(currentBottomPage) + Number(gap);
 		currentPage = currentBottomPage;
 	}
-	
+	currentSearchWord = searchWord;
     	$.ajax({
     		method : 'GET'
     		,url : 'reqFurniture'
@@ -659,6 +701,25 @@ function pagingItem(searchItem,searchWord,gap) {
     		,success : imageOutput}
     	);
     }
+
+function checkImage(useritemnum) {
+	 for(var i=0;i<imgList.length;i++) {
+		 if(imgList[i].useritemnum == useritemnum) {
+			 
+			 //alert("이름 중복됨 "+ useritemnum);
+			 
+			 return 0;
+		 }
+	 }
+	 for(var i=0;i<clothesList.length;i++) {
+		 if(clothesList[i].useritemnum == useritemnum) {
+			 
+			 //alert("이름 중복됨 "+ useritemnum);
+			 
+			 return 0;
+		 }
+	 }
+}
 
 </script>
 
@@ -801,7 +862,7 @@ function pagingItem(searchItem,searchWord,gap) {
 </head>
 <body>
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
-<img id="loadingImage" alt="" src="${pageContext.request.contextPath}/resources/img/furniture/tori0.png">
+<img id="loadingImage" alt="" src="${pageContext.request.contextPath}/resources/img/furniture/tori0.png" >
  <div id="wrapper" align="center">
 	<div id="scroll" style="float:left; width: 1073px; height:545px; border-radius: 25px; background-color: white;">
 		
@@ -853,7 +914,10 @@ function pagingItem(searchItem,searchWord,gap) {
 			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
+			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<c:if test="${userid == sessionScope.loginId}">
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
+			</c:if>
 		</ul>
 	</div>
 	

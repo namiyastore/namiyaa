@@ -54,11 +54,7 @@
 		from
 			favorite
 		where
-		<if test="favoritenum != null">
-			favoritenum = #{favoritenum}
-		</if>
 		<if test="myurl != null">
-		and
 			myurl = #{myurl}
 		</if>
   		<if test ="userid != null">

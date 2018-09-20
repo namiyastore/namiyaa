@@ -12,7 +12,7 @@
 		update 
 			profile 
 		set 
-			nickname = #{nickname}, content = #{content}, originalfile = #{originalfile}, savedfile = #{savedfile} 
+			content = #{content}, originalfile = #{originalfile}, savedfile = #{savedfile} 
 		where
 			userid = #{userid} 
 		

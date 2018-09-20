@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.util.PageNavigator;
+import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Profile;
 
 @Controller
@@ -31,6 +33,9 @@ public class ProfileController {
 	
 	@Autowired
 	ProfileRepository p_repository;
+	
+	@Autowired
+	MembersRepository mb_repository;
 	
 	final String uploadPath = "/profile";
 	
@@ -84,13 +89,16 @@ public class ProfileController {
 	
 		@ResponseBody
 		@RequestMapping(value="/reqProfile", method=RequestMethod.POST)
-		public Profile reqProfile(Model model, HttpSession session) {
+		public Map<String,Object> reqProfile(Model model, HttpSession session) {
 			System.out.println("profile:sss");
 			String userid = (String)session.getAttribute("loginId");
 			Profile p = p_repository.select(userid);
-			
-			
-			return p;
+			Members m = mb_repository.selectid(userid); 
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("profile", p);
+			map.put("myurl", m.getMyurl());
+			System.out.println("map: "+map);
+			return map;
 		}
 	
 }
