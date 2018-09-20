@@ -90,18 +90,21 @@ body {
 
 /* 프로필 버튼 */
 .profileBtn {
-	margin: 14px;
+    margin: 14px;
     margin-left: 25px;
     text-align: center;
     font-size: 1.2em;
     border: 1px solid;
     border-radius: 5px;
     width: 200px;
-    height: 30px;
-    line-height: 25px;
+    height: 40px;
+    line-height: 40px;
     cursor: pointer;
     background-color: #2A3D4C;
     color: #FFFFFF;
+    
+    
+    
 }
 
 /* 프로필 버튼 ( on mouse ) */

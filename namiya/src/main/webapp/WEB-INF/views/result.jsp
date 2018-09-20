@@ -1142,7 +1142,6 @@ p, li, a{
 			</div>
 			<div id="myPageClick" class="profileBtn"><spring:message code="search.profileBtn.myPageClick" /></div>
 			<div id="myStoreClick" class="profileBtn"><spring:message code="search.profileBtn.myStoreClick" /></div>
-			<div id="myInfoClick" class="profileBtn"><spring:message code="search.profileBtn.myInfoClick" /></div>
 			<div id="logoutClick" class="profileBtn"><spring:message code="search.profileBtn.logoutClick" /></div>
 		</div>
 		
