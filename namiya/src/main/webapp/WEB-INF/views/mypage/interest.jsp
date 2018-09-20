@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="resources/mypage/css/mypageCommon.css">
+<link rel="stylesheet" href="resources/mypage/css/mypage_interest.css">
 <title>Interest</title>
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
 <script type="text/javascript">
@@ -89,7 +89,8 @@ function alertMsg() {
 </script> 
 </head>
 <body>
-	<h2>관심상품</h2>
+	<!-- <h2>관심상품</h2> -->
+	<img alt="" src="resources/mypage/images/logo2.gif" id="logo">
 	<%-- <a href="myPage">뒤로가기</a>
 	
 	<form action="iUpdate" method="post">
@@ -103,9 +104,6 @@ function alertMsg() {
 	<div class="wrapper"> 
 		<div class="leftSide"> 
 			<div class="tabs"> 
-				<!-- <div class="leftSide_tabs_tab1"> 
-					Favorite 
-				</div> --> 
 				<div class="leftSide_tabs_tab2"> 
 					Interest 
 				</div> 
@@ -158,7 +156,7 @@ function alertMsg() {
 					</c:if>
 					<c:if test="${empty ilist }">
 						<tr>
-							<th colspan="4">관심상품이 없습니다.</th>
+							<td colspan="4">관심상품이 없습니다.</td>
 						</tr>
 					</c:if>
 				</table>

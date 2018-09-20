@@ -82,8 +82,10 @@
 </script>
 </head>
 <body>
-	<h2>구매이력</h2>
-	 <!-- <a href="myPage">뒤로가기</a> -->
+	<!-- <div class="pagelogo"> -->
+		<img alt="" src="resources/mypage/images/logo2.gif" id="logo">
+	 	<!-- <a href="myPage">뒤로가기</a> -->
+	<!-- </div> -->
 	
 	<div class="wrapper">
 		<div class="leftSide">
@@ -120,15 +122,15 @@
 					<c:if test="${not empty hlist }">
 						<c:forEach var="hList" items="${hlist}">
 							<tr>
-								<td>${hList.historynum}</td>
-								<td>거래종류</td>
-								<td>물건이름</td>
-								<td>${hList.deal_start}</td>
-								<td>${hList.deal_end}</td>
-								<td>${hList.sellerid}</td>
-								<td>${hList.buyerid}</td>
-								<td>거래상태</td>
-								<td><input type="button" value="상세" onclick="detailView(${hList.historynum})"></td>
+								<td style="text-align: right;">${hList.historynum}</td>
+								<td style="text-align: center;">거래종류</td>
+								<td style="text-align: center;">물건이름</td>
+								<td style="text-align: center;">${hList.deal_start}</td>
+								<td style="text-align: center;">${hList.deal_end}</td>
+								<td style="text-align: center;">${hList.sellerid}</td>
+								<td style="text-align: center;">${hList.buyerid}</td>
+								<td style="text-align: center;">거래상태</td>
+								<td style="text-align: center;"><input type="button" value="상세" onclick="detailView(${hList.historynum})"></td>
 							</tr>
 						</c:forEach>
 					</c:if>

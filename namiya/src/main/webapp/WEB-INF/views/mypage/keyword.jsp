@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="resources/mypage/css/mypageCommon.css">
+<link rel="stylesheet" href="resources/mypage/css/mypage_keyword.css">
 <title>keword</title>
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
 <script type="text/javascript">
@@ -79,7 +79,6 @@ function noticeService() {
 			} 
 		} 
 	});	 
-	 
 } 
  
 // 인증키가 등록되었다는 메세지 출력 
@@ -90,19 +89,8 @@ function alertMsg() {
 </script> 
 </head>
 <body>
-	<h2>키워드</h2>
-	<%-- <a href="myPage">뒤로가기</a>
-	<form action="kInsert" method="post">
-		keyword입력
-		<input type="text" name="keywordname" />
-		<br /> 카테고리 입력
-		<input type="text" name="category" />
-		<br /> userid입력
-		<input type="text" name="userid" />
-		<input type="submit" value="키워드 입력완료">
-	</form> --%>
- <div class="wrapper"> 
-	 
+		<img alt="" src="resources/mypage/images/logo2.gif" id="logo">
+ 	<div class="wrapper"> 
 		<div class="leftSide"> 
 			<div class="tabs"> 
  
@@ -151,8 +139,8 @@ function alertMsg() {
 							<tr>
 								<td>${kList.keywordnum}</td>
 								<td><a href="${kList.keywordname}">${kList.keywordname}</a></td>
-								<td><input type="button" value="삭제"	onclick="kdelete(${kList.keywordnum})" /></td>
-								<td><input type="button" value="수정"	onclick="kupdate(${kList.keywordnum})" /></td>
+								<td><input type="button" value="삭제"	 onclick="kupdate(${kList.keywordnum })"></td>
+								<td><input type="button" value="수정"	 onclick="kupdate(${kList.keywordnum })"/></td>
 							</tr>
 						</c:forEach>
 					</c:if>

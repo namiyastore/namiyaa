@@ -15,6 +15,11 @@ body {
 	font-family: 'EcoSansMono', 'JejuGothic'; 
 }
 
+#logo{
+	max-width: 100%;
+	
+}
+
 h2{
 	display: block;
     font-size: 2.5em;
@@ -105,15 +110,15 @@ h2{
 } 
  
 /* 여기부터 기존것들 0915기준 */ 
-.tabs>div { 
-	width: 15%; 
-	height: 80%; 
-	border: 1px solid rgb(50, 50, 50); 
-	background-color: white; 
-	border-top-left-radius: 10px; 
-	border-top-right-radius: 10px; 
-	border: 1px solid rgb(50, 50, 50); 
-} 
+.tabs>div {
+    width: 17%;
+    height: 80%;
+    border: 1px solid rgb(50, 50, 50);
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgb(50, 50, 50);
+}  
  
 .leftSide_tabs_tab1 { 
 	display: flex; 

@@ -81,8 +81,8 @@ function alertMsg() {
 <title>message</title>
 </head>
 <body>
-<div class="wrapper"> 
-	 
+	<img alt="" src="resources/mypage/images/logo2.gif" id="logo">
+	<div class="wrapper"> 
 		<div class="leftSide"> 
 			<div class="tabs"> 
  
