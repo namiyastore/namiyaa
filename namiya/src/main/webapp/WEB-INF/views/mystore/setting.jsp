@@ -100,7 +100,7 @@ function imageOutput(resp) {
         		result +=  '		<img src="${pageContext.request.contextPath}/resources/img/'+item["TYPE"]+'/'+item["FILENAME"]+'0.png" width="90" height="90">';
         }
         result +=  '	</a>';
-        result +=  '</td>';  
+        result +=  '</td>';
         result +=  '</tr>';
         c--;
     });
@@ -155,10 +155,13 @@ function drawCloth(context, minimiImage) {
 			/* context.drawImage(clothesList[0].source,minimiImage.px,minimiImage.py,clothesList[0].width,clothesList[0].height);	
 			context.drawImage(clothesList[1].source,minimiImage.px,Number(minimiImage.py) + 65,clothesList[1].width,clothesList[1].height);
 			context.drawImage(clothesList[2].source,minimiImage.px,Number(minimiImage.py) + 90 ,clothesList[2].width,clothesList[2].height); */
+	for(var i=0;i<clothesList.length;i++) {
+			context.drawImage(clothesList[i].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);
+	}
+		/* context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
+		context.drawImage(clothesList[1].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
+		context.drawImage(clothesList[0].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	 */
 	
-	context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
-	context.drawImage(clothesList[1].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
-	context.drawImage(clothesList[0].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
 }
 
 function setSelectedMenu() {
@@ -183,6 +186,8 @@ function setGifPicture(context, x, y, list) { // context is the canvas 2d contex
  }
 
 function loadGifPicture() { 
+	if(imgList.length<=0)
+		return;
     for(var a = 1; a<imgList[0].totalframes; a++) {
     	
     	var img = new Image();
@@ -474,6 +479,10 @@ function setImage(totalframes,currentframe,width,height,filename,px,py,imageorde
 				return;
 		} */
 	}else if(type == "bottom" || type ==  "top" || type ==  "head") {
+		/* for(var i =0; i<clothesList.length;i++) {
+			if(clothesList[i].type == "top" || clothesList[i].type == "bottom" || clothesList[i].type == "head")
+				clothesList.splice(i,1);
+		} */
 		clothesList.push(imgObject);
 	}
 	
@@ -499,12 +508,24 @@ function newImageLoaded(imgObject,type) {
     	loadGifPicture();
 	} else if(type == "furniture"){
 		imgList.push(imgObject);
-	}else if(type == "head") {
-    	clothesList[0] = imgObject;	
-	}else if(type == "top") {
-		clothesList[1] = imgObject;	
-	}else if(type == "bottom") {
-		clothesList[2] = imgObject;	
+	}else if(type == "bottom" ) {
+		for(var i =0; i<clothesList.length;i++) {
+			if(clothesList[i].type == "bottom")
+				clothesList.splice(i,1);
+		} 
+		clothesList.push(imgObject);
+	}else if(type ==  "top") {
+		for(var i =0; i<clothesList.length;i++) {
+			if(clothesList[i].type == "top")
+				clothesList.splice(i,1);
+			} 
+			clothesList.push(imgObject);
+	}else if(type ==  "head") {
+		for(var i =0; i<clothesList.length;i++) {
+			if(clothesList[i].type == "head")
+				clothesList.splice(i,1);
+			} 
+			clothesList.push(imgObject);
 	}
 	
 	$.ajax({

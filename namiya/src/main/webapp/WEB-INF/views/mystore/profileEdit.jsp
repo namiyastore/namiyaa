@@ -179,7 +179,7 @@
                     <td>
                         <div class="tdcell">
                            <!--  <p class="contxt_webctrl nickname"> -->
-                                <textarea name="content" id="content">${profile.content}</textarea>
+                                <textarea name="content" id="content" style="width: 250px; height: 200px; padding-top: 0px;padding-left: 0px;padding-right: 0px;padding-bottom: 0px;">${profile.content}</textarea>
                             <!-- </p> -->
                         </div>
                     </td>

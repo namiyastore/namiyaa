@@ -42,14 +42,19 @@ var background = {
 	    }
 	 }
 
-	function drawCloth(context, minimiImage) {
+    function drawCloth(context, minimiImage) {	
 		/* context.drawImage(clothesList[0].source,minimiImage.px,minimiImage.py,clothesList[0].width,clothesList[0].height);	
 		context.drawImage(clothesList[1].source,minimiImage.px,Number(minimiImage.py) + 65,clothesList[1].width,clothesList[1].height);
 		context.drawImage(clothesList[2].source,minimiImage.px,Number(minimiImage.py) + 90 ,clothesList[2].width,clothesList[2].height); */
-context.drawImage(clothesList[0].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
-context.drawImage(clothesList[1].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
-context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
-	}
+		 for(var i=0;i<clothesList.length;i++) {
+			
+				context.drawImage(clothesList[i].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);
+			
+			/* context.drawImage(clothesList[2].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
+			context.drawImage(clothesList[1].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	
+			context.drawImage(clothesList[0].source,minimiImage.px,minimiImage.py,minimiImage.width,minimiImage.height);	 */
+		}
+}
 	
 	function setGifPicture(context, x, y, list) { // context is the canvas 2d context.
 	    for(var a = 0; a<list.length; a++) {

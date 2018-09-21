@@ -59,7 +59,7 @@
 		from
 		useritem,imageitem
 		where
-			userid = #{userid}
+			userid = 'master'
 		and
 			imageitem.itemnum = useritem.itemnum
 		and
@@ -74,7 +74,7 @@
         *
 		from useritem, imageitem 
 		where 
-			userid = #{userid}
+			userid = 'master'
 		and
 			imageitem.itemnum = useritem.itemnum
 		and
