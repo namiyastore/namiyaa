@@ -95,6 +95,7 @@ public class MessageRepository{
 			MessageMapper mapper = session.getMapper(MessageMapper.class);
 			RowBounds rb = new RowBounds(startRecord,countPerPage);
 			List<Message> list = mapper.Inbox_select_result(searchWord,rb);
+			System.out.println("받은쪽지함의 리스트0920" +  list);
 			return list;
 		}
 		

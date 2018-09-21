@@ -1,12 +1,5 @@
 @charset "UTF-8"; 
  
-/* body { */ 
-/* 	background-image: url("resources/images/NaviBackGround.png"); */ 
-/* 	background-size: 80%; */ 
-/* 	font-family: 'EcoSansMono', 'JejuGothic'; */ 
-/* } */ 
-
-
 /* 수정된 CSS */ 
 body { 
 	background-image: url("../images/NaviBackGround.png"); 
@@ -16,7 +9,7 @@ body {
 }
 
 #logo{
-	max-width: 100%;
+	max-width: 97%;
 }
 
 h2{
@@ -208,26 +201,19 @@ h2{
     display: flex;
     width: 100%;
     height: 100%;
-    border: solid 1px white;
+    /* border: solid 1px white; */
     justify-content: flex-end;
 }
  
-/* .leftSide_searchBar_inoutMsgBoxTabs{ 
-	display:flex; 
-	border: 1px white solid; 
-	justify-content: flex-start; 
-}  */
- 
-.leftSide_searchBar_inoutMsgBoxTabs > div{ 
-	display:flex; 
-	width: 25%; 
-	background-color: white; 
-	border-top-left-radius: 10px; 
-	border-top-right-radius: 10px; 
-	/* border: 1px black solid; */ 
-	align-items: center; 
-	justify-content: space-between;
-} 
+.leftSide_searchBar_inoutMsgBoxTabs > div {
+    display: flex;
+    width: 25%;
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px black solid;
+ 	align-items: center;
+}
  
 .leftSide .leftSide_table { 
 	display: flex; 
@@ -293,18 +279,18 @@ table, td {
   border: 1px solid #000;
 }
 
-thead {
-  display: table; /* to take the same width as tr */
-  width: 100%; /* - 17px because of the scrollbar width */
+ thead {
+  display: table; 
+  width: 100%; 
 }
 
-tbody {
-  display: block; /* to enable vertical scrolling */
-  max-height: 373px; /* e.g. */
-  overflow-y: scroll; /* keeps the scrollbar even if it doesn't need it; display purpose */
-  overflow-x: hidden;
+ tbody {
+  display: block; 
+  max-height: 373px;
+ /*  overflow-y: scroll; keeps the scrollbar even if it doesn't need it; display purpose
+  overflow-x: hidden; */
 }
-
+ 
 th, td {
     /* width: 33.33%; */
     padding: 5px;
@@ -312,7 +298,7 @@ th, td {
 }
 
 tr {
-  display: table; /* display purpose; th's border */
+  display: table;
   width: 100%;
 }
 
