@@ -56,7 +56,7 @@
 					a += '</td>';
 				$("#winner").html(a);
 				
-				var urlAddr = "http://203.233.199.115:8081";
+				var urlAddr = "http://203.233.199.138:8081";
 				var msg = "추첨%20대상자로%20선정되셨습니다%0Aline:" + urlAddr + "/namiya/sendMsg?userid=" + resp;
 				
 				// 당첨자에게 메세지 전송
