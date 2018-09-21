@@ -82,10 +82,8 @@
 </script>
 </head>
 <body>
-	<!-- <div class="pagelogo"> -->
-		<img alt="" src="resources/mypage/images/logo2.gif" id="logo">
-	 	<!-- <a href="myPage">뒤로가기</a> -->
-	<!-- </div> -->
+	<h2>구매이력</h2>
+	 <!-- <a href="myPage">뒤로가기</a> -->
 	
 	<div class="wrapper">
 		<div class="leftSide">
@@ -120,17 +118,21 @@
 						<th>상세보기</th>
 					</tr>
 					<c:if test="${not empty hlist }">
-						<c:forEach var="hList" items="${hlist}">
+						<c:forEach var="hList" items="${hlist}" varStatus="status">
 							<tr>
-								<td style="text-align: right;">${hList.historynum}</td>
-								<td style="text-align: center;">거래종류</td>
-								<td style="text-align: center;">물건이름</td>
-								<td style="text-align: center;">${hList.deal_start}</td>
-								<td style="text-align: center;">${hList.deal_end}</td>
-								<td style="text-align: center;">${hList.sellerid}</td>
-								<td style="text-align: center;">${hList.buyerid}</td>
-								<td style="text-align: center;">거래상태</td>
-								<td style="text-align: center;"><input type="button" value="상세" onclick="detailView(${hList.historynum})"></td>
+								<td>${hList.historynum}</td>
+								<td>${blist[status.index].service}</td>
+								<td>${plist[status.index].productname}</td>
+								<td>${hList.deal_start}</td>
+								<td>${hList.deal_end}</td>
+								<td>${hList.sellerid}</td>
+								<td>${hList.buyerid}</td>
+								<td>${plist[status.index].sstatus}</td>
+								<c:if test="${sessionScope.loginId eq hList.sellerid}">
+								<td>
+									<input type="button" value="상세" onclick="detailView(${hList.historynum})">
+								</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</c:if>

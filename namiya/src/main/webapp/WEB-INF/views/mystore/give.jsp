@@ -233,10 +233,9 @@ function want(boardnum, userid) {
 		<div id="givedetail">
 			<h1><b>Free Give</b></h1>
 			<hr/>
-			
+			<c:if test="${userid == sessionScope.loginId}"> 
 			<a href="giveForm"><img src="${pageContext.request.contextPath}/resources/images/write.png" style="width:70px; height:40px;"></a>
-			
-			<hr/>
+			</c:if>
 			<c:if test="${empty map}">
 					<br/>
 					<tr>
@@ -249,22 +248,22 @@ function want(boardnum, userid) {
 			<c:forEach var="map" items="${map}" varStatus="status">
 				<table>
 					<tr>
-						<td style="width:50px; font-family: 'Jeju Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
+						<td style="width:60px; font-family: 'Jeju Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
 						<c:if test="${map.ORIGINALFILE != null}">
-						<td id="image"><img src="${pageContext.request.contextPath}/boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
+						<td id="image"><img src="${pageContext.request.contextPath}/boardfile/${map.SAVEDFILE}" style="width:140px; height:100px;"></td>
 						</c:if>
 						<c:if test="${map.ORIGINALFILE == null}">
 						<td id="image"><img src="${pageContext.request.contextPath}/resources/images/basiclogo.png" style="width:150px; height:50px;"></td>
 						</c:if>
 						<td id="title"><a href="giveView?boardnum=${map.BOARDNUM}" style="text-decoration:none; color:black;"><span id="title"><b>${map.TITLE}</b></span></a></td>
 						<td id="date">${map.REGDATE}</td>
-						<%-- <c:if test="${map.USERID != sessionScope.loginId}"> --%>
+						<c:if test="${map.USERID != sessionScope.loginId && map.SSTATUS != '진행완료'}"> 
 						<td id="btn">
 							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 							&nbsp;
 							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 						</td>
-						<%-- </c:if> --%>
+						</c:if>
 					</tr>
 				</table>
 				<hr/>
@@ -316,7 +315,9 @@ function want(boardnum, userid) {
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<c:if test="${userid == sessionScope.loginId}">
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			</c:if>
 		</ul>
 	</div>
 </div>

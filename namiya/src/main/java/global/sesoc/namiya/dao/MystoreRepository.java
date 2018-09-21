@@ -64,7 +64,7 @@ public Members select(String myurl) {
 		public int getItemCount(String searchItem, String searchWord, String userid) {
 			MystoreMapper mapper = session.getMapper(MystoreMapper.class);
 			
-			Map<String,String> map = new HashMap<>();
+			Map<String,String> map = new HashMap<String,String>();
 			
 			map.put("searchItem", searchItem);
 			map.put("searchWord", searchWord);
@@ -82,7 +82,7 @@ public Members select(String myurl) {
 			RowBounds rb = new RowBounds(startRecord,countPerPage);
 			
 			MystoreMapper mapper = session.getMapper(MystoreMapper.class);
-			Map<String,String> map = new HashMap<>();
+			Map<String,String> map = new HashMap<String,String>();
 			
 			map.put("searchItem", searchItem);
 			map.put("searchWord", searchWord);

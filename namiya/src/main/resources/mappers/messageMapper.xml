@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.MessageMapper">
+
 	<select id="mInBoxListAll" resultType="Message">
 		SELECT
 			messagenum,writerid,msg_title,msg_content,regdate,userid,copy
@@ -137,11 +138,11 @@
 		FROM
 			message
 		WHERE
-			msg_title = #{searchWord}
-		OR
-			msg_content = #{searchWord}
-		AND
 			copy = 0
+		AND
+			msg_title LIKE '%'||#{searchWord}||'%'
+		OR
+			msg_content LIKE '%'||#{searchWord}||'%'
 	</select>
 	
 	<select id="getOutboxRecordCount" resultType="int">
@@ -150,11 +151,11 @@
 		FROM
 			message
 		WHERE
-			msg_title = #{searchWord}
-		OR
-			msg_content = #{searchWord}
-		AND
 			copy = 1
+		AND
+			msg_title LIKE '%'||#{searchWord}||'%'
+		OR
+			msg_content LIKE '%'||#{searchWord}||'%'
 	</select>
 	
 	<select id="Inbox_select_result" resultType="Message">
@@ -169,11 +170,11 @@
 		FROM
 			message
 		WHERE
-			msg_title = #{searchWord}
-		OR
-			msg_content = #{searchWord}
-		AND
 			copy = 0
+		AND
+			msg_title LIKE '%'||#{searchWord}||'%'
+		OR
+			msg_content LIKE '%'||#{searchWord}||'%'
 	</select>
 	
 	<select id="Outbox_select_result" resultType="Message">
@@ -188,11 +189,10 @@
 		FROM
 			message
 		WHERE
-			msg_title = #{searchWord}
-		OR
-			msg_content = #{searchWord}
-		AND
 			copy = 1
+		AND
+			msg_title LIKE '%'||#{searchWord}||'%'
+		OR
+			msg_content LIKE '%'||#{searchWord}||'%'
 	</select>
-	
 </mapper>

@@ -61,6 +61,9 @@
 				
 				// 당첨자에게 메세지 전송
 				msgSend(resp, msg);
+				
+				// <input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
+				$("#buyer").html(resp);
 			},
 			error : function(error) {
 				alert("추첨 error : "+error);
@@ -195,7 +198,7 @@
 				<th class="deal_list" >거래시작날짜</th>
 				<th class="deal_list" >거래완료날짜</th>
 				<th class="deal_list" >판매자</th>
-				<!-- <th class="deal_list" >구매자</th> -->
+				<th class="deal_list" >구매자</th>
 				<th class="deal_list" >거래상태</th>
 				<th class="deal_list" style="width:400px;">거래목록</th>
 			</tr>
@@ -205,12 +208,12 @@
 				<td class="deal_info" >${product.productname}</td>
 				<td class="deal_info" style="font-family: 'Jeju Gothic';">${history.deal_start}</td>
 				<td class="deal_info" style="font-family: 'Jeju Gothic';">
-					<c:if test="${product.sstatus eq '거래완료'}">
+					<c:if test="${product.sstatus eq '진행완료'}">
 						${history.deal_end}
 					</c:if>				
 				</td>
 				<td class="deal_info" >${sessionScope.loginId}</td>
-				<!-- <td id="buyer" class="deal_info" ></td> -->
+				<td id="buyer" class="deal_info" >${history.buyerid}</td>
 				<td class="deal_info" >${product.sstatus}</td>
 				<td><input type="button" class="btn" value="list" id="gotolist" onclick="gotohistory()"></td>
 			</tr>
@@ -240,7 +243,11 @@
 		<div style="float: left; width:300px;">
 			<img src="resources/images/takarakuzi.gif" style="width:250px;">
 			<br/>
-			<input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
+			<div id="select">
+			<c:if test="${product.sstatus eq '진행완료'}">
+				<input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
+			</c:if>
+			</div>
 		</div>
 		
 		<div style="float: left; width:200px;">
@@ -248,9 +255,7 @@
 				<tr>
 					<th class="result" colspan="2">당첨자</th>
 				</tr>
-				<tr id="winner">
-				
-				</tr>
+				<tr id="winner"></tr>
 			</table>
 		</div>
 	</div>

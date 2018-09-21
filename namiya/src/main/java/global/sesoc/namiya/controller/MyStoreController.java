@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,6 +47,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.CategoriesRepository;
+import global.sesoc.namiya.dao.HistoryRepository;
 import global.sesoc.namiya.dao.InterestRepository;
 import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.MystoreRepository;
@@ -94,6 +96,9 @@ public class MyStoreController {
 	@Autowired
 	SavingRepository s_repository;
 	
+	@Autowired
+	HistoryRepository h_repository;
+	
 	final String uploadPath = "/boardfile";
 	
 	final int COUNT_PER_PAGE = 5;
@@ -110,6 +115,7 @@ public class MyStoreController {
 		System.out.println("cron test:"+date);
 		
 		int result = p_repository.updatePstt2(date);
+		System.out.println("schedule의 result:"+result);
 	}
 	
 	
@@ -196,6 +202,7 @@ public class MyStoreController {
 		model.addAttribute("map", map);
 		model.addAttribute("navi", navi);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("userid", userid);
 		
 		return "mystore/give";
 	}
@@ -282,6 +289,11 @@ public class MyStoreController {
 		Board board = b_repository.selectOne(boardnum);
 		int productnum = board.getProductnum();
 		
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String userid = member.getUserid();
+		
 		HashMap<String, Object> map = p_repository.seletPC(productnum);
 		String fullPath="";
 		if (board.getSavedfile() != null)
@@ -298,6 +310,7 @@ public class MyStoreController {
 			
 		model.addAttribute("board", board);
 		model.addAttribute("map", map);
+		model.addAttribute("userid", userid);
 		
 		return "mystore/giveView";
 	}
@@ -385,10 +398,12 @@ public class MyStoreController {
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/trade")
 	public String trade(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @PathVariable("miniurl")String miniurl) {
 		String service = "교환";
+		
 		Members m = new Members();
 		m.setMyurl(miniurl);
 		Members member = mb_repository.selectUrl(m);
 		String userid = member.getUserid();
+		
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
@@ -400,6 +415,7 @@ public class MyStoreController {
 		model.addAttribute("map", map);
 		model.addAttribute("navi", navi);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("userid", userid);
 		
 		return "mystore/trade";
 	}
@@ -418,7 +434,11 @@ public class MyStoreController {
 	public String tradewrite(Board board, MultipartFile upload, HttpSession session, Product product, History history, @PathVariable("miniurl")String miniurl) {
 		String originalfile = upload.getOriginalFilename();
 		String savedfile = FileService.saveFile(upload, uploadPath);
-		String userid = (String)session.getAttribute("loginId");
+		
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String userid = member.getUserid();
 
 		int result1 = p_repository.insertPdt(product);
 		Product pr = p_repository.selectOne();
@@ -445,6 +465,11 @@ public class MyStoreController {
 		Board board = b_repository.selectOne(boardnum);
 		int productnum = board.getProductnum();
 
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String userid = member.getUserid();
+		
 		HashMap<String, Object> map = p_repository.seletPC(productnum);
 
 		String fullPath="";
@@ -462,6 +487,7 @@ public class MyStoreController {
 			
 		model.addAttribute("board", board);
 		model.addAttribute("map", map);
+		model.addAttribute("userid", userid);
 		
 		return "mystore/tradeView";
 	}
@@ -548,7 +574,12 @@ public class MyStoreController {
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/talent")
 	public String talent(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @PathVariable("miniurl")String miniurl) {
 		String service = "재능기부";
-		String userid = (String)session.getAttribute("loginId");
+		
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String userid = member.getUserid();
+		
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
@@ -560,6 +591,7 @@ public class MyStoreController {
 		model.addAttribute("map", map);
 		model.addAttribute("navi", navi);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("userid", userid);
 		
 		return "mystore/talent";
 	}
@@ -578,7 +610,11 @@ public class MyStoreController {
 	public String talentwrite(Board board, MultipartFile upload, HttpSession session, Product product, History history, @PathVariable("miniurl")String miniurl) {
 		String originalfile = upload.getOriginalFilename();
 		String savedfile = FileService.saveFile(upload, uploadPath);
-		String userid = (String)session.getAttribute("loginId");
+		
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String userid = member.getUserid();
 			
 		int result1 = p_repository.insertPdt(product);
 		Product pr = p_repository.selectOne();
@@ -622,6 +658,11 @@ public class MyStoreController {
 		Board board = b_repository.selectOne(boardnum);
 		int productnum = board.getProductnum();
 		
+		Members m = new Members();
+		m.setMyurl(miniurl);
+		Members member = mb_repository.selectUrl(m);
+		String userid = member.getUserid();
+		
 		HashMap<String, Object> map = p_repository.seletPC(productnum);
 		
 		String fullPath="";
@@ -639,6 +680,7 @@ public class MyStoreController {
 			
 		model.addAttribute("board", board);
 		model.addAttribute("map", map);
+		model.addAttribute("userid", userid);
 		
 		return "mystore/talentView";
 	}
@@ -725,6 +767,7 @@ public class MyStoreController {
 		m.setMyurl(miniurl);
 		Members member = mb_repository.selectUrl(m);
 		String store_owner = member.getUserid();
+		
 		System.out.println(member);
 		List<Review> list = r_repository.selectReviewAll(store_owner);
 		model.addAttribute("list", list);
@@ -790,18 +833,16 @@ public class MyStoreController {
 		Board board = b_repository.selectBoard(productnum);
 		List<Wish> wlist = b_repository.selectWishAll(board.getBoardnum());
 		
-		
-		// 거래내역 띄우기 
-		
-		
-		
+		// 오늘 날짜
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = Calendar.getInstance().getTime();     
+		String date = df.format(today);
 		
 		// 결과 넘기기
 		model.addAttribute("wlist", wlist);
 		model.addAttribute("history", history);
 		model.addAttribute("board", board);
 		model.addAttribute("product", product);
-		
 		
 		return "mystore/deal";
 	}
@@ -919,8 +960,14 @@ public class MyStoreController {
 		
 		String winid = winner[wn];
 		
-		System.out.println("winner : "+winner[wn]);
+		history.setBuyerid(winid);
 		
+		Product product = p_repository.selectPdt(productnum);
+		product.setSstatus("추첨완료");
+		
+		int result = b_repository.updateBuyer(history);
+		int result2 = p_repository.updatePstt(product);
+		System.out.println("winner : "+winner[wn]);
 		return winid;
 		
 	}

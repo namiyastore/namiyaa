@@ -204,10 +204,9 @@ function want(boardnum, userid) {
 		<div id="tradedetail">
 			<h1><b>Exchange Things</b></h1>
 			<hr/>
-			
+				<c:if test="${userid == sessionScope.loginId}">
 				<a href="tradeForm"><img src="${pageContext.request.contextPath}/resources/images/write.png" style="width:70px; height:40px;"></a>
-				
-				<hr/>
+				</c:if>
 				<c:if test="${empty map}"> 
 				<br/>
 					<tr>
@@ -229,7 +228,7 @@ function want(boardnum, userid) {
 						</c:if>
 						<td id="title"><a href="tradeView?boardnum=${map.BOARDNUM}" style="text-decoration:none; color:black;"><span id="title"><b>${map.TITLE}</b></span></a></td>
 						<td id="date">${map.REGDATE}</td>
-						<c:if test="${map.USERID != sessionScope.loginId}">
+						<c:if test="${map.USERID != sessionScope.loginId && map.SSTATUS != '진행완료'}">
 						<td id="btn">
 							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 							&nbsp;
@@ -286,7 +285,9 @@ function want(boardnum, userid) {
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<c:if test="${userid == sessionScope.loginId}">
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			</c:if>
 		</ul>
 	</div>
 	

@@ -118,6 +118,12 @@ public class MemberController {
 		return "member/loginForm";
 	}
 	
+	@RequestMapping(value="findPop", method=RequestMethod.GET)
+	public String findPop() {
+		
+		return "member/findPop";
+	}
+	
 	@RequestMapping(value="pop", method=RequestMethod.GET)
 	public String popup() {
 		System.out.println("주소팝팝");

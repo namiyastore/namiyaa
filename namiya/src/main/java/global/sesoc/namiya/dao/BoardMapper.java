@@ -52,5 +52,7 @@ public interface BoardMapper {
 
 	public int updateHst(History history); // 날짜 카운트 업데이트
 
+	public int updateBuyer(History history); // 구매자 업데이트
+
 	
 }

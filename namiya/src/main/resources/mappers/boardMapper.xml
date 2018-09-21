@@ -80,4 +80,8 @@
 	<update id="updateHst" parameterType="History">
 		update history set deal_start=#{deal_start}, deal_end=#{deal_end} where historynum=#{historynum}
 	</update>
+	
+	<update id="updateBuyer" parameterType="History">
+		update history set buyerid=#{buyerid} where historynum=#{historynum}
+	</update>
 </mapper>

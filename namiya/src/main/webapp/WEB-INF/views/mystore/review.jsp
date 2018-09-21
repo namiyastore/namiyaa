@@ -210,11 +210,13 @@ $(document).ready(function(){
 							</td>
 						</tr>
 						
+						<c:if test="${store_owner != sessionScope.loginId}">
 						<tr>
 							<td colspan="2" align="right" style="padding-top: 8px;">
 								<input class="btn" id="write" type="button" value="Write" onclick="writeReview()">
 							</td>
 						</tr>
+						</c:if>
 					</table>
 				</div>
 		</form>
@@ -294,7 +296,9 @@ $(document).ready(function(){
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
 			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<c:if test="${store_owner == sessionScope.loginId}">
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			</c:if>
 		</ul>
 	</div>
 

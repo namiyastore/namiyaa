@@ -43,6 +43,7 @@
 			contentType : 'application/json; charset=UTF-8',
 			success : function(resp) {
 				alert(resp);
+				this.close();
 			},
 			error : function(error) {
 				alert("point error :"  + error);

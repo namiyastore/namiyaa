@@ -236,11 +236,13 @@
 						</td>
 					</tr>
 					<tr>
+					<c:if test="${userid != sessionScope.loginId && map.SSTATUS != '진행완료'}"> 
 						<td colspan="2" align="right">
 							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 							<hr/>
 						</td>
+					</c:if>
 					</tr>
 					<tr>
 						<td class="menu" colspan="2"><b>거래상태</b></td>
@@ -294,8 +296,10 @@
 				</table>
 				<br/>
 				<img src="${pageContext.request.contextPath}/resources/images/board.png" style="width:60px; height:40px;" onclick="give()">
-				<img src="${pageContext.request.contextPath}/resources/images/update.png" style="width:60px; height:40px;" onclick="giveUpdate(${board.boardnum})">
-				<img src="${pageContext.request.contextPath}/resources/images/delete.png" style="width:60px; height:40px;" onclick="deleted(${board.boardnum})">
+				<c:if test="${userid == sessionScope.loginId}"> 
+					<img src="${pageContext.request.contextPath}/resources/images/update.png" style="width:60px; height:40px;" onclick="giveUpdate(${board.boardnum})">
+					<img src="${pageContext.request.contextPath}/resources/images/delete.png" style="width:60px; height:40px;" onclick="deleted(${board.boardnum})">
+				</c:if>
 				<br/><br/>
 			</div>
 	</div>
@@ -308,7 +312,9 @@
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px;"></a></li>
 			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px;"></a></li>
+			<c:if test="${userid == sessionScope.loginId}">
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; "></a></li>
+			</c:if>
 		</ul>
 	</div>
 	
