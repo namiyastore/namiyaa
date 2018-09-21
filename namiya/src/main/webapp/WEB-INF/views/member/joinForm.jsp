@@ -130,9 +130,6 @@
         $("#email").blur(function() {
             checkEmail();
         });
-        $("#email").blur(function() {
-            checkEmail();
-        });
         $("#addr").blur(function(){
         	checkAddr();
         });

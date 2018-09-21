@@ -158,7 +158,7 @@ function showErrorMsg(obj, msg) {
 }
 
 function memberfind(){
-	var pop = window.open("findPop","findPop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	var pop = window.open("findPop","findPop","width=800,height=600, scrollbars=yes"); 
 }
 </script>
 

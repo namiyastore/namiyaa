@@ -29,7 +29,9 @@
 <title>jindPop.jsp</title>
 </head>
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+
+</script>
 <body>
 	<h1>번호찾기</h1>
 	
