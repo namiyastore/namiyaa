@@ -148,4 +148,11 @@ public class BoardRepository {
 		
 		return result;
 	}
+
+	public int updateBuyer(History history) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int result = mapper.updateBuyer(history);
+		
+		return result;
+	}
 }

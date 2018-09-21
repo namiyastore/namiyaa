@@ -1,5 +1,6 @@
 package global.sesoc.namiya.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,20 +9,43 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.HistoryRepository;
+import global.sesoc.namiya.dao.ProductRepository;
+import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.History;
+import global.sesoc.namiya.vo.Product;
 
 @Controller
 public class HistoryController {
 	@Autowired
 	HistoryRepository repositroy;
 	
+	@Autowired
+	ProductRepository p_repository;
+	
+	@Autowired
+	BoardRepository b_repository;
+	
 	@RequestMapping(value="historyList", method = RequestMethod.GET)
 	public String historyListAll(Model model) {
-		
 		List<History> hlist = repositroy.hListAll();
+		List<Product> plist = new ArrayList<Product>();
+		List<Board> blist = new ArrayList<Board>();
+		int productnum[] = new int[hlist.size()];
 		
+		for (int i=0; i < hlist.size(); i++) {
+			productnum[i] = hlist.get(i).getProductnum();
+			plist.add(p_repository.selectPdt(productnum[i]));
+			blist.add(b_repository.selectBoard(productnum[i]));
+		}
+		
+		System.out.println(hlist);
+		System.out.println(plist);
+		System.out.println(blist);
 		model.addAttribute("hlist", hlist);
+		model.addAttribute("plist", plist);
+		model.addAttribute("blist", blist);
 		
 		return "mypage/history";
 	}
