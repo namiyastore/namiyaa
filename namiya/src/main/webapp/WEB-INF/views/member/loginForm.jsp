@@ -38,25 +38,18 @@
 $(document).ready(function(){
 	$("#loginUp").click(function(){
 		if(idFlag&&pwdFlag&&(!isShift)){
-			alert("로그인");
 			$("#login_form").submit();
 		}else{
-			alert("id Fail"+idFlag);
-			alert("pwd Fail"+pwdFlag);
-			alert("shift Fail"+isShift);
 			return false;
 		}
 	});
 	
 	$("#password").keydown(function(key) {
         if (key.keyCode == 13) {// 엔터
+        	checkPassword();
         	if(idFlag&&pwdFlag&&(!isShift)){
-    			alert("엔터누름");
     			$("#login_form").submit();
     		}else{
-    			alert("id Fail"+idFlag);
-    			alert("pwd Fail"+pwdFlag);
-    			alert("shift Fail"+isShift);
     			return false;
     		}
         }
@@ -85,7 +78,6 @@ $(document).ready(function(){
 
 
 function signUp(){
-	alert("회원가입");
 	location.href="joinForm";
 }
 
@@ -164,6 +156,10 @@ function showErrorMsg(obj, msg) {
     obj.html(msg);
     obj.show();
 }
+
+function memberfind(){
+	var pop = window.open("findPop","findPop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
 </script>
 
 <body class="is-preload">
@@ -193,7 +189,7 @@ function showErrorMsg(obj, msg) {
 				<a id="loginUp" class="clickbutton"><img width="120" height="50" alt="" src="resources/images/login.png"/></a>
 				<a id="signup" class="clickbutton" onclick="signUp()"><img width="120" height="50" alt="" src="resources/images/signup.png"></a>
 				<br>
-				<a href="">아이디</a><a href="">비밀번호 찾기</a>
+				<a class="clickbutton" onclick="memberfind()">아이디비밀번호 찾기</a>
 			</div>
 		</form>
 		

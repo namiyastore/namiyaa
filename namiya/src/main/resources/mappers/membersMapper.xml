@@ -17,24 +17,12 @@
 			,myurl
 		from
 			members
-		<if test ="password == null and userid==null">
-  		where	
-  			email=#{email}
-  		</if>
 		where
-			userid=#{userid}
-		<if test="password != null">
-		and
-			password=#{password}
-		</if>
-		<if test="password == null and username != null">
-			userid=#{userid}
-		</if>
-  		<if test = "password == null and email != null">
-  			
-  		</if>
-  		
-  		
+			<choose>
+				<when test="userid != null">userid = #{userid}</when>
+				<when test="email != null">email = #{email}</when>
+				<when test="password != null">userid = # {userid} and password = #{password}</when>
+			</choose> 
 	</select>
 	
 	<insert id="insertMembers" parameterType="Members">

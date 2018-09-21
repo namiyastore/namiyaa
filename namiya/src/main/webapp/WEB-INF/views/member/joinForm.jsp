@@ -790,7 +790,8 @@
 							<input type="text" id="id" name="id" class="input100" title="ID" maxlength="20">
 							<span class="focus-input100" data-placeholder="아이디"></span>
                     </div>
-                    <span></span>
+                    <span style="display: block;"  class="error_next_box" id="idMsg" style="display:none"></span>
+                    <br>
                     <div style="display: block"  class="wrap-input100 validate-input">
 							<input type="password" id="pswd1" name="pswd1" class="input100" title="비밀번호 입력" maxlength="20">
 							<span class="focus-input100" data-placeholder="비밀번호"></span>
