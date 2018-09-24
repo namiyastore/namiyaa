@@ -107,10 +107,6 @@
         $("#gender").change(function() {
             checkGender();
         });
-
-        $("#email").blur(function() {
-            checkEmail();
-        });
         
         $("#email").keyup(function(){
         	checkEmail();
