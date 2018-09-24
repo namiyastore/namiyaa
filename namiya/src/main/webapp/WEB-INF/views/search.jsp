@@ -65,6 +65,8 @@ $(function(){
 	// 위치 초기화( 거래 알림창, 프로필 )
 	setPositionInit();
 	
+	var userid = $('#userid').val();
+	
 	// 미니홈피 창 열기
 	$("#myStoreClick").on("click",function(){
 		// 메세지 전송
@@ -134,6 +136,8 @@ $(function(){
 		$("body").css("background-image","resources/images/background.png")
 		.css("background-attachment","fixed");
 		
+		$('body').css('height', (window.innerHeight)+'px');
+		$('body').css('width', (window.innerWidth)+'px');
 	});
 	
 	function setPositionInit() {
@@ -174,6 +178,9 @@ $(function(){
 		$("#flot-pie-chart-wrapper").css("position","absolute")
 			.css("top", 630 + "px")
 			.css("left", (parseInt(left_notice)+650) + "px");
+		
+		$('body').css('height', (window.innerHeight)+'px');
+		$('body').css('width', (window.innerWidth)+'px');
 	}
 	
 	// 검색(버튼)
@@ -267,6 +274,7 @@ $(function(){
 	
 	// 실시간 목록 가져오기
 	var lang = $('#lang').val();
+	
 	function noticeRealtime() {
 		$.ajax({
 			method : "get",
@@ -282,31 +290,32 @@ $(function(){
 						val += '<div class="noticeItemDisplay" id="noticeItemContent">';
 							
 						val += '<div id="noticeText">';
-						if(lang == 'ko') {
-							val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';	
-						}
-						else if(lang == 'ja') {
-							if(resp.service == '양도') {
-								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 譲渡 ]</h3>';	
-							}
-							else if(resp.service == '재능기부') {
-								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能寄付 ]</h3>';
-							}
-							else if(resp.service == '교환') {
-								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能 ]</h3>';
-							}
-						}
-						else if(lang == 'en') {
-							if(resp.service == '양도') {
-								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Transfer ]</h3>';	
-							}
-							else if(resp.service == '재능기부') {
-								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Talent donation ]</h3>';
-							}
-							else if(resp.service == '교환') {
-								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ barter ]</h3>';
-							}
-						}
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';
+// 						if(lang == 'ko') {
+// 							val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';	
+// 						}
+// 						else if(lang == 'ja') {
+// 							if(resp.service == '양도') {
+// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 譲渡 ]</h3>';	
+// 							}
+// 							else if(resp.service == '재능기부') {
+// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能寄付 ]</h3>';
+// 							}
+// 							else if(resp.service == '교환') {
+// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能 ]</h3>';
+// 							}
+// 						}
+// 						else if(lang == 'en') {
+// 							if(resp.service == '양도') {
+// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Transfer ]</h3>';	
+// 							}
+// 							else if(resp.service == '재능기부') {
+// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Talent donation ]</h3>';
+// 							}
+// 							else if(resp.service == '교환') {
+// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ barter ]</h3>';
+// 							}
+// 						}
 						
 						val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp.content;
 						val += '</div>';
