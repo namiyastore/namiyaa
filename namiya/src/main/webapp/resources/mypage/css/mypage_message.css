@@ -237,6 +237,12 @@ h2{
 	width: 100%; 
 } 
  
+#customers { 
+	font-family: "EcoSansMono", 'JejuGothic', 'Arial'; 
+	border-collapse: collapse; 
+	width: 100%; 
+} 
+ 
 #customers td, #customers th { 
 	border: 1px solid #ddd; 
 	padding: 8px; 
@@ -259,7 +265,7 @@ h2{
 }
 
 /* 0916추가수정 테이블의 열속 글자 정렬 */
-.table_1st_td{
+/* .table_1st_td{
 	text-align: right;
 } 
 .table_2nd_td{
@@ -267,46 +273,44 @@ h2{
 } 
 .table_3rd_td{
 	text-align: right;
-}
+} */
 
 /* 스크롤 고정 0916 */
-table {
+/* table {
   width: 100%;
-}
+} */
 
 table, td {
   border-collapse: collapse;
   border: 1px solid #000;
 }
 
- thead {
-  display: table; 
-  width: 100%; 
+/* thead {
+  display: table; to take the same width as tr
+  width: 100%; - 17px because of the scrollbar width
 }
 
- tbody {
-  display: block; 
-  max-height: 373px;
- /*  overflow-y: scroll; keeps the scrollbar even if it doesn't need it; display purpose
-  overflow-x: hidden; */
-}
- 
-th, td {
-    /* width: 33.33%; */
+tbody {
+  display: block; to enable vertical scrolling
+  max-height: 373px; e.g.
+} */
+
+/* th, td {
+    width: 33.33%;
     padding: 5px;
     word-break: break-all;
-}
+} */
 
-tr {
-  display: table;
+/* tr {
+  display: table; display purpose; th's border
   width: 100%;
-}
+} */
 
-td {
+/* td {
   text-align: center;
   border-bottom: none;
   border-left: none;
-}
+} */
 /* 스크롤 고정 여기까지 */
  
 .rightSide .rightSide_MyInfoBox {
