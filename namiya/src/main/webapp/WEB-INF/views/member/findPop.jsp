@@ -149,7 +149,7 @@ function isValidEmail() {
 	<div  class="container-login100">
 	<div class="wrap-login10">
 	<div id="header" class="login100-form-title p-b-26" role="banner">
-   		<a href="${pageContext.request.contextPath}"><img style="border-radius: 10px;" width="540px" height="150px" alt="" src="resources/images/logo.gif"> </a>
+   		<a href="${pageContext.request.contextPath}"><img style="border-radius: 10px;" width="540px" height="150px" alt="" src="resources/images/idpw.gif"> </a>
 	</div>
 					<div style="display: inline-block" class="wrap-input100 validate-input">      
 							<input type="text" id="email" name="email" class="input100" maxlength="100">

@@ -17,4 +17,6 @@ public interface MystoreMapper {
 	public int deleteAll(String userid);
 	public int getTotalItem(Map<String,String> map);
 	public List<Map<String,Object>> selectUserItem(Map<String,String> map, RowBounds rb);
+	public int insertMinimi(String userid);
+	public int insertbackground(String userid);
 }

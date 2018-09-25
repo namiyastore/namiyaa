@@ -93,6 +93,16 @@ public Members select(String myurl) {
 			System.out.println("repuserid: "+userid);
 			return list;
 		}
+		
+		public int MinimiSetting(String userid) {
+			int cnt;
+			MystoreMapper mapper = session.getMapper(MystoreMapper.class);
+			
+			cnt = mapper.insertMinimi(userid);
+			cnt = mapper.insertbackground(userid);
+			
+			return cnt;
+		}
 	
 		
 }
