@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.vo.Members;
+import global.sesoc.namiya.vo.Profile;
 
 @Controller
 public class MemberController {
@@ -181,8 +182,14 @@ public class MemberController {
 		int result = 0;
 		System.out.println("가입폼");
 		System.out.println(members);
+		String nickname = members.getUserid();
+		String userid = members.getUserid();
 		
 		result = repository.insertMembers(members);
+		Profile p = new Profile();
+		p.setNickname(nickname);
+		p.setUserid(userid);
+		prepository.insert(p);
 		
 		if(result!=0) {
 			prepository.select(members.getUserid());
