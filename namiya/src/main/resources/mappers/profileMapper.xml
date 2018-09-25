@@ -18,8 +18,9 @@
 		
 	</update>
 	
-	<insert id="insert" parameterType="String">
-		insert into profile values(profile_seq.nextval,#{userid},null,null,'안녕하세요',#{userid})
+	<insert id="insert" parameterType="Profile">
+		insert into profile values(profile_seq.nextval,#{userid},null,null,'안녕하세요',#{nickname})
 	</insert>
+	
 	
 </mapper>
