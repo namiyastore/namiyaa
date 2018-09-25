@@ -91,7 +91,7 @@ function alertMsg() {
 </script> 
 </head>
 <body>
-	<img alt="" src="resources/mypage/images/logo2.gif" id="logo">
+	<img alt="" src="resources/images/pagetop.gif" id="logo">
 	<!-- <h2>알림</h2> -->
 	<%-- <a href="myPage">뒤로가기</a>
 	<table border="1">

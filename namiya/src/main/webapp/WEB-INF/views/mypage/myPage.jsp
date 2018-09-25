@@ -82,7 +82,7 @@ function alertMsg() {
 </head>
 <body>
 	<!-- <h2>my page</h2> -->
-	<img alt="" src="resources/mypage/images/logo2.gif" id="logo">
+	<img alt="" src="resources/images/pagetop.gif" id="logo">
 	<ul>
 		<li><a href="favoriteList" name="favoriteList">즐겨찾기</a></li>
 		<li><a href="interestList" name="interestList">관심상품</a></li>

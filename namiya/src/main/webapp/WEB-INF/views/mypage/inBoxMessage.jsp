@@ -97,7 +97,7 @@ function alertMsg() {
 		</div>
 	</div> 
  -->
- 	<img alt="" src="resources/mypage/images/logo2.gif" id="logo">	
+ 	<img alt="" src="resources/images/pagetop.gif" id="logo">	
  	<div class="wrapper"> 
 		<div class="leftSide"> 
 			<div class="tabs"> 

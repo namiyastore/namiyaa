@@ -88,6 +88,7 @@
 		AND
 			copy = 1
 	</delete>
+	
 	<select id="mInBoxSelectOne" parameterType="int" resultType="Message">
 		SELECT
 			messagenum,
@@ -170,11 +171,13 @@
 		FROM
 			message
 		WHERE
-			copy = 0
-		AND
-			msg_title LIKE '%'||#{searchWord}||'%'
+		 	(msg_title LIKE '%'||#{searchWord}||'%'
 		OR
-			msg_content LIKE '%'||#{searchWord}||'%'
+			msg_content LIKE '%'||#{searchWord}||'%')
+			<!-- ${searchWord} like '%' || #{searchWord} || '%' -->
+		AND
+			copy = 0
+		
 	</select>
 	
 	<select id="Outbox_select_result" resultType="Message">

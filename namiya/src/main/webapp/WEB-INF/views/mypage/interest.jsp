@@ -90,7 +90,7 @@ function alertMsg() {
 </head>
 <body>
 	<!-- <h2>관심상품</h2> -->
-	<img alt="" src="resources/mypage/images/logo2.gif" id="logo">
+	<img alt="" src="resources/images/pagetop.gif" id="logo">
 	<%-- <a href="myPage">뒤로가기</a>
 	
 	<form action="iUpdate" method="post">

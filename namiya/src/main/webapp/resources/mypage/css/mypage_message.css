@@ -2,14 +2,15 @@
  
 /* 수정된 CSS */ 
 body { 
-	background-image: url("../images/NaviBackGround.png"); 
+	background-image: url("../../images/viewPage.png"); 
 	background-attachment: fixed; 
 	background-size: 80%; 
 	font-family: 'EcoSansMono', 'JejuGothic'; 
 }
 
 #logo{
-	max-width: 97%;
+	max-width: 75%;
+	float: right; 
 }
 
 h2{
