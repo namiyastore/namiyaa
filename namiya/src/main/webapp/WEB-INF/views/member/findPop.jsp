@@ -31,15 +31,23 @@
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
-$("#email").keyup(function(){
-	checkEmail();
-});
-$("#authNo").keyup(function() {
-    checkAuthNo();
-});
-$("#email").blur(function() {
-    checkEmail();
-});
+$(document).ready(function(){
+	   $(window).resize(function (){
+	      resizeTo(400, 400);
+	   });
+	   
+	   $("#email").keyup(function(){
+			checkEmail();
+		});
+		$("#authNo").keyup(function() {
+		    checkAuthNo();
+		});
+		$("#email").blur(function() {
+		    checkEmail();
+		});
+	
+	});
+
 
 
 function checkEmail() {
