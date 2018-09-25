@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.ProfileRepository;
-import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Profile;
 
@@ -37,7 +35,7 @@ public class ProfileController {
 	@Autowired
 	MembersRepository mb_repository;
 	
-	final String uploadPath = "/profile";
+	final String uploadPath = "/home/img/profile";
 	
 	
 	
@@ -45,7 +43,7 @@ public class ProfileController {
 	@RequestMapping(value=uploadPath+"/{image_name:.+}", method= RequestMethod.GET) 
 	public String getContentMediaImage(@PathVariable("image_name")String image_name, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
 		// 확장자 확인 // 
-			
+			System.out.println("!!!!!!!!!!!!!!!!!!image_name:"+ image_name);
 		 String[] filename_seperate = image_name.split("\\."); 
 		 String exp = "";
 		   

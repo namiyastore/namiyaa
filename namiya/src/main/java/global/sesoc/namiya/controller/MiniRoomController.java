@@ -35,7 +35,7 @@ import global.sesoc.namiya.vo.Profile;
 public class MiniRoomController {
 	
 	
-	final String uploadPath = "/profile";
+	final String uploadPath = "/home/img/profile";
 	
 	@Autowired
 	MembersRepository mb_repository;

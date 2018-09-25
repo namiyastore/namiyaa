@@ -143,7 +143,7 @@
                                		<img id="imgThumb" src="https://static.nid.naver.com/images/web/user/default.png?type=s160" width="100" height="80">
                                 </c:if>
                                 <c:if test="${not empty profile.originalfile}">
-                                 	<img id="imgThumb" src="profile/${profile.savedfile}" width="100" height="80">
+                                 	<img id="imgThumb" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" width="100" height="80">
                                 </c:if>
                                 <!-- 기 첨부된 파일이 존재할 경우 출력 -->
 								<c:if test="${profile.originalfile != null}">

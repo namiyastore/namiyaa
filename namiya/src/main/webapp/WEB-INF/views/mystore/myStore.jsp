@@ -181,7 +181,7 @@ var background = {
     			,success : function(map){
     				//alert(map["myurl"]);
     				//alert("wwww "+profile.content);
-    				$('#pimg').attr("src", "${pageContext.request.contextPath}/profile/"+map["profile"].savedfile); 
+    				$('#pimg').attr("src", "${pageContext.request.contextPath}/home/img/profile/"+map["profile"].savedfile); 
     				$('#tx').html(map["profile"].content);
     				$('#nick').html(map["profile"].nickname);
     				
@@ -351,7 +351,7 @@ var background = {
 		
 		<div id="image" style="padding-top: 80px;" align="center">
 			<b id="nick" >${profile.nickname}</b>
-			<img id="pimg" src="${pageContext.request.contextPath}/profile/${profile.savedfile}" style="width:180px; height:181px;">
+			<img id="pimg" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" style="width:180px; height:181px;">
 		</div>
 		
 		<img src="${pageContext.request.contextPath}/resources/images/favorite.png" style="width:50px; heignt:50px;" onclick="favorite('${homeuserid}','${sessionScope.loginId}')">
