@@ -41,7 +41,7 @@ public class LinenotifyController {
 		url += "https://notify-bot.line.me/oauth/token?";
 		url += "grant_type=authorization_code&";
 		url += "code=" + code + "&";
-		url += "redirect_uri=http://localhost:8081/namiya/linenotify&";
+		url += "redirect_uri=http://13.125.208.152:8081/namiya/linenotify&";
 		url += "client_id=j1pv2YPVmD4wAI5oJhXxBp&";
 		url += "client_secret=9hQo5dXlluRl3d2e7fZL2Az9h9W6XUacIepEWDOkkeZ";
 		

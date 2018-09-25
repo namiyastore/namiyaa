@@ -28,7 +28,7 @@ public class LanguageController {
 		return "redirect:/loginForm";
 	}
 	
-	@RequestMapping(value = "/jp", method = RequestMethod.GET)
+	@RequestMapping(value = "/ja", method = RequestMethod.GET)
 	public String jp(HttpSession session) {
 		session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.JAPANESE);
 		//System.out.println(session.getAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME));
