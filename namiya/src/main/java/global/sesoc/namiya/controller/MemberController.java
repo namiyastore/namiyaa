@@ -120,7 +120,7 @@ public class MemberController {
 	
 	@RequestMapping(value="findPop", method=RequestMethod.GET)
 	public String findPop() {
-		
+		System.out.println("찾기팝팝");
 		return "member/findPop";
 	}
 	
