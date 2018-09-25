@@ -55,9 +55,9 @@ public class ProductRepository {
 		return result;
 	}
 
-	public int updatePstt2(String date) {
+	public int updatePstt2(Product product) {
 		ProductMapper mapper = session.getMapper(ProductMapper.class);
-		int result = mapper.updatePstt2(date);
+		int result = mapper.updatePstt2(product);
 		
 		return result;
 	}

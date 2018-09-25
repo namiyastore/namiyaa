@@ -221,7 +221,7 @@ function want(boardnum, userid) {
 					<tr>
 						<td style="width:50px; font-family: 'Jeju Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
 						<c:if test="${map.ORIGINALFILE != null}">
-						<td id="image"><img src="${pageContext.request.contextPath}/boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
+						<td id="image"><img src="${pageContext.request.contextPath}/home/img/boardfile/${map.SAVEDFILE}" style="width:150px; height:100px;"></td>
 						</c:if>
 						<c:if test="${map.ORIGINALFILE == null}">
 						<td id="image"><img src="${pageContext.request.contextPath}/resources/images/basiclogo.png" style="width:150px; height:50px;"></td>

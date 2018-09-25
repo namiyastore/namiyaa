@@ -301,7 +301,7 @@ function  formCheck() {
 						<td class="sort"><b>첨부파일</b></td>
 						<td class="scontent">
 						<c:if test="${not empty board.originalfile}">
-							<img src="${pageContext.request.contextPath}/boardfile/${board.savedfile}" style="width:100px; height:50px;">
+							<img src="${pageContext.request.contextPath}/home/img/boardfile/${board.savedfile}" style="width:100px; height:50px;">
 						</c:if>
 						<!-- 기 첨부된 파일이 존재할 경우 출력 -->
 						<c:if test="${board.originalfile != null}">

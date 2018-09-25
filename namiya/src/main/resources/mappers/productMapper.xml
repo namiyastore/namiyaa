@@ -27,7 +27,7 @@
 		update product set sstatus=#{sstatus} where productnum=#{productnum}
 	</update>
 	
-	<update id="updatePstt2" parameterType="String">
-		update product set sstatus='진행완료' where productnum in (select productnum from history where deal_end =#{deal_end})
+	<update id="updatePstt2" parameterType="Product">
+		update product set sstatus=#{sstatus} where productnum=#{productnum}
 	</update>
 </mapper>

@@ -21,7 +21,7 @@ public interface ProductMapper {
 
 	public int updatePstt(Product product);
 
-	public int updatePstt2(String date);
+	public int updatePstt2(Product product);
 
 
 	

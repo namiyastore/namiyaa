@@ -7,10 +7,60 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>거래진행과정</title>
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
+<script src="resources/search/js/common/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="resources/mypage/css/mypage_historyDetail.css">
 <script>
 	function gotohistory() {
 		location.href="historyList";
 	}
+	
+	$(function() {
+
+		$('.rightSide_MyInfoBoxDown_goToHome').on('click', function() {
+			location.href = './';
+		});
+
+		$('.rightSide_MyInfoBoxDown_myStore').on('click', function() {
+			location.href = 'myStore';
+		});
+
+		$('.rightSide_MyInfoBoxDown_profile').on('click', function() {
+			location.href = 'editForm';
+		});
+
+		$('.rightSide_MyInfoBoxDown_logOut').on('click', function() {
+			location.href = 'logOut';
+		});
+
+		$('.rightSide_MyInfoBoxDown_signOut').on('click', function() {
+			location.href = 'signOut';
+		});
+
+		/* 0915 탭들 hover효과 추가 */
+		$('.leftSide_tabs_tab1').on('click', function() {
+			location.href = 'favoriteList';
+		});
+		$('.leftSide_tabs_tab2').on('click', function() {
+			location.href = 'interestList';
+		});
+		$('.leftSide_tabs_tab3').on('click', function() {
+			location.href = 'historyList';
+		});
+		$('.leftSide_tabs_tab4').on('click', function() {
+			location.href = 'keywordList';
+		});
+		$('.leftSide_tabs_tab5').on('click', function() {
+			location.href = 'mInBoxListAll';
+		});
+		$('.leftSide_tabs_tab6').on('click', function() {
+			location.href = 'noticeList';
+		});
+		$('.leftSide_tabs_tab7').on('click', function() {
+			location.href = 'pointRecord';
+		});
+
+	});
+
 	
 	// 라인 메세지 전송
 	function msgSend(id, content) {
@@ -56,7 +106,7 @@
 					a += '</td>';
 				$("#winner").html(a);
 				
-				var urlAddr = "http://203.233.199.138:8081";
+				var urlAddr = "http://203.233.199.115:8081";
 				var msg = "추첨%20대상자로%20선정되셨습니다%0Aline:" + urlAddr + "/namiya/sendMsg?userid=" + resp;
 				
 				// 당첨자에게 메세지 전송
@@ -78,13 +128,13 @@
 	}
 </script>
 <style>
-	#info {
+	/* #info {
 		width:810px;
-	}
+	} */
 	
-	#apply {
+	/* #apply {
 		width:280px;
-	}
+	} */
 	
 	.apply_list {
 		border: 1px solid #79bfe5;
@@ -182,84 +232,130 @@
 </style>
 </head>
 <body>
-
+<img alt="" src="resources/mypage/images/logo2.gif" id="logo">	
 <input id="userid" type="hidden" value="${sessionScope.loginId }" />
 
-<div id="wrapper" align="center">
-<div style="width:800px; height:600px;">
-	<%-- 거래정보 --%>
-	<div id="deal" style="padding-bottom: 30px; padding-top: 20px;">
-	<h2>거래상품정보</h2>
-		<table id="info">
-			<tr style="width:800px; text-align: center">
-				<th class="deal_list" >거래번호</th>
-				<th class="deal_list" >거래종류</th>
-				<th class="deal_list" >물건이름</th>
-				<th class="deal_list" >거래시작날짜</th>
-				<th class="deal_list" >거래완료날짜</th>
-				<th class="deal_list" >판매자</th>
-				<th class="deal_list" >구매자</th>
-				<th class="deal_list" >거래상태</th>
-				<th class="deal_list" style="width:400px;">거래목록</th>
-			</tr>
-			<tr class="deal_info" style="text-align: center;">
-				<td class="deal_info" >${history.historynum}</td>
-				<td class="deal_info" >${board.service}</td>
-				<td class="deal_info" >${product.productname}</td>
-				<td class="deal_info" style="font-family: 'Jeju Gothic';">${history.deal_start}</td>
-				<td class="deal_info" style="font-family: 'Jeju Gothic';">
-					<c:if test="${product.sstatus eq '진행완료'}">
-						${history.deal_end}
-					</c:if>				
-				</td>
-				<td class="deal_info" >${sessionScope.loginId}</td>
-				<td id="buyer" class="deal_info" >${history.buyerid}</td>
-				<td class="deal_info" >${product.sstatus}</td>
-				<td><input type="button" class="btn" value="list" id="gotolist" onclick="gotohistory()"></td>
-			</tr>
-		</table>
-	</div>
-	
-	<%-- 양도신청현황 --%>
-	<div id="application" style="float: left; padding-top: 20px; padding-bottom: 20px; margin-right: 20px; width:280px; height:400px;">
-	<h2>양도신청 현황</h2>
-		<table id="apply" style="text-align: center;">
-			<tr>
-				<th class="apply_list">신청번호</th>
-				<th class="apply_list">신청자</th>
-			</tr>
-			<c:forEach var="wlist" items="${wlist}" varStatus="status">
-			<tr>
-				<td class="apply_info">${wlist.wishnum}</td>
-				<td class="apply_info">${wlist.userid}</td>
-			</tr>
-			</c:forEach>
-		</table>
-	</div>
-	
-	<%-- 추첨결과 --%>
-	<div id="result" style="float: left; padding-top: 20px; padding-bottom: 20px; width:500px; height:400px;" align="center">
-	<h2 style="margin-bottom: 10px;">추첨결과</h2>
-		<div style="float: left; width:300px;">
-			<img src="resources/images/takarakuzi.gif" style="width:250px;">
-			<br/>
-			<div id="select">
-			<c:if test="${product.sstatus eq '진행완료'}">
-				<input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
-			</c:if>
-			</div>
+<div class="wrapper">
+	<div class="leftSide">
+		<div class="tabs">
+			<div class="leftSide_tabs_tab2">Interest</div>
+			<div class="leftSide_tabs_tab3">History</div>
+			<div class="leftSide_tabs_tab4">Keyword</div>
+			<div class="leftSide_tabs_tab5">Message</div>
+			<div class="leftSide_tabs_tab6">Notice</div>
+			<div class="leftSide_tabs_tab7">Point</div>
 		</div>
 		
-		<div style="float: left; width:200px;">
-			<table style="text-align: center; padding-top: 10px;">
-				<tr>
-					<th class="result" colspan="2">당첨자</th>
+	<div class="leftSide_table" style="background-color: white;">
+		<%-- 거래정보 --%>
+		<div>
+		<h2>거래상품정보</h2>
+			<table id="info">
+				<tr style="width:800px; text-align: center">
+					<th class="deal_list" >거래번호</th>
+					<th class="deal_list" >거래종류</th>
+					<th class="deal_list" >물건이름</th>
+					<th class="deal_list" >거래시작날짜</th>
+					<th class="deal_list" >거래완료날짜</th>
+					<th class="deal_list" >판매자</th>
+					<th class="deal_list" >구매자</th>
+					<th class="deal_list" >거래상태</th>
+					<th class="deal_list" style="width:400px;">거래목록</th>
 				</tr>
-				<tr id="winner"></tr>
+				<tr class="deal_info" style="text-align: center;">
+					<td class="deal_info" >${history.historynum}</td>
+					<td class="deal_info" >${board.service}</td>
+					<td class="deal_info" >${product.productname}</td>
+					<td class="deal_info" style="font-family: 'Jeju Gothic';">${history.deal_start}</td>
+					<td class="deal_info" style="font-family: 'Jeju Gothic';">
+						<c:if test="${product.sstatus eq '진행완료'}">
+							${history.deal_end}
+						</c:if>				
+					</td>
+					<td class="deal_info" >${sessionScope.loginId}</td>
+					<td id="buyer" class="deal_info" >${history.buyerid}</td>
+					<td class="deal_info" >${product.sstatus}</td>
+					<td class="deal_info"><input type="button" class="btn" value="list" id="gotolist" onclick="gotohistory()"></td>
+				</tr>
 			</table>
 		</div>
+		<%-- 양도신청현황 --%>
+		<div id="application" style="float: left; padding-top: 20px; padding-bottom: 20px; margin-right: 20px; width:280px; height:400px;">
+		<h2>양도신청 현황</h2>
+			<table id="apply" style="text-align: center;">
+				<tr>
+					<th class="apply_list">신청번호</th>
+					<th class="apply_list">신청자</th>
+				</tr>
+				<c:forEach var="wlist" items="${wlist}" varStatus="status">
+				<tr>
+					<td class="apply_info">${wlist.wishnum}</td>
+					<td class="apply_info">${wlist.userid}</td>
+				</tr>
+				</c:forEach>
+			</table>
+		</div>
+	
+		<%-- 추첨결과 --%>
+		<div id="result" style="float: left; padding-top: 20px; padding-bottom: 20px; width:500px; height:400px;" align="center">
+		<h2 style="margin-bottom: 10px;">추첨결과</h2>
+			<div style="float: left; width:300px;">
+				<img src="resources/images/takarakuzi.gif" style="width:250px;">
+				<br/>
+				<div id="select">
+				<c:if test="${product.sstatus eq '진행완료'}">
+					<input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
+				</c:if>
+				</div>
+			</div>
+			
+			<div style="float: left; width:200px;">
+				<table style="text-align: center; padding-top: 10px;">
+					<tr>
+						<th class="result" colspan="2">당첨자</th>
+					</tr>
+					<tr id="winner"></tr>
+				</table>
+			</div>
+		</div>
+	
 	</div>
-</div>
+	</div>
+	
+	<!-- 개인정보 표시 부분 -->
+		<div class="rightSide">
+			<div class="rightSide_MyInfoBox">
+				<div class="rightSide_MyInfoBoxUp">
+					<div class="rightSide_MyInfoBoxUp_profileImg">
+						<img src="resources/images/parkby.jpg"	id="rightSide_MyInfoBoxUp_profileImg_profile_pic">
+					</div>
+					<div class="rightSide_MyInfoBoxUp_userId">
+						${sessionScope.loginId}
+						<!-- 세션id가 있으면 거기서 가지고 옮 9/5 <%-- ${"user.userid"} --%>  -->
+					</div>
+					<div class="rightSide_MyInfoBoxUp_userName">
+						${sessionScope.loginName}
+						<!-- 세션id로 해당 user를 찾아내서 입력할 예정 9/5 <%-- ${"user.username"} --%> -->
+					</div>
+				</div>
+
+				<div class="rightSide_MyInfoBoxDown">
+					<div class="rightSide_MyInfoBoxDown_goToHome">Go To Home</div>
+					<!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_myStore">My Store</div>
+					<!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_profile">Edit</div>
+					<!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
+					<div class="rightSide_MyInfoBoxDown_logOut">Logout</div>
+					<!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_signOut">SignOut</div>
+					<!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
+				</div>
+				<!-- rightSide_MyInfoBoxDown div닫힘 -->
+			</div>
+			<!-- rightSide_MyInfoBox div 닫음 -->
+		</div>
+		<!-- rightSide div 닫음 -->
 </div>
 </body>
 </html>

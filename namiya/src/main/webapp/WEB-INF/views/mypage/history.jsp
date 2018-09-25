@@ -82,8 +82,7 @@
 </script>
 </head>
 <body>
-	<h2>구매이력</h2>
-	 <!-- <a href="myPage">뒤로가기</a> -->
+<img alt="" src="resources/mypage/images/logo2.gif" id="logo">	
 	
 	<div class="wrapper">
 		<div class="leftSide">

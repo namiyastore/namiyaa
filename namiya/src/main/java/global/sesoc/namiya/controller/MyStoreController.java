@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -99,23 +100,46 @@ public class MyStoreController {
 	@Autowired
 	HistoryRepository h_repository;
 	
-	final String uploadPath = "/boardfile";
+	final String uploadPath = "/home/img/boardfile";
 	
 	final int COUNT_PER_PAGE = 5;
 	
 	
 	
-	/** deal_end 시간 카운트 **/
-	@Scheduled(cron="*/59 */59 */23 * * *")
-	public void updateDeal_end() {
+	/** deal_end 시간 카운트 
+	 * @throws Exception **/
+	@Scheduled(cron="*/10 * * * * *")
+	public void updateDeal_end() throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = Calendar.getInstance().getTime();     
 		String date = df.format(today);
-		
+		Product product = new Product();
+		int datecom;
 		System.out.println("cron test:"+date);
 		
-		int result = p_repository.updatePstt2(date);
-		System.out.println("schedule의 result:"+result);
+		List<History> list = h_repository.hListAll();
+		
+		for (int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getDeal_end());
+			if(list.get(i).getDeal_end() != null) {
+				if (date.compareTo(list.get(i).getDeal_end()) == 1) {
+					System.out.println("if들어감");
+					int productnum = list.get(i).getProductnum();
+					product = p_repository.selectPdt(productnum);
+					System.out.println(product);
+					
+					product.setSstatus("진행완료");
+					int result = p_repository.updatePstt2(product);
+					System.out.println("schedule의 result:"+result);
+				} else {
+					System.out.println("update는 안됐지");
+				}
+			} else {
+				System.out.println("if안들어감 : "+list.get(i).getDeal_end());
+			}
+ 		}
+		
+		System.out.println("한바뮈 돌았다");
 	}
 	
 	

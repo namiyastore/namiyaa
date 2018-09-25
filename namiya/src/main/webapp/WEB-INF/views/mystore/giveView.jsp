@@ -266,7 +266,7 @@
 							<div id="content" style="width:950px;" >
 								<c:if test="${not empty board.originalfile}">
 								<div align="center">
-										<img alt="" src="${pageContext.request.contextPath}/boardfile/${board.savedfile}" style="width:200px; height:150px;">
+										<img alt="" src="${pageContext.request.contextPath}/home/img/boardfile/${board.savedfile}" style="width:200px; height:150px;">
 										<br/>
 								</div>
 								<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Jeju Gothic', Eco Sans Mono;" readonly="readonly">${board.content}</textarea>
