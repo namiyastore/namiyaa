@@ -33,7 +33,7 @@
 
 $(document).ready(function(){
 	   $(window).resize(function (){
-	      resizeTo(400, 400);
+	      resizeTo(800, 600);
 	   });
 	   
 	   $("#email").keyup(function(){

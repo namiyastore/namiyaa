@@ -231,10 +231,12 @@ iframe {
 /*------------------------------------------------------------------
 [ Input ]*/
 .error_next_box{
+	text-align:right;
 	font-size:13px;
 	font-weight: bold;
 	color: #05dbff;
 	line-height: 0.01;
+	
 }
 .wrap-input100 {
   width: 77%;
