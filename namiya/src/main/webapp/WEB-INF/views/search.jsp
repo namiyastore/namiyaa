@@ -255,7 +255,7 @@ $(function(){
 				val += resp[i].regdate;
 				val += '</div>';
 				val += '</div>';
-				val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp[i].savedfile + '">';
+				val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="home/img/boardfile/' + resp[i].savedfile + '">';
 				
 				val += '</div>';
 			}
@@ -291,31 +291,6 @@ $(function(){
 							
 						val += '<div id="noticeText">';
 						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';
-// 						if(lang == 'ko') {
-// 							val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ ' + resp.service + ' ]</h3>';	
-// 						}
-// 						else if(lang == 'ja') {
-// 							if(resp.service == '양도') {
-// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 譲渡 ]</h3>';	
-// 							}
-// 							else if(resp.service == '재능기부') {
-// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能寄付 ]</h3>';
-// 							}
-// 							else if(resp.service == '교환') {
-// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能 ]</h3>';
-// 							}
-// 						}
-// 						else if(lang == 'en') {
-// 							if(resp.service == '양도') {
-// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Transfer ]</h3>';	
-// 							}
-// 							else if(resp.service == '재능기부') {
-// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ Talent donation ]</h3>';
-// 							}
-// 							else if(resp.service == '교환') {
-// 								val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ barter ]</h3>';
-// 							}
-// 						}
 						
 						val += '&nbsp;&nbsp;&nbsp;&nbsp;' + resp.content;
 						val += '</div>';
@@ -323,7 +298,7 @@ $(function(){
 						val += resp.regdate;
 						val += '</div>';
 						val += '</div>';
-						val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="boardfile/' + resp.savedfile + '">';
+						val += '<img onError="this.src=' + "'" + 'resources/search/image/noimage.png' + "'" + '" id="noticePic" class="noticeItemDisplay" width="100px" height="100px" src="home/img/boardfile/' + resp.savedfile + '">';
 						
 						val += '</div>';					
 					
@@ -389,26 +364,26 @@ function majorCategory() {
 				if(i == 0) {
 					if(resp.length > 1) {
 						$("#depth1").append(
-							"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+							"<div style='border-top: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' >" + resp[i].categoryname + "</div>"
 							+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 						);
 					}
 					else {
 						$("#depth1").append(
-							"<div style='border-top: 1px solid gray; border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+							"<div style='border-top: 1px solid gray; border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' >" + resp[i].categoryname + "</div>"
 							+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 						);
 					}
 				}
 				else if(i == (resp.length-1)) {
 					$("#depth1").append(
-						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						"<div style='border-bottom: 1px solid gray;' data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' >" + resp[i].categoryname + "</div>"
 						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
 				else {
 					$("#depth1").append(
-						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")'>" + resp[i].categoryname + "</div>"
+						"<div data-num='" + resp[i].categorynum + "' data-dept='" + resp[i].depth + "' data-idx='" + (parseInt(i)+1) + "' onclick='javascript:majorCategoryClick(" + resp[i].categorynum + ")' >" + resp[i].categoryname + "</div>"
 						+ "<span id='tooltipnum" + resp[i].categorynum + "' class='tooltiptext'>" + resp[i].categoryname + "</span>"
 					);
 				}
@@ -695,7 +670,7 @@ function minerCategory(category_m) {
 		<div id="profile">
 		
 			<div id="profilePicture">			
-				<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/profile/${profile.savedfile}" width="80px" height="80px">
+				<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" width="80px" height="80px">
 			</div>
 			<div id="myPageClick" class="profileBtn"><spring:message code="search.profileBtn.myPageClick" /></div>
 			<div id="myStoreClick" class="profileBtn"><spring:message code="search.profileBtn.myStoreClick" /></div>

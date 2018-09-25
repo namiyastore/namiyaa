@@ -49,7 +49,6 @@ $(function(){
 	
 	// 고유 url
 	var myurl = $("#myurl").val();
-	alert(myurl)
 
 	$("#sideMenu").mouseleave(function(){		
 		$("#depth2").css("visibility","hidden");
@@ -480,18 +479,21 @@ $(function(){
 // 대분류 클릭 이벤트 함수
 function majorCategoryClick(categorynum) {
 	var currentPage2 = $("#currentPage2").val();
+	var myurl = $('#myurl').val();
 	location.href = "result?currentPage2=" + currentPage2 + "&parentnum=" + categorynum + "&myurl=" + myurl + "&categoryGroup=major";
 }
 
 // 중분류 클릭 이벤트 함수
 function mediumCategoryClick(categorynum) {
 	var currentPage3 = $("#currentPage3").val();
+	var myurl = $('#myurl').val();
 	location.href = "result?currentPage3=" + currentPage3 + "&parentnum=" + categorynum + "&myurl=" + myurl + "&categoryGroup=medium";
 }
 
 // 소분류 클릭 이벤트 함수
 function minorCategoryClick(categorynum) {
 	var currentPage4 = $("#currentPage4").val();
+	var myurl = $('#myurl').val();
 	location.href = "result?currentPage4=" + currentPage4 + "&parentnum=" + categorynum + "&myurl=" + myurl + "&categoryGroup=minor";
 }
 
@@ -1112,7 +1114,7 @@ p, li, a{
 									<c:if test="${!status.first}">
 										<hr/>
 									</c:if>									
-									<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/boardfile/${ptList.savedfile}" width="100px" height="100px">
+									<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/home/img/boardfile/${ptList.savedfile}" width="100px" height="100px">
 									
 								</div>
 							</div>
@@ -1139,7 +1141,7 @@ p, li, a{
 		<div id="profile">
 		
 			<div id="profilePicture">
-				<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/profile/${profile.savedfile}" width="80px" height="80px">
+				<img onError="this.src='resources/search/image/noimage.png'" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" width="80px" height="80px">
 			</div>
 			<div id="myPageClick" class="profileBtn"><spring:message code="search.profileBtn.myPageClick" /></div>
 			<div id="myStoreClick" class="profileBtn"><spring:message code="search.profileBtn.myStoreClick" /></div>
