@@ -6,7 +6,7 @@
 
 	<select id="mInBoxListAll" resultType="Message">
 		SELECT
-			messagenum,writerid,msg_title,msg_content,regdate,userid,copy
+			messagenum,writerid,msg_title,msg_content,to_char(regdate, 'YYYY-MM-DD') regdate,userid,copy
 		FROM
 			message
 		WHERE
@@ -18,7 +18,7 @@
 	
 	<select id="mOutBoxListAll" resultType="Message">
 		SELECT
-			messagenum,writerid,msg_title,msg_content,regdate,userid,copy
+			messagenum,writerid,msg_title,msg_content,to_char(regdate, 'YYYY-MM-DD') regdate,userid,copy
 		FROM
 			message
 		WHERE
@@ -95,7 +95,7 @@
 			writerid,
 			msg_title,
 			msg_content,
-			regdate,
+			to_char(regdate, 'YYYY-MM-DD') regdate,
 			userid,
 			copy
 		FROM
@@ -112,7 +112,7 @@
 			writerid,
 			msg_title,
 			msg_content,
-			regdate,
+			to_char(regdate, 'YYYY-MM-DD') regdate,
 			userid,
 			copy
 		FROM
@@ -126,7 +126,7 @@
 		UPDATE SET
 			msg_title = #{msg_title},
 			msg_content = #{msg_content},
-			sysdate,
+			to_char(sysdate, 'YYYY-MM-DD') regdate,
 			userid = #{userid},
 			copy = #{copy}
 		WHERE
@@ -165,19 +165,17 @@
 			writerid,
 			msg_title,
 			msg_content,
-			regdate,
+			to_char(regdate, 'YYYY-MM-DD') regdate,
 			userid,
 			copy
 		FROM
 			message
 		WHERE
-		 	(msg_title LIKE '%'||#{searchWord}||'%'
+			(msg_title LIKE '%'||#{searchWord}||'%'
 		OR
 			msg_content LIKE '%'||#{searchWord}||'%')
-			<!-- ${searchWord} like '%' || #{searchWord} || '%' -->
 		AND
 			copy = 0
-		
 	</select>
 	
 	<select id="Outbox_select_result" resultType="Message">
@@ -186,7 +184,7 @@
 			writerid,
 			msg_title,
 			msg_content,
-			regdate,
+			to_char(regdate, 'YYYY-MM-DD') regdate,
 			userid,
 			copy
 		FROM

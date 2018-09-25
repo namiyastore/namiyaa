@@ -25,7 +25,8 @@ public class MessageController {
 		int totalRecordCount = repository.getInboxRecordCount(searchWord);
 		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount,10,5);
 		
-		List<Message> InboxList = repository.Inbox_select_result(searchWord,navi.getStartRecord(),navi.getCurrentPage());
+		System.out.println("서치워드는?"+searchWord +"start "+navi.getStartRecord()+"current "+navi.getCurrentPage()+"totalcount? "+totalRecordCount);
+		List<Message> InboxList = repository.Inbox_select_result(searchWord,navi.getStartRecord(),navi.getCountPerPage());
 		System.out.println("0921 받은쪽지 리스트?"+InboxList);
 		
 		model.addAttribute("InboxList", InboxList);
