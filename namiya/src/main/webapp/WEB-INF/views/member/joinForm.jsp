@@ -42,7 +42,8 @@
 
     $(document).ready(function() {
         defaultScript();
-      	
+        $("#id").val("");
+        $("#username").val("");
         function setAddr2(obj) {
     		alert(obj);
     	}	
@@ -791,8 +792,8 @@
 					</div>
 					 <span style="display: block;"  class="error_next_box" id="pswd1Msg" style="display:none"></span>
 					<br>
-					<div style="display: block;"  class="wrap-input100 validate-input">
-							<input type="password" id="pswd2" name="pswd2" class="input100" title="비밀번호 재확인 입력" maxlength="20">
+					<div style="display: inline-block;"  class="wrap-input100 validate-input">
+							<input type="password" id="pswd2" name="pswd2" class="input100" maxlength="40">
 							<span class="focus-input100" data-placeholder="비밀번호 확인"></span>
                     </div>
                     <span style="display: block;"  class="error_next_box" id="pswd2Msg" style="display:none"></span>

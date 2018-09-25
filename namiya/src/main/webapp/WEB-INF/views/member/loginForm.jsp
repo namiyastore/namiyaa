@@ -36,6 +36,8 @@
 	var isShift = false;
 	
 $(document).ready(function(){
+	$("#userid").val("");
+    
 	$("#loginUp").click(function(){
 		if(idFlag&&pwdFlag&&(!isShift)){
 			$("#login_form").submit();
