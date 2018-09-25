@@ -147,22 +147,24 @@ function alertMsg() {
 						<th>Sender</th>
 						<th>Date</th>
 					</tr>
-					<c:if test="${empty message }">
+					<c:if test="${not empty InboxList }">
+						<c:forEach var="inboxList" items="${InboxList}">
+							<tr class="leftSide_table_rows">
+								<td>${inboxList.messagenum }</td>
+								<td><a href="mInBoxSelectOne?messagenum=${inboxList.messagenum}">${inboxList.msg_title }</a></td>
+								<td>${inboxList.userid }</td>
+								<td>${inboxList.regdate }</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty InboxList }">
 						<tr>
 							<td colspan="4">
 								<p>받은 쪽지가 없습니다</p>
 							</td>
 						</tr>
 					</c:if>
-					<c:if test="${not empty message }">
-						<c:forEach var="messageList" items="${InboxMList}">
-							<tr class="leftSide_table_rows">
-								<td><a href="selectOneMessage?messagenum=${messageList.messagenum}">${messageList.title }</a>></td>
-								<td>${messageList.userid }</td>
-								<td>${messageList.date }</td>
-							</tr>
-						</c:forEach>
-					</c:if>
+					
 				</table>
 			</div><!-- 테이블의 div -->
 		</div> 
