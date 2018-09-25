@@ -236,8 +236,8 @@ function want(boardnum, userid) {
 					<tr>
 					<c:if test="${userid != sessionScope.loginId && map.SSTATUS != '진행완료'}"> 
 						<td colspan="2" align="right">
-							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
-							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want(${map.BOARDNUM}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
+							<img src="${pageContext.request.contextPath}/resources/images/interest.png" onclick="interest(${board.boardnum}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
+							<img src="${pageContext.request.contextPath}/resources/images/want.png" onclick="want(${board.boardnum}, '${sessionScope.loginId}')" style="width:55px; height:40px;">
 							<hr/>
 						</td>
 					</c:if>
