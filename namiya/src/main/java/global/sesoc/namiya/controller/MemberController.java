@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import global.sesoc.namiya.dao.MembersRepository;
+import global.sesoc.namiya.dao.MystoreRepository;
 import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Profile;
@@ -38,7 +39,9 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	@Autowired
 	ProfileRepository prepository;
-	
+	@Autowired
+	MystoreRepository mrepository;
+	 
 	//region getPage
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
 	public String loginPage() {
@@ -174,7 +177,7 @@ public class MemberController {
 		return "member/addrBuffer";
 	}
 	
-	//endregion
+	//endregion 
 	
 	//region formprocessing
 	@RequestMapping(value="join_form", method=RequestMethod.POST)
@@ -190,7 +193,7 @@ public class MemberController {
 		p.setNickname(nickname);
 		p.setUserid(userid);
 		prepository.insert(p);
-		
+		mrepository.MinimiSetting(userid);
 		if(result!=0) {
 			prepository.select(members.getUserid());
 			return "member/loginForm";
