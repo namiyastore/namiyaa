@@ -12,7 +12,7 @@
 		update 
 			profile 
 		set 
-			content = #{content}, originalfile = #{originalfile}, savedfile = #{savedfile} 
+			content = #{content}, originalfile = #{originalfile}, savedfile = #{savedfile} , nickname = #{nickname}
 		where
 			userid = #{userid} 
 		
@@ -21,6 +21,10 @@
 	<insert id="insert" parameterType="Profile">
 		insert into profile values(profile_seq.nextval,#{userid},null,null,'안녕하세요',#{nickname})
 	</insert>
+	
+	<select id="selectNickname" parameterType="String" resultType="Profile">
+		select * from profile where nickname = #{nickname}
+	</select>
 	
 	
 </mapper>

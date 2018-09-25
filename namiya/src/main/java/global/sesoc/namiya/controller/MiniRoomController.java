@@ -176,6 +176,10 @@ public class MiniRoomController {
 			if(um != null && !um.getUserid().equals(userid)) {
 					return "";
 			}
+			Profile pfile = p_repository.selectNickname(profile.getNickname());
+			System.out.println("!!!pfile: "+pfile);
+			if(pfile !=null && !pfile.getUserid().equals(userid))
+				return "NickName";
 			String originalfile = upload.getOriginalFilename();
 			String savedfile = FileService.saveFile(upload, uploadPath);
 			System.out.println(originalfile+", "+savedfile+", "+userid);
@@ -193,6 +197,7 @@ public class MiniRoomController {
 			}
 			
 			p.setContent(profile.getContent());
+			p.setNickname(profile.getNickname());
 			p_repository.update(p);
 			Members m = new Members();
 			m.setMyurl(myurl);

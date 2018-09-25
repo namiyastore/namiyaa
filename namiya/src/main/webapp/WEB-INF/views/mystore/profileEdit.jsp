@@ -43,8 +43,13 @@
 
 <script type="text/javascript">
   
-
+	//var checkNicknameVal = true;
     $(document).ready(function() {
+    		
+    	/* $("#nickname").keyup(function(event){
+        	checkNickname();
+        });
+    	 */
     	
     	var fileTypes = [
     		  'image/jpeg',
@@ -67,7 +72,7 @@
     		if(validFileType(files.files[0])) {
     			var imagetag = document.getElementById('imgThumb');
     			imagetag.src = window.URL.createObjectURL(files.files[0]);
-    			//alert(files.files[0].name);	
+    			//alert(files.files[0].name);
     		}
     			
     	});
@@ -76,13 +81,16 @@
     function  formCheck() {
     	var content = document.getElementById("content");
     	var myurl = document.getElementById("myurl");
+    	var nickname = document.getElementById("nickname");
 
-    	if (content.value == '' || myurl.value == '') {
-    		alert('코멘트,URL을 입력하세요.');
+    	
+    	if (content.value == '' || myurl.value == '' || nickname.value == '') {
+    		alert('코멘트,URL,NICKNAME을 입력하세요.');
     		return false;
     	}
     	
-    	
+    	/* if(!checkNicknameVal)
+    		return false; */
     	
     	 var form = $('#profileForm')[0];
          var formData = new FormData(form);
@@ -96,19 +104,53 @@
                      type: 'POST',
                      success: function(myurl){
                          //alert("업로드 성공!!");
-                         if(myurl != "") {
+                         if(myurl == "NickName"){
+                        	 alert("이미 존재하는 NickName");
+                         }
+                         else if(myurl != "") {
                          	opener.location.href = "${pageContext.request.contextPath}/myStore/"+myurl+"/home";
                          	window.close();
                          }else {
-                        	 alert("이미있는 URL "+myurl);
+                        	 alert("이미있는 URL");
                          }
                      }
              });
 
     	return true;
     }
+    
+  /*   function checkNickname() {
+    	 var nickname = $("#nickname").val();
+    	 var oMsg = $("#nickMsg");
+    	 $.ajax({//Id Duplication Check
+             type:"GET",
+             url: "checkNickname?nickname=" + nickname ,
+             success : function(result) {
+                 if (result == 1) {
+                	 checkNicknameVal = true;
+                 	showSuccessMsg(oMsg, "사용가능한 닉네임");
+                 } else {
+                	 checkNicknameVal = false;
+                     showErrorMsg(oMsg, "사용불가 닉네임");
+                 }
+             }
+         });
+    	 
+    }
     	
-   
+    function showErrorMsg(obj, msg) {
+        obj.attr("class", "error_next_box");
+        obj.html(msg);
+        obj.show();
+    }
+
+    function showSuccessMsg(obj, msg) {
+        obj.attr("class", "error_next_box green");
+        obj.html(msg);
+        obj.show();
+    } */
+    
+    
 </script>
 </head>
 
@@ -170,6 +212,19 @@
                                 <input type="text" name="myurl" id="myurl" value="${myurl}" style="width:254px" >
                             </p>
                         </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <div class="thcell"><label for="inpNick">닉네임</label></div>
+                    </th>
+                    <td>
+                        <div class="tdcell" style="padding-bottom: 0px;">
+                            <p class="contxt_webctrl nickname">
+                                <input type="text" name="nickname" id="nickname" value="${profile.nickname}" style="width:254px" >
+                            </p>
+                        </div>
+                        <span style="display: block; padding-left: 30px;"  class="error_next_box" id="nickMsg" style="display:none"></span>
                     </td>
                 </tr>
                  <tr>

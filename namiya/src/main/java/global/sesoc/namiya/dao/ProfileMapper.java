@@ -15,5 +15,6 @@ public interface ProfileMapper {
 	public Profile select(String userid);
 	public int update(Profile profile);
 	public int insert(Profile profile);
+	public Profile selectNickname(String nickname);
 	
 }

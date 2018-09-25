@@ -98,5 +98,16 @@ public class ProfileController {
 			System.out.println("map: "+map);
 			return map;
 		}
+		
+		@RequestMapping(value="/checkNickname", method=RequestMethod.GET)
+		public @ResponseBody int checkNickname(String nickname) {
+			int result = 1;
+			Profile p = p_repository.selectNickname(nickname);
+			if(p!=null) {
+				result = 0;
+			}
+			System.out.println(p);
+			return result;
+		}
 	
 }

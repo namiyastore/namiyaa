@@ -351,7 +351,7 @@ var background = {
 		
 		<div id="image" style="padding-top: 80px;" align="center">
 			<b id="nick" >${profile.nickname}</b>
-			<img id="pimg" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" style="width:180px; height:181px;">
+			<img id="pimg" onError="this.src='${pageContext.request.contextPath}/resources/images/human.png'" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" style="width:180px; height:181px;">
 		</div>
 		
 		<img src="${pageContext.request.contextPath}/resources/images/favorite.png" style="width:50px; heignt:50px;" onclick="favorite('${homeuserid}','${sessionScope.loginId}')">

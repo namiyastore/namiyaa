@@ -33,5 +33,11 @@ public class ProfileRepository {
 		int cnt = mapper.insert(profile);
 		return cnt;
 	}
+
+	public Profile selectNickname(String nickname) {
+		ProfileMapper mapper = session.getMapper(ProfileMapper.class);
+		Profile p = mapper.selectNickname(nickname);
+		return p;
+	}
 		
 }
