@@ -38,6 +38,7 @@
     var authFlag = false;
     var mailFlag = false;
     var sendFlag = false;
+    var phoneFlag= false;
     var userAuthNo = 0;
 
     $(document).ready(function() {
@@ -116,6 +117,10 @@
         $("#phoneNo").blur(function() {
             checkPhoneNo();
         });
+        
+        $("#id").keyup(function(event){
+        	checkPhone();
+        });
 
         $("#btnSend").click(function() {
             sendSmsButton();
@@ -149,12 +154,14 @@
     	alert("pw"+pwFlag);
     	alert("au"+authFlag);
     	alert("mail"+mailFlag);
+    	alert("phone"+phoneFlag);
+    	
         /* if (!checkUnrealInput()) {
             submitOpen();
             return false;
         } */
 
-        if(idFlag && pwFlag && authFlag && mailFlag) {
+        if(idFlag && pwFlag && authFlag $$ phoneFlag && mailFlag) {
         	alert("가입성공.");
         	$("#userid").val(userid);
         	$("#password").val(password);
@@ -704,9 +711,17 @@
         return true;
     }
 
-    function isCellPhone(p) {
+    function checkPhone() {
+    	var p = $("phoneNo").val();
+    	 var oMsg = $("#phoneNoMsg");
         var regPhone = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
-        return regPhone.test(p);
+        if(regPhone.test(p)){
+        	phoneFlag = true;
+        	return true;
+        }else{
+        	showErrorMsg(oMsg, "다시 확인해주세요");
+        	return false;
+        }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //Korean Address API

@@ -192,8 +192,10 @@ function memberfind(){
 				<a id="signup" class="clickbutton" onclick="signUp()"><img width="120" height="50" alt="" src="resources/images/signup.png"></a>
 				<br>
 				<a class="clickbutton" onclick="memberfind()">아이디비밀번호 찾기</a>
-				<a class="clickbutton" onclick="location.href='${pageContext.request.contextPath}/ko'">한글</a>
-				<a class="clickbutton" onclick="location.href='${pageContext.request.contextPath}/ja'">일본어</a>
+				<div style="position: relative; display: inline; left: 300px;"><a class="clickbutton" onclick="location.href='${pageContext.request.contextPath}/ko'"><img width="50" height="50" alt="" src="resources/images/korea.png"/></a></div>
+				<div style="position: relative; display: inline; left: 300px;"><a class="clickbutton" onclick="location.href='${pageContext.request.contextPath}/ja'"><img width="50" height="50" alt="" src="resources/images/japan.png"/></a></div>
+				
+				
 			</div>
 		</form>
 		
