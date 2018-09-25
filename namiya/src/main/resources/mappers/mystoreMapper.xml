@@ -18,11 +18,11 @@
 	<select id="selectAll" parameterType="String" resultType="Map">
 		select 
 		 	*
-		from mystore, imageitem ,useritem
+		from mystore ,useritem, imageitem
 		where 
 			mystore.userid = #{userid}
 		and
-			imageitem.itemnum = mystore.itemnum
+			imageitem.itemnum = useritem.itemnum	
 		and
 			mystore.useritemnum = useritem.useritemnum
 		order by IMAGEORDER
@@ -41,7 +41,6 @@
 			mystore_seq.nextval,
 			#{userid} ,
 			#{useritemnum} ,
-			#{itemnum} ,
 			#{currentframe} ,
 			#{px},
 			#{py},

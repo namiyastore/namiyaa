@@ -83,6 +83,7 @@ public class MiniRoomController {
 			Members m= m_repository.select(miniurl); // 미니룸 멤버
 			System.out.println("member: "+m);
 			List<Map<String,String>> list = m_repository.selectAll(m.getUserid());
+			System.out.println("list:"+list);
 			Profile p = p_repository.select(m.getUserid());
 			model.addAttribute("homeuserid", m.getUserid());
 			model.addAttribute("myurl", m.getMyurl());

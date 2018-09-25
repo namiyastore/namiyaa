@@ -115,7 +115,6 @@ CREATE TABLE mystore
 	imagenum number NOT NULL,
 	userid varchar2(100) NOT NULL,
     useritemnum number not null constraint useritemnum_fk REFERENCES useritem(useritemnum),
-	itemnum number NOT NULL constraint itemnum_fk REFERENCES imageitem(itemnum), 
 	currentframe number NOT NULL,
 	px number NOT NULL,
 	py number NOT NULL,
