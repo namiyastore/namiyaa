@@ -19,10 +19,10 @@
 			members
 		where
 			<choose>
+				<when test="password != null">userid = #{userid} and password = #{password}</when>
 				<when test="userid != null">userid = #{userid}</when>
 				<when test="email != null">email = #{email}</when>
-				<when test="password != null">userid = # {userid} and password = #{password}</when>
-			</choose> 
+			</choose>
 	</select>
 	
 	<insert id="insertMembers" parameterType="Members">
