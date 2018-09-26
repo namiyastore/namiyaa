@@ -11,7 +11,7 @@
 $(function(){ 
 	 
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
-		location.href = './';
+		location.href = 'search';
 	}); 
 	 
 	$('.rightSide_MyInfoBoxDown_myStore').on('click',function(){ 
