@@ -81,7 +81,7 @@ $(function(){
 	
 	// 마이 페이지 이동
 	$("#myPageClick").on("click",function(){
-		location.href = "myPage";
+		location.href = "interestList";
 	});
 	
 	// 로그아웃

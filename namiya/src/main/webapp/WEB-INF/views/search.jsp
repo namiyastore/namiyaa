@@ -48,6 +48,24 @@ var lang = "";
 var alarmMax = 0;	// 실시간 알림글 가장 최근 번호
 
 $(function(){
+	
+	var urlAddr = "http://13.125.208.152:8081";
+	var msg = "抽選対象者に選定されました%0Aline:" + urlAddr + "/namiya/sendMsg?userid=" + "test1";
+	
+	var jsonData = {
+		'message':msg,
+		'receive':'test1'
+	};
+	
+	$.ajax({
+		method : 'get',
+		url : 'LinenotifySendMsg',
+		data : jsonData,
+		success : function(resp) {
+			console.log(JSON.stringify(resp));
+		}
+	});
+	
 	// 카테고리 대분류 가져오기
 	majorCategory();
 	
@@ -79,7 +97,7 @@ $(function(){
 	
 	// 마이 페이지 이동
 	$("#myPageClick").on("click",function(){
-		location.href = "myPage";
+		location.href = "interestList";
 	});
 	
 	// 로그아웃
