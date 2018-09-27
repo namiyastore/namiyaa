@@ -1,0 +1,422 @@
+@charset "UTF-8"; 
+ 
+/* body { */ 
+/* 	background-image: url("resources/images/NaviBackGround.png"); */ 
+/* 	background-size: 80%; */ 
+/* 	font-family: 'EcoSansMono', 'JejuGothic'; */ 
+/* } */ 
+
+
+/* 수정된 CSS */ 
+body { 
+	background-image: url("../images/NaviBackGround.png"); 
+	background-attachment: fixed; 
+	background-size: 80%; 
+	font-family: 'EcoSansMono', 'JejuGothic'; 
+	
+}
+
+#logo{
+	max-width: 90%;
+}
+
+/* h2{
+	display: block;
+    font-size: 2.5em;
+    margin-block-start: 0.2em;
+    margin-block-end: 0.2em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+} */
+
+.wrapper {
+    width: 100%;
+    height: 800px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapper .leftSide {
+    width: 80%;
+    height: 90%;
+    /* border: 1px blue solid;  */
+}
+ 
+.wrapper .rightSide { 
+	width: 20%; 
+	height: 90%; 
+	/* border: 1px blue solid; */  
+	 
+} 
+
+.leftSide{ 
+	display: flex; 
+	flex-direction: column; 
+	align-items: center; 
+} 
+ 
+.wrapper .tabs {
+    width: 95%;
+    height: 10%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* border: 1px green solid; */
+}
+ 
+
+
+.leftSide .tabs {
+    width: 90%;
+    height: 10%;
+    /* border: 1px solid yellow; */
+}
+ 
+/* 0915 7페이지 탭 hover적용 */ 
+.tabs > div:hover { 
+	background-color: #0B3B0B; 
+	color: white; 
+} 
+ 
+.leftSide_tabs_tab1 { 
+	cursor: pointer; 
+} 
+ 
+.leftSide_tabs_tab2 { 
+	cursor: pointer; 
+} 
+ 
+.leftSide_tabs_tab3 { 
+	cursor: pointer; 
+} 
+ 
+.leftSide_tabs_tab4 { 
+	cursor: pointer; 
+} 
+ 
+.leftSide_tabs_tab5 { 
+	cursor: pointer; 
+} 
+.leftSide_tabs_tab6 { 
+	cursor: pointer; 
+} 
+.leftSide_tabs_tab7 { 
+	cursor: pointer; 
+} 
+ 
+/* 여기부터 기존것들 0915기준 */ 
+.tabs>div {
+    width: 17%;
+    height: 80%;
+    border: 1px solid rgb(50, 50, 50);
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgb(50, 50, 50);
+} 
+ 
+.leftSide_tabs_tab1 { 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+} 
+ 
+.leftSide_tabs_tab2 { 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+} 
+ 
+.leftSide_tabs_tab3 { 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+} 
+ 
+.leftSide_tabs_tab4 { 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+} 
+ 
+.leftSide_tabs_tab5 { 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+} 
+ 
+.leftSide_tabs_tab6 { 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+} 
+ 
+.leftSide_tabs_tab7 { 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+} 
+
+.leftSide .searchIcon { 
+	width: 100%; 
+	height: 100%; 
+	background-color: orange; 
+} 
+ 
+.leftSide .leftSide_2nd {
+    display: flex;
+    width: 90%;
+    height: 5%;
+    justify-content: space-between;
+    /* border: solid 1px white; */
+}
+.leftSide_2nd .leftSide_2nd_searchBar{
+	display: flex;
+	width: 40%;
+	height: 95%;
+}
+ 
+.leftSide_2nd{
+	display: flex;
+	flex-direction: row;
+} 
+ 
+/* 받은쪽지함 보낸쪽지함 탭 */ 
+ 
+/* .leftSide .leftSide_searchBar_inoutMsgBoxTabs{ 
+	display: flex; 
+	width:90%; 
+	height:5%; 
+	border: solid 1px white; 
+} 
+ 
+.leftSide_searchBar_inoutMsgBoxTabs{ 
+	display:flex; 
+	border: 1px white solid; 
+	justify-content: flex-start; 
+} 
+ 
+.leftSide_searchBar_inoutMsgBoxTabs > div{ 
+	display:flex; 
+	width: 15%; 
+	background-color: white; 
+	border-top-left-radius: 10px; 
+	border-top-right-radius: 10px; 
+	border: 1px black solid; 
+	align-items: center; 
+	justify-content: center; 
+}  */
+ 
+.leftSide .leftSide_table { 
+	/* display: flex;  */
+	width: 90%; 
+	height: 80%; 
+} 
+ 
+@font-face { 
+	font-family: 'EcoSansMono'; 
+	src: url("resources/fonts/EcoSansMono.ttf") format('truetype'); 
+} 
+ 
+@font-face { 
+	font-family: 'JejuGothic'; 
+	src: url("resources/fonts/JejuGothic.ttf") format('truetype'); 
+} 
+ 
+#customers { 
+	font-family: "EcoSansMono", 'JejuGothic', 'Arial'; 
+	border-collapse: collapse; 
+	width: 100%; 
+} 
+ 
+#customers td, #customers th { 
+	border: 1px solid #ddd; 
+	padding: 8px; 
+} 
+ 
+#customers tr:nth-child(even) { 
+	background-color: #f2f2f2; 
+} 
+ 
+#customers tr:hover { 
+	background-color: #ddd; 
+} 
+ 
+#customers th { 
+	padding-top: 12px; 
+	padding-bottom: 12px; 
+	text-align: center; 
+	background-color: #0B3B0B; 
+	color: white; 
+}
+
+/* 0916추가수정 테이블의 열속 글자 정렬 */
+/* .table_1st_td{
+	text-align: right;
+} 
+.table_2nd_td{
+	text-align: center;
+} 
+.table_3rd_td{
+	text-align: right;
+} */
+
+/* 스크롤 고정 0916 */
+/* table {
+  width: 100%;
+} */
+/* 
+table, td {
+  border-collapse: collapse;
+  border: 1px solid #000;
+}
+ */
+/* thead {
+  display: table; to take the same width as tr
+  width: 100%; - 17px because of the scrollbar width
+}
+
+tbody {
+  display: block; to enable vertical scrolling
+  max-height: 373px; e.g.
+} */
+
+/* th, td {
+    width: 33.33%;
+    padding: 5px;
+    word-break: break-all;
+} */
+
+/* tr {
+  display: table; display purpose; th's border
+  width: 100%;
+} */
+
+/* td {
+  text-align: center;
+  border-bottom: none;
+  border-left: none;
+} */
+/* 스크롤 고정 여기까지 */
+ 
+.rightSide .rightSide_MyInfoBox {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 90%;
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 13px;
+    justify-content: space-between;
+}
+ 
+.rightSide_MyInfoBox .rightSide_MyInfoBoxUp {
+    display: flex;
+    width: 100%;
+    height: 35%;
+    background-color: #FFFFFF;
+    flex-direction: column;
+    justify-content: space-between;
+}
+ 
+#rightSide_MyInfoBoxUp_profileImg_profile_pic {
+    width: 60%;
+    height: 100%;
+    border: thin solid;
+    border-color: #FFFFFF;
+    border-radius: 10px;
+}
+ 
+.rightSide_MyInfoBoxUp .rightSide_MyInfoBoxUp_profileImg { 
+	display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: #FFFFFF; 
+} 
+ 
+.rightSide_MyInfoBoxUp .rightSide_MyInfoBoxUp_userId {
+    height: 25%;
+    /* border: 1px black solid; */
+    text-align: center;
+    background-color: #FFFFFF;
+}
+ 
+.rightSide_MyInfoBoxUp .rightSide_MyInfoBoxUp_userName { 
+	height: 25%; 
+    /* border: 1px black solid; */ 
+    text-align: center; 
+    background-color: #FFFFFF; 
+} 
+ 
+ 
+.rightSide_MyInfoBoxDown {
+    display: flex;
+    /* border: 1px solid pink; */
+    flex-direction: column;
+    height: 60%;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ 
+ 
+.rightSide_MyInfoBoxDown > div { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 17%; 
+    width: 80%; 
+    border: 1px solid #2A3D4C; 
+    border-radius: 9px; 
+    background-color: #2A3D4C; 
+    font-size: 1.1em; 
+    color: white; 
+} 
+ 
+ 
+ 
+.rightSide_MyInfoBoxDown > div:hover { 
+	background-color: white; 
+	color: #2A3D4C; 
+} 
+ 
+/* 세훈 */ 
+.rightSide_MyInfoBoxDown_goToHome { 
+	cursor: pointer; 
+} 
+ 
+.rightSide_MyInfoBoxDown_myStore { 
+	cursor: pointer; 
+}
+ 
+.rightSide_MyInfoBoxDown_profile { 
+	cursor: pointer; 
+} 
+ 
+.rightSide_MyInfoBoxDown_logOut { 
+	cursor: pointer; 
+} 
+ 
+.rightSide_MyInfoBoxDown_signOut { 
+	cursor: pointer; 
+} 
+ 
+#customers tr:nth-child(odd) { 
+    background-color: #FFF9E7; 
+} 
+ 
+#customers tr:nth-child(odd):hover { 
+    background-color: #DDDDDD; 
+} 
+ 
+#noticeService { 
+	cursor: pointer; 
+	text-align: center; 
+	width: 150px; 
+} 
