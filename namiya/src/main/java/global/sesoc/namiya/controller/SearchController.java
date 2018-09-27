@@ -258,4 +258,10 @@ public class SearchController {
 		return json;
 	}
 	
+	@RequestMapping(value="getMyurl", method=RequestMethod.GET)
+	public @ResponseBody String getMyurl(String boardnum) {
+		String result = search_repository.getMyurl(boardnum);
+		return result;
+	}
+	
 }
