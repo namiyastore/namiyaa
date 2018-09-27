@@ -87,7 +87,6 @@ function noticeService() {
 function alertMsg() { 
 	alert("등록되었습니다."); 
 } 
- 
 </script> 
  
 </head> 
@@ -95,10 +94,8 @@ function alertMsg() {
 	<!-- <h2>Point</h2> -->
 	<img alt="" src="resources/images/pagetop.gif" id="logo">
 	<div class="wrapper"> 
-	 
 		<div class="leftSide"> 
 			<div class="tabs"> 
- 
 				<!-- <div class="leftSide_tabs_tab1"> 
 					Favorite 
 				</div> --> 
@@ -139,32 +136,24 @@ function alertMsg() {
 			 
 			<!-- 라인 인증키 얻는 링크 --> 
 <!-- 			<input id="noticeService" type="button" value="Line 알림 서비스 등록" onclick="noticeService()" /> --> 
-			 
-			 
  			<!-- 여기부터 테이블 --> 
 			<div class="leftSide_table"> 
 				<table id="customers"> 
+					<thead> 
+						<tr> 
+							<th>Point</th> 
+							<th>Service</th> 
+							<th>Date</th> 
+						</tr> 
+					</thead> 
 					<c:if test="${empty pointRecord }"> 
 						<tr> 
-							<td colspan="4"> 
-								<p>포인트가 없습니다</p> 
-							</td> 
+							<td colspan="3">포인트가 없습니다 	</td> 
 						</tr> 
 					</c:if> 
 					<c:if test="${not empty pointRecord }"> 
-						<div class="customers_thead"> 
-							<thead> 
-								<tr> 
-									<th>Point</th> 
-									<th>Service</th> 
-									<th>Date</th> 
-								</tr> 
-							</thead> 
-						</div> 
-						 
-						<div class="customers_tbody"> 
-							<tbody> 
-								<c:forEach var="PointList" items="${pointRecord}"> 
+						<tbody> 
+							<c:forEach var="PointList" items="${pointRecord}"> 
 								<tr class="leftSide_table_rows"> 
 								<!--포인트 추가시 수정부분 --> 
 								<c:if test="${PointList.point gt 0}"> 
@@ -176,24 +165,21 @@ function alertMsg() {
 									<td class="table_2nd_td">${PointList.type}</td> 
 									<td class="table_3rd_td">${PointList.regdate}</td> 
 								</tr> 
-								</c:forEach> 
-							</tbody> 
-							 
-						</div><!-- customers_tbody 닫음 --> 
-						 
-						<div class="customer_tfoot"> 
-							<tfoot> 
-								<tr style="color: white; background-color: #0B3B0B;"> 
-									<td colspan="3"> 
+							</c:forEach> 
+						</tbody>
+					</c:if> 
+						<tfoot> 
+							<tr style="color: white; background-color: #0B3B0B;"> 
+								<td colspan="3"> 
 										현재포인트 : <span id="pointTotal" ></span> 
-									</td> 
-								</tr> 
-							</tfoot> 
-						</div><!-- customer_tfoot div닫음 --> 
-				</table> 
-				</c:if> 
+								</td> 
+							</tr> 
+						</tfoot> 
+						<!-- </div> --><!-- customer_tfoot div닫음 --> 
+					</table> 
+				 
 			</div><!-- 테이블의 div 닫음 --> 
-		</div> 
+		</div> <!-- left의 div 닫음 -->
 		<!-- 개인정보 표시 부분 --> 
 		<div class="rightSide"> 
 			<div class="rightSide_MyInfoBox"> 
@@ -229,6 +215,5 @@ function alertMsg() {
 			</div><!-- rightSide_MyInfoBox div 닫음 -->
 		</div><!-- rightSide div 닫음 -->
 	</div>
-	<!-- <form action="reqProfile" method="post" id="goProfile"></form> -->
 </body>
 </html>

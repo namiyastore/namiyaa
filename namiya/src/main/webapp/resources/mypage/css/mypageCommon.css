@@ -1,37 +1,17 @@
 @charset "UTF-8"; 
  
-/* body { */ 
-/* 	background-image: url("resources/images/NaviBackGround.png"); */ 
-/* 	background-size: 80%; */ 
-/* 	font-family: 'EcoSansMono', 'JejuGothic'; */ 
-/* } */ 
-
-
 /* 수정된 CSS */ 
 body { 
-	background-image: url("../../images/viewPage.png"); 
+	background-image: url("../images/NaviBackGround.png"); 
 	background-attachment: fixed; 
 	background-size: 80%; 
 	font-family: 'EcoSansMono', 'JejuGothic'; 
 }
 
 #logo{
-	max-width: 75%;
-	float: right; 
+	max-width: 97%;
 }
 
-h2{
-	display: block;
-    font-size: 2.5em;
-    margin-block-start: 0.2em;
-    margin-block-end: 0.2em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-}
- 
 .wrapper {
     width: 100%;
     height: 650px;

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -9,9 +8,8 @@
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
 <script> 
 $(function(){ 
-	 
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
-		location.href = './';
+		location.href = 'search';
 	}); 
 	 
 	$('.rightSide_MyInfoBoxDown_myStore').on('click',function(){ 
@@ -60,7 +58,11 @@ $(function(){
 	$('.leftSide_searchBar_inoutMsgBoxTabs_out').on('click',function(){ 
 		location.href = 'mOutBoxListAll';		 
 	});
-	 
+	
+	/* 0926 쪽지작성 클릭시 작성화면으로 */
+	$('.leftSide_Buttons_btn1').on('click',function(){ 
+		location.href = 'sendMsg';		 
+	});
 });
 
 // 라인 인증키 등록 
@@ -150,7 +152,7 @@ function alertMsg() {
 					<c:if test="${not empty InboxList }">
 						<c:forEach var="inboxList" items="${InboxList}">
 							<tr class="leftSide_table_rows">
-								<td>${inboxList.messagenum }</td>
+								<td class="table_1st_td">${inboxList.messagenum }</td>
 								<td><a href="mInBoxSelectOne?messagenum=${inboxList.messagenum}">${inboxList.msg_title }</a></td>
 								<td>${inboxList.userid }</td>
 								<td>${inboxList.regdate }</td>
@@ -164,10 +166,26 @@ function alertMsg() {
 							</td>
 						</tr>
 					</c:if>
-					
 				</table>
 			</div><!-- 테이블의 div -->
-		</div> 
+			<div class="leftSide_Buttons">
+				<div class="leftSide_Buttons_btn1">쪽지 작성</div>
+			</div>
+			<div class="leftSide_page">
+				<a href="mInBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}">◁◁</a> 
+				<a href="mInBoxListAll?currentPage=${navi.currentPage - 1}&searchWord=${searchWord}">◀</a>
+				<c:forEach var="page" begin="${navi.startPageGroup }" end="${navi.endPageGroup }">
+					<c:if test="${page == currentPage }">
+						<span style="color: red; font-weight: bolder;">${page} &nbsp</span>
+					</c:if>
+					<c:if test="${page != currentPage }">
+						<a href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp</a>
+					</c:if>
+				</c:forEach>
+				<a href="mInBoxListAll?currentPage=${navi.currentPage + 1}&searchWord=${searchWord}">▶</a> 
+				<a href="mInBoxListAll?currentPage=${navi.currentPage + navi.pagePerGroup}&searchWord=${searchWord}">▷▷</a>
+			</div>
+		</div> <!-- leftside의 div닫힘 -->
 		<!-- 개인정보 표시 부분 --> 
 		<div class="rightSide"> 
 			<div class="rightSide_MyInfoBox"> 
@@ -202,7 +220,6 @@ function alertMsg() {
 				</div><!-- rightSide_MyInfoBoxDown div닫힘 -->
 			</div><!-- rightSide_MyInfoBox div 닫음 -->
 		</div><!-- rightSide div 닫음 -->
-	</div>
-	<!-- <form action="reqProfile" method="post" id="goProfile"></form> -->
+	</div><!-- wrapper div 닫음 -->
 </body>
 </html>

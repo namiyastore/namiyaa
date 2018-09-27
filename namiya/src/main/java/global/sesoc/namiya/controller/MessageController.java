@@ -20,7 +20,7 @@ public class MessageController {
 	
 	@RequestMapping(value="mInBoxListAll", method = RequestMethod.GET)
 	public String mInBoxListAll(@RequestParam(value = "currentPage", defaultValue="1") int currentPage,
-			@RequestParam(value="searchWord",defaultValue = "") String searchWord,Model model) {
+			@RequestParam(value="searchWord", defaultValue = "") String searchWord,Model model) {
 		
 		int totalRecordCount = repository.getInboxRecordCount(searchWord);
 		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount,10,5);
