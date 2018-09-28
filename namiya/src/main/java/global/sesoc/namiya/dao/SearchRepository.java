@@ -133,5 +133,12 @@ public class SearchRepository {
 		
 		return result;
 	}
+
+	public String getMyurl(String boardnum) {
+		SearchMapper mapper = session.getMapper(SearchMapper.class);
+		String result = mapper.getMyurl(boardnum);
+		
+		return result;
+	}
 	
 }

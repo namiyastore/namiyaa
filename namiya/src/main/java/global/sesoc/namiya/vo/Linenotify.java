@@ -2,9 +2,9 @@ package global.sesoc.namiya.vo;
 
 public class Linenotify {
 	
-	String userid;
-    String token;
-    int onoff;
+	private String userid;
+    private String token;
+    private int onoff;
     
     public Linenotify() { }
 

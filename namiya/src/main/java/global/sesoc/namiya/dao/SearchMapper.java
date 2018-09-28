@@ -77,4 +77,11 @@ public interface SearchMapper {
 	 * @return
 	 */
 	public List<Product> selectItemRanking(Map<String,String> lang);
+
+	/**
+	 * Myurl 가져오기
+	 * @param boardnum
+	 * @return
+	 */
+	public String getMyurl(String boardnum);
 }

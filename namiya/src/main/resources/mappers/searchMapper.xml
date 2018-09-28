@@ -154,4 +154,10 @@
 		where rownum &lt;= 3
 	</select>
 	
+	<select id="getMyurl" parameterType="string" resultType="string">
+		select myurl from members where userid = (
+		    select userid from BOARD where boardnum = #{boardnum}
+		)
+	</select>
+	
 </mapper>
