@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title></title>
+<title>MAKANAI</title>
 
 <!-- 카테고리 -->
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
