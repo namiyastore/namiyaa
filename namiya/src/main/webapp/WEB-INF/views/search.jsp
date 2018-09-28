@@ -265,9 +265,24 @@ $(function(){
 			
 			$('.noticeItem').off().on('click', function(){
 				var boardnum = $(this).attr('data-boardnum');
+				var service = $(this).attr('data-service');
 				
-				var myurl = $('#myurl').val();
-				window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+				$.ajax({
+					method : 'get',
+					url : 'getMyurl?boardnum=' + boardnum,
+					success : function(myurl){
+						if(service == '양도') {
+							window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						}
+						else if(service == '교환') {
+							window.open("myStore/" + myurl + "/tradeView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						}
+						else if(service == '재능기부') {
+							window.open("myStore/" + myurl + "/talentView?boardnum=" + boardnum,"mystoreWindow","width=1200, height=650");
+						}
+					}
+				});
+				
 			});
 		}
 	
