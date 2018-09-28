@@ -735,7 +735,7 @@ function minerCategory(category_m) {
 		function openMiniHome(obj) {
 			var uri = "myStore/" + $(obj).attr('data-id') + "/home";
 			
-			window.open(uri,"mystoreWindow","width=1200","height=650");
+			window.open(uri,"mystoreWindow","width=1200, height=650");
 		}
 
         // 웹소켓을 지정한 url로 연결한다.
