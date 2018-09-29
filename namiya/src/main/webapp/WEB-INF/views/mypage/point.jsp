@@ -8,9 +8,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 <link rel="stylesheet" href="resources/mypage/css/mypageCommon.css"> 
  
-<title>Point</title> 
+<title>Point</title>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet"> 
 <script src="resources/search/js/common/jquery-1.12.4.js"></script> 
-
+<style>
+	body {
+		font-family: 'Raleway', 'Nanum Gothic';
+	}
+</style>
 <script> 
 $(function(){ 
 	 

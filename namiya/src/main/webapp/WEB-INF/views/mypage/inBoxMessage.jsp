@@ -7,6 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="resources/mypage/css/mypage_message.css">
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
+<style>
+	body {
+		font-family: 'Raleway', 'Nanum Gothic';
+	}
+</style>
 <script> 
 $(function(){ 
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
@@ -114,6 +119,8 @@ function alertMsg() {
 } 
 </script> 
 <title>Inbox message</title>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 </head>
  <body>
  <input id="lang" type="hidden" value="<spring:message code="common.lang" />" />

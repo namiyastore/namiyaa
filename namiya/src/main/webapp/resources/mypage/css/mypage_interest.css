@@ -1,37 +1,18 @@
 @charset "UTF-8"; 
  
-/* body { */ 
-/* 	background-image: url("resources/images/NaviBackGround.png"); */ 
-/* 	background-size: 80%; */ 
-/* 	font-family: 'EcoSansMono', 'JejuGothic'; */ 
-/* } */ 
-
 
 /* 수정된 CSS */ 
 body { 
 	background-image: url("../../images/viewPage.png"); 
-	font-family: Eco Sans Mono, 'Jeju Gothic';
 	background-repeat: no-repeat;
 	background-position: 0% 0%;
 	background-size: 100% 100%;
-	overflow: hidden; 	
+	overflow: hidden; 
 }
 
 #logo{
 	max-width: 75%;
 	float: right; 
-}
-
-h2{
-	display: block;
-    font-size: 2.5em;
-    margin-block-start: 0.2em;
-    margin-block-end: 0.2em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
 }
 
 .wrapper {
@@ -220,18 +201,7 @@ h2{
 	height: 80%; 
 } 
  
-@font-face { 
-	font-family: 'Eco Sans Mono'; 
-	src: url("resources/fonts/EcoSansMono.ttf") format('truetype'); 
-} 
- 
-@font-face { 
-	font-family: 'Jeju Gothic'; 
-	src: url("resources/fonts/JejuGothic.ttf") format('truetype'); 
-} 
- 
 #customers { 
-	font-family: 'Eco Sans Mono', 'Jeju Gothic', 'Arial'; 
 	border-collapse: collapse; 
 	width: 100%; 
 } 

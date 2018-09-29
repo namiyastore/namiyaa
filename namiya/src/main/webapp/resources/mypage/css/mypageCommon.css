@@ -3,7 +3,6 @@
 /* 수정된 CSS */ 
 body { 
 	background-image: url("../../images/viewPage.png"); 
-	font-family: 'Eco Sans Mono', 'Jeju Gothic';
 	background-repeat: no-repeat;
 	background-position: 0% 0%;
 	background-size: 100% 100%;
@@ -199,18 +198,7 @@ body {
 	height: 80%; 
 } 
  
-@font-face { 
-	font-family: 'Eco Sans Mono';
-	src: url("resources/fonts/EcoSansMono.ttf") format('truetype'); 
-} 
- 
-@font-face { 
-	font-family: 'Jeju Gothic'; 
-	src: url("resources/fonts/JejuGothic.ttf") format('truetype'); 
-} 
- 
 #customers { 
-	font-family: 'Eco Sans Mono', 'Jeju Gothic', 'Arial'; 
 	border-collapse: collapse; 
 	width: 100%; 
 } 
