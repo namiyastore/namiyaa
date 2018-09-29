@@ -84,4 +84,8 @@
 	<update id="updateBuyer" parameterType="History">
 		update history set buyerid=#{buyerid} where historynum=#{historynum}
 	</update>
+	
+	<select id="reviewgetTotalPage" parameterType="String" resultType="Integer">
+		select count(*) from board where userid=#{userid}
+	</select>
 </mapper>

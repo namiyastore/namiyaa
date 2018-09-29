@@ -264,13 +264,13 @@ $(document).ready(function(){
 						<c:forEach var="page" begin="${navi.startPageGroup}" end="${navi.endPageGroup}">
 							<c:if test="${page == navi.currentPage}">
 								<div>
-									<span style="color:#0081C6; font-weight:bold; text-decoration:none; color:black;"><dr>${page}</dr></span>&nbsp;
+									<span style="color:#0081C6; font-weight:bold; text-decoration:none; color:black;"><dr>${page}</dr></span>
 								</div>
 							</c:if>	
 							
 							<c:if test="${page != navi.currentPage}">
 								<div>
-									<a style="text-decoration:none; color:black;" href="give?currentPage=${page}">${page}</a>&nbsp;
+									<a style="text-decoration:none; color:black;" href="review?currentPage=${page}">${page}</a>
 								</div>
 							</c:if>
 						</c:forEach>
