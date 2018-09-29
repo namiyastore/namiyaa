@@ -80,7 +80,9 @@ $(function(){
 	
 	// 마이 페이지 이동
 	$("#myPageClick").on("click",function(){
-		location.href = "interestList";
+		var myurl = $('#myurl').val();
+		
+		location.href = "interestList?myurl=" + myurl;
 	});
 	
 	// 로그아웃
