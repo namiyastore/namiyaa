@@ -238,6 +238,7 @@ function want(boardnum, userid) {
 			<hr/>
 			<c:if test="${userid == sessionScope.loginId}"> 
 			<a href="giveForm"><img src="${pageContext.request.contextPath}/resources/images/write.png" style="width:70px; height:40px;"></a>
+			<hr/>
 			</c:if>
 			<c:if test="${empty map}">
 					<br/>
