@@ -69,6 +69,23 @@ $(function(){
 		location.href = 'pointRecord';		 
 	}); 
 	
+	/* 0926 페이징 이미지버튼 클릭 */
+	$('#btn1').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}';		 
+	});
+	$('#btn2').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage - 1}&searchWord=${searchWord}';		 
+	});
+	$('#btn3').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage + 1}&searchWord=${searchWord}';		 
+	});
+	$('#btn4').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage + navi.pagePerGroup}&searchWord=${searchWord}';		 
+	});
+	/* $('.searchIcon').on('click',function(){ 
+		location.href = 'mInBoxListAll?searchWord=${searchWord}';		 
+	}); */
+	
 	
 	 
 });
@@ -196,6 +213,21 @@ function alertMsg() {
 					</c:if>
 				</table>
 			</div><!-- 테이블의 div 닫음 -->
+			<!-- 페이징 처리 부분 -->
+			<div class="leftSide_page">
+				<img id="btn1" src="resources/images/arrow7.png" width="24px" height="24px">
+				<img id="btn2" src="resources/images/arrow8.png" width="24px" height="24px">
+				<c:forEach var="page" begin="${navi.startPageGroup }" end="${navi.endPageGroup }">
+					<c:if test="${page == currentPage }">
+						<span id="selectedPage">${page} &nbsp</span>
+					</c:if>
+					<c:if test="${page != currentPage }">
+						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp</a>
+					</c:if>
+				</c:forEach>
+				<img id="btn3" src="resources/images/arrow9.png" width="24px" height="24px">
+				<img id="btn4" src="resources/images/arrow10.png" width="24px" height="24px">
+			</div>
 		</div> 
 		<!-- 개인정보 표시 부분 --> 
 		<div class="rightSide"> 

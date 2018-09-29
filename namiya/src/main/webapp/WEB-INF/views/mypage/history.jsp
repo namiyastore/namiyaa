@@ -18,8 +18,28 @@
 			location.href = 'search';
 		});
 
-		$('.rightSide_MyInfoBoxDown_myStore').on('click', function() {
-			location.href = 'myStore';
+		// 미니홈피 창 열기 0929추가
+		$(".rightSide_MyInfoBoxDown_myStore").on("click",function(){
+			// 메세지 전송
+			// message -> 전할 내용
+			// receive -> 받을상대 id
+			
+			var myurl = $('#myurl').val();
+			window.open("myStore/" + myurl + "/home","mystoreWindow","width=1200, height=650");
+		});
+		
+		/* 0926 페이징 이미지버튼 클릭 */
+		$('#btn1').on('click',function(){ 
+			location.href = 'mInBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}';		 
+		});
+		$('#btn2').on('click',function(){ 
+			location.href = 'mInBoxListAll?currentPage=${navi.currentPage - 1}&searchWord=${searchWord}';		 
+		});
+		$('#btn3').on('click',function(){ 
+			location.href = 'mInBoxListAll?currentPage=${navi.currentPage + 1}&searchWord=${searchWord}';		 
+		});
+		$('#btn4').on('click',function(){ 
+			location.href = 'mInBoxListAll?currentPage=${navi.currentPage + navi.pagePerGroup}&searchWord=${searchWord}';		 
 		});
 
 		$('.rightSide_MyInfoBoxDown_profile').on('click', function() {
@@ -140,11 +160,26 @@
 					</c:if>
 					<c:if test="${empty hlist }">
 						<tr>
-							<th colspan="6">구매 내역이 없습니다.</th>
+							<td colspan="9">구매 내역이 없습니다.</td>
 						</tr>
 					</c:if>
 				</table>
 			</div><!-- 테이블의 div 닫음 -->
+			<!-- 페이징 처리 부분 -->
+			<div class="leftSide_page">
+				<img id="btn1" src="resources/images/arrow7.png" width="24px" height="24px">
+				<img id="btn2" src="resources/images/arrow8.png" width="24px" height="24px">
+				<c:forEach var="page" begin="${navi.startPageGroup }" end="${navi.endPageGroup }">
+					<c:if test="${page == currentPage }">
+						<span id="selectedPage">${page} &nbsp</span>
+					</c:if>
+					<c:if test="${page != currentPage }">
+						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp</a>
+					</c:if>
+				</c:forEach>
+				<img id="btn3" src="resources/images/arrow9.png" width="24px" height="24px">
+				<img id="btn4" src="resources/images/arrow10.png" width="24px" height="24px">
+			</div>
 		</div>
 		<!-- 개인정보 표시 부분 -->
 		<div class="rightSide">

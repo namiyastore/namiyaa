@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.HistoryMapper">
-	<select id="hListAll" resultType="History" parameterType="String">
+	<select id="hListAll" resultType="History" parameterType="map">
 		SELECT
 			historynum,
 			productnum,
@@ -70,5 +70,18 @@
 			history
 		ORDER BY
 			historynum desc
+	</select>
+	
+	<select id="getHistoryRecordCount" resultType="int">
+		SELECT
+			count(messagenum)
+		FROM
+			message
+		WHERE
+			copy = 0
+		AND
+			msg_title LIKE '%'||#{searchWord}||'%'
+		OR
+			msg_content LIKE '%'||#{searchWord}||'%'
 	</select>
 </mapper>

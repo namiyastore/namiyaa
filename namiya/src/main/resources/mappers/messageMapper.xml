@@ -163,7 +163,7 @@
 			msg_content LIKE '%'||#{searchWord}||'%'
 	</select>
 	
-	<select id="Inbox_select_result" resultType="Message">
+	<select id="Inbox_select_result" resultType="Message" parameterType="map">
 		SELECT
 			messagenum,
 			writerid,
@@ -184,7 +184,7 @@
 			userid = #{userid}
 	</select>
 	
-	<select id="Outbox_select_result" resultType="Message">
+	<select id="Outbox_select_result" resultType="Message" parameterType="map">
 		SELECT
 			messagenum,
 			writerid,

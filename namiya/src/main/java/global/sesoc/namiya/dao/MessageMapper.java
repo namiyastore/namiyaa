@@ -10,7 +10,7 @@ import global.sesoc.namiya.vo.Message;
 
 
 public interface MessageMapper {
-	public List<Message> mInBoxListAll();
+	public List<Message> mInBoxListAll(String userid);
 	public int mInBoxInsert(Message message);
 	public int mInBoxDelete(int messagenum);
 	public Message mInBoxSelectOne(int messagenum);
@@ -25,7 +25,7 @@ public interface MessageMapper {
 	public int getInboxRecordCount(@Param("searchWord") String word);
 	public int getOutboxRecordCount(@Param("searchWord") String word);
 	
-	public List<Message> Inbox_select_result(@Param("searchWord") String word, String userid, RowBounds rb);
-	public List<Message> Outbox_select_result(@Param("searchWord") String word, RowBounds rb);
+	public List<Message> Inbox_select_result(Map<String,String> map, RowBounds rb);
+	public List<Message> Outbox_select_result(Map<String,String> map, RowBounds rb);
 	
 }

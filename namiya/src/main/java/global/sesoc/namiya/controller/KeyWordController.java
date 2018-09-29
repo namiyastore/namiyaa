@@ -25,6 +25,7 @@ public class KeyWordController {
 	@RequestMapping(value="keywordList")
 	public String keywordList(HttpSession session ,Model model) {
 		String userid = session.getAttribute("loginId").toString();
+		
 		List<Keyword> klist = repository.kListAll(userid);
 		
 		model.addAttribute("klist", klist);
