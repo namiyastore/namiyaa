@@ -6,6 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>후기게시판</title>
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -49,7 +52,6 @@ $(document).ready(function(){
 ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
 	width:16px;height:16px;background:#79bfe5;} 
 
-@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 	li {
 		list-style:none;
 	}
@@ -145,11 +147,12 @@ $(document).ready(function(){
 	}
 	
 	h1 {
-		font-family: Eco Sans Mono;
+		font-family: 'VT323';
+		font-size: 50px;
 	}
 	
 	body, p {
-		font-family: 'Jeju Gothic', Eco Sans Mono;
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 	
 	.btn {
@@ -168,7 +171,7 @@ $(document).ready(function(){
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: Eco Sans Mono;
+		font-family: 'Raleway', 'Nanum Gothic';
 		font-size: 15px;
 	}
 	
@@ -232,7 +235,7 @@ $(document).ready(function(){
 						<table align="center">
 							<tr>
 								<td align="center" style="padding-top: 8px; padding-bottom: 5px;">Write by <b>${list.userid}</b></td>
-								<td align="right" style="padding-top: 8px; padding-bottom: 5px;font-family: 'Jeju Gothic';">${list.regdate}</td>
+								<td align="right" style="padding-top: 8px; padding-bottom: 5px;font-family: 'Nanum Gothic';">${list.regdate}</td>
 							</tr>
 							<tr>
 								<td>

@@ -9,6 +9,8 @@
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
 <link rel="stylesheet" href="resources/mypage/css/mypage_historyDetail.css">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <script>
 	function gotohistory() {
 		location.href="historyList";
@@ -220,6 +222,10 @@
 	
 	.btn:hover {
 		opacity: .9;
+	}
+	
+	body {
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 </style>
 </head>

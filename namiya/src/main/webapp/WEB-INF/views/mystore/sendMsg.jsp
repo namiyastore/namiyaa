@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>쪽지보내기</title>
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
 <script>
 
@@ -121,7 +124,7 @@
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: Eco Sans Mono;
+		font-family: 'Raleway', 'Nanum Gothic';
 		font-size: 15px;
 	}
 	
@@ -132,7 +135,7 @@
 </head>
 <body>
 <div id="wrapper" align="center">
-<h1 style="color: white;">Send a message</h1>
+<h1 style="color: white; font-family: 'VT323';">Send a message</h1>
 <form action="insertMsg" name="form" method="post">
 <input type="hidden" name="copy" value="1">
 <table style="margin-bottom: 10px;">

@@ -7,6 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>양도게시판</title>
+<!-- <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> -->
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -76,8 +80,6 @@ function want(boardnum, userid) {
 ::-webkit-scrollbar-thumb:hover {background: #79bfe5;}
 ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
 	width:16px;height:16px;background:#79bfe5;} 
-
-@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 	li {
 		list-style:none;
 	}
@@ -174,11 +176,12 @@ function want(boardnum, userid) {
 	}
 	
 	h1 {
-		font-family: Eco Sans Mono;
+		font-family: 'VT323';
+		font-size: 50px;
 	}
 	
 	body, p {
-		font-family: 'Jeju Gothic', Eco Sans Mono;
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 	
 	table, tr, td {
@@ -191,7 +194,7 @@ function want(boardnum, userid) {
 		height: 160px;
 		padding: 0px;
 		margin:0px;
-		font-family: 'Jeju Gothic', Eco Sans Mono;
+		font-family: 'Nanum Gothic', 'Raleway';
 	}
 	
 	hr {
@@ -211,7 +214,7 @@ function want(boardnum, userid) {
 	#date {
 		width:150px;
 		text-align: center;
-		font-family: 'Jeju Gothic';
+		font-family: 'Nanum Gothic';
 	}
 	
 	#btn {
@@ -248,7 +251,7 @@ function want(boardnum, userid) {
 			<c:forEach var="map" items="${map}" varStatus="status">
 				<table>
 					<tr>
-						<td style="width:60px; font-family: 'Jeju Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
+						<td style="width:60px; font-family: 'Nanum Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
 						<c:if test="${map.ORIGINALFILE != null}">
 						<td id="image"><img src="${pageContext.request.contextPath}/home/img/boardfile/${map.SAVEDFILE}" style="width:140px; height:100px;"></td>
 						</c:if>

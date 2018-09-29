@@ -6,6 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>교환 글 작성 폼</title>
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -47,7 +50,6 @@ function formCheck() {
 ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
 	width:16px;height:16px;background:#79bfe5;} 
 
-@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 	li {
 		list-style:none;
 	}
@@ -147,11 +149,12 @@ function formCheck() {
 	}
 	
 	h1 {
-		font-family: Eco Sans Mono;
+		font-family: 'VT323';
+		font-size: 50px;
 	}
 	
 	body {
-		font-family: 'Jeju Gothic', sans-serif;
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 	
 	
@@ -216,7 +219,7 @@ function formCheck() {
 						<td class="sort"><b>첨부파일</b></td>
 						<td class="scontent">
 							<input type="file" name="upload" id="file" accept="image/jpeg, image/png, image/gif">
-							<p style="font-family: 'Jeju Gothic'; font-size: 12px; color:red;">이미지 파일만 등록가능합니다.</p>
+							<p style="font-family: 'Raleway', 'Nanum Gothic'; font-size: 12px; color:red;">이미지 파일만 등록가능합니다.</p>
 						</td>
 					</tr>
 				</table>

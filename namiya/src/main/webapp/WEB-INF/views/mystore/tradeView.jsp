@@ -8,6 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>교환 글 자세히 보기</title>
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -83,7 +86,6 @@ function want(boardnum, userid) {
 ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
 	width:16px;height:16px;background:#79bfe5;} 
 
-@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 	li {
 		list-style:none;
 	}
@@ -180,11 +182,12 @@ function want(boardnum, userid) {
 	}
 	
 	h1 {
-		font-family: Eco Sans Mono;
+		font-family: 'VT323';
+		font-size: 50px;
 	}
 	
 	body, p {
-		font-family: 'Jeju Gothic', sans-serif;
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 	
 	table, tr, td {
@@ -206,7 +209,6 @@ function want(boardnum, userid) {
 	
 	#title {
 		width:450px;
-		font-size:20px;
 	}
 	
 	#date {
@@ -221,7 +223,6 @@ function want(boardnum, userid) {
 	
 	#sstatus {
 		width:450px;
-		font-size:20px;
 	}
 </style>
 </head>
@@ -270,12 +271,12 @@ function want(boardnum, userid) {
 										<img alt="" src="${pageContext.request.contextPath}/home/img/boardfile/${board.savedfile}" style="width:200px; height:150px;">
 										<br/>
 								</div>
-								<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Jeju Gothic', Eco Sans Mono;" readonly="readonly">${board.content}</textarea>
+								<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Raleway', 'Nanum Gothic';" readonly="readonly">${board.content}</textarea>
 								</c:if>	
 								
 								
 								<c:if test="${empty board.originalfile}" >
-										<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Jeju Gothic', Eco Sans Mono;" readonly="readonly">${board.content}</textarea>
+										<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Raleway', 'Nanum Gothic';" readonly="readonly">${board.content}</textarea>
 								</c:if>
 							</div>
 						</td>

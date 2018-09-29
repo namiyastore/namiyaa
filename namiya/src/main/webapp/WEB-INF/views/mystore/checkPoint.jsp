@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Point 사용</title>
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
 	function UsePoint(boardnum, userid) {
@@ -133,7 +136,7 @@
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: Eco Sans Mono;
+		font-family: 'Raleway';
 		font-size: 15px;
 	}
 	
@@ -142,11 +145,12 @@
 	}
 	
 	h1 {
-		font-family: Eco Sans Mono;
+		font-family: 'VT323';
+		font-size: 50px;
 	}
 	
 	body, p {
-		font-family: 'Jeju Gothic', Eco Sans Mono;
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 </style>
 </head>
