@@ -242,8 +242,14 @@
          	content.setAttribute("width",60);
          	content.setAttribute("height",60);
          	//var img = new Image();
-         	
+         	<c:if test="${not empty item.SAVEDFILE}">
          	content.src = "${pageContext.request.contextPath}/profile/${item.SAVEDFILE}";
+         	</c:if>
+         	<c:if test="${empty item.SAVEDFILE}">
+         	content.src = "${pageContext.request.contextPath}/resources/images/human.png";
+         	</c:if>
+         	
+         	
        	 	/* img.src = name;
        		img.onload = imageLoaded(content,img); */
        		

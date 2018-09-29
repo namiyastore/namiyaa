@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE>
 <html lang="ko"><head>
 	<meta charset="utf-8">
@@ -11,7 +12,7 @@
 	<meta http-equiv="Cache-Control" content="post-check=0, pre-check=0">
 	<meta http-equiv="Pragma" content="No-Cache">
 
-	<title>프로필 수정</title>
+	<title><spring:message code="profileEdit.Bar" /></title>
 
 	<script type="text/javascript" src="resources/inc/common/js/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="resources/profile/css/profile.css">
@@ -163,20 +164,20 @@
 		<!-- CONTENTS -->
 		<div id="content">
     <div class="c_header">
-        <h2>프로필 수정</h2>
+        <h2><spring:message code="profileEdit.Bar" /></h2>
     </div>
     <form action=""  id="profileForm" method="post" enctype="multipart/form-data">
         <fieldset>
-            <legend>프로필 수정</legend>
+            <legend><spring:message code="profileEdit.Bar" /></legend>
             <table border="1" class="tbl_model">
-                <caption><span class="blind">프로필 수정</span></caption>
+                <caption><span class="blind"><spring:message code="profileEdit.Title" /></span></caption>
                 <colgroup>
                     <col style="width:22%"><col>
                 </colgroup>
                 <tbody>
                 <tr>
                     <th scope="row">
-                        <div class="thcell">프로필 사진</div>
+                        <div class="thcell"><spring:message code="profileEdit.Picture" /></div>
                     </th>
                     <td >
                         <div class="tdcell">
@@ -204,7 +205,7 @@
                 </tr>
                 <tr>
                     <th scope="row">
-                        <div class="thcell"><label for="inpUrl">URL</label></div>
+                        <div class="thcell"><label for="inpUrl"><spring:message code="profileEdit.Url" /></label></div>
                     </th>
                     <td>
                         <div class="tdcell">
@@ -216,7 +217,7 @@
                 </tr>
                 <tr>
                     <th scope="row">
-                        <div class="thcell"><label for="inpNick">닉네임</label></div>
+                        <div class="thcell"><label for="inpNick"><spring:message code="profileEdit.Nickname" /></label></div>
                     </th>
                     <td>
                         <div class="tdcell" style="padding-bottom: 0px;">
@@ -229,7 +230,7 @@
                 </tr>
                  <tr>
                     <th scope="row">
-                        <div class="thcell"><label for="inpNickname">코멘트</label></div>
+                        <div class="thcell"><label for="inpNickname"><spring:message code="profileEdit.Comment" /></label></div>
                     </th>
                     <td>
                         <div class="tdcell">
@@ -242,8 +243,8 @@
                 </tbody>
             </table>
             <div class="btn_wrap" style="height: 100px;">
-                <a href="javascript:;" class="btn_model"><b id="btnConfirm" class="btn2" onclick="return formCheck()" >적용</b></a>
-                <a href="javascript:;" class="btn_model"><b id="btnCancel" class="btn2" onclick="window.close()">닫기</b></a>
+                <a href="javascript:;" class="btn_model"><b id="btnConfirm" class="btn2" onclick="return formCheck()" ><spring:message code="profileEdit.Accept" /></b></a>
+                <a href="javascript:;" class="btn_model"><b id="btnCancel" class="btn2" onclick="window.close()"><spring:message code="profileEdit.Close" /></b></a>
                 <br>
             </div>
         </fieldset>

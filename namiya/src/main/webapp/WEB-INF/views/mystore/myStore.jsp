@@ -200,7 +200,7 @@ var background = {
 			alert("같은id이거나 로그인안함");
 			return;
 		}
-		alert(userid);
+		
 		var sendData = {
 			'homeid' : homeid,
 			'userid' : userid	
@@ -212,7 +212,11 @@ var background = {
 			,dataType : "text"
 			,contentType: "application/json"
 			,success : function(resp){
-				alert(resp);
+				//location.href = document.URL;
+				if(resp == "Favorite insert"){
+					$('.fimg').attr("src", "${pageContext.request.contextPath}/resources/images/favorite.png");
+				} else if(resp == "Favorite delete")
+					$('.fimg').attr("src", "${pageContext.request.contextPath}/resources/images/nfavorite.png");
 			}
 			
 		});
@@ -353,9 +357,12 @@ var background = {
 			<b id="nick" >${profile.nickname}</b>
 			<img id="pimg" onError="this.src='${pageContext.request.contextPath}/resources/images/human.png'" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" style="width:180px; height:181px;">
 		</div>
-		
-		<img src="${pageContext.request.contextPath}/resources/images/favorite.png" style="width:50px; heignt:50px;" onclick="favorite('${homeuserid}','${sessionScope.loginId}')">
-		
+		<c:if test="${not empty favorite}">
+			<img class ="fimg" src="${pageContext.request.contextPath}/resources/images/favorite.png" style="width:50px; heignt:50px;" onclick="favorite('${homeuserid}','${sessionScope.loginId}')">
+		</c:if>
+		<c:if test="${empty favorite}">
+			<img class="fimg" src="${pageContext.request.contextPath}/resources/images/nfavorite.png" style="width:50px; heignt:50px;" onclick="favorite('${homeuserid}','${sessionScope.loginId}')">
+		</c:if>
 		<div id="say" align="center">
 			<textarea id="tx" rows="8" cols="25" style="resize: none; outline: none; border: white;" readonly="readonly">${profile.content}</textarea>
 		</div>
@@ -391,7 +398,7 @@ var background = {
 			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
 			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
-			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
 			<c:if test="${homeuserid == sessionScope.loginId}">
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
 			</c:if>
