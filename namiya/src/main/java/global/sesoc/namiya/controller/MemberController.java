@@ -241,8 +241,8 @@ public class MemberController {
 	    authNum = makeAuth();
 		
 	    String tomail  = usermail;     // 받는 사람 이메일
-	    String title   = "Thank you for enjoying Makanai !";      // 제목
-	    String content = "AuthNum ["+authNum+"]";    // 내용
+	    String title   = "Welcome to MAKANAI!";      // 제목
+	    String content = "Thank you for Signup!"+"\n"+"vertify your Email"+"\n"+"AuthNum ["+authNum+"]";// 내용
 
 	    try {
 	      MimeMessage message = mailSender.createMimeMessage();

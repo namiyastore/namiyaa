@@ -145,25 +145,20 @@
 	/////////////////////////////////////////////////////////////////////////////////////////////////!!Form Submit Check
     //region mainSubmit
     function mainSubmit() {
-    	alert("가입하고시퍼0");
+    	
         var joinMode = $("#joinMode").val();
         var userid = $("#id").val();
     	var password = $("#pswd2").val();
     	var username = $("#name").val();
     	var myurl = userid;
-    	alert("id"+idFlag);
-    	alert("pw"+pwFlag);
-    	alert("au"+authFlag);
-    	alert("mail"+mailFlag);
-    	alert("phone"+phoneFlag);
     	
         /* if (!checkUnrealInput()) {
             submitOpen();
             return false;
         } */
-
+		
         if(idFlag && pwFlag && authFlag && phoneFlag && mailFlag) {
-        	alert("가입성공.");
+        	alert("회원가입이 완료되었습니다!");
         	$("#userid").val(userid);
         	$("#password").val(password);
         	$("#username").val(username);
@@ -171,7 +166,7 @@
         	
             $("#form").submit();
         } else {
-        	alert("가입할 수 없습니다.");
+        	alert("가입할 수 없습니다!");
             submitOpen();
             return false;
         }
