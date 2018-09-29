@@ -790,15 +790,20 @@ public class MyStoreController {
 	/** 후기게시판 관련 controller **/
 	// review 창 띄우기 
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/review")
-	public String review(Model model, @PathVariable("miniurl")String miniurl) {
+	public String review(Model model, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @PathVariable("miniurl")String miniurl) {
 		Members m = new Members();
 		m.setMyurl(miniurl);
 		Members member = mb_repository.selectUrl(m);
 		String store_owner = member.getUserid();
 		
+		int totalRecordCount = b_repository.reviewgetTotalPage(store_owner);
+		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount, 5, 5);
+		
 		System.out.println(member);
-		List<Review> list = r_repository.selectReviewAll(store_owner);
+		List<Review> list = r_repository.selectReviewAll(store_owner, navi.getStartRecord(), navi.getCountPerPage());
+		model.addAttribute("navi", navi);
 		model.addAttribute("list", list);
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("store_owner", store_owner);
 		
 		return "mystore/review";

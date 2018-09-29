@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,9 +16,10 @@ public class ReviewRepository {
 	@Autowired
 	SqlSession session;
 	
-	public List<Review> selectReviewAll(String store_owner) {
+	public List<Review> selectReviewAll(String store_owner, int startRecord, int countPerPage) {
+		RowBounds rb = new RowBounds(startRecord, countPerPage);
 		ReviewMapper mapper = session.getMapper(ReviewMapper.class);
-		List<Review> list = mapper.selectReviewAll(store_owner);
+		List<Review> list = mapper.selectReviewAll(store_owner, rb);
 		
 		return list;
 	}

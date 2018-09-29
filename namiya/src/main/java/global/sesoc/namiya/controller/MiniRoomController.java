@@ -89,6 +89,7 @@ public class MiniRoomController {
 			if(userid !=null) {// 로그인한 유저의 즐겨찾기에 현재 방문하려는 유저가 들어가있는지확인
 				f = new Favorite();
 				f.setMyurl(miniurl);
+				f.setUserid(userid);
 				f = f_repository.fSelect(f); // f가 null이 아니면 이미 추가한 유저
 			}
 			model.addAttribute("homeuserid", m.getUserid());

@@ -155,4 +155,11 @@ public class BoardRepository {
 		
 		return result;
 	}
+
+	public int reviewgetTotalPage(String store_owner) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int recordCount = mapper.reviewgetTotalPage(store_owner);
+		
+		return recordCount;
+	}
 }
