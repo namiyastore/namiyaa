@@ -108,8 +108,9 @@ public class MyStoreController {
 	
 	/** deal_end 시간 카운트 
 	 * @throws Exception **/
-	@Scheduled(cron="*/10 * * * * *")
-	public void updateDeal_end() throws Exception {
+	
+	//@Scheduled(cron="*/10 * * * * *")
+	/*public void updateDeal_end() throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = Calendar.getInstance().getTime();     
 		String date = df.format(today);
@@ -140,7 +141,7 @@ public class MyStoreController {
  		}
 		
 		System.out.println("한바뮈 돌았다");
-	}
+	}*/
 	
 	
 	
@@ -595,7 +596,7 @@ public class MyStoreController {
 	
 	/** 재능기부 관련 controller **/
 	// talent 창 띄우기 
-	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/talent")
+@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/talent")
 	public String talent(Model model, HttpSession session, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @PathVariable("miniurl")String miniurl) {
 		String service = "재능기부";
 		
@@ -603,7 +604,7 @@ public class MyStoreController {
 		m.setMyurl(miniurl);
 		Members member = mb_repository.selectUrl(m);
 		String userid = member.getUserid();
-		
+		System.out.println();
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
