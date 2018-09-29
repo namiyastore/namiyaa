@@ -199,14 +199,7 @@
 		padding: 3px;
 	}
 	
-	body {
-		font-family: 'Jeju Gothic', Eco Sans Mono;
-	}
-	
-	h2 {
-		font-family: 'Jeju Gothic', Eco Sans Mono;
-	}
-	
+		
 	.btn {
 		display: inline-block;
 		width: 60px;
@@ -222,7 +215,6 @@
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: Eco Sans Mono;
 		font-size: 15px;
 	}
 	
@@ -232,7 +224,8 @@
 </style>
 </head>
 <body>
-<img alt="" src="resources/mypage/images/logo2.gif" id="logo">	
+<img alt="" src="resources/images/pagetop.gif" id="logo">	
+
 <input id="userid" type="hidden" value="${sessionScope.loginId }" />
 
 <div class="wrapper">
@@ -246,7 +239,7 @@
 			<div class="leftSide_tabs_tab7">Point</div>
 		</div>
 		
-	<div class="leftSide_table" style="background-color: white;">
+	<div class="leftSide_table" style="background-color: white; height: 500px; overflow-x:hidden; overflow-y: auto;">
 		<%-- 거래정보 --%>
 		<div>
 		<h2>거래상품정보</h2>
@@ -266,8 +259,8 @@
 					<td class="deal_info" >${history.historynum}</td>
 					<td class="deal_info" >${board.service}</td>
 					<td class="deal_info" >${product.productname}</td>
-					<td class="deal_info" style="font-family: 'Jeju Gothic';">${history.deal_start}</td>
-					<td class="deal_info" style="font-family: 'Jeju Gothic';">
+					<td class="deal_info" >${history.deal_start}</td>
+					<td class="deal_info" >
 						<c:if test="${product.sstatus eq '진행완료'}">
 							${history.deal_end}
 						</c:if>				
@@ -300,7 +293,7 @@
 		<div id="result" style="float: left; padding-top: 20px; padding-bottom: 20px; width:500px; height:400px;" align="center">
 		<h2 style="margin-bottom: 10px;">추첨결과</h2>
 			<div style="float: left; width:300px;">
-				<img src="resources/images/takarakuzi.gif" style="width:250px;">
+				<img src="resources/images/takarakuzi.gif" style="width:200px;">
 				<br/>
 				<div id="select">
 				<c:if test="${product.sstatus eq '진행완료'}">

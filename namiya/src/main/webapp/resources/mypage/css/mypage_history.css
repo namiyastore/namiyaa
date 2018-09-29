@@ -10,15 +10,28 @@
 /* 수정된 CSS */ 
 body { 
 	background-image: url("../../images/viewPage.png"); 
-	background-attachment: fixed; 
-	background-size: 80%; 
 	font-family: 'EcoSansMono', 'JejuGothic'; 
+	background-repeat: no-repeat;
+	background-position: 0% 0%;
+	background-size: 100% 120%;
 }
 
 #logo{
 	max-width: 75%;
 	float: right; 
 }
+
+/* h2{
+	display: block;
+    font-size: 2.5em;
+    margin-block-start: 0.2em;
+    margin-block-end: 0.2em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+} */
 
 .wrapper {
     width: 100%;
@@ -291,19 +304,6 @@ tbody {
   border-left: none;
 } */
 /* 스크롤 고정 여기까지 */
-
-/* 0926 글쓰기버튼 추가 및 페이징 처리부분추가 */
-
-.leftSide .leftSide_Buttons {
-    display: flex;
-    width: 90%;
-    /* border: 1px white solid; */
-    justify-content: flex-end;
-}
-
-/* .leftSide_page{
-	border: 1px white solid;
-} */
  
 .rightSide .rightSide_MyInfoBox {
     display: flex;

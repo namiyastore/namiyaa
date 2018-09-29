@@ -109,8 +109,8 @@ public class MyStoreController {
 	/** deal_end 시간 카운트 
 	 * @throws Exception **/
 	
-	//@Scheduled(cron="*/10 * * * * *")
-	/*public void updateDeal_end() throws Exception {
+	@Scheduled(cron="*/30 * * * * *")
+	public void updateDeal_end() throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = Calendar.getInstance().getTime();     
 		String date = df.format(today);
@@ -118,7 +118,7 @@ public class MyStoreController {
 		int datecom;
 		System.out.println("cron test:"+date);
 		
-		List<History> list = h_repository.hListAll();
+		List<History> list = h_repository.selecthListAll();
 		
 		for (int i=0; i<list.size(); i++) {
 			System.out.println(list.get(i).getDeal_end());
@@ -140,8 +140,8 @@ public class MyStoreController {
 			}
  		}
 		
-		System.out.println("한바뮈 돌았다");
-	}*/
+		System.out.println("한바뀌 돌았다");
+	}
 	
 	
 	
@@ -198,7 +198,11 @@ public class MyStoreController {
 		FileService.deleteFile(fullPath);
 		
 		int result = b_repository.deleteOne(boardnum);
-			
+		int productnum = board.getProductnum();
+		History history = h_repository.selectHst(productnum);
+		
+		int result2 = h_repository.hDelete(history.getHistorynum());
+		
 		return result;
 	}
 
@@ -604,7 +608,6 @@ public class MyStoreController {
 		m.setMyurl(miniurl);
 		Members member = mb_repository.selectUrl(m);
 		String userid = member.getUserid();
-		System.out.println();
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("service", service);
 		parm.put("userid", userid);
@@ -930,6 +933,8 @@ public class MyStoreController {
 		System.out.println(wsh);
 	
 		if (wsh == null) {
+			System.out.println(wsh);
+			
 			int result = b_repository.insertWish(wish);
 			
 			String deal_end = null;
@@ -942,12 +947,13 @@ public class MyStoreController {
 			
 			history.setDeal_start(deal_start);
 			
+			
 			// deal_end 설정
 			Date date = new Date();
 			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd"); 
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
-			cal.add(Calendar.DATE, 3);
+			cal.add(Calendar.DATE, 1);
 			deal_end = sdformat.format(cal.getTime());  
 			
 			history.setDeal_end(deal_end);

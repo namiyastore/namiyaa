@@ -10,16 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.HistoryRepository;
-import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.ProductRepository;
 import global.sesoc.namiya.vo.Board;
 import global.sesoc.namiya.vo.History;
-import global.sesoc.namiya.vo.Interest;
-import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Product;
 
 @Controller
@@ -33,14 +29,11 @@ public class HistoryController {
 	@Autowired
 	BoardRepository b_repository;
 	
-	@Autowired
-	MembersRepository Members_repository;
-	
 	@RequestMapping(value="historyList", method = RequestMethod.GET)
-	public String historyListAll(@RequestParam(value = "currentPage", defaultValue="1") int currentPage,
-			@RequestParam(value="searchWord", defaultValue = "") String searchWord,Model model
-			,HttpSession session) {
-		List<History> hlist = repositroy.hListAll();
+	public String historyListAll(Model model, HttpSession session) {
+		String userid = (String) session.getAttribute("loginId");
+		
+		List<History> hlist = repositroy.hListAll(userid);
 		List<Product> plist = new ArrayList<Product>();
 		List<Board> blist = new ArrayList<Board>();
 		int productnum[] = new int[hlist.size()];
@@ -57,15 +50,6 @@ public class HistoryController {
 		model.addAttribute("hlist", hlist);
 		model.addAttribute("plist", plist);
 		model.addAttribute("blist", blist);
-
-		//myurl을 가져오는 코드		
-		String userid = session.getAttribute("loginId").toString();
-		Members m = new Members();
-		
-		m.setUserid(userid);
-		
-		Members result1 = Members_repository.selectOne(m);
-		model.addAttribute("myurl", result1.getMyurl());
 		
 		return "mypage/history";
 	}

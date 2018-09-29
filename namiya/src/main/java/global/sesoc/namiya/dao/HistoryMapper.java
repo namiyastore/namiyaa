@@ -6,9 +6,11 @@ import global.sesoc.namiya.vo.History;
 
 
 public interface HistoryMapper {
-	public List<History> hListAll();
+	public List<History> hListAll(String userid);
 	public int hInsert(History history);
 	public int hDelete(int hitorynum);
 	public History hSelectOne(int historynum);
 	public int hUpdate(History history);
+	public History selectHst(int productnum);
+	public List<History> selecthListAll();
 }

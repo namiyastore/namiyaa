@@ -10,9 +10,10 @@
 /* 수정된 CSS */ 
 body { 
 	background-image: url("../../images/viewPage.png"); 
-	background-attachment: fixed; 
-	background-size: 80%; 
 	font-family: 'EcoSansMono', 'JejuGothic'; 
+	background-repeat: no-repeat;
+	background-position: 0% 0%;
+	background-size: 100% 120%;
 }
 
 #logo{

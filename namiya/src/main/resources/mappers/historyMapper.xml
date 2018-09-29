@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.HistoryMapper">
-	<select id="hListAll" resultType="History">
+	<select id="hListAll" resultType="History" parameterType="String">
 		SELECT
 			historynum,
 			productnum,
@@ -13,6 +13,8 @@
 			to_char(deal_end, 'YYYY-MM-DD') deal_end
 		FROM
 			history
+		WHERE 
+			sellerid=#{userid} or buyerid=#{userid}
 		ORDER BY
 			historynum desc
 
@@ -37,4 +39,36 @@
 		parameterType="History"> update history set boardnum = #{boardnum}, sellerid 
 		= #{sellerid}, buyerid = #{buyerid}, regdate = sysdate where historynum = 
 		#{historynum} </update> -->
+		
+	<select id="selectHst" parameterType="Integer" resultType="History">
+		SELECT
+			historynum,
+			productnum,
+			sellerid,
+			buyerid,
+			deal_start,
+			deal_end
+		FROM
+			history
+		WHERE
+			productnum = #{productnum}
+	</select>
+	
+	<delete id="hDelete" parameterType="Integer">
+		delete history where historynum=#{historynum}
+	</delete>
+	
+	<select id="selecthListAll" resultType="History">
+		SELECT
+			historynum,
+			productnum,
+			sellerid,
+			buyerid,
+			to_char(deal_start, 'YYYY-MM-DD') deal_start,
+			to_char(deal_end, 'YYYY-MM-DD') deal_end
+		FROM
+			history
+		ORDER BY
+			historynum desc
+	</select>
 </mapper>

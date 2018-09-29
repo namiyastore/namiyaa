@@ -13,9 +13,9 @@ public class HistoryRepository{
 	@Autowired
 	SqlSession session;
 
-	public List<History> hListAll() {
+	public List<History> hListAll(String userid) {
 		HistoryMapper mapper = session.getMapper(HistoryMapper.class);
-		List<History> list = mapper.hListAll();
+		List<History> list = mapper.hListAll(userid);
 		return list;
 	}
 
@@ -44,4 +44,19 @@ public class HistoryRepository{
 		int result = mapper.hUpdate(history);
 		return result;
 	}
+
+	public History selectHst(int productnum) {
+		HistoryMapper mapper = session.getMapper(HistoryMapper.class);
+		History history = mapper.selectHst(productnum);
+		
+		return history;
+	}
+
+	public List<History> selecthListAll() {
+		HistoryMapper mapper = session.getMapper(HistoryMapper.class);
+		List<History> list = mapper.selecthListAll();
+		
+		return list;
+	}
+
 }
