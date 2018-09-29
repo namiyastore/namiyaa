@@ -121,24 +121,23 @@ function alertMsg() {
  	<div class="wrapper"> 
 		<div class="leftSide"> 
 			<div class="tabs"> 
- 
 				<div class="leftSide_tabs_tab2"> 
-					Interest 
+					 <spring:message code="mypage.leftSide_tabs_tab2" />
 				</div> 
 				<div class="leftSide_tabs_tab3"> 
-					History 
+					<spring:message code="mypage.leftSide_tabs_tab3" /> 
 				</div> 
 				<div class="leftSide_tabs_tab4"> 
-					Keyword 
+					<spring:message code="mypage.leftSide_tabs_tab4" /> 
 				</div> 
 				<div class="leftSide_tabs_tab5"> 
-					Message 
+					<spring:message code="mypage.leftSide_tabs_tab5" /> 
 				</div> 
 				<div class="leftSide_tabs_tab6"> 
-					Notice 
+					<spring:message code="mypage.leftSide_tabs_tab6" /> 
 				</div> 
 				<div class="leftSide_tabs_tab7"> 
-					Point 
+					<spring:message code="mypage.leftSide_tabs_tab7" /> 
 				</div> 
 			</div>
 			<div class="leftSide_2nd">

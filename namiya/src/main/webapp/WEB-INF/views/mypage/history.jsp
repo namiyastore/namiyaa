@@ -106,13 +106,25 @@
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />" />
 	<div class="wrapper">
 		<div class="leftSide">
-			<div class="tabs">
-				<div class="leftSide_tabs_tab2">Interest</div>
-				<div class="leftSide_tabs_tab3">History</div>
-				<div class="leftSide_tabs_tab4">Keyword</div>
-				<div class="leftSide_tabs_tab5">Message</div>
-				<div class="leftSide_tabs_tab6">Notice</div>
-				<div class="leftSide_tabs_tab7">Point</div>
+			<div class="tabs"> 
+				<div class="leftSide_tabs_tab2"> 
+					 <spring:message code="mypage.leftSide_tabs_tab2" />
+				</div> 
+				<div class="leftSide_tabs_tab3"> 
+					<spring:message code="mypage.leftSide_tabs_tab3" /> 
+				</div> 
+				<div class="leftSide_tabs_tab4"> 
+					<spring:message code="mypage.leftSide_tabs_tab4" /> 
+				</div> 
+				<div class="leftSide_tabs_tab5"> 
+					<spring:message code="mypage.leftSide_tabs_tab5" /> 
+				</div> 
+				<div class="leftSide_tabs_tab6"> 
+					<spring:message code="mypage.leftSide_tabs_tab6" /> 
+				</div> 
+				<div class="leftSide_tabs_tab7"> 
+					<spring:message code="mypage.leftSide_tabs_tab7" /> 
+				</div> 
 			</div>
 			<div class="leftSide_2nd">
 				<div class="leftSide_2nd_searchBar">
