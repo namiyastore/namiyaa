@@ -883,7 +883,7 @@ function checkImage(useritemnum) {
 </head>
 <body>
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
-<img id="loadingImage" alt="" src="${pageContext.request.contextPath}/resources/img/furniture/tori0.png" >
+<img id="loadingImage" alt="" src="${pageContext.request.contextPath}/resources/images/loading.gif" >
  <div id="wrapper" align="center">
 	<div id="scroll" style="float:left; width: 1073px; height:545px; border-radius: 25px; background-color: white;">
 		
