@@ -229,13 +229,13 @@ $(function(){
 				}
 				else if(lang == 'ja') {
 					if(resp[i].service == '양도') {
-						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 譲渡 ]</h3>';	
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ お譲り ]</h3>';	
 					}
 					else if(resp[i].service == '재능기부') {
 						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能寄付 ]</h3>';
 					}
 					else if(resp[i].service == '교환') {
-						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 才能 ]</h3>';
+						val += '<h3>&nbsp;&nbsp;&nbsp;&nbsp;[ 交換 ]</h3>';
 					}
 				}
 				else if(lang == 'en') {

@@ -69,7 +69,7 @@ public class SavingController {
 					}
 					else if(lang.equals("ja")) {
 						if(type.equals("양도")) {
-							result.get(i).setType("譲渡");
+							result.get(i).setType("お譲り");
 						}
 						else if(type.equals("재능기부")) {
 							result.get(i).setType("才能寄付");
