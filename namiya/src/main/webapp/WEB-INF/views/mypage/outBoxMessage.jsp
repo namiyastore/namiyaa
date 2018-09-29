@@ -163,6 +163,7 @@ function alertMsg() {
 					<div class="leftSide_searchBar_inoutMsgBoxTabs_out">Outbox message</div> 
 				</div>
 			</div>
+			
 			<!-- 라인 인증키 얻는 링크 --> 
 <!-- 			<input id="noticeService" type="button" value="Line 알림 서비스 등록" onclick="noticeService()" /> --> 
 			 
