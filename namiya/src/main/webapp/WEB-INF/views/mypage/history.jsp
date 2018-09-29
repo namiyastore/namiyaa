@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -102,7 +103,7 @@
 </head>
 <body>
 <img alt="" src="resources/images/pagetop.gif" id="logo">	
-	
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />" />
 	<div class="wrapper">
 		<div class="leftSide">
 			<div class="tabs">
@@ -198,19 +199,23 @@
 					</div>
 				</div>
 
-				<div class="rightSide_MyInfoBoxDown">
-					<div class="rightSide_MyInfoBoxDown_goToHome">Go To Home</div>
-					<!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_myStore">My Store</div>
-					<!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_profile">Edit</div>
-					<!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
-					<div class="rightSide_MyInfoBoxDown_logOut">Logout</div>
-					<!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_signOut">SignOut</div>
-					<!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
-				</div>
-				<!-- rightSide_MyInfoBoxDown div닫힘 -->
+				<div class="rightSide_MyInfoBoxDown"> 
+					<div class="rightSide_MyInfoBoxDown_goToHome"> 
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_goToHome" /> 
+					</div><!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_myStore">
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_myStore" /> 
+					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_profile">
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_profile" />
+					</div><!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
+					<div class="rightSide_MyInfoBoxDown_logOut">
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_logOut" />
+					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_signOut">
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_signOut" />
+					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
+				</div><!-- rightSide_MyInfoBoxDown div닫힘 -->
 			</div>
 			<!-- rightSide_MyInfoBox div 닫음 -->
 		</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -110,17 +111,9 @@ function alertMsg() {
 </head>
 <body>
 	<input id="myurl" type="hidden" value="${myurl}" />
-	<img alt="" src="resources/images/pagetop.gif" id="logo">
-	<%-- <a href="myPage">뒤로가기</a>
+	<input id="lang" type="hidden" value="<spring:message code="common.lang" />" />
 	
-	<form action="iUpdate" method="post">
-		<input type="hidden" name="interestnum" value="${selectedInterest.interestnum}"/>
-		userid입력
-		<input type="text" name="userid" value="${selectedInterest.userid}" /><br /> 
-		관심상품의 게시글번호 입력
-		<input type="text" name="boardnum" value="${selectedInterest.boardnum}" />
-		<input type="submit" value="수정완료">
-	</form> --%>
+	<img alt="" src="resources/images/pagetop.gif" id="logo">
 	<div class="wrapper"> 
 		<div class="leftSide"> 
 			<div class="tabs"> 
@@ -153,9 +146,6 @@ function alertMsg() {
 				</div>
 			</div>			 
 			 
-			<!-- 라인 인증키 얻는 링크 --> 
-<!-- 			<input id="noticeService" type="button" value="Line 알림 서비스 등록" onclick="noticeService()" /> --> 
-
  			<!-- 여기부터 테이블 --> 
 			<div class="leftSide_table">
 				<table id="customers">
@@ -180,23 +170,25 @@ function alertMsg() {
 						</tr>
 					</c:if>
 				</table>
-			</div><!-- 테이블의 div 닫음 -->
+			</div> <!-- 테이블의 div 닫음 -->
+			
 			<!-- 페이징 처리 부분 -->
 			<div class="leftSide_page">
 				<img id="btn1" src="resources/images/arrow7.png" width="24px" height="24px">
 				<img id="btn2" src="resources/images/arrow8.png" width="24px" height="24px">
 				<c:forEach var="page" begin="${navi.startPageGroup }" end="${navi.endPageGroup }">
 					<c:if test="${page == currentPage }">
-						<span id="selectedPage">${page} &nbsp</span>
+						<span id="selectedPage">${page} &nbsp;</span>
 					</c:if>
 					<c:if test="${page != currentPage }">
-						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp</a>
+						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp;</a>
 					</c:if>
 				</c:forEach>
 				<img id="btn3" src="resources/images/arrow9.png" width="24px" height="24px">
 				<img id="btn4" src="resources/images/arrow10.png" width="24px" height="24px">
 			</div>
 		</div> 
+		
 		<!-- 개인정보 표시 부분 --> 
 		<div class="rightSide"> 
 			<div class="rightSide_MyInfoBox"> 
@@ -214,19 +206,19 @@ function alertMsg() {
 				 
 				<div class="rightSide_MyInfoBoxDown"> 
 					<div class="rightSide_MyInfoBoxDown_goToHome"> 
-						Go To Home 
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_goToHome" /> 
 					</div><!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_myStore">
-						My Store
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_myStore" /> 
 					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_profile">
-						Edit <!-- <span onclick="goProfile()"></span> -->
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_profile" />
 					</div><!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
 					<div class="rightSide_MyInfoBoxDown_logOut">
-						Logout
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_logOut" />
 					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_signOut">
-						SignOut
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_signOut" />
 					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
 				</div><!-- rightSide_MyInfoBoxDown div닫힘 -->
 			</div><!-- rightSide_MyInfoBox div 닫음 -->

@@ -1,6 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html> 
 <head> 
@@ -98,7 +99,7 @@ function alertMsg() {
 </head> 
 <body>
 <input id="myurl" type="hidden" value="${myurl}" /> 
-	<!-- <h2>Point</h2> -->
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />" />
 	<img alt="" src="resources/images/pagetop.gif" id="logo">
 	<div class="wrapper"> 
 		<div class="leftSide"> 
@@ -205,19 +206,19 @@ function alertMsg() {
 				 
 				<div class="rightSide_MyInfoBoxDown"> 
 					<div class="rightSide_MyInfoBoxDown_goToHome"> 
-						Go To Home 
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_goToHome" /> 
 					</div><!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_myStore">
-						My Store
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_myStore" /> 
 					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_profile">
-						Edit <!-- <span onclick="goProfile()"></span> -->
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_profile" />
 					</div><!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
 					<div class="rightSide_MyInfoBoxDown_logOut">
-						Logout
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_logOut" />
 					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
 					<div class="rightSide_MyInfoBoxDown_signOut">
-						SignOut
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_signOut" />
 					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
 				</div><!-- rightSide_MyInfoBoxDown div닫힘 -->
 			</div><!-- rightSide_MyInfoBox div 닫음 -->

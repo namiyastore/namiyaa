@@ -81,7 +81,7 @@ function alertMsg() {
 <title>My page</title>
 </head>
 <body>
-	<!-- <h2>my page</h2> -->
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />" />
 	<img alt="" src="resources/images/pagetop.gif" id="logo">
 	<ul>
 		<li><a href="favoriteList" name="favoriteList">즐겨찾기</a></li>
