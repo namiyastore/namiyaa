@@ -54,9 +54,7 @@
 		from
 			favorite
 		where
-		<if test="myurl != null">
 			myurl = #{myurl}
-		</if>
   		<if test ="userid != null">
   		and
   			userid = #{userid}
