@@ -67,7 +67,21 @@ $(function(){
 	}); 
 	$('.leftSide_tabs_tab7').on('click',function(){ 
 		location.href = 'pointRecord';		 
-	}); 
+	});
+	
+	/* 0926 페이징 이미지버튼 클릭 */
+	$('#btn1').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}';		 
+	});
+	$('#btn2').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage - 1}&searchWord=${searchWord}';		 
+	});
+	$('#btn3').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage + 1}&searchWord=${searchWord}';		 
+	});
+	$('#btn4').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage + navi.pagePerGroup}&searchWord=${searchWord}';		 
+	});
 	 
 });
 
@@ -167,9 +181,6 @@ function alertMsg() {
 					</c:if>
 				</table>
 			</div><!-- 테이블의 div 닫음 -->
-			<div class="leftSide_Buttons">
-				<div>  </div>
-			</div>
 			<!-- 페이징 처리 부분 -->
 			<div class="leftSide_page">
 				<img id="btn1" src="resources/images/arrow7.png" width="24px" height="24px">
