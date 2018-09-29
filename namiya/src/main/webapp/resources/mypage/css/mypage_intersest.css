@@ -10,7 +10,7 @@
 /* 수정된 CSS */ 
 body { 
 	background-image: url("../../images/viewPage.png"); 
-	font-family: 'EcoSansMono', 'JejuGothic'; 
+	font-family: Eco Sans Mono, 'Jeju Gothic';
 	background-repeat: no-repeat;
 	background-position: 0% 0%;
 	background-size: 100% 100%;
@@ -216,17 +216,17 @@ h2{
 } 
  
 @font-face { 
-	font-family: 'EcoSansMono'; 
+	font-family: 'Eco Sans Mono'; 
 	src: url("resources/fonts/EcoSansMono.ttf") format('truetype'); 
 } 
  
 @font-face { 
-	font-family: 'JejuGothic'; 
+	font-family: 'Jeju Gothic'; 
 	src: url("resources/fonts/JejuGothic.ttf") format('truetype'); 
 } 
  
 #customers { 
-	font-family: "EcoSansMono", 'JejuGothic', 'Arial'; 
+	font-family: 'Eco Sans Mono', 'Jeju Gothic', 'Arial'; 
 	border-collapse: collapse; 
 	width: 100%; 
 } 
