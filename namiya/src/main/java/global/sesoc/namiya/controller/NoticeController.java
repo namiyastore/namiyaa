@@ -2,25 +2,41 @@ package global.sesoc.namiya.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.NoticeRepository;
+import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Notice;
 
 @Controller
 public class NoticeController {
 	@Autowired
 	NoticeRepository repository;
+	@Autowired
+	MembersRepository Members_repository;
 	
 	@RequestMapping(value = "noticeList", method = RequestMethod.GET)
-	public String noticeList(Model model) {
+	public String noticeList(Model model,HttpSession session) {
 		List<Notice> nlist = repository.nListAll();
 		model.addAttribute("nlist", nlist);
 		
+		//myurl을 가져오는 코드 시작		
+				String userid = session.getAttribute("loginId").toString();
+				Members m = new Members();
+				
+				m.setUserid(userid);
+				
+				Members result1 = Members_repository.selectOne(m);
+				model.addAttribute("myurl", result1.getMyurl());
+		//myrul가져오는 코드 여기까지
+				
 		return "mypage/notice";
 	}
 	

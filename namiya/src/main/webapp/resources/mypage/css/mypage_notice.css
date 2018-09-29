@@ -1,11 +1,5 @@
 @charset "UTF-8"; 
  
-/* body { */ 
-/* 	background-image: url("resources/images/NaviBackGround.png"); */ 
-/* 	background-size: 80%; */ 
-/* 	font-family: 'EcoSansMono', 'JejuGothic'; */ 
-/* } */ 
-
 
 /* 수정된 CSS */ 
 body { 
@@ -267,8 +261,18 @@ h2{
 } */
 
 /* 스크롤 고정 0916 */
-/* table {
-  width: 100%;
+
+/* 0926 글쓰기버튼 추가 및 페이징 처리부분추가 */
+
+.leftSide .leftSide_Buttons {
+    display: flex;
+    width: 90%;
+    /* border: 1px white solid; */
+    justify-content: flex-end;
+}
+
+/* .leftSide_page{
+	border: 1px white solid;
 } */
 
 table, td {
@@ -303,6 +307,19 @@ tbody {
   border-left: none;
 } */
 /* 스크롤 고정 여기까지 */
+
+/* 0926 글쓰기버튼 추가 및 페이징 처리부분추가 */
+
+.leftSide .leftSide_Buttons {
+    display: flex;
+    width: 90%;
+    /* border: 1px white solid; */
+    justify-content: flex-end;
+}
+
+/* .leftSide_page{
+	border: 1px white solid;
+} */
  
 .rightSide .rightSide_MyInfoBox {
     display: flex;

@@ -26,8 +26,14 @@ $(function(){
 		location.href = './';		 
 	}); 
 	 
-	$('.rightSide_MyInfoBoxDown_myStore').on('click',function(){ 
-		location.href = 'myStore';		 
+	// 미니홈피 창 열기 0929추가
+	$(".rightSide_MyInfoBoxDown_myStore").on("click",function(){
+		// 메세지 전송
+		// message -> 전할 내용
+		// receive -> 받을상대 id
+		
+		var myurl = $('#myurl').val();
+		window.open("myStore/" + myurl + "/home","mystoreWindow","width=1200, height=650");
 	});
 	
 	 $('.rightSide_MyInfoBoxDown_profile').on('click',function(){ 
@@ -35,7 +41,7 @@ $(function(){
 	});  
 	 
 	$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){ 
-		location.href = 'logOut';		 
+		location.href = 'logout';		 
 	}); 
 	 
 	$('.rightSide_MyInfoBoxDown_signOut').on('click',function(){ 
@@ -64,7 +70,7 @@ $(function(){
 	$('.leftSide_tabs_tab7').on('click',function(){ 
 		location.href = 'pointRecord';		 
 	}); 
-	 
+	
 });
 // 라인 인증키 등록 
 function noticeService() { 
@@ -90,7 +96,8 @@ function alertMsg() {
 </script> 
  
 </head> 
-<body> 
+<body>
+<input id="myurl" type="hidden" value="${myurl}" /> 
 	<!-- <h2>Point</h2> -->
 	<img alt="" src="resources/images/pagetop.gif" id="logo">
 	<div class="wrapper"> 
@@ -118,15 +125,16 @@ function alertMsg() {
 					Point 
 				</div> 
 			</div>
+			<!-- 검색창과 라인인증 버튼 -->
 			<div class="leftSide_2nd">
-			<div class="leftSide_2nd_searchBar"> 
-				<input type="text" id="inputBar" class="inputBar"> 
-				<a href="검색 컨트롤러"><img src="resources/mypage/images/searchIcon.png" class="searchIcon"></a>
-			</div>
-				<div class="leftSide_2nd_noticeService"> 
-					<img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" /> 
+				<div class="leftSide_2nd_searchBar"> 
+					<!-- <input type="text" id="inputBar" class="inputBar">  -->
+					<a href="검색 컨트롤러"><!-- <img src="resources/mypage/images/searchIcon.png" class="searchIcon"> --></a>
 				</div>
-			</div>			 
+				<div class="leftSide_2nd_noticeService"> 
+					<!-- <img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" /> --> 
+				</div>
+			</div>	 
 			 
  			<!-- 여기부터 받은쪽지함/보낸쪽지함 탭 --> 
 			<!-- <div class="leftSide_searchBar_inoutMsgBoxTabs"> 

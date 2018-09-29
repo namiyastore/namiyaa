@@ -12,8 +12,14 @@ $(function(){
 		location.href = 'search';
 	}); 
 	 
-	$('.rightSide_MyInfoBoxDown_myStore').on('click',function(){ 
-		location.href = 'myStore';
+	// 미니홈피 창 열기 0929추가
+	$(".rightSide_MyInfoBoxDown_myStore").on("click",function(){
+		// 메세지 전송
+		// message -> 전할 내용
+		// receive -> 받을상대 id
+		
+		var myurl = $('#myurl').val();
+		window.open("myStore/" + myurl + "/home","mystoreWindow","width=1200, height=650");
 	});
 	
 	 $('.rightSide_MyInfoBoxDown_profile').on('click',function(){ 
@@ -21,7 +27,7 @@ $(function(){
 	});  
 	 
 	$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){ 
-		location.href = 'logOut';
+		location.href = 'logout';
 	}); 
 	 
 	$('.rightSide_MyInfoBoxDown_signOut').on('click',function(){ 
@@ -51,6 +57,8 @@ $(function(){
 		location.href = 'pointRecord';		 
 	});
 	
+	
+	
 	/* 0918 받은 쪽지함 보낸 쪽지함 탭 효과 */
 	$('.leftSide_searchBar_inoutMsgBoxTabs_in').on('click',function(){ 
 		location.href = 'mInBoxListAll';		 
@@ -63,6 +71,23 @@ $(function(){
 	$('.leftSide_Buttons_btn1').on('click',function(){ 
 		location.href = 'sendMsg';		 
 	});
+	
+	/* 0926 페이징 이미지버튼 클릭 */
+	$('#btn1').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}';		 
+	});
+	$('#btn2').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage - 1}&searchWord=${searchWord}';		 
+	});
+	$('#btn3').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage + 1}&searchWord=${searchWord}';		 
+	});
+	$('#btn4').on('click',function(){ 
+		location.href = 'mInBoxListAll?currentPage=${navi.currentPage + navi.pagePerGroup}&searchWord=${searchWord}';		 
+	});
+	/* $('.searchIcon').on('click',function(){ 
+		location.href = 'mInBoxListAll?searchWord=${searchWord}';		 
+	}); */
 });
 
 // 라인 인증키 등록 
@@ -90,15 +115,12 @@ function alertMsg() {
 <title>Inbox message</title>
 </head>
  <body>
-<!-- 	<div class="wrapper">
-		<div class="leftSide">
-			<div class="leftSide_searchBar">
-				<input type="text" id="inputBar" class="inputBar">
-				<a href="검색 컨트롤러"><img src="images/if_misc-_Search__1276849.svg" class="searchIcon"></a>
-			</div>
-		</div>
-	</div> 
- -->
+ <input id="myurl" type="hidden" value="${myurl}" />
+ <!-- 페이징 관련 변수 -->
+<input id='page' type="hidden" value="${page}" />
+<input id='searchWord' type="hidden" value="${searchWord}" /> 
+<input id="currentPage" type="hidden" value="${navi.currentPage}" >
+
  	<img alt="" src="resources/images/pagetop.gif" id="logo">	
  	<div class="wrapper"> 
 		<div class="leftSide"> 
@@ -123,9 +145,9 @@ function alertMsg() {
 				</div> 
 			</div>
 			<div class="leftSide_2nd">
-				<div class="leftSide_2nd_searchBar"> 
-					<input type="text" id="inputBar" class="inputBar"> 
-					<a href="검색 컨트롤러"><img src="resources/mypage/images/searchIcon.png" class="searchIcon"></a>
+				<div class="leftSide_2nd_searchBar">
+					<input type="text" name="searchWord" value="${searchWord }" class="inputBar"> 
+					<img src="resources/mypage/images/searchIcon.png" class="searchIcon">
 				</div>
 				<!--<div class="leftSide_2nd_noticeService"> 
 					<img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" /> 
@@ -171,19 +193,20 @@ function alertMsg() {
 			<div class="leftSide_Buttons">
 				<div class="leftSide_Buttons_btn1">쪽지 작성</div>
 			</div>
+			<!-- 페이징 처리 부분 -->
 			<div class="leftSide_page">
-				<a href="mInBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}">◁◁</a> 
-				<a href="mInBoxListAll?currentPage=${navi.currentPage - 1}&searchWord=${searchWord}">◀</a>
+				<img id="btn1" src="resources/images/arrow7.png" width="24px" height="24px">
+				<img id="btn2" src="resources/images/arrow8.png" width="24px" height="24px">
 				<c:forEach var="page" begin="${navi.startPageGroup }" end="${navi.endPageGroup }">
 					<c:if test="${page == currentPage }">
-						<span style="color: red; font-weight: bolder;">${page} &nbsp</span>
+						<span id="selectedPage">${page} &nbsp</span>
 					</c:if>
 					<c:if test="${page != currentPage }">
-						<a href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp</a>
+						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp</a>
 					</c:if>
 				</c:forEach>
-				<a href="mInBoxListAll?currentPage=${navi.currentPage + 1}&searchWord=${searchWord}">▶</a> 
-				<a href="mInBoxListAll?currentPage=${navi.currentPage + navi.pagePerGroup}&searchWord=${searchWord}">▷▷</a>
+				<img id="btn3" src="resources/images/arrow9.png" width="24px" height="24px">
+				<img id="btn4" src="resources/images/arrow10.png" width="24px" height="24px">
 			</div>
 		</div> <!-- leftside의 div닫힘 -->
 		<!-- 개인정보 표시 부분 --> 

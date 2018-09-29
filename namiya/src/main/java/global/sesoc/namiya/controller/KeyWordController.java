@@ -2,6 +2,8 @@ package global.sesoc.namiya.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,19 +11,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import global.sesoc.namiya.dao.KeywordRepository;
+import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.vo.Keyword;
+import global.sesoc.namiya.vo.Members;
 
 @Controller
 public class KeyWordController {
 	@Autowired
 	KeywordRepository repository;
+	@Autowired
+	MembersRepository Members_repository;
 	
 	@RequestMapping(value="keywordList")
-	public String keywordList(Model model) {
+	public String keywordList(HttpSession session ,Model model) {
 		List<Keyword> klist = repository.kListAll();
 		System.out.println("db에서1"+klist);
 		
 		model.addAttribute("klist", klist);
+		
+		//myurl을 가져오는 코드		
+				String userid = session.getAttribute("loginId").toString();
+				Members m = new Members();
+				
+				m.setUserid(userid);
+				
+				Members result1 = Members_repository.selectOne(m);
+				model.addAttribute("myurl", result1.getMyurl());
 		return "mypage/keyword";
 	}
 	

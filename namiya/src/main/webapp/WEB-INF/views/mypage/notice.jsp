@@ -24,8 +24,14 @@ $(function(){
 		location.href = 'search';		 
 	}); 
 	 
-	$('.rightSide_MyInfoBoxDown_myStore').on('click',function(){ 
-		location.href = 'myStore';		 
+	// 미니홈피 창 열기 0929추가
+	$(".rightSide_MyInfoBoxDown_myStore").on("click",function(){
+		// 메세지 전송
+		// message -> 전할 내용
+		// receive -> 받을상대 id
+		
+		var myurl = $('#myurl').val();
+		window.open("myStore/" + myurl + "/home","mystoreWindow","width=1200, height=650");
 	});
 	
 	 $('.rightSide_MyInfoBoxDown_profile').on('click',function(){ 
@@ -33,7 +39,7 @@ $(function(){
 	});  
 	 
 	$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){ 
-		location.href = 'logOut';		 
+		location.href = 'logout';		 
 	}); 
 	 
 	$('.rightSide_MyInfoBoxDown_signOut').on('click',function(){ 
@@ -62,6 +68,8 @@ $(function(){
 	$('.leftSide_tabs_tab7').on('click',function(){ 
 		location.href = 'pointRecord';		 
 	}); 
+	
+	
 	 
 });
 
@@ -91,6 +99,7 @@ function alertMsg() {
 </script> 
 </head>
 <body>
+<input id="myurl" type="hidden" value="${myurl}" />
 	<img alt="" src="resources/images/pagetop.gif" id="logo">
 	<!-- <h2>알림</h2> -->
 	<%-- <a href="myPage">뒤로가기</a>
@@ -182,7 +191,7 @@ function alertMsg() {
 					</c:if>
 					<c:if test="${empty nlist }">
 						<tr>
-							<th colspan="4">알림이 없습니다.</th>
+							<td colspan="3" style="text-align: center;">알림이 없습니다.</td>
 						</tr>
 					</c:if>
 				</table>
