@@ -116,9 +116,10 @@
 
         $("#phoneNo").blur(function() {
             checkPhoneNo();
+            checkPhone();
         });
         
-        $("#id").keyup(function(event){
+        $("#phoneNo").keyup(function(event){
         	checkPhone();
         });
 
@@ -161,7 +162,7 @@
             return false;
         } */
 
-        if(idFlag && pwFlag && authFlag $$ phoneFlag && mailFlag) {
+        if(idFlag && pwFlag && authFlag && phoneFlag && mailFlag) {
         	alert("가입성공.");
         	$("#userid").val(userid);
         	$("#password").val(password);
@@ -712,15 +713,15 @@
     }
 
     function checkPhone() {
-    	var p = $("phoneNo").val();
-    	 var oMsg = $("#phoneNoMsg");
+    	var p = $("#phoneNo").val();
+        var oMsg = $("#phoneNoMsg");
         var regPhone = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
-        if(regPhone.test(p)){
+        if(isNaN(p)){
+        	showErrorMsg(oMsg, "숫자만 입력!");
+        	return false;
+        }else{
         	phoneFlag = true;
         	return true;
-        }else{
-        	showErrorMsg(oMsg, "다시 확인해주세요");
-        	return false;
         }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
