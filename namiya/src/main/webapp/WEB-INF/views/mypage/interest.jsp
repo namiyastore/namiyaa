@@ -154,7 +154,7 @@ function alertMsg() {
 						<c:forEach var="iList" items="${ilist }">
 							<tr>
 								<td>${iList.interestnum}</td>
-								<td><a href="${iList.boardnum}">${iList.boardnum}</a></td>
+								<td><a href="${iList.boardnum}">${iList.title}</a></td>
 								<td><input type="button" value="삭제" onclick="idelete(${iList.interestnum})" /></td>
 								<td><input type="button" value="수정" onclick="iupdate(${iList.interestnum})" /></td>
 							</tr>

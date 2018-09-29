@@ -15,9 +15,9 @@ public class NoticeRepository implements NoticeMapper{
 	@Autowired
 	SqlSession session;
 
-	public List<Notice> nListAll() {
+	public List<Notice> nListAll(String userid) {
 		NoticeMapper mapper = session.getMapper(NoticeMapper.class);
-		List<Notice> nlist = mapper.nListAll();
+		List<Notice> nlist = mapper.nListAll(userid);
 		return nlist;
 	}
 

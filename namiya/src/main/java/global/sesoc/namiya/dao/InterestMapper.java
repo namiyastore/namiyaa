@@ -14,7 +14,7 @@ iInsert
 */
 
 public interface InterestMapper {
-	public List<Interest> iListAll();
+	public List<Interest> iListAll(String userid);
 	public int iInsert(Interest interest);
 	public int iDelete(int interestnum);
 	public Interest iSelectOne(int interestnum);

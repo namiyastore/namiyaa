@@ -28,12 +28,13 @@ public class MessageController {
 	public String mInBoxListAll(@RequestParam(value = "currentPage", defaultValue="1") int currentPage,
 			@RequestParam(value="searchWord", defaultValue = "") String searchWord,Model model
 			,HttpSession session) {
+		String userid = session.getAttribute("loginId").toString();
 		
 		int totalRecordCount = repository.getInboxRecordCount(searchWord);
 		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount,10,5);
 		
 		System.out.println("0926 currentpage? "+currentPage);
-		List<Message> InboxList = repository.Inbox_select_result(searchWord,navi.getStartRecord(),navi.getCountPerPage());
+		List<Message> InboxList = repository.Inbox_select_result(userid,searchWord,navi.getStartRecord(),navi.getCountPerPage());
 		System.out.println("0921 받은쪽지 리스트?"+InboxList);
 		
 		model.addAttribute("InboxList", InboxList);
@@ -42,7 +43,7 @@ public class MessageController {
 		model.addAttribute("currentPage", currentPage);
 		
 		//myurl을 가져오는 코드		
-		String userid = session.getAttribute("loginId").toString();
+		
 		Members m = new Members();
 		
 		m.setUserid(userid);

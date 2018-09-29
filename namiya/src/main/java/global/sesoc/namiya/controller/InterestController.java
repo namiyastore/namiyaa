@@ -25,10 +25,11 @@ public class InterestController {
 	
 	@RequestMapping(value="interestList",method = RequestMethod.GET)
 	public String interest(HttpSession session ,Model model) {
-		List<Interest> ilist = repository.iListAll();
+		
 
 		//myurl을 가져오는 코드		
 		String userid = session.getAttribute("loginId").toString();
+		List<Interest> ilist = repository.iListAll(userid);
 		Members m = new Members();
 		
 		m.setUserid(userid);

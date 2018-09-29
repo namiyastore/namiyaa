@@ -24,11 +24,12 @@ public class NoticeController {
 	
 	@RequestMapping(value = "noticeList", method = RequestMethod.GET)
 	public String noticeList(Model model,HttpSession session) {
-		List<Notice> nlist = repository.nListAll();
+		String userid = session.getAttribute("loginId").toString();
+		List<Notice> nlist = repository.nListAll(userid);
 		model.addAttribute("nlist", nlist);
 		
 		//myurl을 가져오는 코드 시작		
-				String userid = session.getAttribute("loginId").toString();
+				
 				Members m = new Members();
 				
 				m.setUserid(userid);

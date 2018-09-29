@@ -91,10 +91,10 @@ public class MessageRepository{
 		}
 		
 		//받은 쪽지함 검색결과
-		public List<Message> Inbox_select_result(String searchWord,int startRecord, int countPerPage){
+		public List<Message> Inbox_select_result(String userid ,String searchWord, int startRecord, int countPerPage){
 			MessageMapper mapper = session.getMapper(MessageMapper.class);
 			RowBounds rb = new RowBounds(startRecord,countPerPage);
-			List<Message> list = mapper.Inbox_select_result(searchWord,rb);
+			List<Message> list = mapper.Inbox_select_result(userid,searchWord,rb);
 			System.out.println("searchword? "+searchWord + "startRecord? " +startRecord+"countPerPage? "+countPerPage);
 			System.out.println("받은쪽지함의 리스트0920" +  list);
 			return list;

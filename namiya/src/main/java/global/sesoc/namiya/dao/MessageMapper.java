@@ -25,7 +25,7 @@ public interface MessageMapper {
 	public int getInboxRecordCount(@Param("searchWord") String word);
 	public int getOutboxRecordCount(@Param("searchWord") String word);
 	
-	public List<Message> Inbox_select_result(@Param("searchWord") String word, RowBounds rb);
+	public List<Message> Inbox_select_result(@Param("searchWord") String word, String userid, RowBounds rb);
 	public List<Message> Outbox_select_result(@Param("searchWord") String word, RowBounds rb);
 	
 }

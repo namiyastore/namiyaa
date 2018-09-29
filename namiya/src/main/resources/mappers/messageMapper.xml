@@ -4,25 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.MessageMapper">
 
-	<select id="mInBoxListAll" resultType="Message">
+	<select id="mInBoxListAll" resultType="Message" parameterType="string">
 		SELECT
 			messagenum,writerid,msg_title,msg_content,to_char(regdate, 'YYYY-MM-DD') regdate,userid,copy
 		FROM
 			message
 		WHERE
 			copy = 0
+		AND
+			userid = #{userid}
 		ORDER BY
 			messagenum DESC
 		
 	</select>
 	
-	<select id="mOutBoxListAll" resultType="Message">
+	<select id="mOutBoxListAll" resultType="Message" parameterType="string">
 		SELECT
 			messagenum,writerid,msg_title,msg_content,to_char(regdate, 'YYYY-MM-DD') regdate,userid,copy
 		FROM
 			message
 		WHERE
 			copy = 1
+		AND
+			userid = #{userid}
 		ORDER BY
 			messagenum DESC
 		
@@ -176,6 +180,8 @@
 			msg_content LIKE '%'||#{searchWord}||'%')
 		AND
 			copy = 0
+		AND
+			userid = #{userid}
 	</select>
 	
 	<select id="Outbox_select_result" resultType="Message">
@@ -191,6 +197,8 @@
 			message
 		WHERE
 			copy = 1
+		AND
+			userid = #{userid}
 		AND
 			msg_title LIKE '%'||#{searchWord}||'%'
 		OR

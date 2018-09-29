@@ -14,13 +14,16 @@
 	where interestnum = #{interestnum}
 </delete>
 
-<select id="iListAll" resultType="Interest">
+<select id="iListAll" resultType="Interest" parameterType="string">
 	select 
-		interestnum,userid,boardnum
+		interestnum,userid,boardnum,
+        (select title from board 
+			where boardnum = (select interest.BOARDNUM from interest
+			where userid = #{userid})) title
 	from
 		interest
-	<!-- where
-		userid = #{userid} -->
+	where
+		userid = #{userid}
 </select>
 
 <select id="iSelectOne" parameterType="int" resultType="Interest">

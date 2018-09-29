@@ -16,10 +16,10 @@ public class InterestRepository {
 	@Autowired
 	SqlSession session;
 
-	public List<Interest> iListAll() {
+	public List<Interest> iListAll(String userid) {
 		InterestMapper mapper = session.getMapper(InterestMapper.class);
 
-		List<Interest> list = mapper.iListAll();
+		List<Interest> list = mapper.iListAll(userid);
 
 		return list;
 	}

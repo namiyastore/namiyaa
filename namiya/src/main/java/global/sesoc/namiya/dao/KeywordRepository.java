@@ -13,9 +13,9 @@ public class KeywordRepository {
 	@Autowired
 	SqlSession session;
 
-	public List<Keyword> kListAll() {
+	public List<Keyword> kListAll(String userid) {
 		KeywordMapper mapper = session.getMapper(KeywordMapper.class);
-		List<Keyword> klist = mapper.kListAll();
+		List<Keyword> klist = mapper.kListAll(userid);
 		return klist;
 	}
 

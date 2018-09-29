@@ -24,13 +24,13 @@ public class KeyWordController {
 	
 	@RequestMapping(value="keywordList")
 	public String keywordList(HttpSession session ,Model model) {
-		List<Keyword> klist = repository.kListAll();
-		System.out.println("db에서1"+klist);
+		String userid = session.getAttribute("loginId").toString();
+		List<Keyword> klist = repository.kListAll(userid);
 		
 		model.addAttribute("klist", klist);
 		
 		//myurl을 가져오는 코드		
-				String userid = session.getAttribute("loginId").toString();
+				
 				Members m = new Members();
 				
 				m.setUserid(userid);
