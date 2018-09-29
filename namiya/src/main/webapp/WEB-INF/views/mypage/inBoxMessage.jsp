@@ -157,8 +157,12 @@ function alertMsg() {
 						 
  			<!-- 여기부터 받은쪽지함/보낸쪽지함 탭 --> 
 			 	<div class="leftSide_searchBar_inoutMsgBoxTabs"> 
-					<div class="leftSide_searchBar_inoutMsgBoxTabs_in">Inbox message</div> 
-					<div class="leftSide_searchBar_inoutMsgBoxTabs_out">Outbox message</div> 
+					<div class="leftSide_searchBar_inoutMsgBoxTabs_in">
+					<spring:message code="mypage.leftSide_searchBar_inoutMsgBoxTabs_in" />
+					</div> 
+					<div class="leftSide_searchBar_inoutMsgBoxTabs_out">
+					<spring:message code="mypage.leftSide_searchBar_inoutMsgBoxTabs_out" />
+					</div> 
 				</div>
 			</div>
 			<!-- 라인 인증키 얻는 링크 --> 
