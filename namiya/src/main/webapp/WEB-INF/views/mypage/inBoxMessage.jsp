@@ -13,6 +13,11 @@
 	}
 </style>
 <script> 
+
+function searchInbox() {
+	var searchWord = $('#inputBar').val();
+	location.href = 'mInBoxListAll?searchWord='+searchWord;
+}
 $(function(){ 
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
 		location.href = 'search';
@@ -154,13 +159,10 @@ function alertMsg() {
 				</div> 
 			</div>
 			<div class="leftSide_2nd">
-				<div class="leftSide_2nd_searchBar">
-					<input type="text" name="searchWord" value="${searchWord }" class="inputBar"> 
-					<img src="resources/mypage/images/searchIcon.png" class="searchIcon">
+				<div class="leftSide_2nd_searchBar"> 
+					<input type="text" id="inputBar" class="inputBar"> 
+					<a href="#" onclick="javascript:searchInbox()"><img src="resources/mypage/images/searchIcon.png" class="searchIcon"></a>
 				</div>
-				<!--<div class="leftSide_2nd_noticeService"> 
-					<img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" /> 
-				</div> -->
 						 
  			<!-- 여기부터 받은쪽지함/보낸쪽지함 탭 --> 
 			 	<div class="leftSide_searchBar_inoutMsgBoxTabs"> 

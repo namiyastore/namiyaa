@@ -139,28 +139,32 @@
 	
 	<select id="getInboxRecordCount" resultType="int">
 		SELECT
-			count(messagenum)
+			count(*)
 		FROM
 			message
 		WHERE
 			copy = 0
 		AND
+		(
 			msg_title LIKE '%'||#{searchWord}||'%'
 		OR
 			msg_content LIKE '%'||#{searchWord}||'%'
+		)
 	</select>
 	
 	<select id="getOutboxRecordCount" resultType="int">
 		SELECT
-			count(messagenum)
+			count(*)
 		FROM
 			message
 		WHERE
 			copy = 1
 		AND
+		(
 			msg_title LIKE '%'||#{searchWord}||'%'
 		OR
 			msg_content LIKE '%'||#{searchWord}||'%'
+			)
 	</select>
 	
 	<select id="Inbox_select_result" resultType="Message" parameterType="map">
@@ -196,12 +200,12 @@
 		FROM
 			message
 		WHERE
+			(msg_title LIKE '%'||#{searchWord}||'%'
+		OR
+			msg_content LIKE '%'||#{searchWord}||'%')
+		AND
 			copy = 1
 		AND
 			userid = #{userid}
-		AND
-			msg_title LIKE '%'||#{searchWord}||'%'
-		OR
-			msg_content LIKE '%'||#{searchWord}||'%'
 	</select>
 </mapper>

@@ -76,10 +76,10 @@ public class MessageController {
 //	보낸쪽지함의 컨트롤러
 	@RequestMapping(value="mOutBoxListAll", method = RequestMethod.GET)
 	public String mOutBoxListAll(@RequestParam(value = "currentPage", defaultValue="1") int currentPage,
-			@RequestParam(value="searchWord",defaultValue = "") String searchWord,Model model,
-			HttpSession session) {
-		String userid = session.getAttribute("loginId").toString();
+			@RequestParam(value="searchWord", defaultValue = "") String searchWord,Model model
+			,HttpSession session) {
 		
+		String userid = session.getAttribute("loginId").toString();
 		int totalRecordCount = repository.getOutboxRecordCount(searchWord);
 		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount,10,5);
 		
@@ -93,15 +93,15 @@ public class MessageController {
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("navi", navi);
 		model.addAttribute("currentPage", currentPage);
-		//myurl을 가져오는 코드		
-				
-				Members m = new Members();
-				
-				m.setUserid(userid);
-				
-				Members result1 = Members_repository.selectOne(m);
-				model.addAttribute("myurl", result1.getMyurl());
 		
+		//myurl을 가져오는 코드		
+		
+		Members m = new Members();
+		
+		m.setUserid(userid);
+		
+		Members result1 = Members_repository.selectOne(m);
+		model.addAttribute("myurl", result1.getMyurl());
 		return "mypage/outBoxMessage";
 	}
 	@RequestMapping(value="mOutBoxInsert", method = RequestMethod.POST)

@@ -13,7 +13,11 @@
 		font-family: 'Raleway', 'Nanum Gothic';
 	}
 </style>
-<script> 
+<script>
+function searchOutbox() {
+	var searchWord = $('#inputBar').val();
+	location.href = 'mOutBoxListAll?searchWord='+searchWord;
+}
 $(function(){ 
 	 
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
@@ -116,7 +120,7 @@ function alertMsg() {
 	alert("등록되었습니다."); 
 } 
 </script> 
-<title>Inbox message</title>
+<title>Outbox message</title>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 </head>
@@ -158,7 +162,7 @@ function alertMsg() {
 			<div class="leftSide_2nd">
 				<div class="leftSide_2nd_searchBar"> 
 					<input type="text" id="inputBar" class="inputBar"> 
-					<a href="검색 컨트롤러"><img src="resources/mypage/images/searchIcon.png" class="searchIcon"></a>
+					<a href="#" onclick="javascript:searchOutbox()"><img src="resources/mypage/images/searchIcon.png" class="searchIcon"></a>
 				</div>
 				<!--<div class="leftSide_2nd_noticeService"> 
 					<img id="noticeService" src="resources/linenotify/linenotify.png" onclick="javascript:noticeService()" /> 
@@ -178,8 +182,7 @@ function alertMsg() {
 			<!-- 라인 인증키 얻는 링크 --> 
 <!-- 			<input id="noticeService" type="button" value="Line 알림 서비스 등록" onclick="noticeService()" /> --> 
 			 
- 			<!-- 여기부터 테이블 -->
-			<div class="leftSide_table">
+ 			<div class="leftSide_table">
 				<table id="customers">
 					<tr>
 						<th>No.</th>
@@ -187,26 +190,27 @@ function alertMsg() {
 						<th>Sender</th>
 						<th>Date</th>
 					</tr>
-					<c:if test="${empty message }">
-						<tr>
-							<td colspan="4">
-								<p>보낸 쪽지가 없습니다</p>
-							</td>
-						</tr>
-					</c:if>
-					<c:if test="${not empty message }">
-						<c:forEach var="messageList" items="${OutboxList}"> <!-- 수정부분 -->
+					<c:if test="${not empty OutboxList }">
+						<c:forEach var="outboxList" items="${OutboxList}">
 							<tr class="leftSide_table_rows">
-								<td><a href="selectOneMessage?messagenum=${messageList.messagenum}">${messageList.title }</a>></td>
-								<td>${messageList.userid }</td>
-								<td>${messageList.date }</td>
+								<td class="table_1st_td">${outboxList.messagenum }</td>
+								<td><a href="mOutBoxSelectOne?messagenum=${outboxList.messagenum}">${outboxList.msg_title }</a></td>
+								<td>${outboxList.userid }</td>
+								<td>${outboxList.regdate }</td>
 							</tr>
 						</c:forEach>
+					</c:if>
+					<c:if test="${empty OutboxList }">
+						<tr>
+							<td colspan="4">
+								<p>받은 쪽지가 없습니다</p>
+							</td>
+						</tr>
 					</c:if>
 				</table>
 			</div><!-- 테이블의 div -->
 			<div class="leftSide_Buttons">
-				<div>  </div>
+				<br/>
 			</div>
 			<!-- 페이징 처리 부분 -->
 			<div class="leftSide_page">

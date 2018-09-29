@@ -107,8 +107,14 @@ public class MessageRepository{
 		//보낸 쪽지함 검색결과
 		public List<Message> Outbox_select_result(Map<String,String>  map,int startRecord, int countPerPage){
 			MessageMapper mapper = session.getMapper(MessageMapper.class);
-			RowBounds rb = new RowBounds(startRecord, countPerPage);
+			RowBounds rb = new RowBounds(startRecord,countPerPage);
+			
+			String userid = map.get("userid").toString();
+			String searchWord = map.get("searchWord").toString();
+			
 			List<Message> list = mapper.Outbox_select_result(map,rb);
+			System.out.println("searchword? "+searchWord + "startRecord? " +startRecord+"countPerPage? "+countPerPage);
+			System.out.println("받은쪽지함의 리스트0920" +  list);
 			return list;
 		}
 
