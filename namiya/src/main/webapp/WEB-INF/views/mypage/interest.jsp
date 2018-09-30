@@ -28,6 +28,20 @@ function iupdate(num){
 </script>
 <script> 
 $(function(){ 
+	
+	$(".leftSide_table_open").on('click',function(){
+		var boardnum = $(this).attr('data-boardnum');
+		
+		//alert("boardnum: " + boardnum);
+		$.ajax({
+			method : 'get',
+			url : 'getMyurl?boardnum=' + boardnum,
+			success : function(myurl){				
+				//alert("myurl: " + myurl);
+				window.open("myStore/" + myurl + "/giveView?boardnum=" + boardnum, "mystoreWindow", "width=1200, height=650");
+			}
+		});
+	});
 	 
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
 		location.href = 'search';		 
@@ -165,10 +179,13 @@ function alertMsg() {
 					<c:if test="${not empty ilist }">
 						<c:forEach var="iList" items="${ilist }">
 							<tr>
-								<td>${iList.interestnum}</td>
-								<td><a href="${iList.boardnum}">${iList.title}</a></td>
+								<td style="text-align: center;">${iList.interestnum}</td>
+									<td>
+										<div class="leftSide_table_open" data-boardnum="${iList.boardnum}">
+											${iList.title}
+										</div>
+									</td>
 								<td><input type="button" value="삭제" onclick="idelete(${iList.interestnum})" /></td>
-								<td><input type="button" value="수정" onclick="iupdate(${iList.interestnum})" /></td>
 							</tr>
 						</c:forEach>
 					</c:if>

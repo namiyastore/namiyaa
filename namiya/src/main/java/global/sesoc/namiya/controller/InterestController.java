@@ -29,6 +29,7 @@ public class InterestController {
 
 		//myurl을 가져오는 코드		
 		String userid = session.getAttribute("loginId").toString();
+		System.out.println("0930 userid? " + userid);
 		List<Interest> ilist = repository.iListAll(userid);
 		Members m = new Members();
 		

@@ -76,7 +76,7 @@ CREATE TABLE keyword
 (
 	keywordnum number NOT NULL,
 	keywordname varchar2(50) NOT NULL,
-	category varchar2(100) NOT NULL,
+	categorynum number NOT NULL,
 	userid varchar2(100) NOT NULL,
 	PRIMARY KEY (keywordnum)
 );

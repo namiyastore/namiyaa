@@ -19,6 +19,14 @@ function searchInbox() {
 	location.href = 'mInBoxListAll?searchWord='+searchWord;
 }
 $(function(){ 
+	
+	$('.leftSide_table_customers_title').on('click',function(){
+		var messagenum = $(this).attr('data-messagenum');
+		var url = "mInBoxSelectOne?messagenum=" +messagenum;
+		
+		window.open(url, "messageWindow","width=500, height=550");
+	});
+	
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
 		location.href = 'search';
 	}); 
@@ -190,7 +198,8 @@ function alertMsg() {
 						<c:forEach var="inboxList" items="${InboxList}">
 							<tr class="leftSide_table_rows">
 								<td class="table_1st_td">${inboxList.messagenum }</td>
-								<td><a href="mInBoxSelectOne?messagenum=${inboxList.messagenum}">${inboxList.msg_title }</a></td>
+<%-- 								<td><a href="mInBoxSelectOne?messagenum=${inboxList.messagenum}">${inboxList.msg_title }</a></td> --%>
+								<td><div class="leftSide_table_customers_title" data-messagenum="${inboxList.messagenum}">${inboxList.msg_title }</div></td>
 								<td>${inboxList.userid }</td>
 								<td>${inboxList.regdate }</td>
 							</tr>
