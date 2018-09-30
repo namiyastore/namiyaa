@@ -101,6 +101,7 @@
 	function alertMsg() {
 		alert("등록되었습니다.");
 	}
+	
 </script>
 <style>
 	body {
