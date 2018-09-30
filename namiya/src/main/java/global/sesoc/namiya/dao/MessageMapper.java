@@ -22,8 +22,8 @@ public interface MessageMapper {
 	
 	public int mUpdate(Message message);
 	
-	public int getInboxRecordCount(@Param("searchWord") String word);
-	public int getOutboxRecordCount(@Param("searchWord") String word);
+	public int getInboxRecordCount(Map<String, String> userIdAndSearchWord);
+	public int getOutboxRecordCount(Map<String, String> userIdAndSearchWord);
 	
 	public List<Message> Inbox_select_result(Map<String,String> map, RowBounds rb);
 	public List<Message> Outbox_select_result(Map<String,String> map, RowBounds rb);

@@ -71,21 +71,21 @@ public class MessageRepository{
 	}
 	
 	// 전체 받은 쪽지함의 글갯수를 얻어온다
-		public int getInboxRecordCount(String searchWord) {
+		public int getInboxRecordCount(Map<String, String> userIdAndSearchWord) {
 			MessageMapper mapper = session.getMapper(MessageMapper.class);
 			
 //			Map<String,String> map = new HashMap<>();
 //			map.put("searchWord", searchWord);
-			int recordCount =  mapper.getInboxRecordCount(searchWord);
+			int recordCount =  mapper.getInboxRecordCount(userIdAndSearchWord);
 			return recordCount;
 		}
 		
 		// 전체 보낸 쪽지함의 글갯수를 얻어온다
-		public int getOutboxRecordCount(String searchWord) {
+		public int getOutboxRecordCount(Map<String, String> userIdAndSearchWord) {
 			MessageMapper mapper = session.getMapper(MessageMapper.class);
 //			Map<String,String> map = new HashMap<>();
 //			map.put("searchWord", searchWord);
-			int recordCount =  mapper.getOutboxRecordCount(searchWord);
+			int recordCount =  mapper.getOutboxRecordCount(userIdAndSearchWord);
 			
 			return recordCount;
 		}

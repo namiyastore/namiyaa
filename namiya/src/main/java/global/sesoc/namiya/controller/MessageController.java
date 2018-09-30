@@ -35,7 +35,13 @@ public class MessageController {
 			,HttpSession session) {
 		
 		String userid = session.getAttribute("loginId").toString();
-		int totalRecordCount = repository.getInboxRecordCount(searchWord);
+		
+		Map<String,String> userIdAndSearchWord = new HashMap<String,String>();
+		userIdAndSearchWord.put("searchWord", searchWord);
+		userIdAndSearchWord.put("userid", userid);
+		
+		
+		int totalRecordCount = repository.getInboxRecordCount(userIdAndSearchWord);
 		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount,10,5);
 		
 		Map<String,String> map = new HashMap<String,String>();
@@ -83,7 +89,13 @@ public class MessageController {
 			,HttpSession session) {
 		
 		String userid = session.getAttribute("loginId").toString();
-		int totalRecordCount = repository.getOutboxRecordCount(searchWord);
+		
+		Map<String,String> userIdAndSearchWord = new HashMap<String,String>();
+		userIdAndSearchWord.put("searchWord", searchWord);
+		userIdAndSearchWord.put("userid", userid);
+		
+		
+		int totalRecordCount = repository.getOutboxRecordCount(userIdAndSearchWord);
 		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount,10,5);
 		
 		Map<String,String> map = new HashMap<String,String>();

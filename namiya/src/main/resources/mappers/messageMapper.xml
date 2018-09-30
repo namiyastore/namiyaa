@@ -137,13 +137,15 @@
 			messagenum = #{messagenum}
 	</update>
 	
-	<select id="getInboxRecordCount" resultType="int">
+	<select id="getInboxRecordCount" resultType="int" parameterType="map">
 		SELECT
 			count(*)
 		FROM
 			message
 		WHERE
 			copy = 0
+		AND
+			userid = #{userid}
 		AND
 		(
 			msg_title LIKE '%'||#{searchWord}||'%'
@@ -152,13 +154,15 @@
 		)
 	</select>
 	
-	<select id="getOutboxRecordCount" resultType="int">
+	<select id="getOutboxRecordCount" resultType="int" parameterType="map">
 		SELECT
 			count(*)
 		FROM
 			message
 		WHERE
 			copy = 1
+		AND
+			writerid = #{userid}
 		AND
 		(
 			msg_title LIKE '%'||#{searchWord}||'%'
