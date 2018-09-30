@@ -186,6 +186,8 @@
 			copy = 0
 		AND
 			userid = #{userid}
+		ORDER BY
+			regdate DESC
 	</select>
 	
 	<select id="Outbox_select_result" resultType="Message" parameterType="map">
@@ -206,6 +208,8 @@
 		AND
 			copy = 1
 		AND
-			userid = #{userid}
+			WRITERID = #{userid}
+		ORDER BY
+			regdate DESC
 	</select>
 </mapper>

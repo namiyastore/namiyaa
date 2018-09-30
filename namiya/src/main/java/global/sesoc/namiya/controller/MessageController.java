@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.MessageRepository;
 import global.sesoc.namiya.util.PageNavigator;
@@ -25,6 +26,8 @@ public class MessageController {
 	MessageRepository repository;
 	@Autowired
 	MembersRepository Members_repository;
+	@Autowired
+	BoardRepository b_repository;
 	
 	@RequestMapping(value="mInBoxListAll", method = RequestMethod.GET)
 	public String mInBoxListAll(@RequestParam(value = "currentPage", defaultValue="1") int currentPage,
@@ -125,6 +128,36 @@ public class MessageController {
 	public String mUpdate(Message message) {
 		repository.mUpdate(message);
 		return "mypage/message";
+	}
+	
+	@RequestMapping(value="/my_page_sendMsg", method=RequestMethod.GET)
+	public String sendMsg(String userid, Model model) {
+		model.addAttribute("userid", userid);
+		
+		return "mypage/sendMsg";
+	}
+	
+	//쪽지 전송관련
+	@RequestMapping(value="/mypageSendMsg", method=RequestMethod.POST)
+	public String mypageSendMsg(Message msg) {
+		int result = b_repository.insertMsg(msg);
+		
+		System.out.println("보낸쪽지 내용  jsp에서 날라온 내용 "+msg);
+		
+		System.out.println("메세지 전송 결과: " + result);
+
+		/*String writerid = msg.getUserid();
+		String userid = msg.getWriterid();
+		
+		msg.setUserid(userid);
+		msg.setWriterid(writerid);*/
+		msg.setCopy(0);
+		
+		int result2 = b_repository.insertMsg(msg);	
+		
+		System.out.println("메세지 전송 결과2: " + result2);
+		
+		return "redirect:mInBoxListAll";
 	}
 
 }
