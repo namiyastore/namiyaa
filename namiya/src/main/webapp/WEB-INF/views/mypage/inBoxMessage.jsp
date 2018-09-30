@@ -80,7 +80,7 @@ $(function(){
 	
 	/* 0926 쪽지작성 클릭시 작성화면으로 */
 	$('.leftSide_Buttons_btn1').on('click',function(){ 
-		location.href = 'sendMsg';		 
+		location.href = 'my_page_sendMsg';		 
 	});
 	
 	/* 0926 페이징 이미지버튼 클릭 */

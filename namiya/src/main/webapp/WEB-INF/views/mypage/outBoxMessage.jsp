@@ -69,6 +69,14 @@ $(function(){
 		location.href = 'pointRecord';		 
 	});
 	
+	/* 0928 쪽지작성 클릭시 작성화면으로 */
+	$('.leftSide_Buttons_btn1').on('click',function(){ 
+		location.href = 'my_page_sendMsg';		 
+	});
+	
+	// 메세지 전송
+	// message -> 전할 내용
+	// receive -> 받을상대 id
 	
 	
 	/* 0918 받은 쪽지함 보낸 쪽지함 탭 효과 */
@@ -221,7 +229,7 @@ function alertMsg() {
 						<span id="selectedPage">${page} &nbsp</span>
 					</c:if>
 					<c:if test="${page != currentPage }">
-						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp</a>
+						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mOutBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp</a>
 					</c:if>
 				</c:forEach>
 				<img id="btn3" src="resources/images/arrow9.png" width="24px" height="24px">
