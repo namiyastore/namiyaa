@@ -16,14 +16,13 @@
 
 <select id="iListAll" resultType="Interest" parameterType="string">
 	select 
-		interestnum,userid,boardnum,
-        (select title from board 
-			where boardnum = (select interest.BOARDNUM from interest
-			where userid = #{userid})) title
+		interestnum,interest.userid,interest.boardnum,board.TITLE
 	from
-		interest
+		interest, board
 	where
-		userid = #{userid}
+		interest.USERID = #{userid}
+    and
+        INTEREST.BOARDNUM = BOARD.BOARDNUM
 </select>
 
 <select id="iSelectOne" parameterType="int" resultType="Interest">

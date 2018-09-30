@@ -77,9 +77,10 @@ public class MessageController {
 	}
 	@RequestMapping(value="mInBoxSelectOne", method = RequestMethod.GET)
 	public String mInBoxSelectOne(int messagenum,Model model) {
-		Message message = repository.mInBoxSelectOne(messagenum);
-		model.addAttribute("message", message);
-		return "redirect:mInBoxListAll";
+		Message rcvMessage = repository.mInBoxSelectOne(messagenum);
+		
+		model.addAttribute("rcvMessage", rcvMessage);
+		return "mypage/receiveMsg";
 	}
 	
 //	보낸쪽지함의 컨트롤러
