@@ -77,6 +77,11 @@ $(function(){
 		location.href = 'pointRecord';		 
 	});
 	
+	/* 0930 쪽지작성 클릭시 작성화면으로 */
+	$('.leftSide_Buttons_btn1').on('click',function(){ 
+		location.href = 'keywordRegistry';		 
+	});
+	
 	/* 0926 페이징 이미지버튼 클릭 */
 	$('#btn1').on('click',function(){ 
 		location.href = 'mInBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}';		 
@@ -186,7 +191,7 @@ function alertMsg() {
 				</table>
 			</div><!-- 테이블의 div 닫음 -->
 			<div class="leftSide_Buttons">
-				<div>  </div>
+				<div class="leftSide_Buttons_btn1">키워드 등록</div>
 			</div>
 			<!-- 페이징 처리 부분 -->
 			<div class="leftSide_page">

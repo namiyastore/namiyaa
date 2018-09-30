@@ -47,6 +47,12 @@ public class KeyWordController {
 		return "redirect:keywordList";
 	}
 	
+	//키워드 등록할때 창 이동
+	@RequestMapping(value="keywordRegistry",method = RequestMethod.GET )
+	public String keyInsert() {
+		return "mypage/keywordReg";
+	}
+	
 	@RequestMapping(value = "kDelete", method=RequestMethod.GET)
 	public String kDelete(int keywordnum) {
 		repository.kDelete(keywordnum);

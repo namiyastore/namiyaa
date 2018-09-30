@@ -14,7 +14,6 @@
 <style>
 	body {
 		font-family: 'Raleway', 'Nanum Gothic';
-		
 	}
 </style>
 <script type="text/javascript">
@@ -85,9 +84,9 @@ $(function(){
 	$('.leftSide_tabs_tab5').on('click',function(){ 
 		location.href = 'mInBoxListAll';		 
 	}); 
-	$('.leftSide_tabs_tab6').on('click',function(){ 
+	/* $('.leftSide_tabs_tab6').on('click',function(){ 
 		location.href = 'noticeList';		 
-	}); 
+	});  */
 	$('.leftSide_tabs_tab7').on('click',function(){ 
 		location.href = 'pointRecord';		 
 	});
@@ -151,9 +150,9 @@ function alertMsg() {
 				<div class="leftSide_tabs_tab5"> 
 					<spring:message code="mypage.leftSide_tabs_tab5" /> 
 				</div> 
-				<div class="leftSide_tabs_tab6"> 
+				<%-- <div class="leftSide_tabs_tab6"> 
 					<spring:message code="mypage.leftSide_tabs_tab6" /> 
-				</div> 
+				</div>  --%>
 				<div class="leftSide_tabs_tab7"> 
 					<spring:message code="mypage.leftSide_tabs_tab7" /> 
 				</div> 
@@ -223,7 +222,7 @@ function alertMsg() {
 					</div> 
 					<div class="rightSide_MyInfoBoxUp_userId"> 
 						${sessionScope.loginId} <!-- 세션id가 있으면 거기서 가지고 옮 9/5 <%-- ${"user.userid"} --%>  --> 
-					</div> 
+					</div>
 					<div class="rightSide_MyInfoBoxUp_userName"> 
 						${sessionScope.loginName} <!-- 세션id로 해당 user를 찾아내서 입력할 예정 9/5 <%-- ${"user.username"} --%> --> 
 					</div> 
