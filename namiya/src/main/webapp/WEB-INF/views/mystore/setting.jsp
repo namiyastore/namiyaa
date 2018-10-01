@@ -8,6 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <title>SETTING</title>
 <!-- <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -831,11 +833,11 @@ function checkImage(useritemnum) {
 	}
 	
 	h1 {
-		font-family: Eco Sans Mono;
+		font-family:  'Raleway', 'Nanum Gothic';
 	}
 	
 	body {
-		font-family: 'Jeju Gothic', Eco Sans Mono;
+		font-family:  'Raleway', 'Nanum Gothic';
 	}
 
 	#save {
@@ -853,7 +855,7 @@ function checkImage(useritemnum) {
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: Eco Sans Mono;
+		font-family: 'Raleway', 'Nanum Gothic';
 		font-size: 18px;
 	}
 	

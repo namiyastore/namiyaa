@@ -17,6 +17,8 @@
 	<script type="text/javascript" src="resources/inc/common/js/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="resources/profile/css/profile.css">
 	<link rel="stylesheet" type="text/css" href="resources/inc/user/css/ko/help_member.css?180222">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 	<script type="text/javascript" src="https://nid.naver.com/js/clickcr.js"></script>
 	<script type="text/javascript" src="resources/inc/common/js/lcslog.js"></script>
 	<script type="text/javascript" src="resources/inc/common/js/lua.js"></script>
@@ -197,7 +199,7 @@
                             </div>
                             <div class="btn_area_btm">
 									<input type="file" name="upload" id="file" accept="image/jpeg, image/png, image/gif">
-									<p style="font-family: 'Jeju Gothic'; font-size: 12px; color:red;">이미지 파일만 등록가능합니다.</p>
+									<p style="font-family: 'Raleway', 'Nanum Gothic'; font-size: 12px; color:red;">이미지 파일만 등록가능합니다.</p>
                              </div>
                                 <!-- <a href="javascript:;" class="btn_model"><b id="btnDelete" class="btn2 btn_disable" onclick="">삭제</b></a> -->
                           </div>

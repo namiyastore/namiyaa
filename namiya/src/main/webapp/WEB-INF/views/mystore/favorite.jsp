@@ -9,6 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="initial-scale=0.60, minimum-scale=0.60, maximum-scale=0.60">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <title>FAVORITE</title>
 <!-- <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script> -->
 
@@ -73,7 +75,7 @@
       }
       
       .poster > p {
-        font-family: 'Georgia', serif;
+        font-family: 'Raleway', 'Nanum Gothic';
         font-size: 36px;
         font-weight: bold;
         text-align: center;
@@ -199,11 +201,11 @@
 	}
 	
 	h1 {
-		font-family: Eco Sans Mono;
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 	
 	body {
-		font-family: 'Jeju Gothic', Eco Sans Mono;
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 </style>
 

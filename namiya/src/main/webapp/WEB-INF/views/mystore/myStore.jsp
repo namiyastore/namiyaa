@@ -8,6 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <title>My store main</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -240,12 +242,12 @@ var background = {
 
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 	@font-face { 
-	font-family: Eco Sans Mono; 
+	font-family: 'Raleway', 'Nanum Gothic';
 	src: url("resources/fonts/EcoSansMono.ttf") format('truetype'); 
 } 
  
 @font-face { 
-	font-family: 'Jeju Gothic'; 
+	font-family: 'Raleway', 'Nanum Gothic';
 	src: url("resources/fonts/JejuGothic.ttf") format('truetype'); 
 } 
 	
@@ -322,11 +324,11 @@ var background = {
 	}
 	
 	h1 {
-		font-family: Eco Sans Mono;
+		font-family:'Raleway', 'Nanum Gothic';
 	}
 	
 	body {
-		font-family: 'Jeju Gothic';
+		font-family:'Raleway', 'Nanum Gothic';
 	}
 	
 	#zero {
@@ -351,7 +353,7 @@ var background = {
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: Eco Sans Mono;
+		font-family: 'Raleway', 'Nanum Gothic';
 		font-size: 18px;
 	}
 	
@@ -360,11 +362,11 @@ var background = {
 	}
 	
 	#say {
-		font-family: Eco Sans Mono, 'Jeju Gothic';
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 	
 	#url {
-		font-family: Eco Sans Mono, 'Jeju Gothic';
+		font-family: 'Raleway', 'Nanum Gothic';
 	}
 </style>
 </head>
