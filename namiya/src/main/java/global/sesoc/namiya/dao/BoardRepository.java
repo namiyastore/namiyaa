@@ -93,11 +93,11 @@ public class BoardRepository {
 		return result;
 	}
 
-	public Wish selectWish(Map<String, String> param) {
+	public List<Wish> selectWish(Map<String, String> param) {
 		BoardMapper mapper = session.getMapper(BoardMapper.class);
-		Wish wsh = mapper.selectWish(param);
+		List<Wish> wlist = mapper.selectWish(param);
 		
-		return wsh;
+		return wlist;
 	}
 
 	public int insertWish(Wish wish) {

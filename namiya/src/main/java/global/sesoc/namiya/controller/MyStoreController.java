@@ -109,8 +109,8 @@ public class MyStoreController {
 	/** deal_end 시간 카운트 
 	 * @throws Exception **/
 	
-	@Scheduled(cron="*/30 * * * * *")
-	public void updateDeal_end() throws Exception {
+	//@Scheduled(cron="*/30 * * * * *")
+	/*public void updateDeal_end() throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = Calendar.getInstance().getTime();     
 		String date = df.format(today);
@@ -141,7 +141,7 @@ public class MyStoreController {
  		}
 		
 		System.out.println("한바뀌 돌았다");
-	}
+	}*/
 	
 	
 	
@@ -934,11 +934,11 @@ public class MyStoreController {
 		
 		System.out.println("history거래내역:"+history);
 		
-		Wish wsh = b_repository.selectWish(param);
-		System.out.println(wsh);
+		List<Wish> wlist = b_repository.selectWish(param);
+		System.out.println(wlist);
 	
-		if (wsh == null) {
-			System.out.println(wsh);
+		if (wlist.size() == 0) {
+			System.out.println(wlist);
 			
 			int result = b_repository.insertWish(wish);
 			
@@ -1053,10 +1053,13 @@ public class MyStoreController {
 		
 		System.out.println("history거래내역:"+history);
 		
-		Wish wsh = b_repository.selectWish(param);
-		System.out.println(wsh);
+		List<Wish> wlist = b_repository.selectWish(param);
+		
+		
+		// Wish wsh = b_repository.selectWish(param);
+		System.out.println(wlist);
 	
-		if (wsh == null) {
+		if (wlist.size() == 0) {
 			System.out.println("wish null");
 			Saving saving = new Saving();
 			

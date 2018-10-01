@@ -36,7 +36,7 @@ public interface BoardMapper {
 
 	public int insertHst(History history); // history에 넣기
 
-	public Wish selectWish(Map<String, String> param); // wish에서 동일한 값 찾기
+	public List<Wish> selectWish(Map<String, String> param); // wish에서 동일한 값 찾기
 
 	public int insertWish(Wish wish); // wish목록에 넣기
 
