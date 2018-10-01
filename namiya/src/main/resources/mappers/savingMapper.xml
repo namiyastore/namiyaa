@@ -39,7 +39,7 @@
 		)
 	</insert>
 	
-	<select id="pointTotal" parameterType="string" resultType="int">
+	<select id="pointTotal" parameterType="string" resultType="string">
 		select 
 			sum(point) point 
 		from 
