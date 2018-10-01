@@ -245,7 +245,7 @@
          	content.setAttribute("height",60);
          	//var img = new Image();
          	<c:if test="${not empty item.SAVEDFILE}">
-         	content.src = "${pageContext.request.contextPath}/profile/${item.SAVEDFILE}";
+         	content.src = "${pageContext.request.contextPath}/home/img/profile/${item.SAVEDFILE}";
          	</c:if>
          	<c:if test="${empty item.SAVEDFILE}">
          	content.src = "${pageContext.request.contextPath}/resources/images/human.png";
@@ -392,7 +392,7 @@
 <body>
 <div id="wrapper" align="center">
 <div id="pan" style="float:left; width: 1073px; height:545px; border-radius: 25px; background-color: white;">
-	즐겨찾기 3D구현
+	즐겨찾기
 	 <div id="stage"> 
       <div id="rotate"> 
         <div id="ring-1" class="ring"></div>
