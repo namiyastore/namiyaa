@@ -320,7 +320,7 @@
             return false;
         }
         if(mm == "") {
-            alert(mm);
+           
             showErrorMsg(oMsg,"태어난 월을 선택하세요.");
             return false;
         }
@@ -442,7 +442,7 @@
 	
 	//Addr check
 	function checkAddr(){
-		alert("주소");
+		
 		var addr = $("#fullAddr").val();
 		var oMsg = $("#fullAddrMsg");
 		
@@ -666,7 +666,7 @@
    		var usermail = $("#email").val();
 
    		if(mailFlag){
-   			alert("인증버튼 클릭");
+   			
    			$.ajax({//Id Duplication Check
    	            type:"GET",
    	            url: "checkAuthNum?usermail=" + usermail ,
@@ -876,7 +876,7 @@
                         
                     </div>
                     <span style="display: block;" class="error_next_box" id="birthdayMsg" style="display:none"></span>
-`					<br>
+					<br>
                     <div class="join_row join_sex">
                         <h6 style="color: #999999" class="join_title">성별</h6>
                         <div class="ps_box gender_code">
