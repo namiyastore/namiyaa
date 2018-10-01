@@ -174,6 +174,8 @@ function setSelectedMenu() {
 	
 function setGifPicture(context, x, y, list) { // context is the canvas 2d context.
 	    for(var a = 0; a<list.length; a++) {
+	    	if(list[a].totalframes == 1)
+	    		continue;
 	    	if(list[a].type == "background") {
 	    		list[a].currentframe = (list[a].currentframe + 1) % list[a].totalframes;
 	    	// onload event 써서 수정할것
@@ -505,7 +507,12 @@ function newImageLoaded(imgObject,type) {
     	drawTimer = null;
     	gifTimer = null;
     	count = imgList[0].totalframes-1;  // 하나는 이미 로드된 상태(방금)
-    	loadGifPicture();
+    	
+    	if(count != 0) {
+    		loadGifPicture();
+    	}else{
+    		startDraw();
+    	}
 	} else if(type == "furniture"){
 		imgList.push(imgObject);
 	}else if(type == "bottom" ) {
@@ -550,6 +557,7 @@ function gifChanged(image,imgObject) {
 	drawTimer = null;
 	gifTimer = null;
 	count = imgList[0].totalframes-1;  // 하나는 이미 로드된 상태(방금)
+	if(count != 0)
 	loadGifPicture();
 }
 

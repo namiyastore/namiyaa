@@ -235,6 +235,17 @@ var background = {
 	width:16px;height:16px;background:#79bfe5;} 
 
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+	@font-face { 
+	font-family: Eco Sans Mono; 
+	src: url("resources/fonts/EcoSansMono.ttf") format('truetype'); 
+} 
+ 
+@font-face { 
+	font-family: 'Jeju Gothic'; 
+	src: url("resources/fonts/JejuGothic.ttf") format('truetype'); 
+} 
+	
+	
 	li {
 		list-style:none;
 	}
@@ -246,6 +257,11 @@ var background = {
   		-o-background-size: cover;
   		background-size: cover;
   		overflow : hidden;
+  		font-family : Eco Sans Mono, 'Jeju Gothic';
+	}
+	
+	hr {
+		font-family : Eco Sans Mono, 'Jeju Gothic';
 	}
 	
 	#wrapper {
@@ -340,11 +356,11 @@ var background = {
 	}
 	
 	#say {
-		font-family: 'Jeju Gothic';
+		font-family: Eco Sans Mono, 'Jeju Gothic';
 	}
 	
 	#url {
-		font-family: Eco Sans Mono;
+		font-family: Eco Sans Mono, 'Jeju Gothic';
 	}
 </style>
 </head>
@@ -367,7 +383,6 @@ var background = {
 			<textarea id="tx" rows="8" cols="25" style="resize: none; outline: none; border: white;" readonly="readonly">${profile.content}</textarea>
 		</div>
 		
-		<br/>
 		
 		<input id="edit" type="button" value="EDIT" onclick="profileEdit('${homeuserid}','${sessionScope.loginId}')">
 		
