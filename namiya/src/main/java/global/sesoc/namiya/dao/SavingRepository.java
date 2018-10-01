@@ -54,9 +54,14 @@ public class SavingRepository {
 	 */
 	public int pointTotal(String userid) {
 		SavingMapper mapper = session.getMapper(SavingMapper.class);
-		int result = mapper.pointTotal(userid);
+		String result = mapper.pointTotal(userid);
 		
-		return result;
+		if(result != null) {
+			return Integer.parseInt(result);
+		}
+		else {
+			return 0;
+		}
 	}
 
 	/*

@@ -23,7 +23,7 @@ public interface SavingMapper {
 	 * 총 포인트
 	 * ajax로 호출
 	 */
-	public int pointTotal(String userid);
+	public String pointTotal(String userid);
 	
 	/*
 	 * 포인트 사용(int : point -> 사용할 포인트양)
