@@ -225,6 +225,12 @@ CREATE TABLE wish
 );
 
 
+create table keywordchk(
+    pnum number not null,
+    userid  VARCHAR2(100) not null,
+    boardnum number not null
+);
+
 
 /* Create Tables */
 create sequence boardnum_seq;
@@ -242,3 +248,4 @@ create sequence imageitem_seq;
 create sequence useritem_seq;
 create sequence profile_seq;
 create sequence wishnum_seq;
+create sequence keywordchk_seq;
