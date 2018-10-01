@@ -73,9 +73,9 @@
 		$('.leftSide_tabs_tab5').on('click', function() {
 			location.href = 'mInBoxListAll';
 		});
-		$('.leftSide_tabs_tab6').on('click', function() {
+		/* $('.leftSide_tabs_tab6').on('click', function() {
 			location.href = 'noticeList';
-		});
+		}); */
 		$('.leftSide_tabs_tab7').on('click', function() {
 			location.href = 'pointRecord';
 		});
@@ -127,9 +127,9 @@
 				<div class="leftSide_tabs_tab5"> 
 					<spring:message code="mypage.leftSide_tabs_tab5" /> 
 				</div> 
-				<div class="leftSide_tabs_tab6"> 
+				<%-- <div class="leftSide_tabs_tab6"> 
 					<spring:message code="mypage.leftSide_tabs_tab6" /> 
-				</div> 
+				</div>  --%>
 				<div class="leftSide_tabs_tab7"> 
 					<spring:message code="mypage.leftSide_tabs_tab7" /> 
 				</div> 
