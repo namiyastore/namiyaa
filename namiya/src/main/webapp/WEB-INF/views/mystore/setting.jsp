@@ -635,14 +635,14 @@ function startDraw() {
 	  	    return function () {
 	  	      setGifPicture(c, 10, 10, i);
 	  			};
-		 })(context, imgList), 200);
+		 })(context, imgList), 400);
 	}
 	if(drawTimer == null) {
 		drawTimer = setInterval((function (c, i, k) {
    	     return function () {
    	     	drawPicture(c, 10, 10, i, k);
    	     };
-		 })(context, imgList, selectedMenu), 10);  
+		 })(context, imgList, selectedMenu), 100);  
 	}
 }
 

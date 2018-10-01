@@ -155,7 +155,7 @@ var background = {
   	 	     return function () {
   	 	       setGifPicture(c, 10, 10, i);
   		  		};
-  			 })(context, imgList), 200);
+  			 })(context, imgList), 400);
 		}
 		
 		if(drawTimer == null) {
@@ -163,7 +163,7 @@ var background = {
            	 return function () {
            	 	drawPicture(c, 10, 10, i);
            	 };
-		 	})(context, imgList), 10);  
+		 	})(context, imgList), 100);  
 		}
     }
     
