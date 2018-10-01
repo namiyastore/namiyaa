@@ -80,14 +80,14 @@
 			data : jsonData,
 			dataType : 'json',
 			success : function(resp) {
-				alert(JSON.stringify(resp));
+				alert("라인메세지가 전송되었습니다!");
 			}
 		});
 	}
 	
 	function selected(historynum) {
-		alert("추첨하기");
-		alert(historynum);
+		//alert("추첨하기");
+		//alert(historynum);
 		
 		$.ajax({
 			method : 'post',
@@ -302,7 +302,7 @@
 				<img src="resources/images/takarakuzi.gif" style="width:200px;">
 				<br/>
 				<div id="select">
-				<c:if test="${product.sstatus eq '진행완료'}">
+				<c:if test="${product.sstatus eq '진행완료' && history.buyerid == null}">
 					<input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
 				</c:if>
 				</div>

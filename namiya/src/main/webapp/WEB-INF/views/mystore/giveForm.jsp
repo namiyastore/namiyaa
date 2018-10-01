@@ -99,7 +99,7 @@ function  formCheck() {
 	var productname = document.getElementById("productname");
 	var type = document.getElementById("service").value;
 	
-	alert("종류:"+type);
+	//alert("종류:"+type);
 	
 	var sendData = {"type" : type};
 	

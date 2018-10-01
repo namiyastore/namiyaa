@@ -123,7 +123,7 @@ public class MyStoreController {
 		for (int i=0; i<list.size(); i++) {
 			System.out.println(list.get(i).getDeal_end());
 			if(list.get(i).getDeal_end() != null) {
-				if (date.compareTo(list.get(i).getDeal_end()) == 1) {
+				if (date.compareTo(list.get(i).getDeal_end()) >= 0) {
 					System.out.println("if들어감");
 					int productnum = list.get(i).getProductnum();
 					product = p_repository.selectPdt(productnum);

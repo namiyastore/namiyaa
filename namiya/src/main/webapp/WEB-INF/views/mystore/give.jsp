@@ -25,7 +25,7 @@ function interest(boardnum, userid) {
 	var userid = userid;
 	
 	var sendData = {"userid" : userid, "boardnum" : boardnum};
-	alert(boardnum+", "+userid)
+	//alert(boardnum+", "+userid)
     $.ajax({
        	url : 'selectItr',
        	method : 'post',
