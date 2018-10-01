@@ -70,16 +70,16 @@ $(function(){
 	$('.leftSide_tabs_tab5').on('click',function(){ 
 		location.href = 'mInBoxListAll';		 
 	}); 
-	$('.leftSide_tabs_tab6').on('click',function(){ 
+	/* $('.leftSide_tabs_tab6').on('click',function(){ 
 		location.href = 'noticeList';		 
-	}); 
+	}); */ 
 	$('.leftSide_tabs_tab7').on('click',function(){ 
 		location.href = 'pointRecord';		 
 	});
 	
 	/* 0930 쪽지작성 클릭시 작성화면으로 */
 	$('.leftSide_Buttons_btn1').on('click',function(){ 
-		location.href = 'keywordRegistry';		 
+		window.open("keywordRegistry","keywordWindow","width=550, height=50");
 	});
 	
 	/* 0926 페이징 이미지버튼 클릭 */
@@ -145,9 +145,9 @@ function alertMsg() {
 				<div class="leftSide_tabs_tab5"> 
 					<spring:message code="mypage.leftSide_tabs_tab5" /> 
 				</div> 
-				<div class="leftSide_tabs_tab6"> 
+				<%-- <div class="leftSide_tabs_tab6"> 
 					<spring:message code="mypage.leftSide_tabs_tab6" /> 
-				</div> 
+				</div>  --%>
 				<div class="leftSide_tabs_tab7"> 
 					<spring:message code="mypage.leftSide_tabs_tab7" /> 
 				</div> 
