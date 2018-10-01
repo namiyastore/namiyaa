@@ -132,9 +132,11 @@ public class MessageController {
 	}
 	@RequestMapping(value="mOutBoxSelectOne", method = RequestMethod.GET)
 	public String mOutBoxSelectOne(int messagenum,Model model) {
-		Message message = repository.mOutBoxSelectOne(messagenum);
-		model.addAttribute("message", message);
-		return "redirect:messageList";
+		Message sendedmessage = repository.mOutBoxSelectOne(messagenum);
+		
+		System.out.println("발신한 쪽지 내용? " + sendedmessage);
+		model.addAttribute("sendedmessage", sendedmessage);
+		return "mypage/SendedMsg";
 	}
 	
 	@RequestMapping(value="mUpdate", method = RequestMethod.POST)

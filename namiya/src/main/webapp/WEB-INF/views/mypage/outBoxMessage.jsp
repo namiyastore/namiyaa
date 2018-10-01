@@ -19,6 +19,13 @@ function searchOutbox() {
 	location.href = 'mOutBoxListAll?searchWord='+searchWord;
 }
 $(function(){ 
+	
+	$('.leftSide_table_customers_title').on('click',function(){
+		var messagenum = $(this).attr('data-messagenum');
+		var url = "mOutBoxSelectOne?messagenum=" +messagenum;
+		
+		window.open(url, "messageWindow","width=500, height=550");
+	});
 	 
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
 		location.href = 'search';
@@ -195,14 +202,14 @@ function alertMsg() {
 					<tr>
 						<th>No.</th>
 						<th>Title</th>
-						<th>Sender</th>
+						<th>Receiver</th>
 						<th>Date</th>
 					</tr>
 					<c:if test="${not empty OutboxList }">
 						<c:forEach var="outboxList" items="${OutboxList}">
 							<tr class="leftSide_table_rows">
 								<td class="table_1st_td">${outboxList.messagenum }</td>
-								<td><a href="mOutBoxSelectOne?messagenum=${outboxList.messagenum}">${outboxList.msg_title }</a></td>
+								<td><div class="leftSide_table_customers_title" data-messagenum="${outboxList.messagenum}">${outboxList.msg_title }</div></td>
 								<td>${outboxList.userid }</td>
 								<td>${outboxList.regdate }</td>
 							</tr>
