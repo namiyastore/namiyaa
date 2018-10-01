@@ -49,7 +49,7 @@
 				this.close();
 			},
 			error : function(error) {
-				alert("point error :"  + error);
+				//alert("point error :"  + error);
 			}
 		});
 		
