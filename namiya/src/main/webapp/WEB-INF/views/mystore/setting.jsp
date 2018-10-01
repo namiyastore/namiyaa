@@ -630,17 +630,20 @@ function isItemColli(sel,px,py,width,height,front) {
 
 
 function startDraw() {
-	gifTimer = setInterval((function (c, i) {
-	      return function () {
-	        setGifPicture(c, 10, 10, i);
-	  		};
-	 })(context, imgList), 200);
-	    
-	drawTimer = setInterval((function (c, i, k) {
-        return function () {
-        	drawPicture(c, 10, 10, i, k);
-        };
-	 })(context, imgList, selectedMenu), 10);  
+	if(gifTimer == null) {
+		gifTimer = setInterval((function (c, i) {
+	  	    return function () {
+	  	      setGifPicture(c, 10, 10, i);
+	  			};
+		 })(context, imgList), 200);
+	}
+	if(drawTimer == null) {
+		drawTimer = setInterval((function (c, i, k) {
+   	     return function () {
+   	     	drawPicture(c, 10, 10, i, k);
+   	     };
+		 })(context, imgList, selectedMenu), 10);  
+	}
 }
 
 function saveTexture() {

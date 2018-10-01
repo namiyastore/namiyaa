@@ -150,17 +150,21 @@ var background = {
     }
 	
 	function startDraw() {
-    	gifTimer = setInterval((function (c, i) {
-  	      return function () {
-  	        setGifPicture(c, 10, 10, i);
-  	  		};
-  	 })(context, imgList), 200);
-  	    
-    	drawTimer = setInterval((function (c, i) {
-            return function () {
-            	drawPicture(c, 10, 10, i);
-            };
-		 })(context, imgList), 10);  
+		if(gifTimer == null) {
+    		gifTimer = setInterval((function (c, i) {
+  	 	     return function () {
+  	 	       setGifPicture(c, 10, 10, i);
+  		  		};
+  			 })(context, imgList), 200);
+		}
+		
+		if(drawTimer == null) {
+    		drawTimer = setInterval((function (c, i) {
+           	 return function () {
+           	 	drawPicture(c, 10, 10, i);
+           	 };
+		 	})(context, imgList), 10);  
+		}
     }
     
 	function profileEdit(homeid,userid) {
