@@ -1056,7 +1056,7 @@ public class MyStoreController {
 		Product product = p_repository.selectPdt(board.getProductnum());
 		System.out.println(product);
 		
-		/*String status = "진행중";
+		String status = "진행중";
 		
 		product.setSstatus(status);
 		
@@ -1068,7 +1068,7 @@ public class MyStoreController {
 		History history = b_repository.selectHstone(board.getProductnum());
 		
 		System.out.println("history거래내역:"+history);
-		
+		/*
 		List<Wish> wlist = b_repository.selectWish(param);
 		
 		
@@ -1120,7 +1120,7 @@ public class MyStoreController {
 		} else {
 			return "이미 양도신청을 했습니다!";
 		}*/
-		return "테스트";
+		return history.toString();
 	}
 	
 }
