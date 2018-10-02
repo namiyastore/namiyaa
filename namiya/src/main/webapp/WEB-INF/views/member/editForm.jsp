@@ -838,18 +838,9 @@
 					<br>
 					
 					<div style="display: inline-block" class="wrap-input100 validate-input">      
-							<input type="text" id="email" name="email" class="input100" maxlength="100">
-							<span class="focus-input100" data-placeholder="본인인증 이메일"></span>
-                    </div>
-							<input class="clickbutton" type="button" id="emailCheck" value=" 인증 요청 " onclick="isAuthEmail()"/>
-							<span style="display: block;" class="error_next_box" id="emailMsg" style="display:none"></span>
-					<br>
-					<div style="display: inline-block" class="wrap-input100 validate-input">				
-							<input type="text" id="authNo" name="authNo" class="input100" maxlength="100">
-							<span class="focus-input100" data-placeholder="인증번호입력"></span>
-                    </div>
-                    <span class="error_next_box" id="authNoMsg" style="display:none"></span>
-                </div>
+							<h6 style="color: #999999" class="join_title">이메일</h6>
+							<input type="text" id="email" name="email" class="input100" maxlength="100" value="${member.email}">
+                	</div>
 				
                 <!-- 휴대전화 번호 -->
                 <h6 style="color: #999999" class="join_title">전화번호</h6>

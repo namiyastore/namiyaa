@@ -176,14 +176,14 @@ function memberfind(){
 		<form action="login_form" id="login_form" method="post" class="login100-form">
 			<div style="display: inline-block"  class="wrap-input0 validate-input">
 				<input type="text" id="userid" name="userid" class="input100" maxlength="40"/>
-				<span class="focus-input100" data-placeholder="아이디"></span>
+				<span class="focus-input100" data-placeholder="ID"></span>
 			</div>
 			<span style="display: inline" class="error_next_box" id="idMsg" style="display:none"></span>
 			
 			<br><br>
 			<div style="display: inline-block"  class="wrap-input0 validate-input">
 				 <input type="password" id="password" name="password" class="input100" maxlength="40">
-				 <span class="focus-input100" data-placeholder="비밀번호"></span>
+				 <span class="focus-input100" data-placeholder="Password"></span>
 			</div>
 			<span class="error_next_box" id="pwdMsg" style="display:none"></span>
 			<div style="">

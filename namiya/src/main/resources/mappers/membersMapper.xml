@@ -48,7 +48,6 @@
 		set
 			password=#{password},
 			birthday=#{birthday},
-			email=#{email},
 			phone#{phoneNo},
 			fullAddr=#{fullAddr},
 			zipcode=#{zipcode}
