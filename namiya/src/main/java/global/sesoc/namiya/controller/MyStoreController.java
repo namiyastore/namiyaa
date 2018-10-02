@@ -109,8 +109,8 @@ public class MyStoreController {
 	/** deal_end 시간 카운트 
 	 * @throws Exception **/
 	
-	//@Scheduled(cron="*/30 * * * * *")
-	/*public void updateDeal_end() throws Exception {
+	@Scheduled(cron="*/30 * * * * *")
+	public void updateDeal_end() throws Exception {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = Calendar.getInstance().getTime();     
 		String date = df.format(today);
@@ -141,7 +141,7 @@ public class MyStoreController {
  		}
 		
 		System.out.println("한바뀌 돌았다");
-	}*/
+	}
 	
 	
 	
@@ -1091,7 +1091,7 @@ public class MyStoreController {
 			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd"); 
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
-			cal.add(Calendar.DATE, 3);
+			cal.add(Calendar.DATE, 1);
 			deal_end = sdformat.format(cal.getTime());  
 			
 			history.setDeal_end(deal_end);

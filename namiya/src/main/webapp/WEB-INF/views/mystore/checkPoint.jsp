@@ -37,7 +37,8 @@
 			return false;
 		}
 		
-		alert(boardnum+", "+userid+"," + usepoint);
+		//alert(boardnum+", "+userid+"," + usepoint);
+		
 		// 포인트 사용하는 로직
 		$.ajax({
 			method : 'get',
@@ -56,7 +57,7 @@
 	}
 	
 	function DontusePoint(boardnum, userid) {
-		alert(boardnum+", "+userid);
+		//alert(boardnum+", "+userid);
 		var sendData = {"boardnum" : boardnum, "userid" : userid};
 		$.ajax({
 			url : 'DontusePoint',
