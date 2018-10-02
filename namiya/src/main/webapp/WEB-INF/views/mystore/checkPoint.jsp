@@ -11,7 +11,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script>
 	function UsePoint(boardnum, userid) {
-		var usepoint = document.getElementById("pointcontent").value;
+		var usepoint = parseInt(document.getElementById("pointcontent").value);
 		var userid = userid;
 		var boardnum = boardnum;
 		var total = document.getElementById("total").innerHTML;

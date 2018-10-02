@@ -1102,6 +1102,7 @@ public class MyStoreController {
 			
 			history.setDeal_start(deal_start);
 			
+			System.out.println("deal_start:"+deal_start);
 			// deal_end 설정
 			Date date = new Date();
 			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd"); 
@@ -1111,7 +1112,11 @@ public class MyStoreController {
 			deal_end = sdformat.format(cal.getTime());  
 			
 			history.setDeal_end(deal_end);
+			
+			System.out.println("deal_end:"+deal_end);
+			
 			System.out.println("set deal_end history:"+history);
+			
 			int result2 = b_repository.updateHst(history);
 			
 			System.out.println("history update 결과:"+result2);
