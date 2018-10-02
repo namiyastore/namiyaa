@@ -3,7 +3,96 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.MembersMapper">
+	<select id="selectOne" parameterType="Members" resultType="Members">
+		select
+			userid
+			,password
+			,username
+			,birthday
+			,gender
+			,email
+			,phoneno
+			,fulladdr
+			,zipcode
+			,myurl
+		from
+			members
+		where
+			<choose>
+				<when test="password != null">userid = #{userid} and password = #{password}</when>
+				<when test="userid != null">userid = #{userid}</when>
+				<when test="email != null">email = #{email}</when>
+			</choose>
+	</select>
 	
+	<insert id="insertMembers" parameterType="Members">
+		insert into
+			members
+		values(
+			#{userid},
+			#{password},
+			#{username},
+			#{birthday},
+			#{gender},
+			#{email},
+			#{phoneNo},
+			#{fullAddr},
+			#{zipcode},
+			#{myurl}
+		)
+	</insert>
 	
+	<update id="updateMembers" parameterType="Members">
+		update
+			members
+		set
+			password=#{password},
+			birthday=#{birthday},
+			phone#{phoneNo},
+			fullAddr=#{fullAddr},
+			zipcode=#{zipcode}
+		where
+			userid=#{userid}
+	</update>
 	
+	<select id="selectUrl" parameterType="String" resultType="Members">
+      select
+         userid
+         ,password
+         ,username
+         ,birthday
+         ,gender
+         ,email
+         ,phoneno
+         ,fulladdr
+         ,zipcode
+         ,myurl
+      from
+         members
+      where myurl=#{myurl}
+   </select>
+   
+   <update id="updateURL" parameterType="Members">
+      update members set myurl = #{myurl}
+      where
+         userid = #{userid}
+   </update>
+   
+   <select id="selectid" resultType="Members">
+      select 
+         userid
+         ,password
+         ,username
+         ,birthday
+         ,gender
+         ,email
+         ,phoneno
+         ,fulladdr
+         ,zipcode
+         ,myurl
+      from
+         members
+      where
+         userid = #{userid}
+   </select>
 </mapper>

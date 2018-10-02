@@ -3,7 +3,42 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.NoticeMapper">
-	
-	
-	
+	<select id="nListAll" resultType="Notice" parameterType="string">
+	SELECT
+		noticenum,userid,boardnum
+	FROM
+		notice
+	where
+		userid = #{userid}
+	ORDER BY
+		noticenum DESC
+	</select>
+	<insert id="nInsert" parameterType="Notice">
+	INSERT INTO
+		notice(noticenum,userid,boardnum)
+	VALUES
+		(noticenum_seq.nextval,#{userid},#{boardnum})
+	</insert>
+	<delete id="nDelete" parameterType="int">
+	DELETE FROM
+		notice
+	WHERE
+		noticenum = #{noticenum}
+	</delete>
+	<select id="nSelectOne" parameterType="int" resultType="Notice">
+		SELECT
+			noticenum,userid,boardnum
+		FROM
+			notice
+		WHERE
+			noticenum = #{noticenum}
+	</select>
+	<update id="nUpdate" parameterType="Notice">
+	UPDATE
+		notice
+	SET
+		userid =  #{userid}, boardnum = #{boardnum}
+	WHERE
+		noticenum = #{noticenum}
+	</update>
 </mapper>

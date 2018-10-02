@@ -3,7 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.InterestMapper">
+
+<insert id="iInsert" parameterType="Interest">
+	insert into interest 
+		(interestnum,userid,boardnum)
+	values(interestnum_seq.nextval,#{userid},#{boardnum})
+</insert>
+<delete id="iDelete" parameterType="int">
+	delete from interest
+	where interestnum = #{interestnum}
+</delete>
+
+<select id="iListAll" resultType="Interest" parameterType="string">
+	select 
+		interestnum,interest.userid,interest.boardnum,board.TITLE
+	from
+		interest, board
+	where
+		interest.USERID = #{userid}
+    and
+        INTEREST.BOARDNUM = BOARD.BOARDNUM
+</select>
+
+<select id="iSelectOne" parameterType="int" resultType="Interest">
+	select
+		interestnum, userid ,boardnum
+	from
+		interest
+	where
+		interestnum = #{interestnum}
+</select>
 	
-	
-	
+<update id="iUpdate" parameterType="Interest">
+	UPDATE
+		interest
+	SET
+		userid = #{userid}, boardnum = #{boardnum}
+	WHERE
+		interestnum = #{interestnum}
+</update>	
 </mapper>

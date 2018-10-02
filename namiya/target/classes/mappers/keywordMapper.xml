@@ -3,7 +3,73 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.KeywordMapper">
+<select id="kListAll" resultType="Keyword" parameterType="string">
+		select
+			*
+		from
+			keyword
+		where
+			userid = #{userid}
+		order by
+			keywordnum desc
+	</select>
 	
+	<insert id="kInsert" parameterType="Keyword">
+		insert into	keyword
+		(keywordnum, keywordname,categorynum,userid)
+		values
+		(
+			keywordnum_seq.nextval,
+			#{keywordname},
+			#{categorynum},
+			#{userid}
+		)
+	</insert>
 	
+	<delete id="kDelete" parameterType="int">
+		delete from keyword
+			where keywordnum = #{keywordnum}
+	</delete>
+	
+	<select id="kSelectOne" parameterType="int" resultType="Keyword">
+		select
+			keywordnum,keywordname,category,userid
+		from
+			keyword
+		where
+			keywordnum = #{keywordnum}
+	</select>
+	
+	<update id="kUpdate" parameterType="Keyword">
+		update
+			keyword
+		set
+			keywordname = #{keywordname}, category = #{category} ,userid = #{userid}
+		where
+			keywordnum = #{keywordnum}
+	</update>	
+	
+	<select id="chkKeywordDupl" parameterType="Keyword" resultType="int">
+		select 
+			count(*) 
+		from 
+			keyword 
+		where 
+			userid = #{userid} 
+		and 
+			categorynum = #{categorynum} 
+		and 
+			keywordname = #{keywordname}
+	</select>
+	
+	<select id="kListAllWitoutUserid" resultType="Keyword">
+		select 
+			keywordnum,
+			keywordname,
+			categorynum,
+			userid 
+		from 
+			keyword 
+	</select>
 	
 </mapper>

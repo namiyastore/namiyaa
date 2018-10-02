@@ -48,8 +48,8 @@
 			success : function(resp) {
 				alert(resp);
 			},
-			error : function(error) {
-				alert("point error :"  + error);
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 		

@@ -128,4 +128,36 @@
 			boardnum = (select max(boardnum) from board)
 	</select>
 	
+	<select id="selectItemRanking" parameterType="map" resultType="Product">
+		select 
+			productname, productnum 
+		from
+		(
+		    select a.categoryname as productname, b.productnum
+		    <choose>
+		    	<when test="lang=='ko'">
+		    		from categories a
+		    	</when>
+		    	<when test="lang=='ja'">
+		    		from categoriesja a
+		    	</when>
+		    	<when test="lang=='en'">
+		    		from categoriesen a
+		    	</when>
+		    </choose>
+		    , (
+		        select count(*) as productnum, categorynum from PRODUCT where sstatus = '등록' group by categorynum order by productnum desc
+		    ) b
+		    where a.categorynum = b.categorynum 
+		    order by b.productnum desc
+		)
+		where rownum &lt;= 3
+	</select>
+	
+	<select id="getMyurl" parameterType="string" resultType="string">
+		select myurl from members where userid = (
+		    select userid from BOARD where boardnum = #{boardnum}
+		)
+	</select>
+	
 </mapper>

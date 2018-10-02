@@ -3,7 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.ReviewMapper">
+	<select id="selectReviewAll" resultType="Review" parameterType="String">
+		select reviewnum, userid, review_content, to_char(regdate, 'YYYY-MM-DD') regdate, store_owner from review where store_owner=#{store_owner} order by reviewnum desc
+	</select>
 	
+	<insert id="insertReview" parameterType="Review">
+		insert into review (reviewnum, userid, review_content, regdate, store_owner) values(reviewnum_seq.nextval, #{userid}, #{review_content}, sysdate, #{store_owner})
+	</insert>
 	
-	
+	<delete id="deleteReview" parameterType="Integer">
+		delete from review where reviewnum=#{reviewnum}
+	</delete>
 </mapper>

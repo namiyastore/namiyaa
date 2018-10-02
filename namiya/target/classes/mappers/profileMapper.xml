@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="global.sesoc.namiya.dao.ProfileMapper">
+
+	<select id="select" parameterType="String" resultType="Profile">
+		select * from profile where userid = #{userid}
+	</select>
+	
+	<update id="update" parameterType="Profile">
+		update 
+			profile 
+		set 
+			content = #{content}, originalfile = #{originalfile}, savedfile = #{savedfile} , nickname = #{nickname}
+		where
+			userid = #{userid} 
+		
+	</update>
+	
+	<insert id="insert" parameterType="Profile">
+		insert into profile values(profile_seq.nextval,#{userid},null,null,'안녕하세요',#{nickname})
+	</insert>
+	
+	<select id="selectNickname" parameterType="String" resultType="Profile">
+		select * from profile where nickname = #{nickname}
+	</select>
+	
+	
+</mapper>

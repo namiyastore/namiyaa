@@ -18,9 +18,9 @@
 		)
 	</insert>
 	
-	<select id="selectOne" parameterType="string" resultType="int">
+	<select id="selectOne" parameterType="string" resultType="Linenotify">
 		select 
-			count(*) total 
+			userid, token, onoff 
 		from 
 			linenotify 
 		where 

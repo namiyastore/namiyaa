@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import global.sesoc.namiya.vo.Board;
+
 import global.sesoc.namiya.vo.Categories;
 
 @Repository
@@ -47,7 +47,7 @@ public class CategoriesRepository {
 	public List<Categories> Mlist(int categorynum, String lang) {
 		CategoriesMapper mapper = session.getMapper(CategoriesMapper.class);
 		
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		
 		map.put("categorynum", categorynum);
 		map.put("lang", lang);
@@ -60,7 +60,7 @@ public class CategoriesRepository {
 	public List<Categories> Slist(int categorynum, String lang) {
 		CategoriesMapper mapper = session.getMapper(CategoriesMapper.class);
 		
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		
 		map.put("categorynum", categorynum);
 		map.put("lang", lang);

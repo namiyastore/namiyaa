@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="global.sesoc.namiya.dao.KeywordchkMapper">
+	
+	<insert id="insertKeywordchk" parameterType="Keywordchk">
+		insert into 
+			keywordchk 
+		(
+			pnum,
+			boardnum,
+			userid
+		) 
+		values
+		(
+			keywordchk_seq.nextval,
+			#{boardnum},
+			#{userid}
+		)
+	</insert>
+	
+	<select id="selectCount" parameterType="Keywordchk" resultType="int">
+		select 
+			count(*) 
+		from 
+			keywordchk 
+		where 
+			userid = #{userid} 
+		and 
+			boardnum = #{boardnum}
+	</select>
+	
+	<delete id="deleteKeywordchk">
+		delete from keywordchk where userid = '0'
+	</delete>
+	
+	<delete id="deleteKeywordchkDupl" parameterType="Keywordchk">
+		delete from keywordchk 
+		where 
+			userid = #{userid} 
+		and 
+			boardnum = #{boardnum}  
+	</delete>
+	
+</mapper>

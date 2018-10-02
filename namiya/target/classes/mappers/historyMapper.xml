@@ -3,7 +3,85 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="global.sesoc.namiya.dao.HistoryMapper">
+	<select id="hListAll" resultType="History" parameterType="map">
+		SELECT
+			historynum,
+			productnum,
+			sellerid,
+			buyerid,
+			to_char(deal_start, 'YYYY-MM-DD') deal_start,
+			to_char(deal_end, 'YYYY-MM-DD') deal_end
+		FROM
+			history
+		WHERE 
+			sellerid=#{userid} or buyerid=#{userid}
+		ORDER BY
+			historynum desc
+
+	</select>
+	<select id="hSelectOne" parameterType="int" resultType="History">
+		SELECT
+			historynum,
+			productnum,
+			sellerid,
+			buyerid,
+			deal_start,
+			deal_end
+		FROM
+			history
+		WHERE
+			historynum = #{historynum}
+	</select>
+	<!-- <insert id="hInsert" parameterType="History"> insert into history (historynum, 
+		boardnum ,sellerid, buyerid, regdate) values (historynum_seq.nextval, #{boardnum} 
+		, #{sellerid}, #{buyerid}, sysdate) </insert> <delete id="hDelete" parameterType="int"> 
+		delete from history where historynum = #{historynum} </delete> <update id="hUpdate" 
+		parameterType="History"> update history set boardnum = #{boardnum}, sellerid 
+		= #{sellerid}, buyerid = #{buyerid}, regdate = sysdate where historynum = 
+		#{historynum} </update> -->
+		
+	<select id="selectHst" parameterType="Integer" resultType="History">
+		SELECT
+			historynum,
+			productnum,
+			sellerid,
+			buyerid,
+			deal_start,
+			deal_end
+		FROM
+			history
+		WHERE
+			productnum = #{productnum}
+	</select>
 	
+	<delete id="hDelete" parameterType="Integer">
+		delete history where historynum=#{historynum}
+	</delete>
 	
+	<select id="selecthListAll" resultType="History">
+		SELECT
+			historynum,
+			productnum,
+			sellerid,
+			buyerid,
+			to_char(deal_start, 'YYYY-MM-DD') deal_start,
+			to_char(deal_end, 'YYYY-MM-DD') deal_end
+		FROM
+			history
+		ORDER BY
+			historynum desc
+	</select>
 	
+	<select id="getHistoryRecordCount" resultType="int">
+		SELECT
+			count(messagenum)
+		FROM
+			message
+		WHERE
+			copy = 0
+		AND
+			msg_title LIKE '%'||#{searchWord}||'%'
+		OR
+			msg_content LIKE '%'||#{searchWord}||'%'
+	</select>
 </mapper>
