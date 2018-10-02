@@ -1039,7 +1039,7 @@ public class MyStoreController {
 	@ResponseBody
 	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/usePoint", method=RequestMethod.GET, produces = "application/text; charset=utf8")
 	public String UsePoint(Model model, @PathVariable("miniurl")String miniurl, String userid, int usepoint, int boardnum) {
-		/*System.out.println(userid);
+		System.out.println(userid);
 		System.out.println(usepoint);
 		
 		Wish wish = new Wish();
@@ -1056,7 +1056,7 @@ public class MyStoreController {
 		Product product = p_repository.selectPdt(board.getProductnum());
 		System.out.println(product);
 		
-		String status = "진행중";
+		/*String status = "진행중";
 		
 		product.setSstatus(status);
 		
