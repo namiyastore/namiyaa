@@ -37,7 +37,7 @@
 			return false;
 		}
 		
-		//alert(boardnum+", "+userid+"," + usepoint);
+		alert(boardnum+", "+userid+"," + usepoint);
 		
 		// 포인트 사용하는 로직
 		$.ajax({
@@ -47,7 +47,6 @@
 			contentType : 'application/json; charset=UTF-8',
 			success : function(resp) {
 				alert(resp);
-				this.close();
 			},
 			error : function(error) {
 				alert("point error :"  + error);
@@ -61,12 +60,11 @@
 		var sendData = {"boardnum" : boardnum, "userid" : userid}; 
 		$.ajax({
 			url : 'DontusePoint',
-			method : 'get',
+			method : 'post',
 			data : JSON.stringify(sendData),
 			contentType : 'application/json; charset=UTF-8',
 			success : function(resp) {
 				alert(resp);
-				this.close();
 			},
 			error : function(error) {
 				alert("point error :"  + error);
