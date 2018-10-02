@@ -150,15 +150,15 @@
 			<div class="leftSide_table" style="overflow-x:hidden; overflow-y:auto;">
 				<table id="customers">
 					<tr>
-						<th>거래번호</th>
-						<th>거래종류</th>
-						<th>물건이름</th>
-						<th>거래시작날짜</th>
-						<th>거래완료날짜</th>
-						<th>판매자</th>
-						<th>구매자</th>
-						<th>거래상태</th>
-						<th>상세보기</th>
+						<th><spring:message code="history.num" /></th>
+						<th><spring:message code="history.sort" /></th>
+						<th><spring:message code="history.name" /></th>
+						<th><spring:message code="history.start" /></th>
+						<th><spring:message code="history.end" /></th>
+						<th><spring:message code="history.seller" /></th>
+						<th><spring:message code="history.buyer" /></th>
+						<th><spring:message code="history.status" /></th>
+						<th><spring:message code="history.statusShow" /></th>
 					</tr>
 					<c:if test="${not empty hlist }">
 						<c:forEach var="hList" items="${hlist}" varStatus="status">
@@ -185,7 +185,7 @@
 					</c:if>
 					<c:if test="${empty hlist }">
 						<tr>
-							<td colspan="9">구매 내역이 없습니다.</td>
+							<td colspan="9"><spring:message code="history.empty" /></td>
 						</tr>
 					</c:if>
 				</table>

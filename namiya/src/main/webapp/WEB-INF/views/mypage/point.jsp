@@ -153,14 +153,14 @@ function alertMsg() {
 				<table id="customers"> 
 					<thead> 
 						<tr> 
-							<th>Point</th> 
-							<th>Service</th> 
-							<th>Date</th> 
+							<th><spring:message code="point.point" /></th> 
+							<th><spring:message code="point.service" /></th> 
+							<th><spring:message code="point.date" /></th> 
 						</tr> 
 					</thead> 
 					<c:if test="${empty pointRecord }"> 
 						<tr> 
-							<td colspan="3">포인트가 없습니다 	</td> 
+							<td colspan="3"><spring:message code="point.empty" /></td> 
 						</tr> 
 					</c:if> 
 					<c:if test="${not empty pointRecord }"> 
@@ -183,7 +183,7 @@ function alertMsg() {
 						<tfoot> 
 							<tr style="color: white; background-color: #0B3B0B;"> 
 								<td colspan="3"> 
-										현재포인트 : <span id="pointTotal" ></span> 
+										<spring:message code="point.currrentPoint" /> : <span id="pointTotal" ></span> 
 								</td> 
 							</tr> 
 						</tfoot> 

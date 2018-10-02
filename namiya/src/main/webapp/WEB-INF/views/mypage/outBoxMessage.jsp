@@ -201,9 +201,9 @@ function alertMsg() {
 				<table id="customers">
 					<tr>
 						<th>No.</th>
-						<th>Title</th>
-						<th>Receiver</th>
-						<th>Date</th>
+						<th><spring:message code="outBoxMessage.title" /></th>
+						<th><spring:message code="outBoxMessage.sender" /></th>
+						<th><spring:message code="outBoxMessage.date" /></th>
 					</tr>
 					<c:if test="${not empty OutboxList }">
 						<c:forEach var="outboxList" items="${OutboxList}">
@@ -218,7 +218,7 @@ function alertMsg() {
 					<c:if test="${empty OutboxList }">
 						<tr>
 							<td colspan="4">
-								<p>받은 쪽지가 없습니다</p>
+								<p><th><spring:message code="outBoxMessage.empty" /></th></p>
 							</td>
 						</tr>
 					</c:if>

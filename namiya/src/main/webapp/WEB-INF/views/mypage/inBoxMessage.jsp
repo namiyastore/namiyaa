@@ -190,9 +190,9 @@ function alertMsg() {
 				<table id="customers">
 					<tr>
 						<th>No.</th>
-						<th>Title</th>
-						<th>Sender</th>
-						<th>Date</th>
+						<th><spring:message code="inBoxMessage.title" /></th>
+						<th><spring:message code="inBoxMessage.sender" /></th>
+						<th><spring:message code="inBoxMessage.date" /></th>
 					</tr>
 					<c:if test="${not empty InboxList }">
 						<c:forEach var="inboxList" items="${InboxList}">
@@ -208,7 +208,7 @@ function alertMsg() {
 					<c:if test="${empty InboxList }">
 						<tr>
 							<td colspan="4">
-								<p>받은 쪽지가 없습니다</p>
+								<spring:message code="inBoxMessage.empty" />
 							</td>
 						</tr>
 					</c:if>
