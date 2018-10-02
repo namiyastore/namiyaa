@@ -450,3 +450,10 @@ tbody {
 	background-color: white; 
 	color: #2A3D4C;
 }
+
+/* 페이징버튼의 효과주기 */
+#selectedPage{
+	color: #FE2E2E;
+	font-weight: bolder;
+	font-size: 20pt;
+}

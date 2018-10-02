@@ -20,11 +20,19 @@ function searchInbox() {
 }
 $(function(){ 
 	
+	//쪽지 쓰기할때 새창 띄우고 작성
+	$('.leftSide_Buttons_btn1').on('click',function(){
+		var url = "my_page_sendMsg";
+		
+		window.open(url, "Write msg Window","width=500, height=550");
+	});
+	
+	//쪽지함 읽기
 	$('.leftSide_table_customers_title').on('click',function(){
 		var messagenum = $(this).attr('data-messagenum');
 		var url = "mInBoxSelectOne?messagenum=" +messagenum;
 		
-		window.open(url, "messageWindow","width=500, height=550");
+		window.open(url, "Read msg Window","width=500, height=550");
 	});
 	
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
@@ -87,9 +95,9 @@ $(function(){
 	});
 	
 	/* 0926 쪽지작성 클릭시 작성화면으로 */
-	$('.leftSide_Buttons_btn1').on('click',function(){ 
+	/* $('.leftSide_Buttons_btn1').on('click',function(){ 
 		location.href = 'my_page_sendMsg';		 
-	});
+	}); */
 	
 	/* 0926 페이징 이미지버튼 클릭 */
 	$('#btn1').on('click',function(){ 
@@ -223,7 +231,7 @@ function alertMsg() {
 				<img id="btn2" src="resources/images/arrow8.png" width="24px" height="24px">
 				<c:forEach var="page" begin="${navi.startPageGroup }" end="${navi.endPageGroup }">
 					<c:if test="${page == currentPage }">
-						<span id="selectedPage">${page} &nbsp;</span>
+						<span id="selectedPage" style="color: ">&nbsp; ${page} &nbsp;</span>
 					</c:if>
 					<c:if test="${page != currentPage }">
 						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp;</a>
@@ -237,8 +245,9 @@ function alertMsg() {
 		<div class="rightSide"> 
 			<div class="rightSide_MyInfoBox"> 
 				<div class="rightSide_MyInfoBoxUp"> 
-					<div class="rightSide_MyInfoBoxUp_profileImg"> 
-						<img src="resources/images/parkby.jpg" id="rightSide_MyInfoBoxUp_profileImg_profile_pic"> 
+					<div class="rightSide_MyInfoBoxUp_profileImg">
+					<img onError="this.src='resources/images/human.png'" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" width="80px" height="80px"> 
+						<!-- <img src="resources/images/parkby.jpg" id="rightSide_MyInfoBoxUp_profileImg_profile_pic"> --> 
 					</div> 
 					<div class="rightSide_MyInfoBoxUp_userId"> 
 						${sessionScope.loginId} <!-- 세션id가 있으면 거기서 가지고 옮 9/5 <%-- ${"user.userid"} --%>  --> 

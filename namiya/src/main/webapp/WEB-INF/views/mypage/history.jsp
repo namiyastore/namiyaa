@@ -105,10 +105,11 @@
 	}
 	
 </script>
-<style>
+<style> 
 	body {
 		font-family: 'Raleway', 'Nanum Gothic';
 	}
+	
 </style>
 </head>
 <body>
@@ -197,10 +198,10 @@
 				<img id="btn2" src="resources/images/arrow8.png" width="24px" height="24px">
 				<c:forEach var="page" begin="${navi.startPageGroup }" end="${navi.endPageGroup }">
 					<c:if test="${page == currentPage }">
-						<span id="selectedPage">${page} &nbsp</span>
+						<span id="selectedPage">&nbsp; ${page} &nbsp;</span>
 					</c:if>
 					<c:if test="${page != currentPage }">
-						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp</a>
+						&nbsp; <a style="text-decoration:none; color: white; font-size: 15pt;" href="historyList?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp;</a>
 					</c:if>
 				</c:forEach>
 				<img id="btn3" src="resources/images/arrow9.png" width="24px" height="24px">
@@ -213,7 +214,8 @@
 			<div class="rightSide_MyInfoBox">
 				<div class="rightSide_MyInfoBoxUp">
 					<div class="rightSide_MyInfoBoxUp_profileImg">
-						<img src="resources/images/parkby.jpg"	id="rightSide_MyInfoBoxUp_profileImg_profile_pic">
+						<img onError="this.src='resources/images/human.png'" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" width="80px" height="80px">
+						<!-- <img src="resources/images/parkby.jpg"	id="rightSide_MyInfoBoxUp_profileImg_profile_pic"> -->
 					</div>
 					<div class="rightSide_MyInfoBoxUp_userId">
 						${sessionScope.loginId}

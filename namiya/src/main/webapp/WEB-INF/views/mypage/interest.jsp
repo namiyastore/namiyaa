@@ -202,10 +202,10 @@ function alertMsg() {
 				<img id="btn2" src="resources/images/arrow8.png" width="24px" height="24px">
 				<c:forEach var="page" begin="${navi.startPageGroup }" end="${navi.endPageGroup }">
 					<c:if test="${page == currentPage }">
-						<span id="selectedPage">${page} &nbsp;</span>
+						<span id="selectedPage">&nbsp; ${page} &nbsp;</span>
 					</c:if>
 					<c:if test="${page != currentPage }">
-						<a style="text-decoration:none; color: white; font-size: 15pt;" href="interestList?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp;</a>
+						&nbsp; <a style="text-decoration:none; color: white; font-size: 15pt;" href="interestList?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp;</a>
 					</c:if>
 				</c:forEach>
 				<img id="btn3" src="resources/images/arrow9.png" width="24px" height="24px">
@@ -218,7 +218,8 @@ function alertMsg() {
 			<div class="rightSide_MyInfoBox"> 
 				<div class="rightSide_MyInfoBoxUp"> 
 					<div class="rightSide_MyInfoBoxUp_profileImg"> 
-						<img src="resources/images/parkby.jpg" id="rightSide_MyInfoBoxUp_profileImg_profile_pic"> 
+						<!-- 프로필사진 --> 
+						<img onError="this.src='resources/images/human.png'" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" width="80px" height="80px"> 
 					</div> 
 					<div class="rightSide_MyInfoBoxUp_userId"> 
 						${sessionScope.loginId} <!-- 세션id가 있으면 거기서 가지고 옮 9/5 <%-- ${"user.userid"} --%>  --> 

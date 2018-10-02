@@ -13,6 +13,12 @@
 <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet"> 
 <script src="resources/search/js/common/jquery-1.12.4.js"></script> 
 <style>
+::-webkit-scrollbar{width: 16px;}
+::-webkit-scrollbar-track {background-color:AE79F1;}
+::-webkit-scrollbar-thumb {background-color:#79bfe5;}
+::-webkit-scrollbar-thumb:hover {background: #79bfe5;}
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+   width:16px;height:16px;background:#79bfe5;}
 	body {
 		font-family: 'Raleway', 'Nanum Gothic';
 	}
@@ -197,7 +203,8 @@ function alertMsg() {
 			<div class="rightSide_MyInfoBox"> 
 				<div class="rightSide_MyInfoBoxUp"> 
 					<div class="rightSide_MyInfoBoxUp_profileImg"> 
-						<img src="resources/images/parkby.jpg" id="rightSide_MyInfoBoxUp_profileImg_profile_pic"> 
+						<!-- 프로필사진 --> 
+						<img onError="this.src='resources/images/human.png'" src="${pageContext.request.contextPath}/home/img/profile/${profile.savedfile}" width="80px" height="80px"> 
 					</div> 
 					<div class="rightSide_MyInfoBoxUp_userId"> 
 						${sessionScope.loginId} <!-- 세션id가 있으면 거기서 가지고 옮 9/5 <%-- ${"user.userid"} --%>  --> 
