@@ -13,13 +13,16 @@
 		</if>)
 	</insert>
 	
+	
 	<select id="selectList" resultType="map" parameterType="map">
 		select b.boardnum, b.productnum, b.userid, to_char(b.regdate, 'YYYY-MM-DD') regdate, b.title, b.content, b.service, b.originalfile, b.savedfile, p.sstatus from board b, product p where b.productnum = p.productnum and service=#{service} and userid=#{userid} order by boardnum desc
 	</select>
 	
+	
 	<select id="selectOne" resultType="Board" parameterType="Integer">
 		select boardnum, productnum, userid, to_char(regdate,'YYYY-MM-DD') regdate, title, content, service, originalfile, savedfile from board where boardnum=#{boardnum}
 	</select>
+	
 	
 	<select id="getTotalPage" parameterType="map" resultType="Integer">
 		select count(*) from board where service=#{service} and userid=#{userid}
@@ -77,9 +80,11 @@
 		select historynum, productnum, sellerid, buyerid, to_char(deal_start, 'YYYY-MM-DD') deal_start, to_char(deal_end, 'YYYY-MM-DD') deal_end from history where productnum=#{productnum}
 	</select>
 	
+	
 	<update id="updateHst" parameterType="History">
 		update history set deal_start=#{deal_start}, deal_end=#{deal_end} where historynum=#{historynum}
 	</update>
+	
 	
 	<update id="updateBuyer" parameterType="History">
 		update history set buyerid=#{buyerid} where historynum=#{historynum}
