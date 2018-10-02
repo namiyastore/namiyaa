@@ -78,7 +78,6 @@ function noticeService() {
 			} 
 		} 
 	});	 
-	 
 } 
  
 // 인증키가 등록되었다는 메세지 출력 

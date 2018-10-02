@@ -266,7 +266,7 @@
 					<th class="deal_list" >
 						<spring:message code="deal.tradeSort" />
 					</th>
-					<th class="deal_list" >
+					<th class="deal_list" style="font-size: 12px">
 						<spring:message code="deal.tradeName" />
 					</th>
 					<th class="deal_list" >
@@ -278,7 +278,7 @@
 					<th class="deal_list" >
 						<spring:message code="deal.seller" />
 					</th>
-					<th class="deal_list" >
+					<th class="deal_list" style="font-size: 12px" >
 						<spring:message code="deal.buyer" />
 					</th>
 					<th class="deal_list" >

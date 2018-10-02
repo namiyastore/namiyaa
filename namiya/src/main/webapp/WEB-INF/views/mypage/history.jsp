@@ -190,6 +190,7 @@
 					</c:if>
 				</table>
 			</div><!-- 테이블의 div 닫음 -->
+			
 			<!-- 페이징 처리 부분 -->
 			<div class="leftSide_page">
 				<img id="btn1" src="resources/images/arrow7.png" width="24px" height="24px">
@@ -206,6 +207,7 @@
 				<img id="btn4" src="resources/images/arrow10.png" width="24px" height="24px">
 			</div>
 		</div>
+		
 		<!-- 개인정보 표시 부분 -->
 		<div class="rightSide">
 			<div class="rightSide_MyInfoBox">
