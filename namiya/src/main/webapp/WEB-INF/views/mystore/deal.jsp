@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,24 +40,24 @@
 		});
 
 		/* 0915 탭들 hover효과 추가 */
-		$('.leftSide_tabs_tab1').on('click', function() {
+		/* $('.leftSide_tabs_tab1').on('click', function() {
 			location.href = 'favoriteList';
-		});
+		}); */
 		$('.leftSide_tabs_tab2').on('click', function() {
 			location.href = 'interestList';
 		});
 		$('.leftSide_tabs_tab3').on('click', function() {
 			location.href = 'historyList';
 		});
-		$('.leftSide_tabs_tab4').on('click', function() {
+		/* $('.leftSide_tabs_tab4').on('click', function() {
 			location.href = 'keywordList';
-		});
+		}); */
 		$('.leftSide_tabs_tab5').on('click', function() {
 			location.href = 'mInBoxListAll';
 		});
-		$('.leftSide_tabs_tab6').on('click', function() {
+		/* $('.leftSide_tabs_tab6').on('click', function() {
 			location.href = 'noticeList';
-		});
+		}); */
 		$('.leftSide_tabs_tab7').on('click', function() {
 			location.href = 'pointRecord';
 		});
@@ -233,18 +234,24 @@
 </head>
 <body>
 <img alt="" src="resources/images/pagetop.gif" id="logo">	
-
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />" />
 <input id="userid" type="hidden" value="${sessionScope.loginId }" />
 
 <div class="wrapper">
 	<div class="leftSide">
 		<div class="tabs">
-			<div class="leftSide_tabs_tab2">Interest</div>
-			<div class="leftSide_tabs_tab3">History</div>
-			<div class="leftSide_tabs_tab4">Keyword</div>
-			<div class="leftSide_tabs_tab5">Message</div>
-			<div class="leftSide_tabs_tab6">Notice</div>
-			<div class="leftSide_tabs_tab7">Point</div>
+			<div class="leftSide_tabs_tab2">
+				<spring:message code="mypage.leftSide_tabs_tab2" />
+			</div>
+			<div class="leftSide_tabs_tab3">
+				<spring:message code="mypage.leftSide_tabs_tab3" />
+			</div>
+			<div class="leftSide_tabs_tab5">
+				<spring:message code="mypage.leftSide_tabs_tab5" />
+			</div>
+			<div class="leftSide_tabs_tab7">
+				<spring:message code="mypage.leftSide_tabs_tab7" />
+			</div>
 		</div>
 		
 	<div class="leftSide_table" style="background-color: white; height: 500px; overflow-x:hidden; overflow-y: auto;">
@@ -340,19 +347,23 @@
 					</div>
 				</div>
 
-				<div class="rightSide_MyInfoBoxDown">
-					<div class="rightSide_MyInfoBoxDown_goToHome">Go To Home</div>
-					<!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_myStore">My Store</div>
-					<!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_profile">Edit</div>
-					<!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
-					<div class="rightSide_MyInfoBoxDown_logOut">Logout</div>
-					<!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_signOut">SignOut</div>
-					<!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
-				</div>
-				<!-- rightSide_MyInfoBoxDown div닫힘 -->
+				<div class="rightSide_MyInfoBoxDown"> 
+					<div class="rightSide_MyInfoBoxDown_goToHome"> 
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_goToHome" /> 
+					</div><!-- rightSide_MyInfoBoxDown_goToHome의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_myStore">
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_myStore" /> 
+					</div><!-- rightSide_MyInfoBoxDown_myStore의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_profile">
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_profile" />
+					</div><!-- rightSide_MyInfoBoxDown_profile의 div닫힘 0916추가 -->
+					<div class="rightSide_MyInfoBoxDown_logOut">
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_logOut" />
+					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
+					<div class="rightSide_MyInfoBoxDown_signOut">
+						<spring:message code="mypage.rightSide_MyInfoBoxDown_signOut" />
+					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
+				</div><!-- rightSide_MyInfoBoxDown div닫힘 -->
 			</div>
 			<!-- rightSide_MyInfoBox div 닫음 -->
 		</div>

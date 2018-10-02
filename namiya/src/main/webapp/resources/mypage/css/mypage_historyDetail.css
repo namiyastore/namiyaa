@@ -1,11 +1,5 @@
 @charset "UTF-8"; 
  
-/* body { */ 
-/* 	background-image: url("resources/images/NaviBackGround.png"); */ 
-/* 	background-size: 80%; */ 
-/* 	font-family: 'EcoSansMono', 'JejuGothic'; */ 
-/* } */ 
-
 
 /* 수정된 CSS */ 
 body { 
@@ -22,18 +16,6 @@ body {
 	max-width: 75%;
 	float: right; 
 }
-
-/* h2{
-	display: block;
-    font-size: 2.5em;
-    margin-block-start: 0.2em;
-    margin-block-end: 0.2em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-} */
 
 .wrapper {
     width: 100%;
@@ -86,9 +68,9 @@ body {
 	color: white; 
 } 
  
-.leftSide_tabs_tab1 { 
+/* .leftSide_tabs_tab1 { 
 	cursor: pointer; 
-} 
+} */ 
  
 .leftSide_tabs_tab2 { 
 	cursor: pointer; 
@@ -98,29 +80,30 @@ body {
 	cursor: pointer; 
 } 
  
-.leftSide_tabs_tab4 { 
+/* .leftSide_tabs_tab4 { 
 	cursor: pointer; 
-} 
+} */ 
  
 .leftSide_tabs_tab5 { 
 	cursor: pointer; 
 } 
-.leftSide_tabs_tab6 { 
+/* .leftSide_tabs_tab6 { 
 	cursor: pointer; 
-} 
+} */ 
 .leftSide_tabs_tab7 { 
 	cursor: pointer; 
 } 
  
 /* 여기부터 기존것들 0915기준 */ 
 .tabs>div {
-    width: 17%;
+    width: 25%;
     height: 80%;
     border: 1px solid rgb(50, 50, 50);
     background-color: white;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 1px solid rgb(50, 50, 50);
+    font-weight: bold;
 } 
  
 .leftSide_tabs_tab1 { 
@@ -221,18 +204,7 @@ body {
 	height: 80%; 
 } 
  
-@font-face { 
-	font-family: 'Eco Sans Mono'; 
-	src: url("resources/fonts/EcoSansMono.ttf") format('truetype'); 
-} 
- 
-@font-face { 
-	font-family: 'Jeju Gothic'; 
-	src: url("resources/fonts/JejuGothic.ttf") format('truetype'); 
-} 
- 
 #customers { 
-	font-family: 'Eco Sans Mono', 'Jeju Gothic', 'Arial'; 
 	border-collapse: collapse; 
 	width: 100%; 
 } 
@@ -380,6 +352,7 @@ tbody {
     background-color: #2A3D4C; 
     font-size: 1.1em; 
     color: white; 
+    font-weight: bold;
 } 
  
  

@@ -117,12 +117,14 @@ body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 1px solid rgb(50, 50, 50);
+    font-weight: bold;
 }
  
 .leftSide_tabs_tab1 { 
 	display: flex; 
 	justify-content: center; 
-	align-items: center; 
+	align-items: center;
+	font-style: bold; 
 } 
  
 .leftSide_tabs_tab2 { 
@@ -202,7 +204,8 @@ body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 1px black solid;
- 	align-items: center;
+    align-items: center;
+    font-weight: bold;
 }
 
 /* 0926 높이조정 */
@@ -298,7 +301,16 @@ tbody {
     justify-content: flex-end;
 }
 
+/* 페이징부분 */
+.leftSide .leftSide_page{
+	display: flex;
+	width: 90%;
+}
+
 .leftSide_page{
+	display:flex;
+	justify-content:center;
+	align-items:center;
 	border: 1px white solid;
 }
  
@@ -374,14 +386,18 @@ tbody {
     border-radius: 9px; 
     background-color: #2A3D4C; 
     font-size: 1.1em; 
-    color: white; 
+    color: white;
+    font-weight: bold; 
 } 
  
- 
+.leftSide_table_customers_title{
+	cursor: pointer;
+}
  
 .rightSide_MyInfoBoxDown > div:hover { 
 	background-color: white; 
 	color: #2A3D4C; 
+	
 } 
  
 /* 세훈 */ 
@@ -420,14 +436,15 @@ tbody {
 }
 
 /* 0926 작성버튼 및 페이징 */
-.leftSide_Buttons_btn1 { 
-	cursor: pointer; 
-	border:1px solid white;
-	border-radius: 3px; 
-    background-color: #2A3D4C; 
-    font-size: 1.2em; 
-    color: white; 
+.leftSide_Buttons_btn1 {
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 3px;
+    background-color: #2A3D4C;
+    font-size: 1.2em;
+    color: white;
     padding: 5px;
+    font-weight: bold;
 }
 .leftSide_Buttons_btn1:hover{
 	background-color: white; 

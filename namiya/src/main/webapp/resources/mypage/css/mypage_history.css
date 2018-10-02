@@ -102,6 +102,7 @@ body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 1px solid rgb(50, 50, 50);
+    font-weight: bold;
 } 
  
 .leftSide_tabs_tab1 { 
@@ -350,7 +351,8 @@ tbody {
     border-radius: 9px; 
     background-color: #2A3D4C; 
     font-size: 1.1em; 
-    color: white; 
+    color: white;
+    font-weight: bold; 
 } 
  
  

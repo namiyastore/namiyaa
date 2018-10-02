@@ -102,6 +102,7 @@ body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 1px solid rgb(50, 50, 50);
+    font-weight: bold;
 }
  
 .leftSide_tabs_tab1 { 
@@ -327,18 +328,19 @@ tbody {
 
  
  
-.rightSide_MyInfoBoxDown > div { 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 17%; 
-    width: 80%; 
-    border: 1px solid #2A3D4C; 
-    border-radius: 9px; 
-    background-color: #2A3D4C; 
-    font-size: 1.1em; 
-    color: white; 
-} 
+.rightSide_MyInfoBoxDown > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 17%;
+    width: 80%;
+    border: 1px solid #2A3D4C;
+    border-radius: 9px;
+    background-color: #2A3D4C;
+    font-size: 1.1em;
+    color: white;
+    font-weight: bold;
+}
  
  
  
