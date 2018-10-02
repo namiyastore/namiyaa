@@ -53,6 +53,7 @@ import global.sesoc.namiya.dao.InterestRepository;
 import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.MystoreRepository;
 import global.sesoc.namiya.dao.ProductRepository;
+import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.dao.ReviewRepository;
 import global.sesoc.namiya.dao.SavingRepository;
 import global.sesoc.namiya.util.FileService;
@@ -65,6 +66,7 @@ import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Message;
 import global.sesoc.namiya.vo.Mystore;
 import global.sesoc.namiya.vo.Product;
+import global.sesoc.namiya.vo.Profile;
 import global.sesoc.namiya.vo.Review;
 import global.sesoc.namiya.vo.Saving;
 import global.sesoc.namiya.vo.Wish;
@@ -99,6 +101,10 @@ public class MyStoreController {
 	
 	@Autowired
 	HistoryRepository h_repository;
+	
+	@Autowired
+	ProfileRepository pf_repository;
+	
 	
 	final String uploadPath = "/home/img/boardfile";
 	
@@ -801,6 +807,16 @@ public class MyStoreController {
 		
 		System.out.println(member);
 		List<Review> list = r_repository.selectReviewAll(store_owner, navi.getStartRecord(), navi.getCountPerPage());
+		/*
+		String userid [] = new String[list.size()];
+		Profile[] pf = new Profile[list.size()];
+		
+		for (int i = 0; i<list.size(); i++) {
+			userid[i] = list.get(i).getUserid();
+			pf
+			
+		}*/
+		
 		model.addAttribute("navi", navi);
 		model.addAttribute("list", list);
 		model.addAttribute("currentPage", currentPage);
@@ -908,7 +924,7 @@ public class MyStoreController {
 	
 	/** 양도신청 controller **/
 	@ResponseBody
-	@RequestMapping(value="/DontusePoint", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	@RequestMapping(value="/DontusePoint", method=RequestMethod.GET, produces = "application/text; charset=utf8")
 	public String selectWish(@RequestBody Wish wish, Model model, @PathVariable("miniurl")String miniurl) {
 		System.out.println(wish);
 		Map<String, String> param = new HashMap<String, String>();

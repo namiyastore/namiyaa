@@ -61,7 +61,7 @@
 		var sendData = {"boardnum" : boardnum, "userid" : userid}; 
 		$.ajax({
 			url : 'DontusePoint',
-			method : 'post',
+			method : 'get',
 			data : JSON.stringify(sendData),
 			contentType : 'application/json; charset=UTF-8',
 			success : function(resp) {
