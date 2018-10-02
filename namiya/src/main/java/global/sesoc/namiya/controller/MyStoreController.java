@@ -1068,7 +1068,7 @@ public class MyStoreController {
 		History history = b_repository.selectHstone(board.getProductnum());
 		
 		System.out.println("history거래내역:"+history);
-		/*
+		
 		List<Wish> wlist = b_repository.selectWish(param);
 		
 		
@@ -1119,8 +1119,7 @@ public class MyStoreController {
 			return "양도신청을 완료했습니다!";
 		} else {
 			return "이미 양도신청을 했습니다!";
-		}*/
-		return history.toString();
+		}
 	}
 	
 }
