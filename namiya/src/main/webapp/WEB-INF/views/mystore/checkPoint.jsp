@@ -58,7 +58,7 @@
 	
 	function DontusePoint(boardnum, userid) {
 		//alert(boardnum+", "+userid);
-		var sendData = {"boardnum" : boardnum, "userid" : userid};
+		var sendData = {"boardnum" : boardnum, "userid" : userid}; 
 		$.ajax({
 			url : 'DontusePoint',
 			method : 'post',

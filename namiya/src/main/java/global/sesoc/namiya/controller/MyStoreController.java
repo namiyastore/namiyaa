@@ -908,7 +908,7 @@ public class MyStoreController {
 	
 	/** 양도신청 controller **/
 	@ResponseBody
-	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/DontusePoint", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	@RequestMapping(value="/DontusePoint", method=RequestMethod.POST, produces = "application/text; charset=utf8")
 	public String selectWish(@RequestBody Wish wish, Model model, @PathVariable("miniurl")String miniurl) {
 		System.out.println(wish);
 		Map<String, String> param = new HashMap<String, String>();
@@ -1021,7 +1021,7 @@ public class MyStoreController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/myStore" + "/{miniurl:.+}" + "/usePoint", method=RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value="/usePoint", method=RequestMethod.GET, produces = "application/text; charset=utf8")
 	public String UsePoint(Model model, @PathVariable("miniurl")String miniurl, String userid, int usepoint, int boardnum) {
 		System.out.println(userid);
 		System.out.println(usepoint);
