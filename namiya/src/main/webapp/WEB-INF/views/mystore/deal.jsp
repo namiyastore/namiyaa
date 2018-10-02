@@ -257,18 +257,36 @@
 	<div class="leftSide_table" style="background-color: white; height: 500px; overflow-x:hidden; overflow-y: auto;">
 		<%-- 거래정보 --%>
 		<div>
-		<h2>거래상품정보</h2>
+		<h2><spring:message code="deal.tradeInfo" /></h2>
 			<table id="info">
 				<tr style="width:800px; text-align: center">
-					<th class="deal_list" >거래번호</th>
-					<th class="deal_list" >거래종류</th>
-					<th class="deal_list" >물건이름</th>
-					<th class="deal_list" >거래시작날짜</th>
-					<th class="deal_list" >거래완료날짜</th>
-					<th class="deal_list" >판매자</th>
-					<th class="deal_list" >구매자</th>
-					<th class="deal_list" >거래상태</th>
-					<th class="deal_list" style="width:400px;">거래목록</th>
+					<th class="deal_list" >
+						<spring:message code="deal.tradeNum" />
+					</th>
+					<th class="deal_list" >
+						<spring:message code="deal.tradeSort" />
+					</th>
+					<th class="deal_list" >
+						<spring:message code="deal.tradeName" />
+					</th>
+					<th class="deal_list" >
+						<spring:message code="deal.tradeStart" />
+					</th>
+					<th class="deal_list" >
+						<spring:message code="deal.tradeCompleteDate" />
+					</th>
+					<th class="deal_list" >
+						<spring:message code="deal.seller" />
+					</th>
+					<th class="deal_list" >
+						<spring:message code="deal.buyer" />
+					</th>
+					<th class="deal_list" >
+						<spring:message code="deal.tradeStatus" />
+					</th>
+					<th class="deal_list" style="width:400px;">
+						<spring:message code="deal.tradeList" />
+					</th>
 				</tr>
 				<tr class="deal_info" style="text-align: center;">
 					<td class="deal_info" >${history.historynum}</td>
@@ -289,11 +307,11 @@
 		</div>
 		<%-- 양도신청현황 --%>
 		<div id="application" style="float: left; padding-top: 20px; padding-bottom: 20px; margin-right: 20px; width:280px; height:400px;">
-		<h2>양도신청 현황</h2>
+		<h2><spring:message code="deal.giveStatus" /></h2>
 			<table id="apply" style="text-align: center;">
 				<tr>
-					<th class="apply_list">신청번호</th>
-					<th class="apply_list">신청자</th>
+					<th class="apply_list"><spring:message code="deal.giveNum" /></th>
+					<th class="apply_list"><spring:message code="deal.giveUser" /></th>
 				</tr>
 				<c:forEach var="wlist" items="${wlist}" varStatus="status">
 				<tr>
@@ -306,7 +324,7 @@
 	
 		<%-- 추첨결과 --%>
 		<div id="result" style="float: left; padding-top: 20px; padding-bottom: 20px; width:500px; height:400px;" align="center">
-		<h2 style="margin-bottom: 10px;">추첨결과</h2>
+		<h2 style="margin-bottom: 10px;"><spring:message code="deal.giveResult" /></h2>
 			<div style="float: left; width:300px;">
 				<img src="resources/images/takarakuzi.gif" style="width:200px;">
 				<br/>
@@ -320,7 +338,7 @@
 			<div style="float: left; width:200px;">
 				<table style="text-align: center; padding-top: 10px;">
 					<tr>
-						<th class="result" colspan="2">당첨자</th>
+						<th class="result" colspan="2"><spring:message code="deal.winner" /></th>
 					</tr>
 					<tr id="winner"></tr>
 				</table>
