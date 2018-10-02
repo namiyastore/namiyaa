@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import global.sesoc.namiya.dao.InterestRepository;
 import global.sesoc.namiya.dao.MembersRepository;
@@ -24,12 +25,12 @@ public class InterestController {
 	MembersRepository Members_repository;
 	
 	@RequestMapping(value="interestList",method = RequestMethod.GET)
-	public String interest(HttpSession session ,Model model) {
+	public String interest(
+			@RequestParam(value = "currentPage", defaultValue="1") int currentPage,
+			HttpSession session ,Model model) {
 		
-
 		//myurl을 가져오는 코드		
 		String userid = session.getAttribute("loginId").toString();
-		System.out.println("0930 userid? " + userid);
 		List<Interest> ilist = repository.iListAll(userid);
 		Members m = new Members();
 		

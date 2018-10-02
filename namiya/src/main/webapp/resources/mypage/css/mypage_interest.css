@@ -95,7 +95,7 @@ body {
  
 /* 여기부터 기존것들 0915기준 */ 
 .tabs>div {
-    width: 17%;
+    width: 25%;
     height: 80%;
     border: 1px solid rgb(50, 50, 50);
     background-color: white;

@@ -30,9 +30,10 @@ public class MessageController {
 	BoardRepository b_repository;
 	
 	@RequestMapping(value="mInBoxListAll", method = RequestMethod.GET)
-	public String mInBoxListAll(@RequestParam(value = "currentPage", defaultValue="1") int currentPage,
-			@RequestParam(value="searchWord", defaultValue = "") String searchWord,Model model
-			,HttpSession session) {
+	public String mInBoxListAll(
+			@RequestParam(value = "currentPage", defaultValue="1") int currentPage,
+			@RequestParam(value="searchWord", defaultValue = "") String searchWord,
+			Model model,HttpSession session) {
 		
 		String userid = session.getAttribute("loginId").toString();
 		

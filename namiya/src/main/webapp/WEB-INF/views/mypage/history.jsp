@@ -67,9 +67,11 @@
 		$('.leftSide_tabs_tab3').on('click', function() {
 			location.href = 'historyList';
 		});
-		$('.leftSide_tabs_tab4').on('click', function() {
+		
+		/* $('.leftSide_tabs_tab4').on('click', function() {
 			location.href = 'keywordList';
-		});
+		}); 1002 수정 */
+		
 		$('.leftSide_tabs_tab5').on('click', function() {
 			location.href = 'mInBoxListAll';
 		});
@@ -121,9 +123,11 @@
 				<div class="leftSide_tabs_tab3"> 
 					<spring:message code="mypage.leftSide_tabs_tab3" /> 
 				</div> 
-				<div class="leftSide_tabs_tab4"> 
+				
+				<%-- <div class="leftSide_tabs_tab4"> 
 					<spring:message code="mypage.leftSide_tabs_tab4" /> 
-				</div> 
+				</div>  1002수정 --%>
+				
 				<div class="leftSide_tabs_tab5"> 
 					<spring:message code="mypage.leftSide_tabs_tab5" /> 
 				</div> 

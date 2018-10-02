@@ -78,9 +78,9 @@ $(function(){
 	$('.leftSide_tabs_tab3').on('click',function(){ 
 		location.href = 'historyList';		 
 	}); 
-	$('.leftSide_tabs_tab4').on('click',function(){ 
-		location.href = 'keywordList';		 
-	}); 
+	/* $('.leftSide_tabs_tab4').on('click',function(){ 
+		location.href = 'keywordList'; 1002 없앰 수정	 	 
+	}); */
 	$('.leftSide_tabs_tab5').on('click',function(){ 
 		location.href = 'mInBoxListAll';		 
 	}); 
@@ -144,9 +144,9 @@ function alertMsg() {
 				<div class="leftSide_tabs_tab3"> 
 					<spring:message code="mypage.leftSide_tabs_tab3" /> 
 				</div> 
-				<div class="leftSide_tabs_tab4"> 
+				<%-- <div class="leftSide_tabs_tab4"> 
 					<spring:message code="mypage.leftSide_tabs_tab4" /> 
-				</div> 
+				</div>  1002 수정--%>
 				<div class="leftSide_tabs_tab5"> 
 					<spring:message code="mypage.leftSide_tabs_tab5" /> 
 				</div> 
@@ -172,8 +172,8 @@ function alertMsg() {
 				<table id="customers">
 					<tr>
 						<th>No.</th>
-						<th>관심상품의 게시글</th>
-						<th colspan="2">삭제</th>
+						<th><spring:message code="interest.column1" /></th>
+						<th colspan="2"><spring:message code="interest.column2" /></th>
 					</tr>
 					<c:if test="${not empty ilist }">
 						<c:forEach var="iList" items="${ilist }">
@@ -190,7 +190,7 @@ function alertMsg() {
 					</c:if>
 					<c:if test="${empty ilist }">
 						<tr>
-							<td colspan="4">관심상품이 없습니다.</td>
+							<td colspan="4"><spring:message code="interest.empty" /></td>
 						</tr>
 					</c:if>
 				</table>
@@ -205,7 +205,7 @@ function alertMsg() {
 						<span id="selectedPage">${page} &nbsp;</span>
 					</c:if>
 					<c:if test="${page != currentPage }">
-						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp;</a>
+						<a style="text-decoration:none; color: white; font-size: 15pt;" href="interestList?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp;</a>
 					</c:if>
 				</c:forEach>
 				<img id="btn3" src="resources/images/arrow9.png" width="24px" height="24px">
