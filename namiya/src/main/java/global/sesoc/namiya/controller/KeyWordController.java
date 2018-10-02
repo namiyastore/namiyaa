@@ -44,63 +44,63 @@ public class KeyWordController {
 	@Autowired
 	KeywordchkRepository Keywordchk_repository;
 	
-	@Scheduled(cron="*/5 * * * * *")
-	public void keywordCheck() {
-		//System.out.println("***** 키워드 30초마다 호출 스케쥴러 작동 테스트 *****");
-		List<Keyword> klist = repository.kListAllWitoutUserid();
-		List<Board> boardList = board_repository.selectAll();
-		List<Integer> categorynumList = new ArrayList<>();
-		
-		String userid = klist.get(0).getUserid();
-		
-		// board 에 등록된 상품 리스트에서 카테고리번호 추출
-		for(int i=0; i<boardList.size(); i++) {
-			Product tmp  = Product_repository.selectByProductNum(boardList.get(i).getProductnum());
-			categorynumList.add(tmp.getCategorynum());
-		}
-		
-		// 추출된 카테고리번호를 board에 productnum컬럼에 적용 
-		for(int i=0; i<boardList.size(); i++) {
-			boardList.get(i).setProductnum(categorynumList.get(i));
-		}
-		
-		// 최종적으로 키워드에 걸리는 내용이 있는지 확인
-		for(Keyword rs : klist) {
-			int categorynum = rs.getCategorynum();
-			String userid2 = rs.getUserid();
-			String keywordname = rs.getKeywordname();
-			
-			for(int j=0; j<boardList.size(); j++) {
-				Board tmp = boardList.get(j);
-				
-				int tmpCategorynum = tmp.getProductnum();
-				String tmpUserid = tmp.getUserid();
-				String title = tmp.getTitle();
-				
-				if(tmpCategorynum == categorynum && tmpUserid.equals(userid2)) {
-					if(title.contains(keywordname)) {
-						System.out.println(" *** 키워드 감지: " + boardList.get(j));
-						
-						Keywordchk keywordchk = new Keywordchk();
-						keywordchk.setUserid(userid);
-						keywordchk.setBoardnum(boardList.get(j).getBoardnum());
-						
-						int chk = Keywordchk_repository.selectCount(keywordchk);
-						System.out.println("chk: " + chk);
-						if(chk == 0) {
-							System.out.println("유저아이디: " + userid);
-							int re = Keywordchk_repository.insertKeywordchk(keywordchk);
-							System.out.println("추가됨: " + re);
-							Keywordchk_repository.deleteKeywordchk();
-						}
-					}
-				}
-			}
-			
-			
-		}
-		
-	}
+//	@Scheduled(cron="*/5 * * * * *")
+//	public void keywordCheck() {
+//		//System.out.println("***** 키워드 30초마다 호출 스케쥴러 작동 테스트 *****");
+//		List<Keyword> klist = repository.kListAllWitoutUserid();
+//		List<Board> boardList = board_repository.selectAll();
+//		List<Integer> categorynumList = new ArrayList<>();
+//		
+//		String userid = klist.get(0).getUserid();
+//		
+//		// board 에 등록된 상품 리스트에서 카테고리번호 추출
+//		for(int i=0; i<boardList.size(); i++) {
+//			Product tmp  = Product_repository.selectByProductNum(boardList.get(i).getProductnum());
+//			categorynumList.add(tmp.getCategorynum());
+//		}
+//		
+//		// 추출된 카테고리번호를 board에 productnum컬럼에 적용 
+//		for(int i=0; i<boardList.size(); i++) {
+//			boardList.get(i).setProductnum(categorynumList.get(i));
+//		}
+//		
+//		// 최종적으로 키워드에 걸리는 내용이 있는지 확인
+//		for(Keyword rs : klist) {
+//			int categorynum = rs.getCategorynum();
+//			String userid2 = rs.getUserid();
+//			String keywordname = rs.getKeywordname();
+//			
+//			for(int j=0; j<boardList.size(); j++) {
+//				Board tmp = boardList.get(j);
+//				
+//				int tmpCategorynum = tmp.getProductnum();
+//				String tmpUserid = tmp.getUserid();
+//				String title = tmp.getTitle();
+//				
+//				if(tmpCategorynum == categorynum && tmpUserid.equals(userid2)) {
+//					if(title.contains(keywordname)) {
+//						System.out.println(" *** 키워드 감지: " + boardList.get(j));
+//						
+//						Keywordchk keywordchk = new Keywordchk();
+//						keywordchk.setUserid(userid);
+//						keywordchk.setBoardnum(boardList.get(j).getBoardnum());
+//						
+//						int chk = Keywordchk_repository.selectCount(keywordchk);
+//						System.out.println("chk: " + chk);
+//						if(chk == 0) {
+//							System.out.println("유저아이디: " + userid);
+//							int re = Keywordchk_repository.insertKeywordchk(keywordchk);
+//							System.out.println("추가됨: " + re);
+//							Keywordchk_repository.deleteKeywordchk();
+//						}
+//					}
+//				}
+//			}
+//			
+//			
+//		}
+//		
+//	}
 	
 	@RequestMapping(value="keywordList")
 	public String keywordList(HttpSession session ,Model model) {
