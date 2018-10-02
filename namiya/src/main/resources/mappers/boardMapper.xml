@@ -82,7 +82,7 @@
 	
 	
 	<update id="updateHst" parameterType="History">
-		update history set deal_start=to_char(#{deal_start},'YYYY-MM-DD'), deal_end=to_char(#{deal_end}, 'YYYY-MM-DD') where historynum=#{historynum}
+		update history set deal_start=to_date(#{deal_start},'YYYY-MM-DD'), deal_end=to_date(#{deal_end}, 'YYYY-MM-DD') where historynum=#{historynum}
 	</update>
 	
 	
