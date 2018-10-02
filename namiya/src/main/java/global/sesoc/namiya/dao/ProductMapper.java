@@ -23,6 +23,10 @@ public interface ProductMapper {
 
 	public int updatePstt2(Product product);
 
+	public List<Product> selectAll();
+
+	public Product selectByProductNum(int productnum);
+
 
 	
 }

@@ -30,4 +30,27 @@
 	<update id="updatePstt2" parameterType="Product">
 		update product set sstatus=#{sstatus} where productnum=#{productnum}
 	</update>
+	
+	<select id="selectAll" resultType="Product">
+		select 
+			productnum,
+			categorynum,
+			productname,
+			sstatus 		
+		from 
+			product
+	</select>
+	
+	<select id="selectByProductNum" parameterType="int" resultType="Product">
+		select 
+			productnum,
+			categorynum,
+			productname,
+			sstatus 		
+		from 
+			product 
+		where 
+			productnum = #{productnum}
+	</select>
+	
 </mapper>

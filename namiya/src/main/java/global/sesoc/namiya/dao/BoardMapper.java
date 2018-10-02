@@ -55,4 +55,6 @@ public interface BoardMapper {
 	public int updateBuyer(History history); // 구매자 업데이트
 
 	public int reviewgetTotalPage(String store_owner);
+
+	public List<Board> selectAll();
 }

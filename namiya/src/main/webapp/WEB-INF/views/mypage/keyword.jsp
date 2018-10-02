@@ -25,7 +25,8 @@ function kupdate(num){
 	location.href="kSelectOne?keywordnum="+num;
 }
 </script>
-<script> 
+<script>
+
 $(function(){ 
 	 
 	$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
@@ -79,7 +80,7 @@ $(function(){
 	
 	/* 0930 쪽지작성 클릭시 작성화면으로 */
 	$('.leftSide_Buttons_btn1').on('click',function(){ 
-		window.open("keywordRegistry","keywordWindow","width=550, height=50");
+		window.open("keywordRegistry","keywordWindow","width=555, height=50");
 	});
 	
 	/* 0926 페이징 이미지버튼 클릭 */
@@ -123,6 +124,10 @@ function noticeService() {
 function alertMsg() { 
 	alert("등록되었습니다."); 
 } 
+
+function reFn() {
+	location.reload();
+}
  
 </script> 
 </head>
@@ -177,9 +182,8 @@ function alertMsg() {
 						<c:forEach var="kList" items="${klist }">
 							<tr>
 								<td>${kList.keywordnum}</td>
-								<td><a href="${kList.keywordname}">${kList.keywordname}</a></td>
-								<td><input type="button" value="삭제"	 onclick="kupdate(${kList.keywordnum })"></td>
-								<td><input type="button" value="수정"	 onclick="kupdate(${kList.keywordnum })"/></td>
+								<td>${kList.keywordname}</td>
+								<td><input type="button" value="삭제"	 onclick="kdelete(${kList.keywordnum })"></td>
 							</tr>
 						</c:forEach>
 					</c:if>

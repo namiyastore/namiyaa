@@ -162,4 +162,11 @@ public class BoardRepository {
 		
 		return recordCount;
 	}
+
+	public List<Board> selectAll() {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		List<Board> result = mapper.selectAll();
+		
+		return result;
+	}
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -115,6 +116,15 @@ public class LinenotifyController {
 		}
 		
 		return json;
+	}
+	
+	@RequestMapping(value="sendMsgLine", method=RequestMethod.GET)
+	public String sendMsgLine(String userid, String senderid, Model model) {
+		
+		model.addAttribute("userid", userid);
+		model.addAttribute("senderid", senderid);
+		
+		return "linenotify/sendMsg";
 	}
 	
 }

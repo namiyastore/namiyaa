@@ -20,6 +20,7 @@
 		<typeAlias type="global.sesoc.namiya.vo.Profile" alias="Profile"/>
 		<typeAlias type="global.sesoc.namiya.vo.Linenotify" alias="Linenotify"/>
 		<typeAlias type="global.sesoc.namiya.vo.Wish" alias="Wish"/>
+		<typeAlias type="global.sesoc.namiya.vo.Keywordchk" alias="Keywordchk"/>
 	</typeAliases>
 	
 	
@@ -41,5 +42,6 @@
 		<mapper resource="mappers/profileMapper.xml"/>
 		<mapper resource="mappers/linenotifyMapper.xml"/>
 		<mapper resource="mappers/wishMapper.xml"/>
+		<mapper resource="mappers/keywordchkMapper.xml"/>
 	</mappers>
 </configuration>

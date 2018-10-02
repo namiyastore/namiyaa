@@ -16,12 +16,12 @@
 	
 	<insert id="kInsert" parameterType="Keyword">
 		insert into	keyword
-		(keywordnum, keywordname,category,userid)
+		(keywordnum, keywordname,categorynum,userid)
 		values
 		(
 			keywordnum_seq.nextval,
 			#{keywordname},
-			#{category},
+			#{categorynum},
 			#{userid}
 		)
 	</insert>
@@ -41,12 +41,35 @@
 	</select>
 	
 	<update id="kUpdate" parameterType="Keyword">
-	update
-		keyword
-	set
-		keywordname = #{keywordname}, category = #{category} ,userid = #{userid}
-	where
-		keywordnum = #{keywordnum}
+		update
+			keyword
+		set
+			keywordname = #{keywordname}, category = #{category} ,userid = #{userid}
+		where
+			keywordnum = #{keywordnum}
 	</update>	
+	
+	<select id="chkKeywordDupl" parameterType="Keyword" resultType="int">
+		select 
+			count(*) 
+		from 
+			keyword 
+		where 
+			userid = #{userid} 
+		and 
+			categorynum = #{categorynum} 
+		and 
+			keywordname = #{keywordname}
+	</select>
+	
+	<select id="kListAllWitoutUserid" resultType="Keyword">
+		select 
+			keywordnum,
+			keywordname,
+			categorynum,
+			userid 
+		from 
+			keyword 
+	</select>
 	
 </mapper>

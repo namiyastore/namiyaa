@@ -11,4 +11,5 @@ public interface KeywordMapper {
 	public int kDelete(int keywordnum);
 	public Keyword kSelectOne(int keywordnum);
 	public int kUpdate(Keyword keyword);
+	public List<Keyword> kListAllWitoutUserid();
 }

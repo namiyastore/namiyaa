@@ -42,6 +42,17 @@ public class KeywordRepository {
 		int result = mapper.kUpdate(keyword);
 		return result;
 	}
+
+	public int chkKeywordDupl(Keyword keyword) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public List<Keyword> kListAllWitoutUserid() {
+		KeywordMapper mapper = session.getMapper(KeywordMapper.class);
+		List<Keyword> result = mapper.kListAllWitoutUserid();
+		return result;
+	}
 	
 		
 }

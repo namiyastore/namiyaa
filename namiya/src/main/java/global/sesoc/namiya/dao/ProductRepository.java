@@ -62,6 +62,20 @@ public class ProductRepository {
 		return result;
 	}
 
+	public List<Product> selectAll() {
+		ProductMapper mapper = session.getMapper(ProductMapper.class);
+		List<Product> result = mapper.selectAll();
+		
+		return result;
+	}
+
+	public Product selectByProductNum(int productnum) {
+		ProductMapper mapper = session.getMapper(ProductMapper.class);
+		Product result = mapper.selectByProductNum(productnum);
+		
+		return result;
+	}
+
 	
 	
 	
