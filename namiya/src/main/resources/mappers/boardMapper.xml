@@ -91,6 +91,6 @@
 	</update>
 	
 	<select id="reviewgetTotalPage" parameterType="String" resultType="Integer">
-		select count(*) from board where userid=#{userid}
+		select count(*) from review where store_owner=#{store_owner}
 	</select>
 </mapper>
