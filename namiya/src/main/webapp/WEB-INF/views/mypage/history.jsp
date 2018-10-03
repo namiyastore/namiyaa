@@ -33,16 +33,16 @@
 		
 		/* 0926 페이징 이미지버튼 클릭 */
 		$('#btn1').on('click',function(){ 
-			location.href = 'mInBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}';		 
+			location.href = 'historyList?currentPage=${navi.currentPage - navi.pagePerGroup}';		 
 		});
 		$('#btn2').on('click',function(){ 
-			location.href = 'mInBoxListAll?currentPage=${navi.currentPage - 1}&searchWord=${searchWord}';		 
+			location.href = 'historyList?currentPage=${navi.currentPage - 1}';		 
 		});
 		$('#btn3').on('click',function(){ 
-			location.href = 'mInBoxListAll?currentPage=${navi.currentPage + 1}&searchWord=${searchWord}';		 
+			location.href = 'historyList?currentPage=${navi.currentPage + 1}';		 
 		});
 		$('#btn4').on('click',function(){ 
-			location.href = 'mInBoxListAll?currentPage=${navi.currentPage + navi.pagePerGroup}&searchWord=${searchWord}';		 
+			location.href = 'historyList?currentPage=${navi.currentPage + navi.pagePerGroup}';		 
 		});
 
 		$('.rightSide_MyInfoBoxDown_profile').on('click', function() {
@@ -202,7 +202,7 @@
 						<span id="selectedPage">&nbsp; ${page} &nbsp;</span>
 					</c:if>
 					<c:if test="${page != currentPage }">
-						&nbsp; <a style="text-decoration:none; color: white; font-size: 15pt;" href="historyList?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp;</a>
+						&nbsp; <a style="text-decoration:none; color: white; font-size: 15pt;" href="historyList?currentPage=${page}">${page} &nbsp;</a>
 					</c:if>
 				</c:forEach>
 				<img id="btn3" src="resources/images/arrow9.png" width="24px" height="24px">

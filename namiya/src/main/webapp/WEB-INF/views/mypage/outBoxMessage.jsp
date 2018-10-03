@@ -97,16 +97,16 @@ $(function(){
 	
 	/* 0926 페이징 이미지버튼 클릭 */
 	$('#btn1').on('click',function(){ 
-		location.href = 'mInBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}';		 
+		location.href = 'mOutBoxListAll?currentPage=${navi.currentPage - navi.pagePerGroup}&searchWord=${searchWord}';		 
 	});
 	$('#btn2').on('click',function(){ 
-		location.href = 'mInBoxListAll?currentPage=${navi.currentPage - 1}&searchWord=${searchWord}';		 
+		location.href = 'mOutBoxListAll?currentPage=${navi.currentPage - 1}&searchWord=${searchWord}';		 
 	});
 	$('#btn3').on('click',function(){ 
-		location.href = 'mInBoxListAll?currentPage=${navi.currentPage + 1}&searchWord=${searchWord}';		 
+		location.href = 'mOutBoxListAll?currentPage=${navi.currentPage + 1}&searchWord=${searchWord}';		 
 	});
 	$('#btn4').on('click',function(){ 
-		location.href = 'mInBoxListAll?currentPage=${navi.currentPage + navi.pagePerGroup}&searchWord=${searchWord}';		 
+		location.href = 'mOutBoxListAll?currentPage=${navi.currentPage + navi.pagePerGroup}&searchWord=${searchWord}';		 
 	});
 	/* $('.searchIcon').on('click',function(){ 
 		location.href = 'mInBoxListAll?searchWord=${searchWord}';		 

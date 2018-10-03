@@ -12,8 +12,9 @@
 <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
 <style>
+ @import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 	body {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 </style>
 <script type="text/javascript">

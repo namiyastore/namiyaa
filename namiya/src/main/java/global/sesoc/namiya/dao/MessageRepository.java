@@ -99,8 +99,8 @@ public class MessageRepository{
 			String searchWord = map.get("searchWord").toString();
 			
 			List<Message> list = mapper.Inbox_select_result(map,rb);
-			System.out.println("searchword? "+searchWord + "startRecord? " +startRecord+"countPerPage? "+countPerPage);
-			System.out.println("받은쪽지함의 리스트0920" +  list);
+			/*System.out.println("searchword? "+searchWord + "startRecord? " +startRecord+"countPerPage? "+countPerPage);
+			System.out.println("받은쪽지함의 리스트0920" +  list);*/
 			return list;
 		}
 		
@@ -109,12 +109,12 @@ public class MessageRepository{
 			MessageMapper mapper = session.getMapper(MessageMapper.class);
 			RowBounds rb = new RowBounds(startRecord,countPerPage);
 			
-			String userid = map.get("userid").toString();
-			String searchWord = map.get("searchWord").toString();
+			/*String userid = map.get("userid").toString();
+			String searchWord = map.get("searchWord").toString();*/
 			
 			List<Message> list = mapper.Outbox_select_result(map,rb);
-			System.out.println("searchword? "+searchWord + "startRecord? " +startRecord+"countPerPage? "+countPerPage);
-			System.out.println("받은쪽지함의 리스트0920" +  list);
+			/*System.out.println("searchword? "+searchWord + "startRecord? " +startRecord+"countPerPage? "+countPerPage);
+			System.out.println("받은쪽지함의 리스트0920" +  list);*/
 			return list;
 		}
 

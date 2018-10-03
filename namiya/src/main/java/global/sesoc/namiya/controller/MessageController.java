@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.MembersRepository;
 import global.sesoc.namiya.dao.MessageRepository;
+import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.util.PageNavigator;
 import global.sesoc.namiya.vo.Members;
 import global.sesoc.namiya.vo.Message;
+import global.sesoc.namiya.vo.Profile;
 
 @Controller
 public class MessageController {
@@ -28,6 +30,8 @@ public class MessageController {
 	MembersRepository Members_repository;
 	@Autowired
 	BoardRepository b_repository;
+	@Autowired
+	ProfileRepository profile_repository;
 	
 	@RequestMapping(value="mInBoxListAll", method = RequestMethod.GET)
 	public String mInBoxListAll(
@@ -45,14 +49,22 @@ public class MessageController {
 		int totalRecordCount = repository.getInboxRecordCount(userIdAndSearchWord);
 		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount,10,5);
 		
+		System.out.println("111111 currentPage and totalRecordCount? " + currentPage +", "+ totalRecordCount);
+		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("searchWord", searchWord);
 		map.put("userid", userid);
 		
 		List<Message> InboxList = repository.Inbox_select_result(map,navi.getStartRecord(),navi.getCountPerPage());
 		
+		//프로필사진 갱신
+		Profile profile = profile_repository.select(userid);
+		model.addAttribute("profile",profile);
+		
 		model.addAttribute("InboxList", InboxList);
 		model.addAttribute("searchWord", searchWord);
+		System.out.println("11111검사???"+navi.getStartRecord() +", "+navi.getCountPerPage());
+		System.out.println("navui" + navi);
 		model.addAttribute("navi", navi);
 		model.addAttribute("currentPage", currentPage);
 		
@@ -106,6 +118,9 @@ public class MessageController {
 		
 		List<Message> OutboxList = repository.Outbox_select_result(map,navi.getStartRecord(),navi.getCountPerPage());
 		
+		//프로필사진 갱신
+		Profile profile = profile_repository.select(userid);
+		model.addAttribute("profile",profile);
 		model.addAttribute("OutboxList", OutboxList);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("navi", navi);
@@ -158,20 +173,11 @@ public class MessageController {
 	public String mypageSendMsg(Message msg) {
 		int result = b_repository.insertMsg(msg);
 		
-		System.out.println("보낸쪽지 내용  jsp에서 날라온 내용 "+msg);
-		
-		System.out.println("메세지 전송 결과: " + result);
-
-		/*String writerid = msg.getUserid();
-		String userid = msg.getWriterid();
-		
-		msg.setUserid(userid);
-		msg.setWriterid(writerid);*/
 		msg.setCopy(0);
 		
 		int result2 = b_repository.insertMsg(msg);	
 		
-		System.out.println("메세지 전송 결과2: " + result2);
+		/*System.out.println("메세지 전송 결과2: " + result2);*/
 		
 		return "mypage/writeMsg";
 	}

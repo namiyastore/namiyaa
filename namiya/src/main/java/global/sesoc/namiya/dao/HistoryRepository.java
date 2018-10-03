@@ -16,20 +16,18 @@ public class HistoryRepository{
 	@Autowired
 	SqlSession session;
 
-	public List<History> hListAll(Map<String,String>  map, int startRecord, int countPerPage) {
+	public List<History> hListAll(String userid, int startRecord, int countPerPage) {
 		HistoryMapper mapper = session.getMapper(HistoryMapper.class);
 		RowBounds rb = new RowBounds(startRecord,countPerPage);
 		
-		String userid = map.get("userid").toString();
-		String searchWord = map.get("searchWord").toString();
-		
-		List<History> list = mapper.hListAll(map,rb);
+		List<History> list = mapper.hListAll(userid,rb);
 		return list;
 	}
 	//페이징관련
-	public int getHistoryRecordCount(String searchWord) {
+	public int getHistoryRecordCount(String userid) {
 		HistoryMapper mapper = session.getMapper(HistoryMapper.class);
-		int recordCount =  mapper.getHistoryRecordCount(searchWord);
+		int recordCount =  mapper.getHistoryRecordCount(userid);
+		/*System.out.println("1003 거래이력 글 갯수? " + recordCount);*/
 		return recordCount;
 	}
 

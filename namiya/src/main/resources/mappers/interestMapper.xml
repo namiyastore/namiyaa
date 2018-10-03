@@ -41,5 +41,13 @@
 		userid = #{userid}, boardnum = #{boardnum}
 	WHERE
 		interestnum = #{interestnum}
-</update>	
+</update>
+	<select id="getHistoryRecordCount" resultType="int" parameterType="string">
+		SELECT
+			count(*)
+		FROM
+			interest
+		WHERE 
+			userid = #{userid}
+	</select>	
 </mapper>

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import global.sesoc.namiya.dao.MembersRepository;
+import global.sesoc.namiya.dao.ProfileRepository;
 import global.sesoc.namiya.dao.SavingRepository;
 import global.sesoc.namiya.vo.Members;
+import global.sesoc.namiya.vo.Profile;
 import global.sesoc.namiya.vo.Saving;
 
 @Controller
@@ -26,6 +28,8 @@ public class SavingController {
 	
 	@Autowired
 	MembersRepository Members_repository;
+	@Autowired
+	ProfileRepository profile_repository;
 	
 	/*
 	 * 총 포인트
@@ -85,6 +89,11 @@ public class SavingController {
 		}		
 		
 		model.addAttribute("pointRecord", result);
+		
+		//프로필사진 갱신
+		Profile profile = profile_repository.select(userid);
+		model.addAttribute("profile",profile);
+				
 		
 		//myurl을 가져오는 코드 시작		
 		Members m = new Members();

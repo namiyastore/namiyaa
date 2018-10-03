@@ -209,7 +209,7 @@ function alertMsg() {
 								<td class="table_1st_td">${inboxList.messagenum }</td>
 <%-- 								<td><a href="mInBoxSelectOne?messagenum=${inboxList.messagenum}">${inboxList.msg_title }</a></td> --%>
 								<td><div class="leftSide_table_customers_title" data-messagenum="${inboxList.messagenum}">${inboxList.msg_title }</div></td>
-								<td>${inboxList.userid }</td>
+								<td>${inboxList.writerid }</td>
 								<td>${inboxList.regdate }</td>
 							</tr>
 						</c:forEach>
@@ -232,7 +232,7 @@ function alertMsg() {
 				<img id="btn2" src="resources/images/arrow8.png" width="24px" height="24px">
 				<c:forEach var="page" begin="${navi.startPageGroup }" end="${navi.endPageGroup }">
 					<c:if test="${page == currentPage }">
-						<span id="selectedPage" style="color: ">&nbsp; ${page} &nbsp;</span>
+						<span id="selectedPage">&nbsp; ${page} &nbsp;</span>
 					</c:if>
 					<c:if test="${page != currentPage }">
 						<a style="text-decoration:none; color: white; font-size: 15pt;" href="mInBoxListAll?currentPage=${page}&searchWord=${searchWord}">${page} &nbsp;</a>
