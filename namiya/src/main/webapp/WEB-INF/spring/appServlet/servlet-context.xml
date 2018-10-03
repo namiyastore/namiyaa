@@ -23,12 +23,45 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- CookieLocaleResolver Language Change by Parameter -->
-   <interceptors>
-        <beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-            <beans:property name="paramName" value="lang"/>
-        </beans:bean>
+
+	 <!-- 인터셉터 객체 생성 -->
+    <beans:bean id="authenticationInterceptor" class="global.sesoc.namiya.interceptor.sessioninterceptor">
+    </beans:bean>
+    
+    <beans:bean id="authenticationInterceptor2" class="global.sesoc.namiya.interceptor.sessioninterceptor2">
+    </beans:bean>
+    
+    <!-- Interceptor 설정 -->
+    <interceptors>
+        <interceptor>
+            <mapping path="/search"/>
+            <mapping path="/result"/>
+            <mapping path="/myStore/{miniurl}/home"/>
+            <mapping path="/profileEdit/**"/>
+            <mapping path="/fDelete/**"/>
+            <mapping path="/fSelectOne/**"/>
+            <mapping path="/editForm/**"/>
+            <mapping path="/deal/**"/>
+            <mapping path="/sendMsg/**"/>
+            <mapping path="/insertMsg/**"/>
+            <mapping path="/historyList/**"/>
+            <mapping path="/interestList/**"/>
+            <mapping path="/mInBoxListAll/**"/>
+            <mapping path="/mOutBoxListAll/**"/>
+            <beans:ref bean="authenticationInterceptor"/>
+        </interceptor>
     </interceptors>
+    
+    <!-- Interceptor 설정 -->
+    <interceptors>
+        <interceptor>
+            <mapping path="/loginForm/**"/>
+            <mapping path="/joinForm/**"/>
+            
+            <beans:ref bean="authenticationInterceptor2"/>
+        </interceptor>
+    </interceptors>
+
 	
 	<beans:bean id="echoHandler" class="global.sesoc.namiya.util.EchoHandler" />
 
