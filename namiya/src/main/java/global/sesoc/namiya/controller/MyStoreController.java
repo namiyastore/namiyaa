@@ -816,14 +816,6 @@ public class MyStoreController {
 
 		System.out.println(member);
 		List<Review> list = r_repository.selectReviewAll(store_owner, navi.getStartRecord(), navi.getCountPerPage());
-		/*
-		 * String userid [] = new String[list.size()]; Profile[] pf = new
-		 * Profile[list.size()];
-		 * 
-		 * for (int i = 0; i<list.size(); i++) { userid[i] = list.get(i).getUserid(); pf
-		 * 
-		 * }
-		 */
 
 		model.addAttribute("navi", navi);
 		model.addAttribute("list", list);
@@ -832,7 +824,7 @@ public class MyStoreController {
 
 		return "mystore/review";
 	}
-
+	
 	// review 작성하기
 	@RequestMapping(value = "/myStore" + "/{miniurl:.+}" + "/insertReview", method = RequestMethod.POST)
 	public String insertReview(Review review, @PathVariable("miniurl") String miniurl) {

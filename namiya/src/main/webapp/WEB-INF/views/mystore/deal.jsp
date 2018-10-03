@@ -39,25 +39,31 @@
 	$(function() {
 		printWinner(${history.historynum},"${history.buyerid}");
 			
-		$('.rightSide_MyInfoBoxDown_goToHome').on('click', function() {
-			location.href = './';
+		$('.rightSide_MyInfoBoxDown_goToHome').on('click',function(){ 
+			location.href = 'search';		 
+		}); 
+		 
+		// 미니홈피 창 열기
+		$(".rightSide_MyInfoBoxDown_myStore").on("click",function(){
+			// 메세지 전송
+			// message -> 전할 내용
+			// receive -> 받을상대 id
+			
+			var myurl = $('#myurl').val();
+			window.open("myStore/" + myurl + "/home","mystoreWindow","width=1200, height=650");
 		});
-
-		$('.rightSide_MyInfoBoxDown_myStore').on('click', function() {
-			location.href = 'myStore';
-		});
-
-		$('.rightSide_MyInfoBoxDown_profile').on('click', function() {
-			location.href = 'editForm';
-		});
-
-		$('.rightSide_MyInfoBoxDown_logOut').on('click', function() {
-			location.href = 'logOut';
-		});
-
-		$('.rightSide_MyInfoBoxDown_signOut').on('click', function() {
-			location.href = 'signOut';
-		});
+		
+		 $('.rightSide_MyInfoBoxDown_profile').on('click',function(){ 
+			location.href = 'editForm';		 
+		});  
+		 
+		$('.rightSide_MyInfoBoxDown_logOut').on('click',function(){ 
+			location.href = 'logout';		 
+		}); 
+		 
+		$('.rightSide_MyInfoBoxDown_signOut').on('click',function(){ 
+			location.href = 'signOut';		 
+		}); 
 
 		/* 0915 탭들 hover효과 추가 */
 		/* $('.leftSide_tabs_tab1').on('click', function() {
