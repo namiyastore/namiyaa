@@ -43,31 +43,12 @@
     var userAuthNo = 0;
     
     	//language pack
-		var joinFormId='';
-		var joinFormPw='';
-		var joinFormChkPw='';
-		var joinFormName='';
-		var joinFormBirth='';
-		var joinFormYear='';
-		var joinFormMonth='';
-		var joinFormDay='';
-		var joinFormGender='';
-		var joinFormMan='';
-		var joinFormWoman='';
-		var joinFormEmail='';
-		var joinFormAuthRequest='';
-		var joinFormPhone='';
-		var joinFormAddrKor='';
-		var joinFormSearchAddr='';
-		var joinFormSignUp='';
-		var joinFormnInfo='';
-		var joinFormchkBirth='';
-		var joinFormchkEmail='';
-		var joinFormClause='';
-		var joinFormPersonalInfo='';
-    
+		var joinFormId='';var joinFormPw='';var joinFormChkPw='';var joinFormName='';var joinFormBirth='';var joinFormYear='';var joinFormMonth='';var joinFormDay='';var joinFormGender='';var joinFormMan='';var joinFormWoman='';var joinFormEmail='';var joinFormAuthRequest='';var joinFormPhone='';var joinFormAddrKor='';var joinFormSearchAddr='';var joinFormSignUp='';var joinFormnInfo='';var joinFormchkBirth='';var joinFormchkEmail='';var joinFormClause='';var joinFormPersonalInfo='';
+    	var joinFormidem='';var joinFormidsm='';var joinFormidfm='';var joinFormpwem='';var joinFormpwem1='';var joinFormpwem2='';var joinFormmsm='';var joinFormmfm='';var joinFormbem='';var joinFormyem='';var joinFormmem='';var joinFormdem='';var joinFormaem='';var joinFormaem1='';var joinFormaem2='';var joinFormeem='';var joinFormeem1='';var joinFormesm='';var joinFormeem2='';var joinFormvem='';var joinFormvsm='';var joinFormnem='';var joinFormnsm='';var joinFormnfm='';var joinFormvnm='';var joinFormvsm2='';var joinFormvsm3='';var joinFormncm='';
 
     $(document).ready(function() {
+    	joinFormId=$("#joinFormId").val();joinFormPw=$("#joinFormPw").val();joinFormChkPw=$("#joinFormChkPw").val();joinFormName=$("#joinFormName").val();joinFormBirth=$("#joinFormBirth").val();joinFormYear=$("#joinFormYear").val();joinFormMonth=$("#joinFormMonth").val();joinFormDay=$("#joinFormDay").val();joinFormGender=$("#joinFormGender").val();joinFormMan=$("#joinFormMan").val();joinFormWoman=$("#joinFormWoman").val();joinFormEmail=$("joinFormEmail").val();joinFormAuthRequest=$("#joinFormAuthRequest").val();joinFormPhone=$("#joinFormPhone").val();joinFormAddrKor=$("#joinFormAddrKor").val();joinFormSearchAddr=$("#joinFormSearchAddr").val();joinFormSignUp=$("#joinFormSignUp").val();joinFormnInfo=$("#joinFormnInfo").val();joinFormchkBirth=$("#joinFormchkBirth").val();joinFormchkEmail=$("#joinFormchkEmail").val();joinFormClause=$("#joinFormClause").val();joinFormPersonalInfo=$("#joinFormPersonalInfo").val();
+    	
         defaultScript();
         $("#id").val("");
         $("#username").val("");
@@ -228,7 +209,7 @@
         var oMsg = $("#idMsg");
 
         if ( id == "") {
-            showErrorMsg(oMsg,"필수 정보입니다.");
+            showErrorMsg(oMsg,joinFormnInfo);
             return false;
         }
 
@@ -262,7 +243,7 @@
         var oMsg = $("#pswd1Msg");
 
         if (pw == "") {
-            showErrorMsg(oMsg,"필수 정보입니다.");
+            showErrorMsg(oMsg,joinFormnInfo);
             return false;
         }
         if (isValidPasswd(pw) != true) {
@@ -282,7 +263,7 @@
 
         if (pswd2.val() == "") {
      
-            showErrorMsg(oMsg,"필수 정보입니다.");
+            showErrorMsg(oMsg,joinFormnInfo);
             return false;
         }
         if (pswd1.val() != pswd2.val()) {
@@ -305,7 +286,7 @@
 
         var name = $("#name").val();
         if (name == "") {
-            showErrorMsg(oMsg,"필수 정보입니다.");
+            showErrorMsg(oMsg,joinFormnInfo);
             return false;
         }
         if (name != "" && nonchar.test(name)) {
@@ -548,9 +529,9 @@
 
         var oMsg = $("#pswd1Msg");
         if ((myKeyCode >= 65 && myKeyCode <= 90) && !myShiftKey) {
-            showErrorMsg(oMsg,"Caps Lock이 켜져 있습니다.");
+            showErrorMsg(oMsg,"Caps Lock ON");
         } else if ((myKeyCode >= 97 && myKeyCode <= 122) && myShiftKey) {
-            showErrorMsg(oMsg,"Caps Lock이 켜져 있습니다.");
+            showErrorMsg(oMsg,"Caps Lock ON");
         } else {
             hideMsg(oMsg);
         }
@@ -569,9 +550,9 @@
 
         var oMsg = $("#pswd2Msg");
         if ((myKeyCode >= 65 && myKeyCode <= 90) && !myShiftKey) {
-            showErrorMsg(oMsg,"Caps Lock이 켜져 있습니다.");
+            showErrorMsg(oMsg,"Caps Lock ON");
         } else if ((myKeyCode >= 97 && myKeyCode <= 122) && myShiftKey) {
-            showErrorMsg(oMsg,"Caps Lock이 켜져 있습니다.");
+            showErrorMsg(oMsg,"Caps Lock ON");
         } else {
             hideMsg(oMsg);
         }
@@ -793,12 +774,66 @@
 <body class="is-preload">
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 
+<input id="joinFormId" type="hidden" value="<spring:message code="joinForm.Id" />">
+<input id="joinFormPw" type="hidden" value="<spring:message code="joinForm.Pw" />">
+<input id="joinFormName" type="hidden" value="<spring:message code="joinForm.Name" />">
+<input id="joinFormBirth" type="hidden" value="<spring:message code="joinForm.Birth" />">
+<input id="joinFormYear" type="hidden" value="<spring:message code="joinForm.Year" />">
+<input id="joinFormMonth" type="hidden" value="<spring:message code="joinForm.Month" />">
+<input id="joinFormDay" type="hidden" value="<spring:message code="joinForm.Day" />">
+<input id="joinFormGender" type="hidden" value="<spring:message code="joinForm.Gender" />">
+<input id="joinFormMan" type="hidden" value="<spring:message code="joinForm.Man" />">
+<input id="joinFormWoman" type="hidden" value="<spring:message code="joinForm.Woman" />">
+<input id="joinFormEmail" type="hidden" value="<spring:message code="joinForm.Email" />">
+<input id="joinFormAuthRequest" type="hidden" value="<spring:message code="joinForm.AuthRequest" />">
+<input id="joinFormPhone" type="hidden" value="<spring:message code="joinForm.Phone" />">
+<input id="joinFormAddrKor" type="hidden" value="<spring:message code="joinForm.AddrKor" />">
+<input id="joinFormSearchAddr" type="hidden" value="<spring:message code="joinForm.SearchAddr" />">
+<input id="joinFormSignUp" type="hidden" value="<spring:message code="joinForm.SignUp" />">
+<input id="joinFormnInfo" type="hidden" value="<spring:message code="joinForm.nInfo" />">
+<input id="joinFormchkBirth" type="hidden" value="<spring:message code="joinForm.chkBirth" />">
+<input id="joinFormchkEmail" type="hidden" value="<spring:message code="joinForm.chkEmail" />">
+<input id="joinFormClause" type="hidden" value="<spring:message code="joinForm.Clause" />">
+<input id="joinFormPersonalInfo" type="hidden" value="<spring:message code="joinForm.PersonalInfo" />">
+
+<input id="joinFormnem" type="hidden" value="<spring:message code="joinForm.nem" />">
+<input id="joinFormnsm" type="hidden" value="<spring:message code="joinForm.nsm" />">
+<input id="joinFormnfm" type="hidden" value="<spring:message code="joinForm.nfm" />">
+<input id="joinFormvnm" type="hidden" value="<spring:message code="joinForm.vnm" />">
+<input id="joinFormvsm2" type="hidden" value="<spring:message code="joinForm.vsm2" />">
+<input id="joinFormvsm3" type="hidden" value="<spring:message code="joinForm.vsm3" />">
+<input id="joinFormncm" type="hidden" value="<spring:message code="joinForm.ncm" />">
+
+<input id="joinFormidem" type="hidden" value="<spring:message code="joinForm.idem" />">
+<input id="joinFormidsm" type="hidden" value="<spring:message code="joinForm.idsm" />">
+<input id="joinFormidfm" type="hidden" value="<spring:message code="joinForm.idfm" />">
+<input id="joinFormpwem" type="hidden" value="<spring:message code="joinForm.pwem" />">
+<input id="joinFormpwem1" type="hidden" value="<spring:message code="joinForm.pwem1" />">
+<input id="joinFormpwem2" type="hidden" value="<spring:message code="joinForm.pwem2" />">
+<input id="joinFormmsm" type="hidden" value="<spring:message code="joinForm.msm" />">
+<input id="joinFormmfm" type="hidden" value="<spring:message code="joinForm.mfm" />">
+<input id="joinFormbem" type="hidden" value="<spring:message code="joinForm.bem" />">
+<input id="joinFormyem" type="hidden" value="<spring:message code="joinForm.yem" />">
+<input id="joinFormmem" type="hidden" value="<spring:message code="joinForm.mem" />">
+<input id="joinFormdem" type="hidden" value="<spring:message code="joinForm.dem" />">
+<input id="joinFormaem" type="hidden" value="<spring:message code="joinForm.maem" />">
+<input id="joinFormaem1" type="hidden" value="<spring:message code="joinForm.maem1" />">
+<input id="joinFormaem2" type="hidden" value="<spring:message code="joinForm.maem2" />">
+<input id="joinFormeem" type="hidden" value="<spring:message code="joinForm.meem" />">
+<input id="joinFormeem1" type="hidden" value="<spring:message code="joinForm.meem1" />">
+<input id="joinFormesm" type="hidden" value="<spring:message code="joinForm.mesm" />">
+<input id="joinFormeem2" type="hidden" value="<spring:message code="joinForm.meem2" />">
+<input id="joinFormvem" type="hidden" value="<spring:message code="joinForm.mvem" />">
+<input id="joinFormvsm" type="hidden" value="<spring:message code="joinForm.mvsm" />">
+
+
+
 <div id="wrap"class="limiter">
 <div  class="container-login100">
 <div class="wrap-login100">
 <!-- header -->
 <div id="header" class="login100-form-title" role="banner">
-    <a href="${pageContext.request.contextPath}"><img style="border-radius: 10px;" width="490px" height="150px" alt="" src="resources/images/logo.gif"> </a>
+    <a href="${pageContext.request.contextPath}"><img style="border-radius: 10px" width="490px" height="150px" alt="" src="resources/images/logo.gif"> </a>
 </div>
 
 <!-- // header -->
@@ -821,19 +856,19 @@
                 <div class="row_group">
                     <div style="display: inline-block" class="wrap-input100 validate-input">      
 							<input type="text" id="id" name="id" class="input100" title="ID" maxlength="20">
-							<span class="focus-input100" data-placeholder="아이디"></span>
+							<span class="focus-input100" data-placeholder="<spring:message code="joinForm.Id" />"></span>
                     </div>
                     <span style="display: block;"  class="error_next_box" id="idMsg" style="display:none"></span>
                     <br>
                     <div style="display: inline-block"  class="wrap-input100 validate-input">
-							<input type="password" id="pswd1" name="pswd1" class="input100" title="비밀번호 입력" maxlength="20">
-							<span class="focus-input100" data-placeholder="비밀번호"></span>
+							<input type="password" id="pswd1" name="pswd1" class="input100" maxlength="20">
+							<span class="focus-input100" data-placeholder="<spring:message code="joinForm.Pw" />"></span>
 					</div>
 					 <span style="display: block;"  class="error_next_box" id="pswd1Msg" style="display:none"></span>
 					<br>
 					<div style="display: inline-block;"  class="wrap-input100 validate-input">
 							<input type="password" id="pswd2" name="pswd2" class="input100" maxlength="40">
-							<span class="focus-input100" data-placeholder="비밀번호 확인"></span>
+							<span class="focus-input100" data-placeholder="<spring:message code="joinForm.ChkPw" />"></span>
                     </div>
                     <span style="display: block;"  class="error_next_box" id="pswd2Msg" style="display:none"></span>
                     <br>
@@ -846,20 +881,20 @@
                     <!-- lang = ko_KR -->
                     <div style="display: inline-block" class="wrap-input100 validate-input">
 						<input type="text" id="name" name="name" title="이름" class="input100" maxlength="40">
-						<span class="focus-input100" data-placeholder="이 름"></span>
+						<span class="focus-input100" data-placeholder="<spring:message code="joinForm.Name" />"></span>
                     </div>
                     <span class="error_next_box" id="nameMsg" style="display:none"></span>
                     <!-- lang = ko_KR -->
 
                     <div>
-                        <h6 style="color: #999999" class="join_title">생년월일</h6>
+                        <h6 style="color: #999999" class="join_title"><spring:message code="joinForm.Birth" /></h6>
                         
                             <div style="display: inline-block;" class="wrap-input10 validate-input">
-								<input type="text" id="yy" placeholder="년(4자)" class="input1" maxlength="4">
+								<input type="text" id="yy" placeholder="<spring:message code="joinForm.Year" />" class="input1" maxlength="4">
                             </div>
                             <div style="display: inline-block;" class="wrap-input10 validate-input">
 									<select id="mm" title="월" class="sel">
-										<option>월</option>
+										<option><spring:message code="joinForm.Month" /></option>
 										  	 			<option value="01">
                                                             1
                                                         </option>
@@ -899,19 +934,19 @@
 									</select>
                             </div>
                             <div style="display: inline-block;" class="wrap-input10 validate-input">
-									<input type="text" id="dd" placeholder="일" class="input10" maxlength="2">
+									<input type="text" id="dd" placeholder="<spring:message code="joinForm.Day" />" class="input10" maxlength="2">
                             </div>
                         
                     </div>
                     <span style="display: block;" class="error_next_box" id="birthdayMsg" style="display:none"></span>
 					<br>
                     <div class="join_row join_sex">
-                        <h6 style="color: #999999" class="join_title">성별</h6>
+                        <h6 style="color: #999999" class="join_title"><spring:message code="joinForm.Gender" /></h6>
                         <div class="ps_box gender_code">
                             <select id="gender" name="gender" title="성별" class="sel">
-                                <option value="" selected="">성별</option>
-                                <option value="남자">남자</option>
-                                <option value="여자">여자</option>
+                                <option value="" selected="">"<spring:message code="joinForm.Gender" />"</option>
+                                <option value="남자"><spring:message code="joinForm.Man" /></option>
+                                <option value="여자"><spring:message code="joinForm.Woman" /></option>
                             </select>
                         </div>
                     </div>
@@ -921,14 +956,14 @@
 					
 					<div style="display: inline-block" class="wrap-input100 validate-input">      
 							<input type="text" id="email" name="email" class="input100" maxlength="100">
-							<span class="focus-input100" data-placeholder="본인인증 이메일"></span>
+							<span class="focus-input100" data-placeholder="<spring:message code="joinForm.Email" />"></span>
                     </div>
-							<input class="clickbutton" type="button" id="emailCheck" value=" 인증 요청 " onclick="isAuthEmail()"/>
+							<input class="clickbutton" type="button" id="emailCheck" value="<spring:message code="joinForm.AuthRequest" />" onclick="isAuthEmail()"/>
 							<span style="display: block;" class="error_next_box" id="emailMsg" style="display:none"></span>
 					<br>
 					<div style="display: inline-block" class="wrap-input100 validate-input">				
 							<input type="text" id="authNo" name="authNo" class="input100" maxlength="100">
-							<span class="focus-input100" data-placeholder="인증번호입력"></span>
+							<span class="focus-input100" data-placeholder="<spring:message code="joinForm.AuthRequest" />"></span>
                     </div>
                     <span class="error_next_box" id="authNoMsg" style="display:none"></span>
                 </div>
@@ -936,7 +971,7 @@
                 <!-- 휴대전화 번호 -->
                 <div style="display: inline-block" class="wrap-input100 validate-input">
 							<input type="tel" id="phoneNo" name="phoneNo" class="input100" maxlength="16">
-							<span class="focus-input100" data-placeholder="전화번호입력"></span>
+							<span class="focus-input100" data-placeholder="<spring:message code="joinForm.Phone" />"></span>
                 </div>
                 <span class="error_next_box" id="phoneNoMsg" style="display:none"></span>
                 
@@ -947,16 +982,16 @@
 	        <div id="callBackDiv">
 	        	<div style="display: inline-block" class="wrap-input100 validate-input">
 	        		<input type="text" id="zipcode" name="zipcode" class="input100" maxlength="16" readonly="readonly">
-					<input type="text" id="fullAddr" name="fullAddr" class="input100" maxlength="16" readonly="readonly" placeholder="도로명 주소">
+					<input type="text" id="fullAddr" name="fullAddr" class="input100" maxlength="16" readonly="readonly" placeholder="<spring:message code="joinForm.AddrKor" />">
                 </div>
-				 <input class="clickbutton" type="button" onClick="goPopup();" value=" 주소 찾기 "/>
+				 <input class="clickbutton" type="button" onClick="goPopup();" value="<spring:message code="joinForm.SearchAddr" />"/>
 			</div>
 			<span class="error_next_box" id="fullAddrMsg" style="display:none"></span>
            	<br>
        </div>
           		<div>
           		<h3 class="join_title"> </h3>
-          			<input type="button" onClick="mainSubmit()" value="회원가입" class="clickbutton"/>
+          			<input type="button" onClick="mainSubmit()" value="<spring:message code="joinForm.SignUp" />" class="clickbutton"/>
          		</div>
          		<br><br>
           </div>
@@ -968,8 +1003,8 @@
 	<!-- footer -->
 	<div id="footer" role="contentinfo">
 		<ul>
-			<li><a href="">이용약관</a></li>
-			<li><strong><a href="">개인정보처리방침</a></strong></li>
+			<li><a href=""><spring:message code="joinForm.Clause" /></a></li>
+			<li><strong><a href=""><spring:message code="joinForm.PersonalInfo" /></a></strong></li>
 		</ul>
 		<address>
 			<em><a href="" target="_blank" class="logo"><span class="blind">C1</span></a></em>

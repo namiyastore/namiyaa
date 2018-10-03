@@ -39,8 +39,8 @@
 	var askingId = '';
 	
 $(document).ready(function(){
-	askingPw = $("#askingPw").val();
 	askingId = $("#askingId").val();
+	askingPw = $("#askingPw").val();
 	
 	$("#userid").val("");
     
