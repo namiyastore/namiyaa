@@ -173,7 +173,7 @@ public class MessageController {
 		
 		System.out.println("메세지 전송 결과2: " + result2);
 		
-		return "redirect:mInBoxListAll";
+		return "mypage/writeMsg";
 	}
 
 }

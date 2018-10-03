@@ -136,7 +136,7 @@
 <body>
 <div id="wrapper" align="center">
 <h1 style="color: white; font-family: 'VT323';">Send a message</h1>
-<form action="mypageSendMsg" name="form" method="post">
+ <form action="mypageSendMsg" name="form" method="post">
 <input type="hidden" name="copy" value="1">
 <table style="margin-bottom: 10px;">
 	<tr>
