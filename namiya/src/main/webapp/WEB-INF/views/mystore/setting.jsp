@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
 <title>SETTING</title>
 <!-- <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -758,6 +759,7 @@ function checkImage(useritemnum) {
 </script>
 
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 ::-webkit-scrollbar{width: 16px;}
 ::-webkit-scrollbar-track {background-color:AE79F1;}
 ::-webkit-scrollbar-thumb {background-color:#79bfe5;}
@@ -833,11 +835,12 @@ function checkImage(useritemnum) {
 	}
 	
 	h1 {
-		font-family:  'Raleway', 'Nanum Gothic';
+		font-family: 'VT323';
+		font-size: 50px;
 	}
 	
 	body {
-		font-family:  'Raleway', 'Nanum Gothic';
+		font-family:  'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 
 	#save {
@@ -855,7 +858,7 @@ function checkImage(useritemnum) {
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 		font-size: 18px;
 	}
 	
@@ -898,9 +901,8 @@ function checkImage(useritemnum) {
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <img id="loadingImage" alt="" src="${pageContext.request.contextPath}/resources/images/loading.gif" >
  <div id="wrapper" align="center">
-	<div id="scroll" style="float:left; width: 1073px; height:545px; border-radius: 25px; background-color: white;">
-		
-		<h1><b><spring:message code="setting.Title" /></b></h1>
+	<div id="scroll" style="float:left; width: 1073px; height:545px; border-radius: 25px; background-color: white; padding-top: 5px; padding-bottom: 5px;">
+		<h1><b>Setting</b></h1>
 		<hr style="width: 1040px; border-color:black;"/>
 		<div id="selected" style="float:left; width:280px; height:430px; padding-left: 20px;">
 			<div id="list" style="float:left; width: 100px; text-align:right; height:430px; padding-top: 30px; margin-left :10px;">

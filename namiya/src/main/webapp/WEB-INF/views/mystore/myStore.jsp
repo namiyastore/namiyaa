@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
 <title>My store main</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-3.3.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -233,6 +234,7 @@ var background = {
 	
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 ::-webkit-scrollbar{width: 16px;}
 ::-webkit-scrollbar-track {background-color:AE79F1;}
 ::-webkit-scrollbar-thumb {background-color:#79bfe5;}
@@ -242,12 +244,12 @@ var background = {
 
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 	@font-face { 
-	font-family: 'Raleway', 'Nanum Gothic';
+	font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	src: url("resources/fonts/EcoSansMono.ttf") format('truetype'); 
 } 
  
 @font-face { 
-	font-family: 'Raleway', 'Nanum Gothic';
+	font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	src: url("resources/fonts/JejuGothic.ttf") format('truetype'); 
 } 
 	
@@ -263,11 +265,11 @@ var background = {
   		-o-background-size: cover;
   		background-size: cover;
   		overflow : hidden;
-  		font-family : Eco Sans Mono, 'Jeju Gothic';
+  		font-family : Eco Sans Mono, 'Jeju Gothic', 'Noto Sans Japanese';
 	}
 	
 	hr {
-		font-family : Eco Sans Mono, 'Jeju Gothic';
+		font-family : Eco Sans Mono, 'Jeju Gothic', 'Noto Sans Japanese';
 	}
 	
 	#wrapper {
@@ -324,11 +326,12 @@ var background = {
 	}
 	
 	h1 {
-		font-family:'Raleway', 'Nanum Gothic';
+		font-family: 'VT323';
+		font-size: 50px;
 	}
 	
 	body {
-		font-family:'Raleway', 'Nanum Gothic';
+		font-family:'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 	
 	#zero {
@@ -353,7 +356,7 @@ var background = {
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 		font-size: 18px;
 	}
 	
@@ -362,11 +365,11 @@ var background = {
 	}
 	
 	#say {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 	
 	#url {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 </style>
 </head>

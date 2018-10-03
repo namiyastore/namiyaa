@@ -11,11 +11,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
 <title>FAVORITE</title>
 <!-- <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script> -->
 
 <style type="text/css">
-
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 
    #stage {
      width: 600px;
@@ -75,7 +76,7 @@
       }
       
       .poster > p {
-        font-family: 'Raleway', 'Nanum Gothic';
+        font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
         font-size: 36px;
         font-weight: bold;
         text-align: center;
@@ -201,11 +202,12 @@
 	}
 	
 	h1 {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'VT323';
+		font-size: 50px;
 	}
 	
 	body {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 </style>
 
@@ -392,13 +394,16 @@
 <body>
 <div id="wrapper" align="center">
 <div id="pan" style="float:left; width: 1073px; height:545px; border-radius: 25px; background-color: white;">
-	즐겨찾기
+	<div style="padding-top: 5px;, padding-bottom: 5px;">
+	<h1><b>Favorite</b></h1>
+	<hr/>
 	 <div id="stage"> 
       <div id="rotate"> 
         <div id="ring-1" class="ring"></div>
         <div id="ring-2" class="ring"></div>
         <div id="ring-3" class="ring"></div>
       </div>
+    </div>
     </div>
 </div>  
 
