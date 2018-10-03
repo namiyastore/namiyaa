@@ -19,33 +19,23 @@
 		location.href="historyList";
 	}
 	
-	function printWinner(historynum) {
-		$.ajax({
-			method : 'post',
-			url : 'selectWinner',
-			data : {"historynum" : historynum},
-			
-			dataType: 'text',
-			success : function(resp) {
+	function printWinner(historynum,winner) {
 				var a = '';
 					a += '<td id="winnerid" class="result_info" style="text-align: center; width:120px; font-size: 14px; color:red;">';
-					a += resp;
+					a += winner
 					a += '</td>';
 					a += '<td class="result_info">';
 					a += '<input type="button" id="message" class="btn" name="message" value="쪽지" onclick= "message(';
-					a += "'"+resp+"'"; 
+					a += "'"+winner+"'"; 
 					a += ')" >';				
 					a += '</td>';
-				$("#winner").html(a);
-			},
-			error : function(error) {
-				alert(error);	
-			}
-		});
+					
+					$("#winner").html(a);
+		
 	}
 	
 	$(function() {
-		printWinner(${history.historynum});
+		printWinner(${history.historynum},${history.buyerid});
 		
 		$('.rightSide_MyInfoBoxDown_goToHome').on('click', function() {
 			location.href = './';
