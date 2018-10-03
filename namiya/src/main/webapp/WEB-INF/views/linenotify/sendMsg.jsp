@@ -30,7 +30,6 @@
 
 	$(function(){
 		var senderid = $('#senderid').val();
-		alert('senderid: ' + senderid);
 		
 		if(detectmob()) {
 			$('body').css('height', (window.innerHeight)+'px');
