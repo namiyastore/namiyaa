@@ -943,14 +943,14 @@ function checkImage(useritemnum) {
 	</div>
 	
 	
-	<div id="list" style="float:left; width: 90px; text-align:right; height:545px; padding-top: 3px;">
+	<div id="list" style="float:left; width: 88px; text-align:right; height:545px; padding-top: 3px;">
 		<ul class="menulist">
 			<li><a href="home"><img src="${pageContext.request.contextPath}/resources/images/home.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			<li><a href="give"><img src="${pageContext.request.contextPath}/resources/images/give.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			<li><a href="trade"><img src="${pageContext.request.contextPath}/resources/images/trade.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			<li><a href="talent"><img src="${pageContext.request.contextPath}/resources/images/talent.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			<li><a href="review"><img src="${pageContext.request.contextPath}/resources/images/review.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
-			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 1px;"></a></li>
+			<li><a href="favorite"><img src="${pageContext.request.contextPath}/resources/images/favoritemenu.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			<c:if test="${userid == sessionScope.loginId}">
 			<li><a href="setting"><img src="${pageContext.request.contextPath}/resources/images/setting.png" style="width:90px; height:50px; margin-bottom: 5px;"></a></li>
 			</c:if>

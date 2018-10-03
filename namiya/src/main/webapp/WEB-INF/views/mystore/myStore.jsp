@@ -415,7 +415,7 @@ var background = {
 		
 	</div>
 	
-	<div id="list" style="float:left; width: 90px; text-align:right; height:545px; padding-top: 3px;">
+	<div id="list" style="float:left; width: 88px; text-align:right; height:545px; padding-top: 3px;">
 		<ul>
 			<li><a href="home"><img src="${pageContext.request.contextPath}/resources/images/home.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
 			<li><a href="give"><img src="${pageContext.request.contextPath}/resources/images/give.png" style="width:90px; height:50px; margin-bottom: 4px;"></a></li>
