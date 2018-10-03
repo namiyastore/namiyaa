@@ -994,7 +994,8 @@ public class MyStoreController {
 	/** 당첨자 추천 **/
 	@ResponseBody
 	@RequestMapping(value = "/selectWinner", method = RequestMethod.POST)
-	public String selectWinner(int historynum, Model model) {
+	public Map<String, String> selectWinner(int historynum, Model model, HttpSession session) {
+		String sellerid = (String)session.getAttribute("loginId");
 		History history = b_repository.selectHst(historynum);
 		int productnum = history.getProductnum();
 		Board board = b_repository.selectBoard(productnum);
@@ -1022,7 +1023,12 @@ public class MyStoreController {
 		int result = b_repository.updateBuyer(history);
 		int result2 = p_repository.updatePstt(product);
 		System.out.println("winner : " + winner[wn]);
-		return winid;
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("winnerid", winid);
+		map.put("sellerid", sellerid);
+		
+		return map;
 	}
 
 	/** 포인트 확인 controller **/

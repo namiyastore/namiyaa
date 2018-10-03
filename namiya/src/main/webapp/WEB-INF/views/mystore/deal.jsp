@@ -106,7 +106,7 @@
 		});
 	}
 	
-	function selected(historynum) {
+	function selected(historynum, sellerid) {
 		//alert("추첨하기");
 		//alert(historynum);
 		
@@ -115,7 +115,6 @@
 			url : 'selectWinner',
 			data : {"historynum" : historynum},
 			
-			dataType: 'text',
 			success : function(resp) {
 				var a = '';
 					a += '<td id="winnerid" class="result_info" style="text-align: center; width:120px; font-size: 14px; color:red;">';
@@ -128,10 +127,10 @@
 					a += '</td>';
 				$("#winner").html(a);
 				
-				var senderid = $("#userid").val();
+				resp["winnerid"][0]["TYPE"]
 				
 				var urlAddr = "http://13.125.208.152:8081";
-				var msg = "추첨%20대상자로%20선정되셨습니다%0Aline:" + urlAddr + "/namiya/sendMsg?userid=" + resp + "&senderid=" + senderid;
+				var msg = "추첨%20대상자로%20선정되셨습니다%0Aline:" + urlAddr + "/namiya/sendMsg?userid=" + resp["winnerid"] + "&senderid=" +  resp["sellerid"];
 				
 				// 당첨자에게 메세지 전송
 				msgSend(resp, msg);
@@ -352,7 +351,7 @@
 				<br/>
 				<div id="select">
 				<c:if test="${product.sstatus eq '진행완료' && history.buyerid == null}">
-					<input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
+					<input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum}, '${sessionScope.loginId}')">
 				</c:if>
 				</div>
 			</div>
