@@ -184,16 +184,21 @@ public class MiniRoomController {
 			if(um != null && !um.getUserid().equals(userid)) {
 					return "";
 			}
+			
 			Profile pfile = p_repository.selectNickname(profile.getNickname());
 			System.out.println("!!!pfile: "+pfile);
 			if(pfile !=null && !pfile.getUserid().equals(userid))
 				return "NickName";
-			String originalfile = upload.getOriginalFilename();
-			String savedfile = FileService.saveFile(upload, uploadPath);
-			System.out.println(originalfile+", "+savedfile+", "+userid);
+			String originalfile = null;
+			String savedfile = null;
+			if(upload.getSize() != 0) {
+				originalfile = upload.getOriginalFilename();
+				savedfile = FileService.saveFile(upload, uploadPath);
+				System.out.println(originalfile+", "+savedfile+", "+userid);
+			}
 			Profile p = p_repository.select(userid);
 			// member xml에서 update문 추가하기
-			if(!originalfile.equals("")) { // 파일 첨부가 있을때
+			if(originalfile != null) { // 파일 첨부가 있을때
 				// 기존파일삭제후 넣기
 				if(p.getSavedfile() !=null && !p.getSavedfile().equals("")) { // 기존프로필 저장파일이 있으면
 					String fullPath = uploadPath + "/" + p.getSavedfile();

@@ -47,7 +47,7 @@ public class FavoriteController {
 		return "mystore/favorite";
 	}
 	
-	@RequestMapping(value="favoriteList", method = RequestMethod.GET)
+/*	@RequestMapping(value="favoriteList", method = RequestMethod.GET)
 	public String fListAll(Model model) {
 		
 		//List<Favorite> flist = repository.fListAll();
@@ -68,6 +68,7 @@ public class FavoriteController {
 		model.addAttribute("list", list);
 		return "mypage/favorite";
 	}
+	*/
 	
 	@RequestMapping(value="fInsert", method = RequestMethod.POST)
 	public String fInsert(Favorite favorite) {
