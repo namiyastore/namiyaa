@@ -7,7 +7,7 @@ import global.sesoc.namiya.vo.Members;
 
 
 public interface MembersMapper {
-
+ 
 	public Members selectOne(Members m);
 
 	public int insertMembers(Members members);

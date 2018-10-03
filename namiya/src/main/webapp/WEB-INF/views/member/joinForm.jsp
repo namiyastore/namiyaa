@@ -41,6 +41,31 @@
     var sendFlag = false;
     var phoneFlag= false;
     var userAuthNo = 0;
+    
+    	//language pack
+		var joinFormId='';
+		var joinFormPw='';
+		var joinFormChkPw='';
+		var joinFormName='';
+		var joinFormBirth='';
+		var joinFormYear='';
+		var joinFormMonth='';
+		var joinFormDay='';
+		var joinFormGender='';
+		var joinFormMan='';
+		var joinFormWoman='';
+		var joinFormEmail='';
+		var joinFormAuthRequest='';
+		var joinFormPhone='';
+		var joinFormAddrKor='';
+		var joinFormSearchAddr='';
+		var joinFormSignUp='';
+		var joinFormnInfo='';
+		var joinFormchkBirth='';
+		var joinFormchkEmail='';
+		var joinFormClause='';
+		var joinFormPersonalInfo='';
+    
 
     $(document).ready(function() {
         defaultScript();
@@ -766,6 +791,8 @@
 </script>
 
 <body class="is-preload">
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
+
 <div id="wrap"class="limiter">
 <div  class="container-login100">
 <div class="wrap-login100">

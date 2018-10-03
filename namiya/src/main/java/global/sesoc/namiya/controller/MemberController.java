@@ -64,7 +64,7 @@ public class MemberController {
 		Members m = new Members();
 		m = repository.selectOne(member);
 		
-		if(m!=null) {
+		if(m!=null) { 
 			System.out.println("로그인성공");
 			System.out.println(m);
 			session.setAttribute("loginId", m.getUserid());

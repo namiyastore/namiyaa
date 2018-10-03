@@ -47,8 +47,7 @@
 			members
 		set
 			password=#{password},
-			birthday=#{birthday},
-			phone#{phoneNo},
+			phoneno=#{phoneNo},
 			fullAddr=#{fullAddr},
 			zipcode=#{zipcode}
 		where

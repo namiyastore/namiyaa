@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,8 +35,13 @@
 	var idFlag = false;
 	var pwdFlag = false;
 	var isShift = false;
+	var askingPw = '';
+	var askingId = '';
 	
 $(document).ready(function(){
+	askingPw = $("#askingPw").val();
+	askingId = $("#askingId").val();
+	
 	$("#userid").val("");
     
 	$("#loginUp").click(function(){
@@ -87,17 +93,18 @@ function checkId(){
 	var userid = $("#userid").val();
 	var oMsg = $("#idMsg");
 	
+	
 	if ( userid == "") {
-        showErrorMsg(oMsg,"아이디를 입력해주세요");
+        showErrorMsg(oMsg,askingId);
         idFlag = false;
     }else{
-    	showErrorMsg(oMsg,"비밀번호를 입력하세요");
+    	showErrorMsg(oMsg,askingPw);
     	idFlag = true;
     }
 
     var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
     if (!isID.test(userid)) {
-        showErrorMsg(oMsg,"아이디를 확인해주세요.");
+        showErrorMsg(oMsg,askingId);
         idFlag = false;
     }else{
     	idFlag = true;
@@ -109,7 +116,7 @@ function checkPassword(){
 	var oMsg = $("#pwdMsg");
 	
 	 if (password == "") {
-         showErrorMsg(oMsg,"비밀번호를 입력해주세요.");
+         showErrorMsg(oMsg,askingPw);
          pwdFlag = false;
      }else{
     	 pwdFlag = true;
@@ -136,9 +143,9 @@ function checkCapslock(e) {
 
      var oMsg = $("#pwdMsg");
     if ((myKeyCode >= 65 && myKeyCode <= 90) && !myShiftKey) {
-        showErrorMsg(oMsg,"Caps Lock이 켜져 있습니다.");
+        showErrorMsg(oMsg,"Caps Lock ON");
     } else if ((myKeyCode >= 97 && myKeyCode <= 122) && myShiftKey) {
-        showErrorMsg(oMsg,"Caps Lock이 켜져 있습니다.");
+        showErrorMsg(oMsg,"Caps Lock Off");
     } else {
         hideMsg(oMsg);
     }
@@ -165,6 +172,9 @@ function memberfind(){
 </script>
 
 <body class="is-preload">
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
+<input id="askingPw" type="hidden" value="<spring:message code="loginForm.askingForPwd" />">
+<input id="askingId" type="hidden" value="<spring:message code="loginForm.askingForId" />">
 
 	<div id="wrap"class="limiter">
 	<div  class="container-login100">
@@ -191,9 +201,9 @@ function memberfind(){
 				<a id="loginUp" class="clickbutton"><img width="120" height="50" alt="" src="resources/images/login.png"/></a>
 				<a id="signup" class="clickbutton" onclick="signUp()"><img width="120" height="50" alt="" src="resources/images/signup.png"></a>
 				<br>
-				<a class="clickbutton" onclick="memberfind()">아이디비밀번호 찾기</a>
-				<div style="position: relative; display: inline; left: 300px;"><a class="clickbutton" onclick="location.href='${pageContext.request.contextPath}/ko'"><img width="50" height="50" alt="" src="resources/images/korea.png"/></a></div>
-				<div style="position: relative; display: inline; left: 300px;"><a class="clickbutton" onclick="location.href='${pageContext.request.contextPath}/ja'"><img width="50" height="50" alt="" src="resources/images/japan.png"/></a></div>
+				<a class="clickbutton" onclick="memberfind()"><spring:message code="loginForm.idNpwdFind" /></a>
+				<div style="position: relative; display: inline; left: 270px;"><a class="clickbutton" onclick="location.href='${pageContext.request.contextPath}/ko'"><img width="50" height="50" alt="" src="resources/images/korea.png"/></a>
+				 <a class="clickbutton" onclick="location.href='${pageContext.request.contextPath}/ja'"><img width="50" height="50" alt="" src="resources/images/japan.png"/></a></div>
 				
 				
 			</div>
