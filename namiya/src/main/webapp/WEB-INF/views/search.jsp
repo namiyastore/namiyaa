@@ -17,6 +17,7 @@
 ::-webkit-scrollbar-thumb:hover {background: #79bfe5;}
 ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
    width:16px;height:16px;background:#79bfe5;} 
+   
 	body {
 		font-family: 'Raleway', 'Nanum Gothic';
 	}
