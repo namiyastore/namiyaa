@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -77,6 +77,7 @@
 	 
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 ::-webkit-scrollbar{width: 16px;}
 ::-webkit-scrollbar-track {background-color:AE79F1;}
 ::-webkit-scrollbar-thumb {background-color:#79bfe5;}
@@ -185,7 +186,7 @@
 	}
 	
 	body, p {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 	
 	table, tr, td {
@@ -226,6 +227,7 @@
 </style>
 </head>
 <body>
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <div id="wrapper" align="center">
 	<div id="scroll" style="float:left; width: 1073px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
 			<div id="giveform">
@@ -246,7 +248,7 @@
 					</c:if>
 					</tr>
 					<tr>
-						<td class="menu" colspan="2"><b>거래상태</b></td>
+						<td class="menu" colspan="2"><b><spring:message code="giveView.status" /></b></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="scontent"> 
@@ -254,13 +256,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="menu"><b>제목</b></td>
+						<td colspan="2" class="menu"><b><spring:message code="giveView.title" /></b></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="scontent"><input type="text" class="ins" id="title" name="title" value="${board.title}" readonly="readonly"></td>
 					</tr>
 					<tr>
-						<td colspan="2" class="menu"><b>내용</b></td>
+						<td colspan="2" class="menu"><b><spring:message code="giveView.content" /></b></td>
 					</tr>
 					<tr>
 						<td colspan="2">
@@ -270,28 +272,28 @@
 										<img alt="" src="${pageContext.request.contextPath}/home/img/boardfile/${board.savedfile}" style="width:200px; height:150px;">
 										<br/>
 								</div>
-								<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Raleway', 'Nanum Gothic';" readonly="readonly">${board.content}</textarea>
+								<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';" readonly="readonly">${board.content}</textarea>
 								</c:if>	
 								
 								
 								<c:if test="${empty board.originalfile}" >
-										<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Raleway', 'Nanum Gothic';" readonly="readonly">${board.content}</textarea>
+										<textarea rows="15" cols="150" style="resize:none; outline: none; border: none; background-color: #fcfbf9; padding-left: 10px; font-size: 15px; font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';" readonly="readonly">${board.content}</textarea>
 								</c:if>
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="menu"><b>양도상품 정보</b></td>
+						<td colspan="2" class="menu"><b><spring:message code="giveView.productinfo" /></b></td>
 					</tr>
 					<tr>
-						<td class="sort"><b>분류</b></td>
+						<td class="sort"><b><spring:message code="giveView.sort" /></b></td>
 						<td class="scontent">
 							<input class="ins" type="text" id="categoryname" name="categoryname" value="${map.CATEGORYNAME}" readonly="readonly">
 						</td>
 						
 					</tr>
 					<tr>
-						<td class="sort"><b>상품이름</b></td>
+						<td class="sort"><b><spring:message code="giveView.name" /></b></td>
 						<td class="scontent"><input class="ins" type="text" id="productname" name="productname" value="${map.PRODUCTNAME}" readonly="readonly"></td>
 					</tr>
 				</table>

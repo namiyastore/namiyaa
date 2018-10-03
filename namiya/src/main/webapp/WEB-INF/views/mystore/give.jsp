@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -74,6 +74,7 @@ function want(boardnum, userid) {
 
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 ::-webkit-scrollbar{width: 16px;}
 ::-webkit-scrollbar-track {background-color:AE79F1;}
 ::-webkit-scrollbar-thumb {background-color:#79bfe5;}
@@ -181,7 +182,7 @@ function want(boardnum, userid) {
 	}
 	
 	body, p {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 	
 	table, tr, td {
@@ -194,7 +195,7 @@ function want(boardnum, userid) {
 		height: 160px;
 		padding: 0px;
 		margin:0px;
-		font-family: 'Nanum Gothic', 'Raleway';
+		font-family: 'Nanum Gothic', 'Raleway', 'Noto Sans Japanese';
 	}
 	
 	hr {
@@ -214,7 +215,7 @@ function want(boardnum, userid) {
 	#date {
 		width:150px;
 		text-align: center;
-		font-family: 'Nanum Gothic';
+		font-family: 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 	
 	#btn {
@@ -231,6 +232,7 @@ function want(boardnum, userid) {
 </style>
 </head>
 <body>
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <div id="wrapper" align="center">
 	<div id="scroll" style="float:left; width: 1073px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
 		<div id="givedetail">
@@ -243,7 +245,7 @@ function want(boardnum, userid) {
 			<c:if test="${empty map}">
 					<br/>
 					<tr>
-						<td colspan="3">등록된 무료양도 상품이 없습니다.</td>
+						<td colspan="3"><spring:message code="give.notice" /></td>
 					</tr>
 			</c:if>
 			
@@ -252,7 +254,7 @@ function want(boardnum, userid) {
 			<c:forEach var="map" items="${map}" varStatus="status">
 				<table>
 					<tr>
-						<td style="width:60px; font-family: 'Nanum Gothic'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
+						<td style="width:60px; font-family: 'Nanum Gothic', 'Noto Sans Japanese'; font-size: 15px; color:#105531;"><b>${map.SSTATUS}</b></td>
 						<c:if test="${map.ORIGINALFILE != null}">
 						<td id="image"><img src="${pageContext.request.contextPath}/home/img/boardfile/${map.SAVEDFILE}" style="width:140px; height:100px;"></td>
 						</c:if>

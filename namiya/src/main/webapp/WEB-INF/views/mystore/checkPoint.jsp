@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html >
 <html>
 <head>
@@ -78,6 +79,7 @@
 	}
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 	input[type="number"]::-webkit-outer-spin-button,
 	input[type="number"]::-webkit-inner-spin-button {
 	}
@@ -135,7 +137,7 @@
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: 'Raleway';
+		font-family: 'Raleway', 'Noto Sans Japanese';
 		font-size: 15px;
 	}
 	
@@ -149,29 +151,30 @@
 	}
 	
 	body, p {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 </style>
 </head>
 <body>
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <div id="wrapper" align="center">
 <h1 style="color: white;">Point Use</h1>
 <table style="padding-bottom: 10px;">
 	<tr>
-		<th colspan="2" style="color:white; font-size: 13px; padding-bottom: 10px;">포인트는 200점 단위로 사용이 가능합니다.</th>
+		<th colspan="2" style="color:white; font-size: 13px; padding-bottom: 10px;"><spring:message code="checkPoint.notice" /></th>
 	</tr>
 	<tr>
-		<th class="menu">사용가능 포인트</th>
+		<th class="menu"><spring:message code="checkPoint.check" /></th>
 		<td class="content" id="total">${point_total}</td>
 	</tr>
 	<tr>
-		<th class="menu">사용할 포인트</th>
+		<th class="menu"><spring:message code="checkPoint.use" /></th>
 		<td class="content"><input id="pointcontent" type="number" name="quantity" min="0" step="200" value="0"></td>
 	</tr>
 </table>
-<input class="btn" type="button" value="사용하기" onclick="UsePoint(${boardnum}, '${sessionScope.loginId}')">
-<input class="btn" type="button" value="사용안함" onclick="DontusePoint(${boardnum}, '${sessionScope.loginId}')">
-<input class="btn" type="button" value="닫기" onclick="Closed()">
+<input class="btn" type="button" value="<spring:message code="checkPoint.btn1" />" onclick="UsePoint(${boardnum}, '${sessionScope.loginId}')">
+<input class="btn" type="button" value="<spring:message code="checkPoint.btn2" />" onclick="DontusePoint(${boardnum}, '${sessionScope.loginId}')">
+<input class="btn" type="button" value="<spring:message code="checkPoint.btn3" />" onclick="Closed()">
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,6 +46,7 @@ function formCheck() {
 }
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 ::-webkit-scrollbar{width: 16px;}
 ::-webkit-scrollbar-track {background-color:AE79F1;}
 ::-webkit-scrollbar-thumb {background-color:#79bfe5;}
@@ -151,7 +153,7 @@ function formCheck() {
 	}
 	
 	body {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 	
 	.scl {
@@ -167,6 +169,7 @@ function formCheck() {
 </style>
 </head>
 <body>
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <div id="wrapper" align="center">
 	<form name="form1" action="talentupdate" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="userid" value="${sessionScope.loginId}" id="userid">
@@ -181,32 +184,32 @@ function formCheck() {
 						</td>
 					</tr>
 					<tr>
-						<td class="menu" colspan="2"><b>거래종류</b></td>
+						<td class="menu" colspan="2"><b><spring:message code="talentUpdate.sevice" /></b></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="scontent"> 
-							<input class="ins" type="text" name="service" id="service" value="재능기부" readonly="readonly">
+							<input class="ins" type="text" name="service" id="service" value="<spring:message code="talentUpdate.talent" />" readonly="readonly">
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="menu"><b>제목</b></td>
+						<td colspan="2" class="menu"><b><spring:message code="talentUpdate.title" /></b></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="scontent"><input type="text" class="ins" id="title" name="title" value="${board.title}"></td>
 					</tr>
 					<tr>
-						<td colspan="2" class="menu"><b>내용</b></td>
+						<td colspan="2" class="menu"><b><spring:message code="talentUpdate.content" /></b></td>
 					</tr>
 					<tr>
 						<td colspan="2"><textarea rows="15" cols="150" id="content" name="content" style="resize:none;">${board.content}</textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2" class="menu"><b>재능기부 정보</b></td>
+						<td colspan="2" class="menu"><b><spring:message code="talentUpdate.productinfo" /></b></td>
 					</tr>
 					<tr>
-						<td class="sort"><b>분류</b></td>
+						<td class="sort"><b><spring:message code="talentUpdate.sort" /></b></td>
 						<td class="scontent">
-						<label style="font-size: 14px;">대분류</label>
+						<label style="font-size: 14px;"><spring:message code="talentUpdate.sort.big" /></label>
 							<select id="big" name="categorynum">
 							<option class="category" value="대분류">--대분류--</option>
 								<c:forEach var="list" items="${c_list}">
@@ -218,11 +221,11 @@ function formCheck() {
 						</td>
 					</tr>
 					<tr>
-						<td class="sort"><b>재능이름</b></td>
+						<td class="sort"><b><spring:message code="talentUpdate.name" /></b></td>
 						<td class="scontent"><input class="ins" type="text" id="productname" name="productname" value="${map.PRODUCTNAME}"></td>
 					</tr>
 					<tr>
-						<td class="sort"><b>첨부파일</b></td>
+						<td class="sort"><b><spring:message code="talentUpdate.file" /></b></td>
 						<td class="scontent">
 						<c:if test="${not empty board.originalfile}">
 							<img src="${pageContext.request.contextPath}/home/img/boardfile/${board.savedfile}" style="width:100px; height:50px;">
@@ -233,7 +236,7 @@ function formCheck() {
 						</c:if>
 						<br/>
 							<input type="file" name="upload" id="file" accept="image/jpeg, image/png, image/gif">
-							<p style="font-family: 'Raleway', 'Nanum Gothic'; font-size: 12px; color:red;">이미지 파일만 등록가능합니다.</p>
+							<p style="font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese'; font-size: 12px; color:red;"><spring:message code="talentUpdate.notice" /></p>
 						</td>
 					</tr>
 				</table>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -117,6 +118,7 @@ function  formCheck() {
 
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 ::-webkit-scrollbar{width: 16px;}
 ::-webkit-scrollbar-track {background-color:AE79F1;}
 ::-webkit-scrollbar-thumb {background-color:#79bfe5;}
@@ -224,7 +226,7 @@ function  formCheck() {
 	}
 	
 	body {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 	
 	.scl {
@@ -240,6 +242,7 @@ function  formCheck() {
 </style>
 </head>
 <body>
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <div id="wrapper" align="center">
 	<form name="form1" action="update" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="userid" value="${sessionScope.loginId}" id="userid">
@@ -254,32 +257,32 @@ function  formCheck() {
 						</td>
 					</tr>
 					<tr>
-						<td class="menu" colspan="2"><b>거래종류</b></td>
+						<td class="menu" colspan="2"><b><spring:message code="giveUpdate.sevice" /></b></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="scontent"> 
-							<input class="ins" type="text" name="service" id="service" value="양도" readonly="readonly">
+							<input class="ins" type="text" name="service" id="service" value="<spring:message code="giveUpdate.give" />" readonly="readonly">
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="menu"><b>제목</b></td>
+						<td colspan="2" class="menu"><b><spring:message code="giveUpdate.title" /></b></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="scontent"><input type="text" class="ins" id="title" name="title" value="${board.title}"></td>
 					</tr>
 					<tr>
-						<td colspan="2" class="menu"><b>내용</b></td>
+						<td colspan="2" class="menu"><b><spring:message code="giveUpdate.content" /></b></td>
 					</tr>
 					<tr>
 						<td colspan="2"><textarea rows="15" cols="150" id="content" name="content" style="resize:none;">${board.content}</textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2" class="menu"><b>양도상품 정보</b></td>
+						<td colspan="2" class="menu"><b><spring:message code="giveUpdate.productinfo" /></b></td>
 					</tr>
 					<tr>
-						<td class="sort"><b>분류</b></td>
+						<td class="sort"><b><spring:message code="giveUpdate.sort" /></b></td>
 						<td class="scontent">
-						<label style="font-size: 14px;">대분류</label>
+						<label style="font-size: 14px;"><spring:message code="giveUpdate.sort.big" /></label>
 							<select id="big">
 								<option class="category" value="대분류">--대분류--</option>
 								<c:forEach var="list" items="${c_list}">
@@ -288,20 +291,20 @@ function  formCheck() {
 									</c:if>
 								</c:forEach>
 							</select>
-						<label style="font-size: 14px;">중분류</label>
+						<label style="font-size: 14px;"><spring:message code="giveUpdate.sort.middle" /></label>
 							<select id="middle">
 							</select>
-						<label style="font-size: 14px;">소분류</label>
+						<label style="font-size: 14px;"><spring:message code="giveUpdate.sort.small" /></label>
 							<select id="small" name="categorynum">
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td class="sort"><b>상품이름</b></td>
+						<td class="sort"><b><spring:message code="giveUpdate.name" /></b></td>
 						<td class="scontent"><input class="ins" type="text" id="productname" name="productname" value="${map.PRODUCTNAME}"></td>
 					</tr>
 					<tr>
-						<td class="sort"><b>첨부파일</b></td>
+						<td class="sort"><b><spring:message code="giveUpdate.file" /></b></td>
 						<td class="scontent">
 						<c:if test="${not empty board.originalfile}">
 							<img src="${pageContext.request.contextPath}/home/img/boardfile/${board.savedfile}" style="width:100px; height:50px;">
@@ -312,7 +315,7 @@ function  formCheck() {
 						</c:if>
 						<br/>
 							<input type="file" name="upload" id="file" accept="image/jpeg, image/png, image/gif">
-							<p style="font-family: 'Nanum Gothic'; font-size: 12px; color:red;">이미지 파일만 등록가능합니다.</p>
+							<p style="font-family: 'Nanum Gothic', 'Noto Sans Japanese'; font-size: 12px; color:red;"><spring:message code="giveUpdate.notice" /></p>
 						</td>
 					</tr>
 				</table>

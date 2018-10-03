@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,6 +46,7 @@ $(document).ready(function(){
 	}
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 ::-webkit-scrollbar{width: 16px;}
 ::-webkit-scrollbar-track {background-color:AE79F1;}
 ::-webkit-scrollbar-thumb {background-color:#79bfe5;}
@@ -152,7 +154,7 @@ $(document).ready(function(){
 	}
 	
 	body, p {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 	
 	.btn {
@@ -171,7 +173,7 @@ $(document).ready(function(){
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 		font-size: 15px;
 	}
 	
@@ -192,6 +194,7 @@ $(document).ready(function(){
 </style>
 </head>
 <body>
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <div id="wrapper" align="center">
 	<div id="scroll" style="float:left; width: 1073px; height:545px; overflow-y:auto; overflow-x:hidden; border-radius: 25px; background-color: white;">
 		<div id="givedetail">
@@ -227,7 +230,7 @@ $(document).ready(function(){
 		<hr/>
 		<br/>
 				<c:if test="${empty list}"> 
-					<p>등록된 후기가 없습니다.</p>
+					<p><spring:message code="review.notice" /></p>
 				</c:if>
 				<c:if test="${not empty list}">
 					<c:forEach var="list" items="${list}" varStatus="status">
@@ -235,7 +238,7 @@ $(document).ready(function(){
 						<table align="center">
 							<tr>
 								<td align="center" style="padding-top: 8px; padding-bottom: 5px;">Write by <b>${list.userid}</b></td>
-								<td align="right" style="padding-top: 8px; padding-bottom: 5px;font-family: 'Nanum Gothic';">${list.regdate}</td>
+								<td align="right" style="padding-top: 8px; padding-bottom: 5px;font-family: 'Nanum Gothic', 'Noto Sans Japanese';">${list.regdate}</td>
 							</tr>
 							<tr>
 								<td>

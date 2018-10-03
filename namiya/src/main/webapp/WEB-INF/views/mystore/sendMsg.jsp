@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -62,6 +63,7 @@
 	}
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 	body {
 		background: url('resources/images/msgmain.png') no-repeat center center fixed; 
  		-webkit-background-size: cover;
@@ -124,7 +126,7 @@
 		-o-transition: all .5s;
 		transition: all .5s;
 		background-color:#105531;
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 		font-size: 15px;
 	}
 	
@@ -134,21 +136,22 @@
 </style>
 </head>
 <body>
+<input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <div id="wrapper" align="center">
 <h1 style="color: white; font-family: 'VT323';">Send a message</h1>
 <form action="insertMsg" name="form" method="post">
 <input type="hidden" name="copy" value="1">
 <table style="margin-bottom: 10px;">
 	<tr>
-		<td class="menu"><b>보내는사람</b></td>
+		<td class="menu"><b><spring:message code="sendMsg.from" /></b></td>
 		<td class="content"><input type="text" id="writerid" name="writerid" value="${sessionScope.loginId}" readonly="readonly" style="outline: none; border: none;"></td>
 	</tr>
 	<tr>
-		<td class="menu"><b>받는사람</b></td>
+		<td class="menu"><b><spring:message code="sendMsg.to" /></b></td>
 		<td class="content"><input type="text" id="userid" name="userid" value="${userid}" readonly="readonly" style="outline: none; border: none;"></td>
 	</tr>
 	<tr>
-		<td class="menu"><b>제목</b></td>
+		<td class="menu"><b><spring:message code="sendMsg.title" /></b></td>
 		<td class="content"><input name="msg_title" id="msg_title" style="width: 230px; outline: none;"></td>
 	</tr>
 	<tr>
