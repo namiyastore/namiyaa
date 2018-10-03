@@ -29,6 +29,8 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
 <title>login.jsp</title>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 </head>
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
@@ -170,7 +172,13 @@ function memberfind(){
 	var pop = window.open("findPop","findPop","width=800,height=600, scrollbars=yes"); 
 }
 </script>
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 
+body, h { 
+	font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
+}
+</style>
 <body class="is-preload">
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 <input id="askingPw" type="hidden" value="<spring:message code="loginForm.askingForPwd" />">
