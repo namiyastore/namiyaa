@@ -13,12 +13,40 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 <script>
+
+
 	function gotohistory() {
 		location.href="historyList";
 	}
 	
+	function printWinner(historynum) {
+		$.ajax({
+			method : 'post',
+			url : 'selectWinner',
+			data : {"historynum" : historynum},
+			
+			dataType: 'text',
+			success : function(resp) {
+				var a = '';
+					a += '<td id="winnerid" class="result_info" style="text-align: center; width:120px; font-size: 14px; color:red;">';
+					a += resp;
+					a += '</td>';
+					a += '<td class="result_info">';
+					a += '<input type="button" id="message" class="btn" name="message" value="쪽지" onclick= "message(';
+					a += "'"+resp+"'"; 
+					a += ')" >';				
+					a += '</td>';
+				$("#winner").html(a);
+			},
+			error : function(error) {
+				alert(error);	
+			}
+		});
+	}
+	
 	$(function() {
-
+		printWinner(${history.historynum});
+		
 		$('.rightSide_MyInfoBoxDown_goToHome').on('click', function() {
 			location.href = './';
 		});
@@ -97,7 +125,6 @@
 			
 			dataType: 'text',
 			success : function(resp) {
-				alert(resp);
 				var a = '';
 					a += '<td id="winnerid" class="result_info" style="text-align: center; width:120px; font-size: 14px; color:red;">';
 					a += resp;
@@ -116,9 +143,10 @@
 				
 				// 당첨자에게 메세지 전송
 				msgSend(resp, msg);
-				
+				 
 				// <input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
 				$("#buyer").html(resp);
+			
 			},
 			error : function(error) {
 				alert("추첨 error : "+error);

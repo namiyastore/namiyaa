@@ -271,7 +271,7 @@ function  formCheck() {
 					</tr>
 					<tr>
 						<td colspan="2" class="scontent"> 
-							<input class="ins" type="text" name="service" id="service" value="<spring:message code="giveFrom.give" />" readonly="readonly">
+							<input class="ins" type="text" name="service" id="service" value="<spring:message code="giveForm.give" />" readonly="readonly">
 						</td>
 					</tr>
 					<tr>
