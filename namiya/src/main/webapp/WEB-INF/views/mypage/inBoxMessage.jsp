@@ -8,8 +8,9 @@
 <link rel="stylesheet" href="resources/mypage/css/mypage_message.css">
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
 <style>
+ @import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 	body {
-		font-family: 'Raleway', 'Nanum Gothic';
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 	}
 </style>
 <script> 

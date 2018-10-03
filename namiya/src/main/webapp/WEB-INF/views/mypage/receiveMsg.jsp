@@ -66,6 +66,11 @@
 	}
 </script>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+	body {
+		font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
+	}
+	
 	body {
 		background: url('resources/images/msgmain.png') no-repeat center center fixed; 
  		-webkit-background-size: cover;
