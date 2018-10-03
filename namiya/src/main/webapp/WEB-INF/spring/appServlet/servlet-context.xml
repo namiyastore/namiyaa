@@ -50,6 +50,10 @@
             <mapping path="/mOutBoxListAll/**"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
+        
+        <beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <beans:property name="paramName" value="lang"/>
+        </beans:bean>
     </interceptors>
     
     <!-- Interceptor 설정 -->
