@@ -175,7 +175,7 @@ function memberfind(){
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 
-body, h {
+body, h { 
 	font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
 }
 </style>
