@@ -121,31 +121,31 @@ public class MyStoreController {
 		String date = df.format(today);
 		Product product = new Product();
 		int datecom;
-		System.out.println("cron test:" + date);
+//		System.out.println("cron test:" + date);
 
 		List<History> list = h_repository.selecthListAll();
 
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getDeal_end());
+//			System.out.println(list.get(i).getDeal_end());
 			if (list.get(i).getDeal_end() != null) {
 				if (date.compareTo(list.get(i).getDeal_end()) >= 0) {
-					System.out.println("if들어감");
+//					System.out.println("if들어감");
 					int productnum = list.get(i).getProductnum();
 					product = p_repository.selectPdt(productnum);
-					System.out.println(product);
+//					System.out.println(product);
 
 					product.setSstatus("진행완료");
 					int result = p_repository.updatePstt2(product);
-					System.out.println("schedule의 result:" + result);
+//					System.out.println("schedule의 result:" + result);
 				} else {
-					System.out.println("update는 안됐지");
+//					System.out.println("update는 안됐지");
 				}
 			} else {
-				System.out.println("if안들어감 : " + list.get(i).getDeal_end());
+//				System.out.println("if안들어감 : " + list.get(i).getDeal_end());
 			}
 		}
 
-		System.out.println("한바뀌 돌았다");
+//		System.out.println("한바뀌 돌았다");
 	}
 
 	/** 공통부분 **/
@@ -376,14 +376,14 @@ public class MyStoreController {
 		// 첨부한 경우
 		if (upload.getSize() != 0) {
 			String fullPath = uploadPath + "/" + old.getSavedfile();
-			System.out.println(fullPath);
+//			System.out.println(fullPath);
 
 			FileService.deleteFile(fullPath);
 			String originalfile = upload.getOriginalFilename();
 			String savedfile = FileService.saveFile(upload, uploadPath);
 
-			System.out.println("오리지널 파일 :" + originalfile);
-			System.out.println("저장된 파일 :" + savedfile);
+//			System.out.println("오리지널 파일 :" + originalfile);
+//			System.out.println("저장된 파일 :" + savedfile);
 
 			board.setOriginalfile(originalfile);
 			board.setSavedfile(savedfile);
@@ -555,14 +555,14 @@ public class MyStoreController {
 		// 첨부한 경우
 		if (upload.getSize() != 0) {
 			String fullPath = uploadPath + "/" + old.getSavedfile();
-			System.out.println(fullPath);
+//			System.out.println(fullPath);
 
 			FileService.deleteFile(fullPath);
 			String originalfile = upload.getOriginalFilename();
 			String savedfile = FileService.saveFile(upload, uploadPath);
 
-			System.out.println("오리지널 파일 :" + originalfile);
-			System.out.println("저장된 파일 :" + savedfile);
+//			System.out.println("오리지널 파일 :" + originalfile);
+//			System.out.println("저장된 파일 :" + savedfile);
 
 			board.setOriginalfile(originalfile);
 			board.setSavedfile(savedfile);
@@ -814,7 +814,7 @@ public class MyStoreController {
 		int totalRecordCount = b_repository.reviewgetTotalPage(store_owner);
 		PageNavigator navi = new PageNavigator(currentPage, totalRecordCount, 5, 5);
 
-		System.out.println(member);
+//		System.out.println(member);
 		List<Review> list = r_repository.selectReviewAll(store_owner, navi.getStartRecord(), navi.getCountPerPage());
 
 		model.addAttribute("navi", navi);
@@ -828,7 +828,7 @@ public class MyStoreController {
 	// review 작성하기
 	@RequestMapping(value = "/myStore" + "/{miniurl:.+}" + "/insertReview", method = RequestMethod.POST)
 	public String insertReview(Review review, @PathVariable("miniurl") String miniurl) {
-		System.out.println(review);
+//		System.out.println(review);
 		int result = r_repository.insertReview(review);
 
 		return "redirect:/" + "myStore/" + miniurl + "/review";
@@ -848,20 +848,20 @@ public class MyStoreController {
 	@RequestMapping(value = "/myStore" + "/{miniurl:.+}"
 			+ "/selectItr", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public String selectItr(@RequestBody Interest interest, @PathVariable("miniurl") String miniurl) {
-		System.out.println(interest);
+//		System.out.println(interest);
 		Map<String, String> parm = new HashMap<String, String>();
 		parm.put("userid", interest.getUserid());
 		parm.put("boardnum", "" + interest.getBoardnum());
-		System.out.println(interest);
+//		System.out.println(interest);
 
 		Interest itr = b_repository.selectItr(parm);
-		System.out.println("itr:" + itr);
+//		System.out.println("itr:" + itr);
 
 		if (itr == null) {
-			System.out.println("itr null");
+//			System.out.println("itr null");
 
 			int result = b_repository.insertItr(interest);
-			System.out.println(result);
+//			System.out.println(result);
 			return "관심상품 목록에 추가되었습니다!";
 		} else {
 			return "이미 관심상품목록에 존재합니다!";
@@ -905,12 +905,12 @@ public class MyStoreController {
 	// 쪽지보내기
 	@RequestMapping(value = "/insertMsg", method = RequestMethod.POST)
 	public String insertMsg(Message message, Model model) {
-		System.out.println(message);
+//		System.out.println(message);
 		int result = b_repository.insertMsg(message);
 
 		model.addAttribute("userid", message.getUserid());
 
-		System.out.println("쪽지보내기 result: " + result);
+//		System.out.println("쪽지보내기 result: " + result);
 
 		return "redirect:/sendMsg";
 
@@ -921,16 +921,16 @@ public class MyStoreController {
 	@RequestMapping(value = "/myStore" + "/{miniurl:.+}"
 			+ "/DontusePoint", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public String selectWish(@RequestBody Wish wish, Model model, @PathVariable("miniurl") String miniurl) {
-		System.out.println(wish);
+//		System.out.println(wish);
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("userid", wish.getUserid());
 		param.put("boardnum", "" + wish.getBoardnum());
 
 		Board board = b_repository.selectOne(wish.getBoardnum());
-		System.out.println(board);
+//		System.out.println(board);
 
 		Product product = p_repository.selectPdt(board.getProductnum());
-		System.out.println(product);
+//		System.out.println(product);
 
 		String status = "진행중";
 
@@ -938,18 +938,18 @@ public class MyStoreController {
 
 		int pudt = p_repository.updatePstt(product);
 
-		System.out.println("update product :" + product);
-		System.out.println("product 결과:" + pudt);
+//		System.out.println("update product :" + product);
+//		System.out.println("product 결과:" + pudt);
 
 		History history = b_repository.selectHstone(board.getProductnum());
 
-		System.out.println("history거래내역:" + history);
+//		System.out.println("history거래내역:" + history);
 
 		List<Wish> wlist = b_repository.selectWish(param);
-		System.out.println(wlist);
+//		System.out.println(wlist);
 
 		if (wlist.size() == 0) {
-			System.out.println(wlist);
+//			System.out.println(wlist);
 
 			int result = b_repository.insertWish(wish);
 
@@ -975,7 +975,7 @@ public class MyStoreController {
 
 			int result2 = b_repository.updateHst(history);
 
-			System.out.println("history update 결과:" + result2);
+//			System.out.println("history update 결과:" + result2);
 
 			return "양도신청을 완료했습니다!";
 		} else {
@@ -1000,13 +1000,13 @@ public class MyStoreController {
 			System.out.println(winner[i]);
 		}
 
-		System.out.println("신청자목록:" + wlist);
+//		System.out.println("신청자목록:" + wlist);
 
 		int wn = (int) ((Math.random() * winner.length) - 1);
-		System.out.println(wn);
+//		System.out.println(wn);
 
 		String winid = winner[wn];
-		System.out.println("당첨자:" + winid);
+//		System.out.println("당첨자:" + winid);
 		history.setBuyerid(winid);
 
 		Product product = p_repository.selectPdt(productnum);
@@ -1014,7 +1014,7 @@ public class MyStoreController {
 
 		int result = b_repository.updateBuyer(history);
 		int result2 = p_repository.updatePstt(product);
-		System.out.println("winner : " + winner[wn]);
+//		System.out.println("winner : " + winner[wn]);
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("winnerid", winid);
@@ -1038,8 +1038,8 @@ public class MyStoreController {
 			+ "/usePoint", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public String UsePoint(Model model, @PathVariable("miniurl") String miniurl, String userid, int usepoint,
 			int boardnum) {
-		System.out.println(userid);
-		System.out.println(usepoint);
+//		System.out.println(userid);
+//		System.out.println(usepoint);
 
 		Wish wish = new Wish();
 		wish.setBoardnum(boardnum);
@@ -1050,10 +1050,10 @@ public class MyStoreController {
 		param.put("boardnum", "" + wish.getBoardnum());
 
 		Board board = b_repository.selectOne(wish.getBoardnum());
-		System.out.println(board);
+//		System.out.println(board);
 
 		Product product = p_repository.selectPdt(board.getProductnum());
-		System.out.println(product);
+//		System.out.println(product);
 
 		String status = "진행중";
 
@@ -1061,33 +1061,33 @@ public class MyStoreController {
 
 		int pudt = p_repository.updatePstt(product);
 
-		System.out.println("update product :" + product);
-		System.out.println("product 결과:" + pudt);
+//		System.out.println("update product :" + product);
+//		System.out.println("product 결과:" + pudt);
 
 		History history = b_repository.selectHstone(board.getProductnum());
 
-		System.out.println("history거래내역:" + history);
+//		System.out.println("history거래내역:" + history);
 
 		List<Wish> wlist = b_repository.selectWish(param);
 
 		// Wish wsh = b_repository.selectWish(param);
-		System.out.println(wlist);
+//		System.out.println(wlist);
 
 		if (wlist.size() == 0) {
-			System.out.println("wish null");
+//			System.out.println("wish null");
 			Saving saving = new Saving();
 
 			saving.setPoint(-(usepoint));
 			saving.setUserid(userid);
 
 			int result = s_repository.pointMinus(saving);
-			System.out.println(result);
+//			System.out.println(result);
 
 			int a = usepoint / 200;
 
 			for (int i = 0; i <= a; i++) {
 				int result1 = b_repository.insertWish(wish);
-				System.out.println(result1);
+//				System.out.println(result1);
 			}
 
 			String deal_end = null;
@@ -1100,7 +1100,7 @@ public class MyStoreController {
 
 			history.setDeal_start(deal_start);
 
-			System.out.println("deal_start:" + deal_start);
+//			System.out.println("deal_start:" + deal_start);
 			// deal_end 설정
 			Date date = new Date();
 			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
@@ -1111,13 +1111,13 @@ public class MyStoreController {
 
 			history.setDeal_end(deal_end);
 
-			System.out.println("deal_end:" + deal_end);
+//			System.out.println("deal_end:" + deal_end);
 
-			System.out.println("set deal_end history:" + history);
+//			System.out.println("set deal_end history:" + history);
 
 			int result2 = b_repository.updateHst(history);
 
-			System.out.println("history update 결과:" + result2);
+//			System.out.println("history update 결과:" + result2);
 
 			return "양도신청을 완료했습니다!";
 		} else {

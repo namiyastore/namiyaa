@@ -58,7 +58,7 @@
 		delete history where historynum=#{historynum}
 	</delete>
 	
-	<select id="selecthListAll" resultType="History" parameterType="string">
+	<select id="selecthListAll" resultType="History">
 		SELECT
 			historynum,
 			productnum,
@@ -67,9 +67,7 @@
 			to_char(deal_start, 'YYYY-MM-DD') deal_start,
 			to_char(deal_end, 'YYYY-MM-DD') deal_end
 		FROM
-			history
-		where
-			userid = #{userid} 
+			history 
 		ORDER BY
 			historynum desc
 	</select>

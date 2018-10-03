@@ -178,9 +178,12 @@
 								<td>${hList.buyerid}</td>
 								<td>${plist[status.index].sstatus}</td>
 								<c:if test="${sessionScope.loginId eq hList.sellerid}">
-								<td>
-									<input type="button" value="상세" onclick="detailView(${hList.historynum})">
-								</td>
+									<td>
+										<input type="button" value="상세" onclick="detailView(${hList.historynum})">
+									</td>
+								</c:if>
+								<c:if test="${sessionScope.loginId != hList.sellerid}">
+									<td>&nbsp;</td>
 								</c:if>
 							</tr>
 						</c:forEach>
