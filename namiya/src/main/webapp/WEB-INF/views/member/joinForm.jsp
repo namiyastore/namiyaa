@@ -29,6 +29,8 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <!--===============================================================================================-->
 <title>joinform.jsp</title>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 </head>
 
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"></script>
@@ -48,6 +50,7 @@
 
     $(document).ready(function() {
     	joinFormId=$("#joinFormId").val();joinFormPw=$("#joinFormPw").val();joinFormChkPw=$("#joinFormChkPw").val();joinFormName=$("#joinFormName").val();joinFormBirth=$("#joinFormBirth").val();joinFormYear=$("#joinFormYear").val();joinFormMonth=$("#joinFormMonth").val();joinFormDay=$("#joinFormDay").val();joinFormGender=$("#joinFormGender").val();joinFormMan=$("#joinFormMan").val();joinFormWoman=$("#joinFormWoman").val();joinFormEmail=$("joinFormEmail").val();joinFormAuthRequest=$("#joinFormAuthRequest").val();joinFormPhone=$("#joinFormPhone").val();joinFormAddrKor=$("#joinFormAddrKor").val();joinFormSearchAddr=$("#joinFormSearchAddr").val();joinFormSignUp=$("#joinFormSignUp").val();joinFormnInfo=$("#joinFormnInfo").val();joinFormchkBirth=$("#joinFormchkBirth").val();joinFormchkEmail=$("#joinFormchkEmail").val();joinFormClause=$("#joinFormClause").val();joinFormPersonalInfo=$("#joinFormPersonalInfo").val();
+    	joinFormidem=$("#joinFormidem").val();joinFormidsm=$("#joinFormidsm").val();joinFormidfm=$("#joinFormidfm").val();joinFormpwem=$("#joinFormpwem").val();joinFormpwem1=$("#joinFormpwem1").val();joinFormpwem2=$("#joinFormpwem2").val();joinFormmsm=$("#joinFormmsm").val();joinFormmfm=$("#joinFormmfm").val();joinFormbem=$("#joinFormbem").val();joinFormyem=$("#joinFormyem").val();joinFormmem=$("#joinFormmem").val();joinFormdem=$("#joinFormdem").val();joinFormaem=$("#joinFormaem").val();joinFormaem1=$("#joinFormaem1").val();joinFormaem2=$("#joinFormaem2").val();joinFormeem=$("#joinFormeem").val();joinFormeem1=$("#joinFormeem1").val();joinFormesm=$("#joinFormesm").val();joinFormeem2=$("#joinFormeem2").val();joinFormvem=$("#joinFormvem").val();joinFormvsm=$("#joinFormvsm").val();joinFormnem=$("#joinFormnem").val();joinFormnsm=$("#joinFormnsm").val();joinFormnfm=$("#joinFormnfm").val();joinFormvnm=$("#joinFormvnm").val();joinFormvsm2=$("#joinFormvsm2").val();joinFormvsm3=$("#joinFormvsm3").val();joinFormncm=$("#joinFormncm").val();
     	
         defaultScript();
         $("#id").val("");
@@ -165,7 +168,7 @@
         } */
 		
         if(idFlag && pwFlag && authFlag && phoneFlag && mailFlag) {
-        	alert("회원가입이 완료되었습니다!");
+        	alert(joinFormmsm);
         	$("#userid").val(userid);
         	$("#password").val(password);
         	$("#username").val(username);
@@ -173,7 +176,7 @@
         	
             $("#form").submit();
         } else {
-        	alert("가입할 수 없습니다!");
+        	alert(joinFormmfm);
             submitOpen();
             return false;
         }
@@ -215,7 +218,7 @@
 
         var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
         if (!isID.test(id)) {
-            showErrorMsg(oMsg,"5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+            showErrorMsg(oMsg,joinFormpwem);
             return false;
         }
 
@@ -224,10 +227,10 @@
             url: "checkId?id=" + id ,
             success : function(result) {
                 if (result == 1) {
-                	showSuccessMsg(oMsg, "가입가능합니다.");
+                	showSuccessMsg(oMsg, joinFormidsm);
                 	idFlag = true;
                 } else {
-                    showErrorMsg(oMsg, "이미 사용중이거나 탈퇴한 아이디입니다.");
+                    showErrorMsg(oMsg, joinFormidfm);
                 }
             }
         });
@@ -247,7 +250,7 @@
             return false;
         }
         if (isValidPasswd(pw) != true) {
-            showErrorMsg(oMsg,"8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+            showErrorMsg(oMsg,joinFormpwem);
             return false;
         }
 
@@ -268,7 +271,7 @@
         }
         if (pswd1.val() != pswd2.val()) {
             
-            showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
+            showErrorMsg(oMsg,joinFormpwem1);
             pswd2.val("");
             return false;
         } else {
@@ -290,7 +293,7 @@
             return false;
         }
         if (name != "" && nonchar.test(name)) {
-            showErrorMsg(oMsg,"한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
+            showErrorMsg(oMsg,joinFormpwem2);
             return false;
         }
 
@@ -307,7 +310,7 @@
         var lang = "ko_KR";
 
         if (yy == "" && mm == "" && dd == "") {
-            showErrorMsg(oMsg,"태어난 년도 4자리를 정확하게 입력하세요.");
+            showErrorMsg(oMsg,joinFormbem);
             return false;
         }
 
@@ -319,43 +322,43 @@
         }
 
         if(yy == "") {
-            showErrorMsg(oMsg,"생년월일을 확인해주세요.");
+            showErrorMsg(oMsg,joinFormyem);
             return false;
         }
         if(yy.length != 4 || yy.indexOf('e') != -1 || yy.indexOf('E') != -1) {
-            showErrorMsg(oMsg,"생년월일을 확인해주세요.");
+            showErrorMsg(oMsg,joinFormyem);
             return false;
         }
         if(mm == "") {
            
-            showErrorMsg(oMsg,"태어난 월을 선택하세요.");
+            showErrorMsg(oMsg,joinFormmem);
             return false;
         }
         if(dd == "") {
-            showErrorMsg(oMsg,"태어난 일 확인해주세요");
+            showErrorMsg(oMsg,joinFormdem);
             return false;
         }
         if(dd.length != 2 || dd.indexOf('e') != -1 || dd.indexOf('E') != -1) {
-            showErrorMsg(oMsg,"태어난 일 확인해주세요");
+            showErrorMsg(oMsg,joinFormdem);
             return false;
         }
 
         birthday = yy + mm + dd;
         if (!isValidDate(birthday)) {
-            showErrorMsg(oMsg,"생년월일을 확인해주세요.");
+            showErrorMsg(oMsg,joinFormyem);
             return false;
         }
         $("#birthday").val(birthday);
 
         var age = calcAge(birthday);
         if (age < 0) {
-            showErrorMsg(oMsg,"나이가?예?");
+            showErrorMsg(oMsg,joinFormaem);
             return false;
         } else if (age >= 100) {
-            showErrorMsg(oMsg,"어르신 확실합니까?");
+            showErrorMsg(oMsg,joinFormaem1);
             return false;
         } else if (age < 14) {
-            showErrorMsg(oMsg,"만 14세 미만은 가입할 수 없습니다.");
+            showErrorMsg(oMsg,joinFormaem2);
             return false;
         } else {
             hideMsg(oMsg);
@@ -369,7 +372,7 @@
         var oMsg = $("#genderMsg");
 
         if (gender == "") {
-            showErrorMsg(oMsg,"필수 정보입니다.");
+            showErrorMsg(oMsg,joinFormnInfo);
             return false;
         }
         hideMsg(oMsg);
@@ -381,7 +384,7 @@
         var oMsg = $("#emailMsg");
 
         if (email == "") {
-            showErrorMsg(oMsg,"이메일 주소를 입력해주세요.");
+            showErrorMsg(oMsg,joinFormeem);
             return false;
         }
 
@@ -389,7 +392,7 @@
         var isHan = /[ㄱ-ㅎ가-힣]/g;
   
         if (!isEmail.test(email) || isHan.test(email)) {
-            showErrorMsg(oMsg,"이메일 주소를 다시 확인해주세요.");
+            showErrorMsg(oMsg,joinFormeem1);
             return false;
         }
       ////////////////////////////////////
@@ -401,10 +404,10 @@
             url: "checkEmail?email=" + email ,
             success : function(result) {
                 if (result == 1) {
-                	showSuccessMsg(oMsg, "인증가능합니다.");
+                	showSuccessMsg(oMsg, joinFormesm);
                 	mailFlag = true;
                 } else {
-                    showErrorMsg(oMsg, "이미 가입된 이메일입니다.");
+                    showErrorMsg(oMsg, joinFormeem2);
                 }
             }
         });
@@ -419,18 +422,18 @@
     	var oMsg = $("#authNoMsg");
     	
     	if(authNo==""){
-    		showErrorMsg(oMsg,"반드시 해주세요.");
+    		showErrorMsg(oMsg,joinFormvem);
     		return false;
     	}
 		if(sendFlag){
 			if(userAuthNo==authNo){
-				showSuccessMsg(oMsg," 인증완료.");
+				showSuccessMsg(oMsg,joinFormvsm);
 				authFlag = true;
 			}else{
-				showErrorMsg(oMsg,"번호가 다릅니다.");
+				showErrorMsg(oMsg,joinFormnem);
 			}
 		}else{
-			showErrorMsg(oMsg,"반드시 해주세요.");
+			showErrorMsg(oMsg,joinFormnem);
 		}
     }
 	///////////////////////////////////////////////////////////
@@ -439,7 +442,7 @@
         var oMsg = $("#phoneNoMsg");
 
         if (phoneNo == "") {
-            showErrorMsg(oMsg,"필수 정보입니다.");
+            showErrorMsg(oMsg,joinFormnInfo);
             return false;
         }
 
@@ -454,7 +457,7 @@
 		var oMsg = $("#fullAddrMsg");
 		
 		if(addr == ""){
-			showErrorMsg(oMsg,"필수 정보입니다.");
+			showErrorMsg(oMsg,joinForm.nInfo);
 			return false;
 		}
 		
@@ -679,16 +682,16 @@
    	            url: "checkAuthNum?usermail=" + usermail ,
    	            success : function(result) {
    	                if (result != 0) {
-   	                	showSuccessMsg(oMsg, "인증번호 발송완료");
+   	                	showSuccessMsg(oMsg, joinFormnsm);
    	                	sendFlag=true;
    	                	userAuthNo = result;
    	                } else {
-   	                    showErrorMsg(oMsg, "발송실패");
+   	                    showErrorMsg(oMsg, joinFormnfm);
    	                }
    	            }
    	        });
    		}else{
-   			alert("이메일을 확인해주세요.");
+   			alert("Pls check Email!");
    		}
     }
     //Ajax 이메일인증번호 
@@ -699,13 +702,13 @@
         var oCode = $("#authNoCode");
 
         if (authNo == "") {
-            showErrorMsg(oMsg,"인증이 필요합니다.");
+            showErrorMsg(oMsg,joinFormvnm);
             return false;
         }
 
         if(authFlag) {
-            showSuccessMsg(oMsg,"인증이 성공했습니다.");
-            showAuthSuccessBox(oBox, oCode, "일치");
+            showSuccessMsg(oMsg,joinFormvsm2);
+            showAuthSuccessBox(oBox, oCode, joinFormvsm3);
             $("#phoneNoMsg").hide();
             return true;
         } else {
@@ -719,7 +722,7 @@
         var oMsg = $("#phoneNoMsg");
         var regPhone = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
         if(isNaN(p)){
-        	showErrorMsg(oMsg, "숫자만 입력!");
+        	showErrorMsg(oMsg, joinFormncm);
         	return false;
         }else{
         	phoneFlag = true;
@@ -770,7 +773,13 @@
 
     //endregion
 </script>
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 
+body, h {
+	font-family: 'Raleway', 'Nanum Gothic', 'Noto Sans Japanese';
+}
+</style>
 <body class="is-preload">
 <input id="lang" type="hidden" value="<spring:message code="common.lang" />">
 
@@ -816,15 +825,15 @@
 <input id="joinFormyem" type="hidden" value="<spring:message code="joinForm.yem" />">
 <input id="joinFormmem" type="hidden" value="<spring:message code="joinForm.mem" />">
 <input id="joinFormdem" type="hidden" value="<spring:message code="joinForm.dem" />">
-<input id="joinFormaem" type="hidden" value="<spring:message code="joinForm.maem" />">
-<input id="joinFormaem1" type="hidden" value="<spring:message code="joinForm.maem1" />">
-<input id="joinFormaem2" type="hidden" value="<spring:message code="joinForm.maem2" />">
-<input id="joinFormeem" type="hidden" value="<spring:message code="joinForm.meem" />">
-<input id="joinFormeem1" type="hidden" value="<spring:message code="joinForm.meem1" />">
-<input id="joinFormesm" type="hidden" value="<spring:message code="joinForm.mesm" />">
-<input id="joinFormeem2" type="hidden" value="<spring:message code="joinForm.meem2" />">
-<input id="joinFormvem" type="hidden" value="<spring:message code="joinForm.mvem" />">
-<input id="joinFormvsm" type="hidden" value="<spring:message code="joinForm.mvsm" />">
+<input id="joinFormaem" type="hidden" value="<spring:message code="joinForm.aem" />">
+<input id="joinFormaem1" type="hidden" value="<spring:message code="joinForm.aem1" />">
+<input id="joinFormaem2" type="hidden" value="<spring:message code="joinForm.aem2" />">
+<input id="joinFormeem" type="hidden" value="<spring:message code="joinForm.eem" />">
+<input id="joinFormeem1" type="hidden" value="<spring:message code="joinForm.eem1" />">
+<input id="joinFormesm" type="hidden" value="<spring:message code="joinForm.esm" />">
+<input id="joinFormeem2" type="hidden" value="<spring:message code="joinForm.eem2" />">
+<input id="joinFormvem" type="hidden" value="<spring:message code="joinForm.vem" />">
+<input id="joinFormvsm" type="hidden" value="<spring:message code="joinForm.vsm" />">
 
 
 
