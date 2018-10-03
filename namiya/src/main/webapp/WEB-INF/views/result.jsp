@@ -8,7 +8,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MAKANAI</title>
-
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
+<style>
+::-webkit-scrollbar{width: 16px;}
+::-webkit-scrollbar-track {background-color:AE79F1;}
+::-webkit-scrollbar-thumb {background-color:#79bfe5;}
+::-webkit-scrollbar-thumb:hover {background: #79bfe5;}
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+   width:16px;height:16px;background:#79bfe5;} 
+	body {
+		font-family: 'Raleway', 'Nanum Gothic';
+	}
+</style>
 <!-- 카테고리 -->
 <script src="resources/search/js/common/jquery-1.12.4.js"></script>
 
