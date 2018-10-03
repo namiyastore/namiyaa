@@ -132,9 +132,9 @@
 					a += ')" >';				
 					a += '</td>';
 				$("#winner").html(a);
-				alert(resp["sellerid"]);
+// 				alert(resp["sellerid"]);
 				var urlAddr = "http://13.125.208.152:8081";
-				var msg = "추첨%20대상자로%20선정되셨습니다%0Aline:" + urlAddr + "/namiya/sendMsgLine?userid=" + resp["winnerid"] + "&senderid=" +  resp["sellerid"];
+				var msg = "추첨%20대상자로%20선정되셨습니다%0Aline:" + urlAddr + "/namiya/sendMsgLine?userid=" + resp["winnerid"] + "%26senderid=" +  resp["sellerid"];
 				alert(msg);
 				// 당첨자에게 메세지 전송
 				msgSend(resp["winnerid"], msg);

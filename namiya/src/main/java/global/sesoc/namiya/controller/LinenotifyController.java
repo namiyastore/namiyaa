@@ -16,15 +16,21 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import global.sesoc.namiya.util.HttpclientSendMsg;
+import global.sesoc.namiya.dao.BoardRepository;
 import global.sesoc.namiya.dao.LinenotifyRepository;
+import global.sesoc.namiya.dao.MessageRepository;
 import global.sesoc.namiya.util.Httpclient;
 import global.sesoc.namiya.vo.Linenotify;
+import global.sesoc.namiya.vo.Message;
 
 @Controller
 public class LinenotifyController {
 	
 	@Autowired
 	LinenotifyRepository repository;
+	
+	@Autowired
+	BoardRepository b_repository;
 	
 	/**
 	 * 라인 인증키 등록
@@ -123,6 +129,30 @@ public class LinenotifyController {
 		
 		model.addAttribute("userid", userid);
 		model.addAttribute("senderid", senderid);
+		
+		return "linenotify/sendMsg";
+	}
+	
+	@RequestMapping(value="insertMsgLine", method=RequestMethod.POST)
+	public String insertMsgLine(String writerid, String userid, String msg_title, String msg_content) {
+		
+		Message message1 = new Message();
+		message1.setWriterid(writerid);
+		message1.setUserid(userid);
+		message1.setMsg_title(msg_title);
+		message1.setMsg_content(msg_content);
+		message1.setCopy(1);
+		
+		Message message2 = new Message();
+		message2.setWriterid(writerid);
+		message2.setUserid(userid);
+		message2.setMsg_title(msg_title);
+		message2.setMsg_content(msg_content);
+		message2.setCopy(0);
+		
+		
+		int result1 = b_repository.insertMsg(message1);
+		int result2 = b_repository.insertMsg(message2);
 		
 		return "linenotify/sendMsg";
 	}

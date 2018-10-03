@@ -29,6 +29,9 @@
 	}
 
 	$(function(){
+		var senderid = $('#senderid').val();
+		alert('senderid: ' + senderid);
+		
 		if(detectmob()) {
 			$('body').css('height', (window.innerHeight)+'px');
 			$('body').css('width', (window.innerWidth)+'px');
@@ -134,9 +137,11 @@
 </style>
 </head>
 <body>
+<input id="senderid" type="hidden" value="${senderid}" />
+
 <div id="wrapper" align="center">
 <h1 style="color: white; font-family: 'VT323';">Send a message</h1>
-<form action="insertMsg" name="form" method="post">
+<form action="insertMsgLine" name="form" method="post">
 <input type="hidden" name="copy" value="1">
 <table style="margin-bottom: 10px;">
 	<tr>
