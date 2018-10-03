@@ -50,7 +50,7 @@
 		});
 
 		$('.rightSide_MyInfoBoxDown_logOut').on('click', function() {
-			location.href = 'logOut';
+			location.href = 'logout';
 		});
 
 		$('.rightSide_MyInfoBoxDown_signOut').on('click', function() {
