@@ -576,7 +576,7 @@ function changeDirection(sel) {
 
 function deleteItem(sel) {
 	if(imgList[sel].type == "minimi") {
-		alert("삭제 불가");
+		
 		return;
 	}
 	imgList.splice(sel,1);

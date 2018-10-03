@@ -172,7 +172,7 @@ var background = {
     
 	function profileEdit(homeid,userid) {
 		if(homeid != userid){
-			alert("다른id");
+			//alert("다른id");
 			return;
 		}
 		eidtwindow = window.open("${pageContext.request.contextPath}/profileEdit", "profileEdit", "top=200,left=300,width=620,height=830");
@@ -204,7 +204,7 @@ var background = {
 	function favorite(homeid,userid) {
 		
 		if(userid == '' || homeid == userid){
-			alert("같은id이거나 로그인안함");
+			//alert("같은id이거나 로그인안함");
 			return;
 		}
 		
