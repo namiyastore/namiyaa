@@ -106,7 +106,7 @@
 		});
 	}
 	
-	function selected(historynum, sellerid) {
+	function selected(historynum) {
 		//alert("추첨하기");
 		//alert(historynum);
 		
@@ -118,25 +118,23 @@
 			success : function(resp) {
 				var a = '';
 					a += '<td id="winnerid" class="result_info" style="text-align: center; width:120px; font-size: 14px; color:red;">';
-					a += resp;
+					a += resp["winnerid"];
 					a += '</td>';
 					a += '<td class="result_info">';
 					a += '<input type="button" id="message" class="btn" name="message" value="쪽지" onclick= "message(';
-					a += "'"+resp+"'"; 
+					a += "'"+resp["winnerid"]+"'"; 
 					a += ')" >';				
 					a += '</td>';
 				$("#winner").html(a);
-				
-				resp["winnerid"][0]["TYPE"]
-				
+				alert(resp["sellerid"]);
 				var urlAddr = "http://13.125.208.152:8081";
-				var msg = "추첨%20대상자로%20선정되셨습니다%0Aline:" + urlAddr + "/namiya/sendMsg?userid=" + resp["winnerid"] + "&senderid=" +  resp["sellerid"];
-				
+				var msg = "추첨%20대상자로%20선정되셨습니다%0Aline:" + urlAddr + "/namiya/sendMsgLine?userid=" + resp["winnerid"] + "&senderid=" +  resp["sellerid"];
+				alert(msg);
 				// 당첨자에게 메세지 전송
-				msgSend(resp, msg);
+				msgSend(resp["winnerid"], msg);
 				 
 				// <input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
-				$("#buyer").html(resp);
+				$("#buyer").html(resp["winnerid"]);
 				
 				$("#selected").attr('disabled', 'disabled');
 			},
@@ -351,7 +349,7 @@
 				<br/>
 				<div id="select">
 				<c:if test="${product.sstatus eq '진행완료' && history.buyerid == null}">
-					<input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum}, '${sessionScope.loginId}')">
+					<input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
 				</c:if>
 				</div>
 			</div>
