@@ -49,6 +49,16 @@
 		var writerid = document.getElementById("writerid");
 		var userid = document.getElementById("userid");
 		
+		if(writerid.value == '') {
+			alert("보내는 사람을 입력하세요");
+			return false;
+		}
+		
+		if(userid.value == '') {
+			alert("받는사람을 입력하세요");
+			return false;
+		}
+		
 		if(msg_title.length == 0) {
 			alert("제목을 입력하세요");
 			return false;
@@ -60,6 +70,10 @@
 		}
 		
 		document.form.submit();
+	}
+	
+	function closeMsg() {
+		this.close();
 	}
 </script>
 <style>
@@ -161,6 +175,7 @@
 </table>
 </form>
 	<input id="btn" type="button" value="Send" onclick="sendaMsg()">
+	<input id="btn" type="button" value="Close" onclick="closeMsg()">
 </div>
 </body>
 </html>
