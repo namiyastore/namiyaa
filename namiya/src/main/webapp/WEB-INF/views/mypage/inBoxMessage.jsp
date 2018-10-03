@@ -21,7 +21,7 @@ function searchInbox() {
 $(function(){ 
 	
 	//쪽지 쓰기할때 새창 띄우고 작성
-	$('.leftSide_Buttons_btn1').on('click',function(){
+	$('.leftSide_Buttons_btn1').on('click',function(){		
 		var url = "my_page_sendMsg";
 		
 		window.open(url, "Write msg Window","width=500, height=550");

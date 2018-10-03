@@ -210,7 +210,7 @@ function alertMsg() {
 							<tr class="leftSide_table_rows">
 								<td class="table_1st_td">${outboxList.messagenum }</td>
 								<td><div class="leftSide_table_customers_title" data-messagenum="${outboxList.messagenum}">${outboxList.msg_title }</div></td>
-								<td>${outboxList.userid }</td>
+								<td>${outboxList.writerid }</td>
 								<td>${outboxList.regdate }</td>
 							</tr>
 						</c:forEach>
