@@ -30,13 +30,15 @@
 					a += ')" >';				
 					a += '</td>';
 					
-					$("#winner").html(a);
+					if(winner != null) {
+						$("#winner").html(a);
+					}
 		
 	}
 	
 	$(function() {
-		printWinner(${history.historynum},${history.buyerid});
-		
+		printWinner(${history.historynum},"${history.buyerid}");
+			
 		$('.rightSide_MyInfoBoxDown_goToHome').on('click', function() {
 			location.href = './';
 		});
@@ -136,7 +138,8 @@
 				 
 				// <input type="button" class="btn" id="selected" name="selected" value="추첨" onclick="selected(${history.historynum})">
 				$("#buyer").html(resp);
-			
+				
+				$("#selected").attr('disabled', 'disabled');
 			},
 			error : function(error) {
 				alert("추첨 error : "+error);
