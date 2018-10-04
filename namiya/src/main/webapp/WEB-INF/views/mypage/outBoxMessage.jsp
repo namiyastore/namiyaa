@@ -209,7 +209,7 @@ function alertMsg() {
 					<c:if test="${not empty OutboxList }">
 						<c:forEach var="outboxList" items="${OutboxList}">
 							<tr class="leftSide_table_rows">
-								<td class="table_1st_td" style="text-align: center;">${outboxList.messagenum }</td>
+								<td style="text-align: center; width: 8%;">${outboxList.messagenum }</td>
 								<td style="text-align: left;"><div class="leftSide_table_customers_title" data-messagenum="${outboxList.messagenum}">${outboxList.msg_title }</div></td>
 								<td style="text-align: center; width: 15%;">${outboxList.userid }</td>
 								<td style="text-align: center; width: 20%;">${outboxList.regdate }</td>
@@ -218,8 +218,8 @@ function alertMsg() {
 					</c:if>
 					<c:if test="${empty OutboxList }">
 						<tr>
-							<td colspan="4">
-								<p><th><spring:message code="outBoxMessage.empty" /></th></p>
+							<td colspan="4" style="text-align: center;">
+								<spring:message code="outBoxMessage.empty" />
 							</td>
 						</tr>
 					</c:if>
