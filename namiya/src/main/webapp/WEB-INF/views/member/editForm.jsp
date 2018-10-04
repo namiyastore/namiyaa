@@ -826,7 +826,7 @@ body, h {
                     <!-- lang = ko_KR -->
                     <h6 style="color: #999999" class="join_title">이름</h6>
                     <div style="display: inline-block" class="wrap-input100 validate-input">
-						<input type="text" id="name" name="name" class="input100" value="${member.username}" maxlength="40">
+						<input type="text" id="name" name="name" class="input100" value="${member.username}" maxlength="40" readonly="readonly">
                     </div>
                     <span class="error_next_box" id="nameMsg" style="display:none"></span>
                     <!-- lang = ko_KR -->
@@ -852,7 +852,7 @@ body, h {
 					
 					<div style="display: inline-block" class="wrap-input100 validate-input">      
 							<h6 style="color: #999999" class="join_title">이메일</h6>
-							<input type="text" id="email" name="email" class="input100" maxlength="100" value="${member.email}">
+							<input type="text" id="email" name="email" class="input100" maxlength="100" value="${member.email}" readonly="readonly">
                 	</div>
 				
                 <!-- 휴대전화 번호 -->
