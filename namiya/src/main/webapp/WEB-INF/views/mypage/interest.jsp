@@ -185,7 +185,9 @@ function alertMsg() {
 											${iList.title}
 										</div>
 									</td>
-								<td><input type="button" value="삭제" onclick="idelete(${iList.interestnum})" /></td>
+								<%-- <td><input type="button" value="삭제" onclick="idelete(${iList.interestnum})" /></td> --%>
+								<td id="deleteBtn" ><img src="resources/mypage/images/delete_icon.png" onclick="idelete(${iList.interestnum})"
+								style="width: 24px;height: 24px; display: block;margin-left: auto;margin-right: auto;"/></td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -243,9 +245,11 @@ function alertMsg() {
 					<div class="rightSide_MyInfoBoxDown_logOut">
 						<spring:message code="mypage.rightSide_MyInfoBoxDown_logOut" />
 					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_signOut">
+					
+					<%-- <div class="rightSide_MyInfoBoxDown_signOut">
 						<spring:message code="mypage.rightSide_MyInfoBoxDown_signOut" />
-					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
+					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 --> --%>
+					
 				</div><!-- rightSide_MyInfoBoxDown div닫힘 -->
 			</div><!-- rightSide_MyInfoBox div 닫음 -->
 		</div><!-- rightSide div 닫음 -->

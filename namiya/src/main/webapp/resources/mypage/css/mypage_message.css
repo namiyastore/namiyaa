@@ -222,7 +222,7 @@ body {
  
 #customers td, #customers th { 
 	border: 1px solid #ddd; 
-	padding: 8px; 
+	padding: 6px; 
 } 
  
 #customers tr:nth-child(even) { 
@@ -299,6 +299,7 @@ tbody {
     width: 90%;
     /* border: 1px white solid; */
     justify-content: flex-end;
+    margin-top: 50px;
 }
 
 /* 페이징부분 */

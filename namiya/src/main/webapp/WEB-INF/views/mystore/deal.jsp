@@ -403,9 +403,11 @@
 					<div class="rightSide_MyInfoBoxDown_logOut">
 						<spring:message code="mypage.rightSide_MyInfoBoxDown_logOut" />
 					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_signOut">
+					
+					<%-- <div class="rightSide_MyInfoBoxDown_signOut">
 						<spring:message code="mypage.rightSide_MyInfoBoxDown_signOut" />
-					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
+					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 --> --%>
+					
 				</div><!-- rightSide_MyInfoBoxDown div닫힘 -->
 			</div><!-- rightSide_MyInfoBox div 닫음 -->
 		</div><!-- rightSide div 닫음 -->

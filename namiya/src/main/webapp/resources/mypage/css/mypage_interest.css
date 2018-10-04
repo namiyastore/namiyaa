@@ -210,7 +210,7 @@ body {
  
 #customers td, #customers th { 
 	border: 1px solid #ddd; 
-	padding: 8px; 
+	padding: 6px; 
 } 
  
 #customers tr:nth-child(even) { 
@@ -348,6 +348,10 @@ tbody {
 	background-color: white; 
 	color: #2A3D4C; 
 } 
+ 
+.leftSide_table_open{
+	cursor: pointer;
+}
  
 /* 세훈 */ 
 .rightSide_MyInfoBoxDown_goToHome { 

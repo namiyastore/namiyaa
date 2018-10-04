@@ -52,8 +52,6 @@ body {
     align-items: center;
     /* border: 1px green solid; */
 }
- 
-
 
 .leftSide .tabs {
     width: 90%;
@@ -211,7 +209,7 @@ body {
  
 #customers td, #customers th { 
 	border: 1px solid #ddd; 
-	padding: 8px; 
+	padding: 6px; 
 } 
  
 #customers tr:nth-child(even) { 
@@ -403,3 +401,7 @@ tbody {
 	font-weight: bolder;
 	font-size: 20pt;
 } 
+
+#detail{
+	cursor: pointer; 
+}

@@ -178,9 +178,9 @@
 								<td>${hList.buyerid}</td>
 								<td>${plist[status.index].sstatus}</td>
 								<c:if test="${sessionScope.loginId eq hList.sellerid}">
-									<td>
-										<input type="button" value="상세" onclick="detailView(${hList.historynum})">
-									</td>
+								<td>
+									<img id="detail" src="resources/mypage/images/detail_Icon.png" onclick="detailView(${hList.historynum})">
+								</td>
 								</c:if>
 								<c:if test="${sessionScope.loginId != hList.sellerid}">
 									<td>&nbsp;</td>
@@ -244,9 +244,11 @@
 					<div class="rightSide_MyInfoBoxDown_logOut">
 						<spring:message code="mypage.rightSide_MyInfoBoxDown_logOut" />
 					</div><!-- rightSide_MyInfoBoxDown_logOut의 div닫힘 -->
-					<div class="rightSide_MyInfoBoxDown_signOut">
+					
+					<%-- <div class="rightSide_MyInfoBoxDown_signOut">
 						<spring:message code="mypage.rightSide_MyInfoBoxDown_signOut" />
-					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 -->
+					</div><!-- rightSide_MyInfoBoxDown_signOut의 div닫힘 --> --%>
+					
 				</div><!-- rightSide_MyInfoBoxDown div닫힘 -->
 			</div>
 			<!-- rightSide_MyInfoBox div 닫음 -->
