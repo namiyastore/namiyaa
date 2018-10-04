@@ -173,23 +173,23 @@ function alertMsg() {
 					<c:if test="${not empty pointRecord }"> 
 						<tbody> 
 							<c:forEach var="PointList" items="${pointRecord}"> 
-								<tr class="leftSide_table_rows"> 
+								<tr class="leftSide_table_rows" style="text-align: center;"> 
 								<!--포인트 추가시 수정부분 --> 
 								<c:if test="${PointList.point gt 0}"> 
-									<td class="table_1st_td">+${PointList.point}</td> 
+									<td class="table_1st_td" style="text-align: center;">+${PointList.point}</td> 
 								</c:if> 
 								 <c:if test="${PointList.point lt 0}"> 
-									<td class="table_1st_td">${PointList.point}</td> 
+									<td class="table_1st_td" style="text-align: center;">${PointList.point}</td> 
 								</c:if>
-									<td class="table_2nd_td">${PointList.type}</td> 
-									<td class="table_3rd_td">${PointList.regdate}</td> 
+									<td class="table_2nd_td" style="text-align: center;">${PointList.type}</td> 
+									<td class="table_3rd_td" style="text-align: center;">${PointList.regdate}</td> 
 								</tr> 
 							</c:forEach> 
 						</tbody>
 					</c:if> 
 						<tfoot> 
 							<tr style="color: white; background-color: #0B3B0B;"> 
-								<td colspan="3"> 
+								<td colspan="3" style="text-align: center; font-weight: bold;"> 
 										<spring:message code="point.currrentPoint" /> : <span id="pointTotal" ></span> 
 								</td> 
 							</tr> 

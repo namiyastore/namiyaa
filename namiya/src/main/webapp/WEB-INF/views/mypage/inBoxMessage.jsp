@@ -206,17 +206,16 @@ function alertMsg() {
 					<c:if test="${not empty InboxList }">
 						<c:forEach var="inboxList" items="${InboxList}">
 							<tr class="leftSide_table_rows">
-								<td class="table_1st_td">${inboxList.messagenum }</td>
-<%-- 								<td><a href="mInBoxSelectOne?messagenum=${inboxList.messagenum}">${inboxList.msg_title }</a></td> --%>
-								<td><div class="leftSide_table_customers_title" data-messagenum="${inboxList.messagenum}">${inboxList.msg_title }</div></td>
-								<td>${inboxList.writerid }</td>
-								<td>${inboxList.regdate }</td>
+								<td class="table_1st_td" style="text-align: center;">${inboxList.messagenum }</td>
+								<td class="table_2nd_td" style="text-align: left;"><div class="leftSide_table_customers_title" data-messagenum="${inboxList.messagenum}">${inboxList.msg_title }</div></td>
+								<td style="text-align: center; width: 15%;">${inboxList.writerid }</td>
+								<td style="width: 20%;">${inboxList.regdate }</td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					<c:if test="${empty InboxList }">
 						<tr>
-							<td colspan="4">
+							<td colspan="4" style="text-align: center;">
 								<spring:message code="inBoxMessage.empty" />
 							</td>
 						</tr>

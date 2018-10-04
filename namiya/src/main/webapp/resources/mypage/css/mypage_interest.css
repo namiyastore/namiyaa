@@ -92,6 +92,10 @@ body {
 .leftSide_tabs_tab7 { 
 	cursor: pointer; 
 } 
+
+#deleteBtn{
+	cursor: pointer;
+}
  
 /* 여기부터 기존것들 0915기준 */ 
 .tabs>div {

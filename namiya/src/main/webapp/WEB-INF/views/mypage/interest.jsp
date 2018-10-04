@@ -19,7 +19,8 @@
 </style>
 <script type="text/javascript">
 function idelete(num) {
-	location.href="iDelete?interestnum="+num;
+	location.href="i
+?interestnum="+num;
 }
 
 function iupdate(num){
@@ -179,21 +180,21 @@ function alertMsg() {
 					<c:if test="${not empty ilist }">
 						<c:forEach var="iList" items="${ilist }">
 							<tr>
-								<td style="text-align: center;">${iList.interestnum}</td>
-									<td>
+								<td style="text-align: center; width: 8%;">${iList.interestnum}</td>
+									<td style="text-align: left;">
 										<div class="leftSide_table_open" data-boardnum="${iList.boardnum}">
 											${iList.title}
 										</div>
 									</td>
 								<%-- <td><input type="button" value="삭제" onclick="idelete(${iList.interestnum})" /></td> --%>
-								<td id="deleteBtn" ><img src="resources/mypage/images/delete_icon.png" onclick="idelete(${iList.interestnum})"
+								<td id="deleteBtn" style="width: 8%;" ><img src="resources/mypage/images/delete_icon.png" onclick="idelete(${iList.interestnum})"
 								style="width: 24px;height: 24px; display: block;margin-left: auto;margin-right: auto;"/></td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					<c:if test="${empty ilist }">
 						<tr>
-							<td colspan="4"><spring:message code="interest.empty" /></td>
+							<td colspan="4" style="text-align: center;"><spring:message code="interest.empty" /></td>
 						</tr>
 					</c:if>
 				</table>

@@ -165,22 +165,23 @@
 					<c:if test="${not empty hlist }">
 						<c:forEach var="hList" items="${hlist}" varStatus="status">
 							<tr>
-								<td>${hList.historynum}</td>
-								<td>${blist[status.index].service}</td>
-								<td>${plist[status.index].productname}</td>
-								<td>${hList.deal_start}</td>
-								<td>
+								<td style="text-align: center;">${hList.historynum}</td>
+								<td style="text-align: center;">${blist[status.index].service}</td>
+								<td style="text-align: left;">${plist[status.index].productname}</td>
+								<td style="text-align: center;">${hList.deal_start}</td>
+								<td style="text-align: center;">
 									<c:if test="${plist[status.index].sstatus eq '진행완료'}">
 										${hList.deal_end}
 									</c:if>
 								</td>
-								<td>${hList.sellerid}</td>
-								<td>${hList.buyerid}</td>
-								<td>${plist[status.index].sstatus}</td>
+								<td style="text-align: center;">${hList.sellerid}</td>
+								<td style="text-align: center;">${hList.buyerid}</td>
+								<td style="text-align: center;">${plist[status.index].sstatus}</td>
 								<c:if test="${sessionScope.loginId eq hList.sellerid}">
-								<td>
+								<td style="width: 8%;">
 									<img id="detail" src="resources/mypage/images/detail_Icon.png" onclick="detailView(${hList.historynum})"
-									style="display: block;margin-left: auto;margin-right: auto;">
+									 style="display: block;margin-left: auto;margin-right: auto;">
+									
 								</td>
 								</c:if>
 								<c:if test="${sessionScope.loginId != hList.sellerid}">
@@ -191,7 +192,7 @@
 					</c:if>
 					<c:if test="${empty hlist }">
 						<tr>
-							<td colspan="9"><spring:message code="history.empty" /></td>
+							<td colspan="9" style="text-align: center;"><spring:message code="history.empty" /></td>
 						</tr>
 					</c:if>
 				</table>

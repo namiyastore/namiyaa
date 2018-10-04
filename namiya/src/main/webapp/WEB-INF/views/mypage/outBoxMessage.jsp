@@ -209,10 +209,10 @@ function alertMsg() {
 					<c:if test="${not empty OutboxList }">
 						<c:forEach var="outboxList" items="${OutboxList}">
 							<tr class="leftSide_table_rows">
-								<td class="table_1st_td">${outboxList.messagenum }</td>
-								<td><div class="leftSide_table_customers_title" data-messagenum="${outboxList.messagenum}">${outboxList.msg_title }</div></td>
-								<td>${outboxList.userid }</td>
-								<td>${outboxList.regdate }</td>
+								<td class="table_1st_td" style="text-align: center;">${outboxList.messagenum }</td>
+								<td style="text-align: left;"><div class="leftSide_table_customers_title" data-messagenum="${outboxList.messagenum}">${outboxList.msg_title }</div></td>
+								<td style="text-align: center; width: 15%;">${outboxList.userid }</td>
+								<td style="text-align: center; width: 20%;">${outboxList.regdate }</td>
 							</tr>
 						</c:forEach>
 					</c:if>
