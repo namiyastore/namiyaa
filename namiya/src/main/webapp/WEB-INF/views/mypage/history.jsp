@@ -179,7 +179,8 @@
 								<td>${plist[status.index].sstatus}</td>
 								<c:if test="${sessionScope.loginId eq hList.sellerid}">
 								<td>
-									<img id="detail" src="resources/mypage/images/detail_Icon.png" onclick="detailView(${hList.historynum})">
+									<img id="detail" src="resources/mypage/images/detail_Icon.png" onclick="detailView(${hList.historynum})"
+									style="display: block;margin-left: auto;margin-right: auto;">
 								</td>
 								</c:if>
 								<c:if test="${sessionScope.loginId != hList.sellerid}">
