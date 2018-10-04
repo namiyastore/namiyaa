@@ -38,8 +38,6 @@
 			return false;
 		}
 		
-		alert(boardnum+", "+userid+"," + usepoint);
-		
 		// 포인트 사용하는 로직
 		$.ajax({
 			method : 'get',
